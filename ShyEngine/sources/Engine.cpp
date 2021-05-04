@@ -1,0 +1,72 @@
+#include <Engine.h>
+
+Engine::Engine(int width, int height)
+{
+	this->_width = width;
+	this->_height = height;
+
+	this->_state = GameState::GAME_STATE_PAUSED;
+	this->_gameWindow = nullptr;
+}
+
+Engine::~Engine()
+{
+}
+
+void Engine::run()
+{
+	this->init();
+
+	this->_state = GameState::GAME_STATE_RUNNING;
+
+	this->loop();
+}
+
+void Engine::loop()
+{
+	// Running the engine loop until the user doesn't quit
+	while (this->_state == GameState::GAME_STATE_RUNNING)
+	{
+		// Test sprite
+		Sprite sprite(0, 0, 0.2f, 0.2f);
+		// Processing input for this frame
+		_input.processInput();
+		// Rendering the sprite
+		_renderer.render(sprite);
+
+		// If the user decided to quit, I stop the loop
+		if (_input.isQuitting())
+		{
+			this->_state = GameState::GAME_STATE_STOPPED;
+		}
+	}
+}
+
+void Engine::init()
+{
+	// Initializing SDL
+	int sdlErr = SDL_Init(SDL_INIT_EVERYTHING);
+
+	// Creating the game window
+	this->_gameWindow = SDL_CreateWindow("Shy Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->_width, this->_height, SDL_WINDOW_OPENGL);
+
+	if (_gameWindow == nullptr)
+		Error::fatal("Couldn't create the main window.");
+
+	// Initializing the renderer
+	this->_renderer.init(this->_gameWindow);
+	// Clearing input
+	this->_input.clearInput();
+
+	// Initializing glew
+	glewExperimental = GL_TRUE;
+	GLenum err = glewInit();
+
+	if (err == GLEW_OK)
+		std::cout << ("Initialized Glew") << std::endl;
+	else
+		Error::fatal("Couldn't initialize Glew");
+
+	// Enabling double buffering
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+}
