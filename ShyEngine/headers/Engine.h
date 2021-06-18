@@ -6,6 +6,8 @@
 #include <iostream>
 #include <Error.h>
 #include <Sprite.h>
+#include <ShaderProgram.h>
+#include <Utility.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
@@ -18,12 +20,15 @@ private:
 	Renderer _renderer;
 
 	GameState _state;
+	ShaderProgram _colorShader;
 	
 
 	int _width;
 	int _height;
 
 	void init();
+
+	void initShaders();
 
 	void loop();
 

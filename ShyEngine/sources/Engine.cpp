@@ -32,7 +32,9 @@ void Engine::loop()
 		// Processing input for this frame
 		_input.processInput();
 		// Rendering the sprite
+		_colorShader.use();
 		_renderer.render(sprite);
+		_colorShader.unuse();
 
 		// If the user decided to quit, I stop the loop
 		if (_input.isQuitting())
@@ -44,6 +46,7 @@ void Engine::loop()
 
 void Engine::init()
 {
+	std::cout << "CWD: " << Utility::getCwd() << std::endl;
 	// Initializing SDL
 	int sdlErr = SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -69,4 +72,13 @@ void Engine::init()
 
 	// Enabling double buffering
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	// Initializing shaders
+	initShaders();
+}
+
+void Engine::initShaders()
+{
+	_colorShader.compileShaders("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
+	_colorShader.addAttribute("vertPos");
+	_colorShader.linkShaders();
 }

@@ -24,6 +24,7 @@
     <ProjectGuid>{f993faab-13b0-4ede-b25f-9c3c1fb381ea}</ProjectGuid>
     <RootNamespace>UnsettledEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ShyEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -149,8 +150,8 @@
     <ClCompile Include="sources\Renderer.cpp" />
     <ClCompile Include="sources\ShaderProgram.cpp" />
     <ClCompile Include="sources\Sprite.cpp" />
-    <ClCompile Include="Sources\Test.cpp" />
-    <ClCompile Include="UnsettledEngine.cpp" />
+    <ClCompile Include="ShyEngine.cpp" />
+    <ClCompile Include="sources\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Engine.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="headers\Renderer.h" />
     <ClInclude Include="headers\ShaderProgram.h" />
     <ClInclude Include="headers\Sprite.h" />
+    <ClInclude Include="headers\Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
