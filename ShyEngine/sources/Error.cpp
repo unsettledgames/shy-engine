@@ -1,6 +1,7 @@
 #include <Error.h>
 #include <SDL/SDL.h>
 #include <iostream>
+#include <cstdlib>
 
 void Error::fatal(std::string error)
 {
@@ -10,4 +11,5 @@ void Error::fatal(std::string error)
 		std::cout << "The error seems to be associated with SDL or glew. Printing error: " << SDL_GetError() << std::endl;
 	perror("Printing perror");
 	SDL_Quit();
+	exit(-1);
 }

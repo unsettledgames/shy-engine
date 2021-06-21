@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <GL/glew.h>
 #include <fstream>
@@ -30,6 +32,8 @@ public:
 	void linkShaders();
 
 	void addAttribute(const std::string& name);
+
+	GLuint getUniformLocation(const std::string& name);
 
 	void use();
 
