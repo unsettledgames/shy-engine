@@ -12,7 +12,7 @@ ShaderProgram::~ShaderProgram()
 
 GLuint ShaderProgram::getUniformLocation(const std::string& name)
 {
-	GLuint location = glGetUniformLocation(_programID, name.c_str());
+	GLint location = glGetUniformLocation(_programID, name.c_str());
 
 	if (location == GL_INVALID_INDEX)
 		Error::fatal("Couldn't get uniform " + name + " location");

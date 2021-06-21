@@ -3,6 +3,8 @@
 #include <Vertex.h>
 #include <cstddef>
 #include<GL/glew.h>
+#include <Texture.h>
+#include <ImageLoader.h>
 
 class Sprite
 {
@@ -12,7 +14,8 @@ private:
 	float _width;
 	float _height;
 
-	Vertex vertexData[6];
+	Texture _texture;
+	Vertex _vertexData[6];
 
 	GLuint _buffer;
 

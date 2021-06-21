@@ -145,8 +145,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sources\Engine.cpp" />
+    <ClCompile Include="sources\EngineIO.cpp" />
     <ClCompile Include="sources\Error.cpp" />
+    <ClCompile Include="sources\ImageLoader.cpp" />
     <ClCompile Include="sources\Input.cpp" />
+    <ClCompile Include="sources\picopng.cpp" />
     <ClCompile Include="sources\Renderer.cpp" />
     <ClCompile Include="sources\ShaderProgram.cpp" />
     <ClCompile Include="sources\Sprite.cpp" />
@@ -155,11 +158,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Engine.h" />
+    <ClInclude Include="headers\EngineIO.h" />
     <ClInclude Include="headers\Error.h" />
+    <ClInclude Include="headers\ImageLoader.h" />
     <ClInclude Include="headers\Input.h" />
+    <ClInclude Include="headers\picopng.h" />
     <ClInclude Include="headers\Renderer.h" />
     <ClInclude Include="headers\ShaderProgram.h" />
     <ClInclude Include="headers\Sprite.h" />
+    <ClInclude Include="headers\Texture.h" />
     <ClInclude Include="headers\Utility.h" />
     <ClInclude Include="headers\Vertex.h" />
   </ItemGroup>
