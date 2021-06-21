@@ -161,6 +161,7 @@
     <ClInclude Include="headers\ShaderProgram.h" />
     <ClInclude Include="headers\Sprite.h" />
     <ClInclude Include="headers\Utility.h" />
+    <ClInclude Include="headers\Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

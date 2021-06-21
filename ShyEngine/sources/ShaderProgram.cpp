@@ -33,7 +33,7 @@ void ShaderProgram::linkShaders()
 
 	GLint isLinked = 0;
 	glGetProgramiv(_programID, GL_LINK_STATUS, (int*)&isLinked);
-	if (isLinked == GL_FALSE)
+	if (isLinked != GL_TRUE)
 	{
 		GLint maxLength = 0;
 		glGetProgramiv(_programID, GL_INFO_LOG_LENGTH, &maxLength);
@@ -66,6 +66,9 @@ void ShaderProgram::addAttribute(const std::string& name)
 
 void ShaderProgram::compileShaders(const std::string& vertPath, const std::string& fragPath)
 {
+	// Get a program object.
+	_programID = glCreateProgram();
+
 	// Creating shaders, handling errors
 	_vertShaderID = glCreateShader(GL_VERTEX_SHADER);
 	if (_vertShaderID == 0)
@@ -77,9 +80,7 @@ void ShaderProgram::compileShaders(const std::string& vertPath, const std::strin
 
 	compileShader(vertPath, _vertShaderID);
 	compileShader(fragPath, _fragShaderID);
-
-	// Get a program object.
-	_programID = glCreateProgram();
+	
 
 	// Attach our shaders to our program
 	glAttachShader(_programID, _vertShaderID);
@@ -118,7 +119,7 @@ void ShaderProgram::compileShader(const std::string& filePath, GLuint shaderID)
 		glGetShaderInfoLog(shaderID, 1024, &log_length, message);
 		glDeleteShader(shaderID);
 
-		Error::fatal("Vertex shader failed to compile");
+		Error::fatal("Shader " + filePath + " failed to compile");
 		std::printf("%s\n", message);
 	}
 }

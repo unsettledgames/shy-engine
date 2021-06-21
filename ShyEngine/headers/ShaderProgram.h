@@ -6,6 +6,7 @@
 
 /*
 	OPTIMIZABLE: save compiled version of shaders, recompile only if necessary. Could be done via makefile?
+	OPTIMIZABLE: ShaderPrograms should probably be a property of each renderer.
 */
 
 class ShaderProgram

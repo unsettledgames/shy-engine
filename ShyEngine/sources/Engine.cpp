@@ -28,7 +28,7 @@ void Engine::loop()
 	while (this->_state == GameState::GAME_STATE_RUNNING)
 	{
 		// Test sprite
-		Sprite sprite(0, 0, 0.2f, 0.2f);
+		Sprite sprite(0, 0, 2, 2);
 		// Processing input for this frame
 		_input.processInput();
 		// Rendering the sprite
@@ -80,5 +80,6 @@ void Engine::initShaders()
 {
 	_colorShader.compileShaders("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
 	_colorShader.addAttribute("vertPos");
+	_colorShader.addAttribute("vertColor");
 	_colorShader.linkShaders();
 }
