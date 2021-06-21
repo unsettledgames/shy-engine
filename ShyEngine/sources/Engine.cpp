@@ -1,12 +1,8 @@
 #include <Engine.h>
 
-Engine::Engine(int width, int height)
+Engine::Engine(int width, int height) : 
+	_width(700), _height(400), _time(0), _state(GameState::GAME_STATE_PAUSED),_gameWindow(nullptr)
 {
-	this->_width = width;
-	this->_height = height;
-
-	this->_state = GameState::GAME_STATE_PAUSED;
-	this->_gameWindow = nullptr;
 }
 
 Engine::~Engine()
@@ -33,6 +29,11 @@ void Engine::loop()
 		_input.processInput();
 		// Rendering the sprite
 		_colorShader.use();
+
+		// Applying time
+		GLuint timeLocation = _colorShader.getUniformLocation("time");
+		glUniform1f(timeLocation, _time);
+
 		_renderer.render(sprite);
 		_colorShader.unuse();
 
@@ -41,6 +42,8 @@ void Engine::loop()
 		{
 			this->_state = GameState::GAME_STATE_STOPPED;
 		}
+
+		_time += 0.01f;
 	}
 }
 

@@ -1,0 +1,9 @@
+Engine
+	Renderer
+		Has a list of renderables, renders all of them
+	Renderable
+		Has a ShaderProgram used to render it
+	ShaderProgram
+		Shaders used to render a Renderable
+	Sprite 
+		Implements Renderable

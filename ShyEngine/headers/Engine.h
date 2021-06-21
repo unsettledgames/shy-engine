@@ -22,6 +22,7 @@ private:
 	GameState _state;
 	ShaderProgram _colorShader;
 	
+	float _time;
 
 	int _width;
 	int _height;

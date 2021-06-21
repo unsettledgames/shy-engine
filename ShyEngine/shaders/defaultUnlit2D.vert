@@ -4,6 +4,7 @@ in vec2 vertPos;
 in vec4 vertColor;
 
 out vec4 fragColor;
+out vec2 fragPos;
 
 void main()
 {
@@ -12,4 +13,5 @@ void main()
 	gl_Position.w = 1.0;
 
 	fragColor = vertColor;
+	fragPos = vertPos;
 }

@@ -107,7 +107,7 @@ void ShaderProgram::compileShader(const std::string& filePath, GLuint shaderID)
 
 	// Handling file opening error
 	if (file.fail())
-		Error::fatal("Couldn't open vertex shader file " + filePath);
+		Error::fatal("Couldn't open shader file " + filePath);
 	// Getting file contents
 	while (std::getline(file, currLine))
 		fileContent += currLine + "\n";
@@ -129,7 +129,6 @@ void ShaderProgram::compileShader(const std::string& filePath, GLuint shaderID)
 		glGetShaderInfoLog(shaderID, 1024, &log_length, message);
 		glDeleteShader(shaderID);
 
-		Error::fatal("Shader " + filePath + " failed to compile");
-		std::printf("%s\n", message);
+		Error::fatal("Shader " + filePath + " failed to compile: \n" + message);
 	}
 }
