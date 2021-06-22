@@ -5,6 +5,8 @@
 #include <fstream>
 #include <vector>
 #include <Error.h>
+#include <ImageLoader.h>
+#include <Texture.h>
 
 /*
 	OPTIMIZABLE: save compiled version of shaders, recompile only if necessary. Could be done via makefile?
@@ -19,6 +21,8 @@ private:
 	GLuint _vertShaderID;
 	GLuint _fragShaderID;
 	GLuint _programID;
+
+	Texture _texture;
 
 	void compileShader(const std::string& filePath, GLuint shaderID);
 
@@ -35,7 +39,7 @@ public:
 
 	GLuint getUniformLocation(const std::string& name);
 
-	void use();
+	void use(float time);
 
 	void unuse();
 };

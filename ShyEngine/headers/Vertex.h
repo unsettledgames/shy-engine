@@ -35,4 +35,16 @@ struct Vertex
 		color.b = b;
 		color.a = a;
 	}
+
+	void setPosition(float x, float y)
+	{
+		position.x = x;
+		position.y = y;
+	}
+
+	void setUV(float u, float v)
+	{
+		uv.u = u;
+		uv.v = v;
+	}
 };

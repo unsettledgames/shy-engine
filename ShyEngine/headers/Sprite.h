@@ -16,11 +16,10 @@ private:
 
 	Texture _texture;
 	Vertex _vertexData[6];
-
 	GLuint _buffer;
 
 public:
-	Sprite(float x, float y, float width, float height);
+	Sprite(float x, float y, float width, float height, std::string texturePath);
 
 	~Sprite();
 

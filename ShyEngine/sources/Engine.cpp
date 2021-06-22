@@ -24,15 +24,11 @@ void Engine::loop()
 	while (this->_state == GameState::GAME_STATE_RUNNING)
 	{
 		// Test sprite
-		Sprite sprite(0, 0, 2, 2);
+		Sprite sprite(0, 0, 2, 2, "textures/5heartsSmall.png");
 		// Processing input for this frame
 		_input.processInput();
 		// Rendering the sprite
-		_colorShader.use();
-
-		// Applying time
-		GLuint timeLocation = _colorShader.getUniformLocation("time");
-		glUniform1f(timeLocation, _time);
+		_colorShader.use(_time);		
 
 		_renderer.render(sprite);
 		_colorShader.unuse();
@@ -84,5 +80,6 @@ void Engine::initShaders()
 	_colorShader.compileShaders("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
 	_colorShader.addAttribute("vertPos");
 	_colorShader.addAttribute("vertColor");
+	_colorShader.addAttribute("vertUV");
 	_colorShader.linkShaders();
 }

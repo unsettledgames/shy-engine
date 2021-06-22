@@ -18,5 +18,4 @@ public:
 	void init(SDL_Window* window);
 
 	void render(Sprite toRender);
-
 };

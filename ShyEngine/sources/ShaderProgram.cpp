@@ -2,7 +2,7 @@
 
 ShaderProgram::ShaderProgram() : _nAttributes(0), _vertShaderID(0), _fragShaderID(0), _programID(0)
 {
-
+	
 }
 
 ShaderProgram::~ShaderProgram()
@@ -20,12 +20,23 @@ GLuint ShaderProgram::getUniformLocation(const std::string& name)
 	return location;
 }
 
-void ShaderProgram::use()
+void ShaderProgram::use(float time)
 {
 	glUseProgram(_programID);
 
 	for (int i = 0; i < _nAttributes; i++)
 		glEnableVertexAttribArray(i);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, _texture.id);
+
+	// Applying texture
+	GLuint textureLocation = getUniformLocation("mainTexture");
+	glUniform1i(textureLocation, 0);
+
+	// Applying time
+	GLint timeLocation = getUniformLocation("time");
+	glUniform1f(timeLocation, time);
 }
 
 void ShaderProgram::unuse()
@@ -34,6 +45,8 @@ void ShaderProgram::unuse()
 
 	for (int i = 0; i < _nAttributes; i++)
 		glDisableVertexAttribArray(i);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void ShaderProgram::linkShaders()
@@ -67,6 +80,8 @@ void ShaderProgram::linkShaders()
 	glDetachShader(_programID, _fragShaderID);
 	glDeleteShader(_vertShaderID);
 	glDeleteShader(_fragShaderID);
+
+	this->_texture = ImageLoader::loadPNG("textures/5heartsSmall.png");
 }
 
 void ShaderProgram::addAttribute(const std::string& name)

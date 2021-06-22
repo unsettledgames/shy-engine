@@ -2,9 +2,11 @@
 
 in vec2 vertPos;
 in vec4 vertColor;
+in vec2 vertUV;
 
 out vec4 fragColor;
 out vec2 fragPos;
+out vec2 fragUV;
 
 void main()
 {
@@ -14,4 +16,5 @@ void main()
 
 	fragColor = vertColor;
 	fragPos = vertPos;
+	fragUV = vertUV;
 }
