@@ -8,7 +8,7 @@ Sprite::Sprite(float x, float y, float width, float height, std::string textureP
 	this->_height = height;
 
 	this->_buffer = 0;
-	this->_texture = ImageLoader::loadPNG(texturePath);
+	this->_texture = ResourcesManager::getTexture(texturePath);
 
 	// Initializing the sprite
 	// Creating the buffer if I haven't yet
@@ -57,6 +57,8 @@ Sprite::~Sprite()
 
 void Sprite::render()
 {
+	// OPTIMIZABLE: check if it's already binded
+	glBindTexture(GL_TEXTURE_2D, _texture.id);
 	// Binding the buffer and sending the vertex data
 	glBindBuffer(GL_ARRAY_BUFFER, _buffer);
 	// Enabling vertex position

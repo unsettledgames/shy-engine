@@ -40,6 +40,9 @@ void Engine::loop()
 		}
 
 		_time += 0.01f;
+
+		calculateFPS();
+		std::cout << "FPS: " << _fps << std::endl;
 	}
 }
 
@@ -73,6 +76,32 @@ void Engine::init()
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	// Initializing shaders
 	initShaders();
+}
+
+void Engine::calculateFPS()
+{
+	static const int NUM_SAMPLES = 10;
+	static float prevTime = 0;
+	static float sum = 0;
+	static int timeIndex = 0;
+
+	static float prevTicks = SDL_GetTicks();
+	float currTicks = SDL_GetTicks();
+	int currNFrames;
+
+	// Removing the last amount if I have more than NUM_SAMPLES frames
+	if (timeIndex >= NUM_SAMPLES)
+		sum -= prevTime;
+
+	// Adding the new frame time
+	_frameTime = currTicks - prevTicks;
+	sum += _frameTime;
+	prevTime = _frameTime;
+	timeIndex++;
+
+	// Computing FPS
+	_fps = (1000.0f / (sum / NUM_SAMPLES));
+	prevTicks = currTicks;
 }
 
 void Engine::initShaders()

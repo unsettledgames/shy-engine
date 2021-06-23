@@ -28,7 +28,6 @@ void ShaderProgram::use(float time)
 		glEnableVertexAttribArray(i);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _texture.id);
 
 	// Applying texture
 	GLuint textureLocation = getUniformLocation("mainTexture");
@@ -80,8 +79,6 @@ void ShaderProgram::linkShaders()
 	glDetachShader(_programID, _fragShaderID);
 	glDeleteShader(_vertShaderID);
 	glDeleteShader(_fragShaderID);
-
-	this->_texture = ImageLoader::loadPNG("textures/5heartsSmall.png");
 }
 
 void ShaderProgram::addAttribute(const std::string& name)

@@ -151,9 +151,11 @@
     <ClCompile Include="sources\Input.cpp" />
     <ClCompile Include="sources\picopng.cpp" />
     <ClCompile Include="sources\Renderer.cpp" />
+    <ClCompile Include="sources\ResourcesManager.cpp" />
     <ClCompile Include="sources\ShaderProgram.cpp" />
     <ClCompile Include="sources\Sprite.cpp" />
     <ClCompile Include="ShyEngine.cpp" />
+    <ClCompile Include="sources\TextureCache.cpp" />
     <ClCompile Include="sources\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +166,11 @@
     <ClInclude Include="headers\Input.h" />
     <ClInclude Include="headers\picopng.h" />
     <ClInclude Include="headers\Renderer.h" />
+    <ClInclude Include="headers\ResourcesManager.h" />
     <ClInclude Include="headers\ShaderProgram.h" />
     <ClInclude Include="headers\Sprite.h" />
     <ClInclude Include="headers\Texture.h" />
+    <ClInclude Include="headers\TextureCache.h" />
     <ClInclude Include="headers\Utility.h" />
     <ClInclude Include="headers\Vertex.h" />
   </ItemGroup>

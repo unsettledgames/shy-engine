@@ -22,8 +22,6 @@ private:
 	GLuint _fragShaderID;
 	GLuint _programID;
 
-	Texture _texture;
-
 	void compileShader(const std::string& filePath, GLuint shaderID);
 
 public:

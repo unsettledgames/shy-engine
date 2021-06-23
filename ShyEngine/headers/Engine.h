@@ -27,6 +27,9 @@ private:
 	int _width;
 	int _height;
 
+	float _fps;
+	float _frameTime;
+
 	void init();
 
 	void initShaders();
@@ -39,6 +42,8 @@ public:
 	~Engine();
 
 	void run();
+
+	void calculateFPS();
 	
 };
 

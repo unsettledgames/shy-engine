@@ -5,6 +5,7 @@
 #include<GL/glew.h>
 #include <Texture.h>
 #include <ImageLoader.h>
+#include <ResourcesManager.h>
 
 class Sprite
 {
