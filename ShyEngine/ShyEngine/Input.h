@@ -2,19 +2,21 @@
 
 #include <SDL/SDL.h>
 
-class Input
-{
-private:
-	bool quitting;
+namespace ShyEngine {
+	class Input
+	{
+	private:
+		bool quitting;
 
-public:
-	Input();
+	public:
+		Input();
 
-	~Input();
+		~Input();
 
-	void clearInput();
+		void clearInput();
 
-	void processInput();
+		void processInput();
 
-	bool isQuitting();
-};
+		bool isQuitting();
+	};
+}

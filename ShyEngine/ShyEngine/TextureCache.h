@@ -5,13 +5,15 @@
 #include <Texture.h>
 #include <ImageLoader.h>
 
-class TextureCache
-{
-private:
-	std::map<std::string, Texture> _cache;
+namespace ShyEngine {
+	class TextureCache
+	{
+	private:
+		std::map<std::string, Texture> _cache;
 
-public:
-	TextureCache();
+	public:
+		TextureCache();
 
-	Texture getTexture(std::string path);
-};
+		Texture getTexture(std::string path);
+	};
+}

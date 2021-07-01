@@ -156,8 +156,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ShyEngine.cpp" />
-    <ClCompile Include="sources\Engine.cpp" />
+    <ClCompile Include="sources\ShyEngine.cpp" />
+    <ClCompile Include="sources\Window.cpp" />
     <ClCompile Include="sources\EngineIO.cpp" />
     <ClCompile Include="sources\Error.cpp" />
     <ClCompile Include="sources\ImageLoader.cpp" />
@@ -171,7 +171,8 @@
     <ClCompile Include="sources\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h" />
+    <ClInclude Include="ShyEngine.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="EngineIO.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="ImageLoader.h" />

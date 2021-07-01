@@ -13,31 +13,33 @@
 	OPTIMIZABLE: ShaderPrograms should probably be a property of each renderer.
 */
 
-class ShaderProgram
-{
-private:
-	int _nAttributes;
+namespace ShyEngine {
+	class ShaderProgram
+	{
+	private:
+		int _nAttributes;
 
-	GLuint _vertShaderID;
-	GLuint _fragShaderID;
-	GLuint _programID;
+		GLuint _vertShaderID;
+		GLuint _fragShaderID;
+		GLuint _programID;
 
-	void compileShader(const std::string& filePath, GLuint shaderID);
+		void compileShader(const std::string& filePath, GLuint shaderID);
 
-public:
-	ShaderProgram();
+	public:
+		ShaderProgram();
 
-	~ShaderProgram();
+		~ShaderProgram();
 
-	void compileShaders(const std::string& vertPath, const std::string& fragPath);
+		void compileShaders(const std::string& vertPath, const std::string& fragPath);
 
-	void linkShaders();
+		void linkShaders();
 
-	void addAttribute(const std::string& name);
+		void addAttribute(const std::string& name);
 
-	GLuint getUniformLocation(const std::string& name);
+		GLuint getUniformLocation(const std::string& name);
 
-	void use(float time);
+		void use(float time);
 
-	void unuse();
-};
+		void unuse();
+	};
+}

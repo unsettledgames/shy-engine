@@ -6,8 +6,10 @@
 #include <EngineIO.h>
 #include <Error.h>
 
-class ImageLoader
-{
-public:
-	static Texture loadPNG(std::string path);
-};
+namespace ShyEngine {
+	class ImageLoader
+	{
+	public:
+		static Texture loadPNG(std::string path);
+	};
+}

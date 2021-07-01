@@ -7,22 +7,24 @@
 #include <ImageLoader.h>
 #include <ResourcesManager.h>
 
-class Sprite
-{
-private:
-	float _xPos;
-	float _yPos;
-	float _width;
-	float _height;
+namespace ShyEngine {
+	class Sprite
+	{
+	private:
+		float _xPos;
+		float _yPos;
+		float _width;
+		float _height;
 
-	Texture _texture;
-	Vertex _vertexData[6];
-	GLuint _buffer;
+		Texture _texture;
+		Vertex _vertexData[6];
+		GLuint _buffer;
 
-public:
-	Sprite(float x, float y, float width, float height, std::string texturePath);
+	public:
+		Sprite(float x, float y, float width, float height, std::string texturePath);
 
-	~Sprite();
+		~Sprite();
 
-	void render();
-};
+		void render();
+	};
+}

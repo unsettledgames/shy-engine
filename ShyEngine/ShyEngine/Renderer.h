@@ -5,17 +5,19 @@
 #include <Error.h>
 #include <Sprite.h>
 
-class Renderer
-{
-private:
-	SDL_GLContext _glContext;
-	SDL_Window* _window;
-public:
-	Renderer();
+namespace ShyEngine {
+	class Renderer
+	{
+	private:
+		SDL_GLContext _glContext;
+		SDL_Window* _window;
+	public:
+		Renderer();
 
-	~Renderer();
+		~Renderer();
 
-	void init(SDL_Window* window);
+		void init(SDL_Window* window);
 
-	void render(Sprite toRender);
-};
+		void render(Sprite toRender);
+	};
+}

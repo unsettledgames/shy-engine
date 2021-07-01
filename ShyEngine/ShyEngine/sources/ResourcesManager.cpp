@@ -1,8 +1,10 @@
 #include <ResourcesManager.h>
 
-TextureCache ResourcesManager::_textureCache;
+namespace ShyEngine {
+	TextureCache ResourcesManager::_textureCache;
 
-Texture ResourcesManager::getTexture(std::string path)
-{
-	return _textureCache.getTexture(path);
+	Texture ResourcesManager::getTexture(std::string path)
+	{
+		return _textureCache.getTexture(path);
+	}
 }
