@@ -76,7 +76,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)ShyEngine/headers;$(SolutionDir)/Headers;$(SolutionDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(SolutionDir)/ShyEngine;$(SolutionDir)/Headers;$(SolutionDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath)/Sources;</SourcePath>
     <LibraryPath>$(SolutionDir)deps/lib;$(SolutionDir)Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>

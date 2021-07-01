@@ -4,10 +4,7 @@
 #include <Windows.h>
 
 #include <iostream>
-#include <Engine.h>
-
-#include <SDL/SDL.h>
-#include <GL/glew.h>
+#include <ShyEngine/Engine.h>
 
 int main(int argc, char** argv)
 {
