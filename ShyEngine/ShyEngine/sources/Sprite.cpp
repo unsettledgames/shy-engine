@@ -16,25 +16,32 @@ namespace ShyEngine {
 		if (_buffer == 0)
 			glGenBuffers(1, &_buffer);
 
-		// Bottom left
-		_vertexData[0].setPosition(_xPos - _width / 2, _yPos - _height / 2);
-		_vertexData[0].setUV(0.0f, 0.0f);
+		//First Triangle
 		// Top right
-		_vertexData[1].setPosition(_xPos + _width / 2, _yPos + _height / 2);
-		_vertexData[1].setUV(1.0f, 1.0f);
+		_vertexData[0].setPosition(_xPos + _width, _yPos + _height);
+		_vertexData[0].setUV(1.0f, 1.0f);
+
 		// Top left
-		_vertexData[2].setPosition(_xPos - _width / 2, _yPos + _height / 2);
-		_vertexData[2].setUV(0.0f, 1.0f);
+		_vertexData[1].setPosition(_xPos, _yPos + _height);
+		_vertexData[1].setUV(0.0f, 1.0f);
+
+		// Bottom left
+		_vertexData[2].setPosition(_xPos, _yPos);
+		_vertexData[2].setUV(0.0f, 0.0f);
+
+
+		//Second Triangle
+		// Bottom left
+		_vertexData[3].setPosition(_xPos, _yPos);
+		_vertexData[3].setUV(0.0f, 0.0f);
+
+		// Bottom right
+		_vertexData[4].setPosition(_xPos + _width, _yPos);
+		_vertexData[4].setUV(1.0f, 0.0f);
 
 		// Top right
-		_vertexData[3].setPosition(_xPos + _width / 2, _yPos + _height / 2);
-		_vertexData[3].setUV(1.0f, 1.0f);
-		// Bottom left
-		_vertexData[4].setPosition(_xPos - _width / 2, _yPos - _height / 2);
-		_vertexData[4].setUV(0.0f, 0.0f);
-		// Bottom right	
-		_vertexData[5].setPosition(_xPos + _width / 2, _yPos - _height / 2);
-		_vertexData[5].setUV(1.0f, 0.0f);
+		_vertexData[5].setPosition(_xPos + _width, _yPos + _height);
+		_vertexData[5].setUV(1.0f, 1.0f);
 
 		for (int i = 0; i < 6; i++)
 			_vertexData[i].setColor(255, 0, 255, 255);

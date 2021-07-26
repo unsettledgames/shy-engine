@@ -7,13 +7,11 @@ namespace ShyEngine {
 	{
 	}
 
-	Window::~Window()
-	{
-	}
-
 	void Window::run()
 	{
 		this->_state = GameState::GAME_STATE_RUNNING;
+
+		_camera.init(_width, _height);
 
 		this->loop();
 	}
@@ -29,22 +27,28 @@ namespace ShyEngine {
 			Uint32 startTicks = SDL_GetTicks();
 			Uint32 frameTicks;
 			// Test sprite
-			Sprite sprite(0, 0, 2, 2, "textures/5heartsSmall.png");
+			Sprite sprite(0, 0, 300, 300, "textures/5heartsSmall.png");
 			// Processing input for this frame
 			_input.processInput();
 			// Rendering the sprite
 			_colorShader.use(_time);
 
+			// Camera projection
+			_colorShader.setOrthoProjection("orthoProj", _camera.getCameraMatrix());
+
 			_renderer.render(sprite);
+			_camera.update();
 			_colorShader.unuse();
 
 			// If the user decided to quit, I stop the loop
 			if (_input.isQuitting())
-			{
 				this->_state = GameState::GAME_STATE_STOPPED;
-			}
 
 			_time += 0.01f;
+
+			// TEST
+			if (_input.getKeyDown(SDLK_w))
+				_camera.setPosition(_camera.getPosition() + glm::vec2(0, 0.5f));
 
 			// Print FPS
 			calculateFPS();

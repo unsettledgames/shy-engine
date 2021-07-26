@@ -24,39 +24,86 @@ namespace ShyEngine {
 		{
 			switch (inputEvent.type)
 			{
-			case SDL_MOUSEMOTION:
-				break;
+				case SDL_MOUSEMOTION:
+					break;
 
-			case SDL_QUIT:
-				this->quitting = true;
-				break;
+				case SDL_QUIT:
+				{
+					this->_quitting = true;
+					break;
+				}
 
-			case SDL_KEYDOWN:
-				break;
+				case SDL_KEYDOWN:
+				{
+					SDL_Keycode key = inputEvent.key.keysym.sym;
+					std::map<SDL_Keycode, InputData>::iterator inputData = _inputMap.find(key);
+					InputData toAdd;
 
-			case SDL_KEYUP:
-				break;
+					if (inputData == _inputMap.end())
+						toAdd = { true, SDL_GetTicks(), SDL_GetTicks(), 0 };
+					else if (!inputData->second.isDown) {
+						inputData->second.isDown = true;
+						inputData->second.startDownTime = SDL_GetTicks();
+						inputData->second.lastDownTime = SDL_GetTicks();
+						inputData->second.upTime = 0;
+					}
+					else {
+						inputData->second.lastDownTime = SDL_GetTicks();
+					}
 
-			case SDL_MOUSEBUTTONDOWN:
-				break;
+					_inputMap.insert(std::make_pair(key, toAdd));
 
-			case SDL_MOUSEBUTTONUP:
-				break;
+					break;
+				}
 
-			default:
-				std::cout << "Unhandled input event with type " << inputEvent.type << std::endl;
-				break;
+				case SDL_KEYUP:
+				{
+					SDL_Keycode key = inputEvent.key.keysym.sym;
+					std::map<SDL_Keycode, InputData>::iterator toUpdate = _inputMap.find(key);
+
+					toUpdate->second.isDown = false;
+					toUpdate->second.upTime = SDL_GetTicks();
+
+					break;
+				}
+
+				case SDL_MOUSEBUTTONDOWN:
+					break;
+
+				case SDL_MOUSEBUTTONUP:
+					break;
+
+				default:
+					std::cout << "Unhandled input event with type " << inputEvent.type << std::endl;
+					break;
 			}
 		}
 	}
 
 	void Input::clearInput()
 	{
-		this->quitting = false;
+		this->_quitting = false;
 	}
 
 	bool Input::isQuitting()
 	{
-		return this->quitting;
+		return this->_quitting;
+	}
+
+	bool Input::keyPressed(SDL_Keycode key)
+	{
+		return false;
+	}
+
+	bool Input::getKeyDown(SDL_Keycode key)
+	{
+		return _inputMap.find(key) != _inputMap.end() &&
+			_inputMap.find(key)->second.isDown;
+	}
+
+	bool Input::getKeyUp(SDL_Keycode key)
+	{
+		return _inputMap.find(key) == _inputMap.end() ||
+			!_inputMap.find(key)->second.isDown;
 	}
 }

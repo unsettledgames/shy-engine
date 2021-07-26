@@ -11,6 +11,12 @@ namespace ShyEngine {
 
 	}
 
+	void ShaderProgram::setOrthoProjection(const std::string& uniform, glm::mat4 val)
+	{
+		GLint orthoProjLocation = getUniformLocation("orthoProj");
+		glUniformMatrix4fv(orthoProjLocation, 1, GL_FALSE, &(val[0][0]));
+	}
+
 	GLuint ShaderProgram::getUniformLocation(const std::string& name)
 	{
 		GLint location = glGetUniformLocation(_programID, name.c_str());

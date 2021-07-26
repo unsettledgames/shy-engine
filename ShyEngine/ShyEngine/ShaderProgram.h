@@ -7,6 +7,7 @@
 #include <Error.h>
 #include <ImageLoader.h>
 #include <Texture.h>
+#include <glm/glm.hpp>
 
 /*
 	OPTIMIZABLE: save compiled version of shaders, recompile only if necessary. Could be done via makefile?
@@ -37,6 +38,8 @@ namespace ShyEngine {
 		void addAttribute(const std::string& name);
 
 		GLuint getUniformLocation(const std::string& name);
+
+		void setOrthoProjection(const std::string& uniform, glm::mat4 val);
 
 		void use(float time);
 

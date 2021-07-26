@@ -2,13 +2,12 @@
 
 #include <ShyEngine/Window.h>
 
-using namespace ShyEngine;
 
 int main(int argc, char** argv)
 {
-    Window engine(700, 400);
-
-    engine.init("Test", 0 | WindowFlags::FULLSCREEN);
+    ShyEngine::Window engine(700, 400);
+    
+    engine.init("Test", SDL_WINDOW_OPENGL);
     engine.run();
 
     return 0;

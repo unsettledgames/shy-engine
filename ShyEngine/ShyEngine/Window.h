@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL/SDL.h>
+#include <GL/glew.h>
 #include <Input.h>
 #include <Renderer.h>
 #include <iostream>
@@ -8,10 +9,12 @@
 #include <Sprite.h>
 #include <ShaderProgram.h>
 #include <Utility.h>
+#include <Camera2D.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
-enum WindowFlags {INVISIBLE = 0x1, FULLSCREEN = 0x2, BORDERLESS = 0x4};
+// 0x2 is used by SDL_WINDOW_OPENGL
+enum WindowFlags {INVISIBLE = 0x1, FULLSCREEN = 0x4, BORDERLESS = 0x8};
 
 namespace ShyEngine {
 	class Window
@@ -24,6 +27,9 @@ namespace ShyEngine {
 
 		GameState _state;
 		ShaderProgram _colorShader;
+
+		// TEST
+		Camera2D _camera;
 
 		float _time;
 
@@ -40,8 +46,6 @@ namespace ShyEngine {
 
 	public:
 		Window(int width, int height);
-
-		~Window();
 
 		void init(std::string windowName, unsigned int flags);
 

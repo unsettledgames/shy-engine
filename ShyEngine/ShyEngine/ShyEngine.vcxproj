@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\Camera2D.cpp" />
     <ClCompile Include="sources\ShyEngine.cpp" />
     <ClCompile Include="sources\Window.cpp" />
     <ClCompile Include="sources\EngineIO.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="sources\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera2D.h" />
     <ClInclude Include="ShyEngine.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="EngineIO.h" />
