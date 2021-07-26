@@ -10,6 +10,8 @@
 #include <ShaderProgram.h>
 #include <Utility.h>
 #include <Camera2D.h>
+#include <SpriteBatch.h>
+#include <ResourcesManager.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
@@ -30,6 +32,7 @@ namespace ShyEngine {
 
 		// TEST
 		Camera2D _camera;
+		SpriteBatch _spriteBatch;
 
 		float _time;
 

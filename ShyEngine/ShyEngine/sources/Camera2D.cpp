@@ -2,7 +2,7 @@
 #include <iostream>
 
 namespace ShyEngine {
-	Camera2D::Camera2D() : _position(0.0f, 0.0f), _cameraMatrix(1.0f), _orthoMatrix(1.0f), 
+	Camera2D::Camera2D() : _position(0.0f, 0.0f), _cameraMatrix(1.0f), _orthoMatrix(1.0f),
 		_scale(1.0f), _matrixUpdated(true), _screenWidth(-1), _screenHeight(-1)
 	{
 
@@ -21,11 +21,13 @@ namespace ShyEngine {
 	{
 		if (_matrixUpdated)
 		{
+			// Camera scaling
+			glm::vec3 scale(this->_scale, this->_scale, 0.0f);
+			_cameraMatrix = glm::scale(glm::mat4(1.0f), scale) * _orthoMatrix;
+
+			// Camera translation
 			glm::vec3 translateVector(-this->_position.x, -this->_position.y, 0.0f);
 			_cameraMatrix = glm::translate(this->_orthoMatrix, translateVector);
-
-			glm::vec3 scale(this->_scale, this->_scale, 0.0f);
-			_cameraMatrix = glm::scale(_cameraMatrix, scale);
 
 			_matrixUpdated = false;
 		}

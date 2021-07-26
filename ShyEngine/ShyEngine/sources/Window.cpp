@@ -26,18 +26,35 @@ namespace ShyEngine {
 			// Start and end times of the frame
 			Uint32 startTicks = SDL_GetTicks();
 			Uint32 frameTicks;
-			// Test sprite
-			Sprite sprite(0, 0, 300, 300, "textures/5heartsSmall.png");
 			// Processing input for this frame
 			_input.processInput();
-			// Rendering the sprite
+			
+			// Setting up the shader
 			_colorShader.use(_time);
-
-			// Camera projection
 			_colorShader.setOrthoProjection("orthoProj", _camera.getCameraMatrix());
 
-			_renderer.render(sprite);
+			// Clearing buffers
+			glClearDepth(1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClearColor(0, 0, 1, 1);
+
+			_spriteBatch.begin();
+			Color col = { 255, 255, 255, 255 };
+			GLuint tex = ResourcesManager::getTexture("textures/5heartsSmall.png").id;
+
+			for (int i = 0; i < 10000; i++)
+			{
+				_spriteBatch.draw(glm::vec4(i, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
+			}
+
+			_spriteBatch.end();
+			_spriteBatch.render();
+
+			// Camera update
 			_camera.update();
+
+			// Cleanup
+			SDL_GL_SwapWindow(this->_gameWindow);
 			_colorShader.unuse();
 
 			// If the user decided to quit, I stop the loop
@@ -57,9 +74,9 @@ namespace ShyEngine {
 			frameCounter++;
 
 			// Limit FPS
-			frameTicks = SDL_GetTicks() - startTicks;
+			/*frameTicks = SDL_GetTicks() - startTicks;
 			if (1000.0f / _maxFPS > frameTicks)
-				SDL_Delay(1000.0f / (_maxFPS - frameTicks));
+				SDL_Delay(1000.0f / (_maxFPS - frameTicks));*/
 		}
 	}
 
@@ -99,6 +116,9 @@ namespace ShyEngine {
 		SDL_GL_SetSwapInterval(0);
 		// Initializing shaders
 		initShaders();
+
+		// TEST
+		_spriteBatch.init();
 
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;
