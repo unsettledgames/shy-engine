@@ -68,7 +68,7 @@ namespace ShyEngine
 			void end();
 
 			void draw(const glm::vec4& destinationRect, const glm::vec4& uvRect, float depth,
-				const GLuint& texture, const Color& color);
+				const GLuint& texture, const ColorRGBA8& color);
 
 			void render();
 	};

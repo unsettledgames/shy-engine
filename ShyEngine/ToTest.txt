@@ -1,0 +1,8 @@
+INPUT
+- keyDown
+- keyUp
+- keyPressed
+
+- buttonDown
+- buttonUp
+- buttonPressed

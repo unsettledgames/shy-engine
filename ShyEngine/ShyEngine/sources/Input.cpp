@@ -151,6 +151,21 @@ namespace ShyEngine {
 		return _lastKeyUp != -1 && _lastKeyUp == key;
 	}
 
+	bool Input::keyPressed(SDL_Keycode key)
+	{
+		auto keyIt = _keysMap.find(key);
+
+		if (keyIt != _keysMap.end())
+		{
+			InputData data = keyIt->second;
+
+			if (data.lastDownTime - data.startDownTime < INPUT_PRESSED_THRESHOLD)
+				return true;
+		}
+
+		return false;
+	}
+
 	bool Input::getButtonDown(Uint8 button)
 	{
 		return _mouseMap.find(button) != _mouseMap.end() &&
@@ -160,6 +175,21 @@ namespace ShyEngine {
 	bool Input::getButtonUp(Uint8 button)
 	{
 		return _lastButtonUp != -1 && _lastButtonUp == button;
+	}
+
+	bool Input::buttonPressed(Uint8 button)
+	{
+		auto buttonIt = _mouseMap.find(button);
+
+		if (buttonIt != _mouseMap.end())
+		{
+			InputData data = buttonIt->second;
+
+			if (data.lastDownTime - data.startDownTime < INPUT_PRESSED_THRESHOLD)
+				return true;
+		}
+
+		return false;
 	}
 
 	glm::vec2 Input::getMousePosition()

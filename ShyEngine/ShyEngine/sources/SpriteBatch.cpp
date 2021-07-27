@@ -3,7 +3,7 @@
 namespace ShyEngine
 {
 
-	SpriteBatch::SpriteBatch() : _vbo(0), _vao(0)
+	SpriteBatch::SpriteBatch() : _vbo(0), _vao(0), _sortType(GlyphSortType::TEXTURE)
 	{
 
 	}
@@ -30,7 +30,7 @@ namespace ShyEngine
 	}
 
 	void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, float depth,
-		const GLuint& texture, const Color& color)
+		const GLuint& texture, const ColorRGBA8& color)
 	{
 		Glyph* newGlyph = new Glyph();
 

@@ -25,20 +25,24 @@ namespace ShyEngine {
 			// Processing input for this frame
 			_input.processInput();
 			
-			// Setting up the shader
+			// Setting up the shader REFACTOR: put this in the SpriteRenderer class
 			_colorShader.use(_time);
+			// REFACTOR: since the shader will be a SpriteRenderer property, I should find a way
+			// to pass camera data to it. Or maybe have a currentShader in the Engine? Even though
+			// conceptually, shaders are linked to Rendering
 			_colorShader.setOrthoProjection("orthoProj", _camera.getCameraMatrix());
 
-			// Clearing buffers
+			// Clearing buffers REFACTOR: Renderer?
 			glClearDepth(1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glClearColor(0, 0, 1, 1);
 
+			// REFACTOR: this is probably part of Renderer as well
 			_spriteBatch.begin();
-			Color col = { 255, 255, 255, 255 };
+			ColorRGBA8 col = { 255, 255, 255, 255 };
 			//GLuint tex = ResourcesManager::getTexture("textures/5heartsSmall.png").id;
 			GLuint tex = ResourcesManager::getTexture("textures/Alice.png").id;
-
+			// TEST
 			_spriteBatch.draw(glm::vec4(0, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
 			_spriteBatch.draw(glm::vec4(200, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
 			_spriteBatch.draw(glm::vec4(400, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
@@ -46,7 +50,8 @@ namespace ShyEngine {
 			_spriteBatch.end();
 			_spriteBatch.render();
 
-			// Camera update
+			// Camera update REFACTOR: the camera should update on its own, in some way. Maybe the
+			// enine has an active camera and it updates it?
 			_camera.update();
 
 			// Cleanup
@@ -56,8 +61,6 @@ namespace ShyEngine {
 			// If the user decided to quit, I stop the loop
 			if (_input.isQuitting())
 				this->_state = GameState::GAME_STATE_STOPPED;
-
-			_time += 0.01f;
 
 			// TEST
 			if (_input.getKeyDown(SDLK_w))
@@ -83,8 +86,10 @@ namespace ShyEngine {
 		if (_gameWindow == nullptr)
 			Error::fatal("Couldn't create the main window.");
 
-		// Initializing the renderer
-		this->_renderer.init(this->_gameWindow);
+		// Initializing opengl
+		this->_glContext = SDL_GL_CreateContext(_gameWindow);
+		if (this->_glContext == nullptr)
+			Error::fatal("Couldn't create GL context");
 		// Clearing input
 		this->_input.clearInput();
 

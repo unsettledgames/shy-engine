@@ -90,9 +90,15 @@ namespace ShyEngine {
 
 	void ShaderProgram::addAttribute(const std::string& name)
 	{
-		glBindAttribLocation(_programID, _nAttributes++, name.c_str());
+		glBindAttribLocation(_programID, _nAttributes, name.c_str());
+		_nAttributes++;
 	}
 
+	/*
+		REFACTOR: shaders should be added by the user, so they should probably also call compileShaders
+		on their own OR maybe have an Engine.init() that compiles shaders and also does other stuff.
+		I'd like to hide what is actually happening behind the scenes.
+	*/
 	void ShaderProgram::compileShaders(const std::string& vertPath, const std::string& fragPath)
 	{
 		// Get a program object.
@@ -107,15 +113,19 @@ namespace ShyEngine {
 		if (_fragShaderID == 0)
 			Error::fatal("Couldn't create fragment shader");
 
+		// Compile shaders
 		compileShader(vertPath, _vertShaderID);
 		compileShader(fragPath, _fragShaderID);
-
 
 		// Attach our shaders to our program
 		glAttachShader(_programID, _vertShaderID);
 		glAttachShader(_programID, _fragShaderID);
 	}
 
+	/*
+		Compiles a single shader. OPTIMIZABLE: can't I just cache a compiled version of a shader so that 
+		I can skip compilation?
+	*/
 	void ShaderProgram::compileShader(const std::string& filePath, GLuint shaderID)
 	{
 		// Shader compile error
