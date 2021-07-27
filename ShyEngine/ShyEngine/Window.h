@@ -12,6 +12,7 @@
 #include <Camera2D.h>
 #include <SpriteBatch.h>
 #include <ResourcesManager.h>
+#include <Timing.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
@@ -33,15 +34,12 @@ namespace ShyEngine {
 		// TEST
 		Camera2D _camera;
 		SpriteBatch _spriteBatch;
+		FpsLimiter _fpsLimiter;
 
 		float _time;
 
 		int _width;
 		int _height;
-
-		float _fps;
-		float _maxFPS;
-		float _frameTime;
 
 		void initShaders();
 
@@ -53,8 +51,6 @@ namespace ShyEngine {
 		void init(std::string windowName, unsigned int flags);
 
 		void run();
-
-		void calculateFPS();
 
 		int getScreenWidth();
 

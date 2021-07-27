@@ -57,4 +57,17 @@ namespace ShyEngine {
 	{
 		return this->_cameraMatrix;
 	}
+
+	glm::vec2 Camera2D::screenToWorld(glm::vec2 screenCoords)
+	{
+		// Convert to a system where (0,0) is the center of the screen
+		screenCoords.y = _screenHeight - screenCoords.y;
+		screenCoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
+		// Take scaling in account
+		screenCoords /= _scale;
+		// Convert to world position
+		screenCoords += _position;
+
+		return screenCoords;
+	}
 }

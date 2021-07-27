@@ -3,7 +3,8 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 #include <string>
-#include <map>
+#include <unordered_map>
+#include <glm/glm.hpp>
 
 namespace ShyEngine {
 	typedef struct inputdata{
@@ -18,7 +19,23 @@ namespace ShyEngine {
 	{
 		private:
 			bool _quitting;
-			std::map<SDL_Keycode, InputData> _inputMap;
+
+			// OPTIMIZABLE? Both SDL_Keycode and Uint8 are unsigned ints, so I could just have a single 
+			// map. Maybe research a little bit to understand if it's worth it
+			// Used to save the state of keys
+			std::unordered_map<SDL_Keycode, InputData> _keysMap;
+			// Used to save the state of mouse buttons
+			std::unordered_map<Uint8, InputData> _mouseMap;
+
+			// The key that has been released in the current frame (-1 if none)
+			SDL_Keycode _lastKeyUp;
+			// The button that has been released in the current frame (-1 if none)
+			Uint8 _lastButtonUp;
+
+			// Current mouse position
+			glm::vec2 _mousePosition;
+
+			void setMousePosition(float x, float y);
 
 		public:
 			Input();
@@ -31,11 +48,15 @@ namespace ShyEngine {
 
 			bool isQuitting();
 
-			bool keyPressed(SDL_Keycode key);
-
 			bool getKeyDown(SDL_Keycode key);
 
 			bool getKeyUp(SDL_Keycode key);
+
+			bool getButtonDown(Uint8 button);
+
+			bool getButtonUp(Uint8 button);
+
+			glm::vec2 getMousePosition();
 
 	};
 }

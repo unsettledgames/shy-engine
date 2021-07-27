@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <ShyEngine/Window.h>
+#include <ShyEngine/SpriteBatch.h>
 
 
 int main(int argc, char** argv)

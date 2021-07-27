@@ -34,5 +34,7 @@ namespace ShyEngine {
 		void update();
 
 		void init(int width, int height);
+
+		glm::vec2 screenToWorld(glm::vec2 screenCoords);
 	};
 }
