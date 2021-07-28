@@ -70,4 +70,30 @@ namespace ShyEngine {
 
 		return screenCoords;
 	}
+
+	bool Camera2D::isBoxInView(const glm::vec2& position, const glm::vec2& dimensions)
+	{
+		const float xRadius = dimensions.x / 2.0f;
+		const float yRadius = dimensions.y / 2.0f;
+
+		// TEST IT by multiplying scale by 2
+		glm::vec2 scaledScreenDim = glm::vec2(_screenWidth, _screenHeight) / _scale;
+
+		const float minDistanceX = scaledScreenDim.x / 2 + xRadius;
+		const float minDistanceY = scaledScreenDim.y / 2 + yRadius;
+
+		glm::vec2 centerPos = position + dimensions / 2.0f;
+		glm::vec2 centerCameraPos = _position;
+
+		glm::vec2 distance = centerPos - centerCameraPos;
+
+		float xDepth = minDistanceX - abs(distance.x);
+		float yDepth = minDistanceY - abs(distance.y);
+		
+		// ISSUE: use an &&
+		if (xDepth > 0 || yDepth > 0)
+			return true;
+
+		return false;
+	}
 }

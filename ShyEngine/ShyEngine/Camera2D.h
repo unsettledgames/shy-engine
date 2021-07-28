@@ -23,18 +23,41 @@ namespace ShyEngine {
 
 		Camera2D();
 
+		/*
+			Gets / sets the position
+		*/
 		void setPosition(glm::vec2 position);
 		glm::vec2 getPosition();
 
+		/*
+			Gets / sets the scake
+		*/
 		void setScale(float scale);
 		float getScale();
 
+		/*
+			Returns the camera matrix
+		*/
 		glm::mat4 getCameraMatrix();
 
+		/*
+			Updates the camera
+		*/
 		void update();
 
+		/*
+			Initializes the camera
+		*/
 		void init(int width, int height);
 
+		/*
+			Converts screenCoords (in screen position) to world position
+		*/
 		glm::vec2 screenToWorld(glm::vec2 screenCoords);
+
+		/*
+			Checks whether or not the box passed as a parameter is in the camera view
+		*/
+		bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions);
 	};
 }

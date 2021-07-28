@@ -4,6 +4,7 @@ Comment labels:
 - IMPROVEMENT: something that can be improved by adding functionalities to it
 - INSPIRATION: something that can be used as a template to add more stuff
 - OPTIMIZABLE: something that can be optimized
+- ISSUE: part of code that could cause an issue, the possible solution is usually there as well
 
 Engine
 	Renderer
