@@ -17,14 +17,19 @@ namespace ShyEngine
 	{
 		this->_sortType = sortType;
 		this->_renderBatches.clear();
-
-		for (int i = 0; i < _glyphs.size(); i++)
-			delete _glyphs[i];
 		this->_glyphs.clear();
 	}
 
 	void SpriteBatch::end()
 	{
+		// Update pointers for sorting
+		_glyphPointers.resize(_glyphs.size());
+		
+		for (int i = 0; i < _glyphs.size(); i++)
+		{
+			_glyphPointers[i] = &_glyphs[i];
+		}
+
 		sortGlyphs();
 		createRenderBatches();
 	}
@@ -32,29 +37,7 @@ namespace ShyEngine
 	void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, float depth,
 		const GLuint& texture, const ColorRGBA8& color)
 	{
-		Glyph* newGlyph = new Glyph();
-
-		newGlyph->texture = texture;
-		newGlyph->depth = depth;
-
-		newGlyph->topLeft.color = color;
-		newGlyph->topRight.color = color;
-		newGlyph->bottomRight.color = color;
-		newGlyph->bottomLeft.color = color;
-
-		newGlyph->topLeft.setPosition(destRect.x, destRect.y + destRect.w);
-		newGlyph->topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
-
-		newGlyph->bottomLeft.setPosition(destRect.x, destRect.y);
-		newGlyph->bottomLeft.setUV(uvRect.x, uvRect.y);
-
-		newGlyph->topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
-		newGlyph->topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
-
-		newGlyph->bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
-		newGlyph->bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
-
-		this->_glyphs.push_back(newGlyph);
+		this->_glyphs.emplace_back(destRect, uvRect, depth, texture, color);
 	}
 
 	void SpriteBatch::render()
@@ -107,28 +90,28 @@ namespace ShyEngine
 		std::vector<Vertex> vertices;
 		vertices.resize(_glyphs.size() * 6);
 
-		_renderBatches.emplace_back(offset, 6, _glyphs[0]->texture);
-		vertices[currentVert++] = _glyphs[0]->topLeft;
-		vertices[currentVert++] = _glyphs[0]->bottomLeft;
-		vertices[currentVert++] = _glyphs[0]->bottomRight;
-		vertices[currentVert++] = _glyphs[0]->bottomRight;
-		vertices[currentVert++] = _glyphs[0]->topRight;
-		vertices[currentVert++] = _glyphs[0]->topLeft;
+		_renderBatches.emplace_back(offset, 6, _glyphPointers[0]->texture);
+		vertices[currentVert++] = _glyphPointers[0]->topLeft;
+		vertices[currentVert++] = _glyphPointers[0]->bottomLeft;
+		vertices[currentVert++] = _glyphPointers[0]->bottomRight;
+		vertices[currentVert++] = _glyphPointers[0]->bottomRight;
+		vertices[currentVert++] = _glyphPointers[0]->topRight;
+		vertices[currentVert++] = _glyphPointers[0]->topLeft;
 
 		offset += 6;
 
 		for (currentGlyph = 1; currentGlyph < _glyphs.size(); currentGlyph++)
 		{
-			if (_glyphs[currentGlyph]->texture != _glyphs[currentGlyph - 1]->texture)
-				_renderBatches.emplace_back(offset, 6, _glyphs[currentGlyph]->texture);
+			if (_glyphPointers[currentGlyph]->texture != _glyphPointers[currentGlyph - 1]->texture)
+				_renderBatches.emplace_back(offset, 6, _glyphPointers[currentGlyph]->texture);
 			else
 				_renderBatches.back().nVertices += 6;
-			vertices[currentVert++] = _glyphs[currentGlyph]->topLeft;
-			vertices[currentVert++] = _glyphs[currentGlyph]->bottomLeft;
-			vertices[currentVert++] = _glyphs[currentGlyph]->bottomRight;
-			vertices[currentVert++] = _glyphs[currentGlyph]->bottomRight;
-			vertices[currentVert++] = _glyphs[currentGlyph]->topRight;
-			vertices[currentVert++] = _glyphs[currentGlyph]->topLeft;
+			vertices[currentVert++] = _glyphPointers[currentGlyph]->topLeft;
+			vertices[currentVert++] = _glyphPointers[currentGlyph]->bottomLeft;
+			vertices[currentVert++] = _glyphPointers[currentGlyph]->bottomRight;
+			vertices[currentVert++] = _glyphPointers[currentGlyph]->bottomRight;
+			vertices[currentVert++] = _glyphPointers[currentGlyph]->topRight;
+			vertices[currentVert++] = _glyphPointers[currentGlyph]->topLeft;
 
 			offset += 6;
 		}
@@ -148,17 +131,17 @@ namespace ShyEngine
 		{
 			case GlyphSortType::BACK_TO_FRONT:
 			{
-				std::stable_sort(_glyphs.begin(), _glyphs.end(), compareBackToFront);
+				std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareBackToFront);
 				break;
 			}
 			case GlyphSortType::FRONT_TO_BACK:
 			{
-				std::stable_sort(_glyphs.begin(), _glyphs.end(), compareFrontToBack);
+				std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareFrontToBack);
 				break;
 			}
 			case GlyphSortType::TEXTURE:
 			{
-				std::stable_sort(_glyphs.begin(), _glyphs.end(), compareTexture);
+				std::stable_sort(_glyphPointers.begin(), _glyphPointers.end(), compareTexture);
 				break;
 			}
 			default:

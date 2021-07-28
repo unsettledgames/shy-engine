@@ -1,2 +1,4 @@
 SDL
 lodepng (picopng)
+glm
+MakingGamesWithBen

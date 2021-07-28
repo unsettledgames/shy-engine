@@ -12,6 +12,7 @@
 #include <SpriteBatch.h>
 #include <ResourcesManager.h>
 #include <Timing.h>
+#include <cstdlib>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 

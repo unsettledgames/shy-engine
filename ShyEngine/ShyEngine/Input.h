@@ -6,7 +6,6 @@
 #include <unordered_map>
 #include <glm/glm.hpp>
 
-// REFACTOR: this is in ticks, not in milliseconds
 #define INPUT_PRESSED_THRESHOLD	5
 
 namespace ShyEngine {

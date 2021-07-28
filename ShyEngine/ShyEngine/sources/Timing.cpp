@@ -2,7 +2,8 @@
 
 namespace ShyEngine
 {
-	FpsLimiter::FpsLimiter()
+	FpsLimiter::FpsLimiter() : _targetFps(60), _currFps(60), _startTicks(0), _frameTime(0), 
+							   _isLimitingFps(false)
 	{
 
 	}
@@ -12,10 +13,16 @@ namespace ShyEngine
 		setTargetFps(fps);
 	}
 
+	// IMPROVEMENT: fixed, deterministic timestep (https://gafferongames.com/post/fix_your_timestep/), 
+	// but you'll need to have a render module and a physics module (one undependent on the other)
 	void FpsLimiter::begin()
 	{
 		// Start and end times of the frame
 		_startTicks = SDL_GetTicks();
+
+		// Computing delta time for the current frame
+		const float DESIRED_FRAME_TIME = MS_PER_SEC / _targetFps;
+		this->_deltaTime = _frameTime / DESIRED_FRAME_TIME;
 	}
 
 	float FpsLimiter::end()
@@ -24,8 +31,11 @@ namespace ShyEngine
 
 		calculateFPS();
 
-		if (1000.0f / _targetFps > frameTicks)
-			SDL_Delay(1000.0f / (_targetFps - frameTicks));
+		if (_isLimitingFps)
+		{
+			if (1000.0f / _targetFps > frameTicks)
+				SDL_Delay(1000.0f / (_targetFps - frameTicks));
+		}
 
 		return this->_currFps;
 	}
@@ -63,5 +73,10 @@ namespace ShyEngine
 	float FpsLimiter::getCurrentFps()
 	{
 		return this->_currFps;
+	}
+
+	void FpsLimiter::toggleFpsLimiting(bool state)
+	{
+		this->_isLimitingFps = state;
 	}
 }

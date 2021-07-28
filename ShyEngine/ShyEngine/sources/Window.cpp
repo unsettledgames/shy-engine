@@ -18,10 +18,15 @@ namespace ShyEngine {
 	void Window::loop()
 	{
 		static int frameCounter = 1;
+		const int MAX_SIM_STEPS = 6;
+		const float MAX_DELTA_TIME = 1.0f;
 
 		// Running the engine loop until the user doesn't quit
 		while (this->_state == GameState::GAME_STATE_RUNNING)
 		{
+			int currSimStep = 0;
+			_fpsLimiter.begin();
+
 			// Processing input for this frame
 			_input.processInput();
 			
@@ -36,6 +41,21 @@ namespace ShyEngine {
 			glClearDepth(1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glClearColor(0, 0, 1, 1);
+
+			// REFACTOR: delta time implementation: uncomment it and put rendering and physics 
+			// code inside of the while
+			/*
+			float totalDeltaTime = _fpsLimiter.getDeltaTime();
+			while (totalDeltaTime > 0.0f && currSimStep < MAX_SIM_STEPS)
+			{
+				float deltaTime = std::min(MAX_DELTA_TIME, deltaTime);
+
+				// Update stuff, pass deltaTime to them
+
+				totalDeltaTime -= deltaTime;
+				currSimStep++;
+			}
+			*/
 
 			// REFACTOR: this is probably part of Renderer as well
 			_spriteBatch.begin();
@@ -65,6 +85,8 @@ namespace ShyEngine {
 			// TEST
 			if (_input.getKeyDown(SDLK_w))
 				_camera.setPosition(_camera.getPosition() + glm::vec2(0, 0.5f));
+
+			_fpsLimiter.end();
 		}
 	}
 

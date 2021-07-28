@@ -8,8 +8,9 @@
 
 namespace ShyEngine
 {
-	typedef struct glyph
+	class Glyph
 	{
+	public:
 		GLuint texture;
 		float depth;
 
@@ -17,7 +18,30 @@ namespace ShyEngine
 		Vertex bottomLeft;
 		Vertex topRight;
 		Vertex bottomRight;
-	} Glyph;
+
+		Glyph() {}
+
+		Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, float Depth,
+			const GLuint& Texture, const ColorRGBA8& color) : texture(Texture), depth(Depth)
+		{
+			this->topLeft.color = color;
+			this->topRight.color = color;
+			this->bottomRight.color = color;
+			this->bottomLeft.color = color;
+
+			this->topLeft.setPosition(destRect.x, destRect.y + destRect.w);
+			this->topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
+
+			this->bottomLeft.setPosition(destRect.x, destRect.y);
+			this->bottomLeft.setUV(uvRect.x, uvRect.y);
+
+			this->topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
+			this->topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+
+			this->bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
+			this->bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
+		}
+	};
 
 	enum class GlyphSortType
 	{
@@ -44,8 +68,11 @@ namespace ShyEngine
 			GLuint _vbo;
 			GLuint _vao;
 			GlyphSortType _sortType;
-
-			std::vector<Glyph*> _glyphs;
+			
+			// Used for sorting
+			std::vector<Glyph*> _glyphPointers;
+			// Actual glyphs
+			std::vector<Glyph> _glyphs;
 			std::vector<RenderBatch> _renderBatches;
 
 			void createVertexArray();

@@ -1,3 +1,10 @@
+Comment labels:
+
+- REFACTOR: a part of code that should be refactored, keeping its functionalities but with a better structure
+- IMPROVEMENT: something that can be improved by adding functionalities to it
+- INSPIRATION: something that can be used as a template to add more stuff
+- OPTIMIZABLE: something that can be optimized
+
 Engine
 	Renderer
 		Has a list of renderables, renders all of them
