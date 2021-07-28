@@ -13,6 +13,7 @@
 #include <ResourcesManager.h>
 #include <Timing.h>
 #include <cstdlib>
+#include <SpriteFont.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
@@ -40,7 +41,9 @@ namespace ShyEngine {
 		// TEST
 		Camera2D _camera;
 		SpriteBatch _spriteBatch;
+		SpriteBatch _hudBatch;
 		FpsLimiter _fpsLimiter;
+		SpriteFont _spriteFont;
 
 		// REFACTOR: have a proper Time class
 		float _time;

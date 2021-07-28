@@ -160,6 +160,7 @@
     <ClCompile Include="sources\Camera2D.cpp" />
     <ClCompile Include="sources\ShyEngine.cpp" />
     <ClCompile Include="sources\SpriteBatch.cpp" />
+    <ClCompile Include="sources\SpriteFont.cpp" />
     <ClCompile Include="sources\Timing.cpp" />
     <ClCompile Include="sources\Window.cpp" />
     <ClCompile Include="sources\EngineIO.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="ShyEngine.h" />
     <ClInclude Include="SpriteBatch.h" />
+    <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="EngineIO.h" />

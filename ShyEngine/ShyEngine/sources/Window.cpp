@@ -70,6 +70,17 @@ namespace ShyEngine {
 			_spriteBatch.end();
 			_spriteBatch.render();
 
+			// TEST: draws the HUD
+			_hudBatch.begin();
+
+			char buffer[256];
+			sprintf_s(buffer, "Test text haha get it???");
+			_spriteFont.draw(_hudBatch, buffer, glm::vec2(10, 300), glm::vec2(2, 2), 1.0f,
+				ColorRGBA8(255, 255, 255, 255));
+
+			_hudBatch.end();
+			_hudBatch.render();
+
 			// Camera update REFACTOR: the camera should update on its own, in some way. Maybe the
 			// enine has an active camera and it updates it?
 			_camera.update();
@@ -133,6 +144,8 @@ namespace ShyEngine {
 
 		// TEST
 		_spriteBatch.init();
+		_hudBatch.init();
+		_spriteFont.init("fonts/chintzy.TTF", 16);
 
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;
