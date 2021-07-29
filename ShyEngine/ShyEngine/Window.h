@@ -43,7 +43,7 @@ namespace ShyEngine {
 		SpriteBatch _spriteBatch;
 		SpriteBatch _hudBatch;
 		FpsLimiter _fpsLimiter;
-		SpriteFont _spriteFont;
+		SpriteFont* _spriteFont;
 
 		// REFACTOR: have a proper Time class
 		float _time;
