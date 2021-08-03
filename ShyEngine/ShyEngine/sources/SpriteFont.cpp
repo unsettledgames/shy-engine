@@ -17,138 +17,143 @@ int closestPow2(int i) {
 
 namespace ShyEngine {
 
-    SpriteFont::SpriteFont(const char* font, int size, char startChar, char endChar) {
+    SpriteFont::SpriteFont(const char* font, int size, unsigned char startChar, unsigned char endChar) 
+    {
         // Initialize SDL_ttf
-        if (!TTF_WasInit()) {
+        if (!TTF_WasInit())
             TTF_Init();
-        }
 
         // Open the font
-        TTF_Font* f = TTF_OpenFont(font, size);
-        if (f == nullptr) {
+        TTF_Font* currFont = TTF_OpenFont(font, size);
+        if (currFont == nullptr) 
+        {
             fprintf(stderr, "Failed to open TTF font %s\n", font);
-            fflush(stderr);
             throw 281;
         }
         
         // Setting start stats
-        m_fontHeight = TTF_FontHeight(f);
+        m_fontHeight = TTF_FontHeight(currFont);
+        // Beginning character
         m_regStart = startChar;
+        // Number of characters
         m_regLength = endChar - startChar + 1;
-        // FEATURE: let the user choose padding
+        // FEATURE: let the user choose padding between letters
         int padding = size / 8;
 
         /*
             First measure all the regions
-
-            x = minX
-            y = minY
-            z = maxX
-            w = maxY
         */
-        glm::ivec4* glyphRects = new glm::ivec4[m_regLength];
+        GlyphData* glyphRects = new GlyphData[m_regLength];
         int i = 0, advance;
-        for (char c = startChar; c <= endChar; c++) {
-            TTF_GlyphMetrics(f, c, &glyphRects[i].x, &glyphRects[i].z, &glyphRects[i].y, &glyphRects[i].w, &advance);
-            glyphRects[i].z -= glyphRects[i].x;
-            glyphRects[i].x = 0;
-            glyphRects[i].w -= glyphRects[i].y;
-            glyphRects[i].y = 0;
+        for (unsigned char c = startChar; c <= endChar; c++) 
+        {
+            TTF_GlyphMetrics(currFont, c, &glyphRects[i].minX, &glyphRects[i].maxX, &glyphRects[i].minY, &glyphRects[i].maxY, &advance);
             i++;
         }
 
         // Find best partitioning of glyphs
-        int rows = 1, w, h, bestWidth = 0, bestHeight = 0, area = MAX_TEXTURE_RES * MAX_TEXTURE_RES, bestRows = 0;
+        int rows = 1, width, height, bestWidth = 0, bestHeight = 0, area = MAX_TEXTURE_RES * MAX_TEXTURE_RES, bestRows = 0;
         std::vector<int>* bestPartition = nullptr;
-        while (rows <= m_regLength) {
-            h = rows * (padding + m_fontHeight) + padding;
-            auto glyphRow = createRows(glyphRects, m_regLength, rows, padding, w);
+        while (rows <= m_regLength) 
+        {
+            // to understand better
+            height = rows * (padding + m_fontHeight) + padding;
+            std::vector<int>* glyphRow = createRows(glyphRects, m_regLength, rows, padding, width);
 
             // Desire a power of 2 texture
-            w = closestPow2(w);
-            h = closestPow2(h);
+            width = closestPow2(width);
+            height = closestPow2(height);
 
             // A texture must be feasible
-            if (w > MAX_TEXTURE_RES || h > MAX_TEXTURE_RES) {
+            if (width > MAX_TEXTURE_RES || height > MAX_TEXTURE_RES) 
+            {
                 rows++;
                 delete[] glyphRow;
                 continue;
             }
 
             // Check for minimal area
-            if (area >= w * h) {
+            if (area >= width * height) 
+            {
                 if (bestPartition) delete[] bestPartition;
                 bestPartition = glyphRow;
-                bestWidth = w;
-                bestHeight = h;
+                bestWidth = width;
+                bestHeight = height;
                 bestRows = rows;
                 area = bestWidth * bestHeight;
                 rows++;
             }
-            else {
+            else
+            {
                 delete[] glyphRow;
                 break;
             }
         }
 
         // Can a bitmap font be made?
-        if (!bestPartition) {
+        if (!bestPartition) 
+        {
             fprintf(stderr, "Failed to Map TTF font %s to texture. Try lowering resolution.\n", font);
-            fflush(stderr);
             throw 282;
         }
         // Create the texture
         glGenTextures(1, &m_texID);
         glBindTexture(GL_TEXTURE_2D, m_texID);
+        // For a last resource I could try setting the max width and height, I should look
+        // in createRows to see their values
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bestWidth, bestHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
         // Now draw all the glyphs
-        SDL_Color fg = { 255, 255, 255, 255 };
+        SDL_Color foregroundColor = { 255, 255, 255, 255 };
 
         // what the flying fuck Ben I love your tutorials but please add a fucking comment once
         // every 100 lines ffs
-        int ly = padding;
-        for (int ri = 0; ri < bestRows; ri++) {
-            int lx = padding;
-            for (size_t ci = 0; ci < bestPartition[ri].size(); ci++) {
-                int gi = bestPartition[ri][ci];
+        int yOffset = padding;
+        // For each glyph row
+        for (int rowIdx = 0; rowIdx < bestRows; rowIdx++) 
+        {
+            int xOffset = padding;
 
-                SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(f, (char)(startChar + gi), fg);
+            for (size_t colIdx = 0; colIdx < bestPartition[rowIdx].size(); colIdx++) 
+            {
+                // Current glyph index
+                int glyphIdx = bestPartition[rowIdx][colIdx];
+                // Surface for the current glyph
+                SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(currFont, (unsigned char)(startChar + glyphIdx), foregroundColor);
 
-                // Pre-multiplication occurs here <- thanks, very helpful
-                unsigned char* sp = (unsigned char*)glyphSurface->pixels;
-                int cp = glyphSurface->w * glyphSurface->h * 4;
-                for (int i = 0; i < cp; i += 4) {
-                    float a = sp[i + 3] / 255.0f;
-                    sp[i] *= a;
-                    sp[i + 1] = sp[i];
-                    sp[i + 2] = sp[i];
-                }
+                // Pre-multiplication occurs 
+                /* ISSUE: uncomment this
+                unsigned char* surfacePixels = (unsigned char*)glyphSurface->pixels;
+                int nPixels = glyphSurface->w * glyphSurface->h * 4;
+                for (int i = 0; i < nPixels; i += 4) 
+                {
+                    float a = surfacePixels[i + 3] / 255.0f;
+                    surfacePixels[i] *= a;
+                    surfacePixels[i + 1] = surfacePixels[i];
+                    surfacePixels[i + 2] = surfacePixels[i];
+                }*/
 
                 // Save glyph image and update coordinates
-                glTexSubImage2D(GL_TEXTURE_2D, 0, lx, bestHeight - ly - 1 - glyphSurface->h, glyphSurface->w, glyphSurface->h, GL_BGRA, GL_UNSIGNED_BYTE, glyphSurface->pixels);
-                glyphRects[gi].x = lx;
-                glyphRects[gi].y = ly;
-                glyphRects[gi].z = glyphSurface->w;
-                glyphRects[gi].w = glyphSurface->h;
+                // BUG: probabilmente il problema è negli offset in questa chiamata
+                glTexSubImage2D(GL_TEXTURE_2D, 0, xOffset, bestHeight - yOffset - glyphSurface->h, 
+                    glyphSurface->w, glyphSurface->h, GL_BGRA, GL_UNSIGNED_BYTE, glyphSurface->pixels);
+                glyphRects[glyphIdx].minX = xOffset;
+                glyphRects[glyphIdx].minY = yOffset;
+                glyphRects[glyphIdx].maxX = glyphSurface->w;
+                glyphRects[glyphIdx].maxY = glyphSurface->h;
 
                 SDL_FreeSurface(glyphSurface);
                 glyphSurface = nullptr;
 
-                lx += glyphRects[gi].z + padding;
+                xOffset += glyphRects[glyphIdx].maxX + padding;
             }
-            ly += m_fontHeight + padding;
+            yOffset += m_fontHeight + padding;
         }
 
-        // Draw the unsupported glyph
+        // Draw the unsupported glyph <- why?
         int rs = padding - 1;
-        int* pureWhiteSquare = new int[rs * rs];
-        memset(pureWhiteSquare, 0xffffffff, rs * rs * sizeof(int));
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, rs, rs, GL_RGBA, GL_UNSIGNED_BYTE, pureWhiteSquare);
-        delete[] pureWhiteSquare;
-        pureWhiteSquare = nullptr;
 
-        // Set some texture parameters <- così, per sport
+        // Set texture parameters
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -158,13 +163,13 @@ namespace ShyEngine {
         m_glyphs = new CharGlyph[m_regLength + 1];
         for (i = 0; i < m_regLength; i++) 
         {
-            m_glyphs[i].character = (char)(startChar + i);
-            m_glyphs[i].size = glm::vec2(glyphRects[i].z, glyphRects[i].w);
+            m_glyphs[i].character = (unsigned char)(startChar + i);
+            m_glyphs[i].size = glm::vec2(glyphRects[i].maxX, glyphRects[i].maxY);
             m_glyphs[i].uvRect = glm::vec4(
-                (float)glyphRects[i].x / (float)bestWidth,
-                (float)glyphRects[i].y / -(float)bestHeight,
-                (float)glyphRects[i].z / (float)bestWidth,
-                (float)glyphRects[i].w / -(float)bestHeight
+                (float)glyphRects[i].minX / (float)bestWidth,
+                (float)glyphRects[i].minY / -(float)bestHeight,
+                (float)glyphRects[i].maxX / (float)bestWidth,
+                (float)glyphRects[i].maxY / -(float)bestHeight
             );
         }
         m_glyphs[m_regLength].character = ' ';
@@ -174,9 +179,11 @@ namespace ShyEngine {
         glBindTexture(GL_TEXTURE_2D, 0);
         delete[] glyphRects;
         delete[] bestPartition;
-        TTF_CloseFont(f);
+        TTF_CloseFont(currFont);
     }
-    void SpriteFont::dispose() {
+
+    void SpriteFont::dispose() 
+    {
         if (m_texID != 0) {
             glDeleteTextures(1, &m_texID);
             m_texID = 0;
@@ -187,42 +194,52 @@ namespace ShyEngine {
         }
     }
 
-    std::vector<int>* SpriteFont::createRows(glm::ivec4* rects, int rectsLength, int r, int padding, int& w) {
+    // The problem is probably here
+    std::vector<int>* SpriteFont::createRows(GlyphData* rects, int rectsLength, int nRows, 
+        int padding, int& rowWidth) 
+    {
         // Blank initialize
-        std::vector<int>* rowList = new std::vector<int>[r]();
-        int* cw = new int[r]();
-        for (int i = 0; i < r; i++) {
-            cw[i] = padding;
-        }
+        // Vettore di vettori contenenti interi, questa roba è una matrice di interi alta nRows
+        std::vector<int>* rowList = new std::vector<int>[nRows]();
+        int* currWidths = new int[nRows];
+        for (int i = 0; i < nRows; i++)
+            currWidths[i] = padding;
 
         // Loop through all glyphs
-        for (int i = 0; i < rectsLength; i++) {
+        for (int i = 0; i < rectsLength; i++) 
+        {
             // Find row for placement
-            int ri = 0;
-            for (int rii = 1; rii < r; rii++)
-                if (cw[rii] < cw[ri]) ri = rii;
+            int rowIdx = 0;
+            for (int j = 1; j < nRows; j++)
+            {
+                if (currWidths[j] < currWidths[rowIdx])
+                    rowIdx = j;
+            }
 
             // Add width to that row
-            cw[ri] += rects[i].z + padding;
+            currWidths[rowIdx] += rects[i].maxX + padding;
 
             // Add glyph to the row list
-            rowList[ri].push_back(i);
+            rowList[rowIdx].push_back(i);
         }
 
         // Find the max width
-        w = 0;
-        for (int i = 0; i < r; i++) {
-            if (cw[i] > w) w = cw[i];
+        rowWidth = 0;
+        for (int i = 0; i < nRows; i++) 
+        {
+            if (currWidths[i] > rowWidth) 
+                rowWidth = currWidths[i];
         }
 
         return rowList;
     }
 
+    // SAFE returns the size of a string
     glm::vec2 SpriteFont::measure(const char* s) {
         glm::vec2 size(0, m_fontHeight);
         float cw = 0;
         for (int si = 0; s[si] != 0; si++) {
-            char c = s[si];
+            unsigned char c = s[si];
             if (s[si] == '\n') {
                 size.y += m_fontHeight;
                 if (size.x < cw)
@@ -242,29 +259,41 @@ namespace ShyEngine {
         return size;
     }
 
+    /*
+        SAFE
+    */
     void SpriteFont::draw(SpriteBatch& batch, const char* s, glm::vec2 position, glm::vec2 scaling,
-        float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */) {
+        float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */) 
+    {
         glm::vec2 textPos = position;
         // Apply justification
-        if (just == Justification::MIDDLE) {
+        if (just == Justification::MIDDLE)
             textPos.x -= measure(s).x * scaling.x / 2;
-        }
-        else if (just == Justification::RIGHT) {
+        else if (just == Justification::RIGHT)
             textPos.x -= measure(s).x * scaling.x;
-        }
-        for (int strIndex = 0; s[strIndex] != 0; strIndex++) {
-            char c = s[strIndex];
-            if (c == '\n') {
+
+        for (int strIndex = 0; s[strIndex] != 0; strIndex++) 
+        {
+            unsigned char c = s[strIndex];
+            // Returning to start of the line, moving to new line
+            if (c == '\n') 
+            {
                 textPos.y += m_fontHeight * scaling.y;
                 textPos.x = position.x;
             }
-            else {
-                // Check for correct glyph
+            // Print the current clyph
+            else 
+            {
+                // Get correct glyph
                 int glyphIndex = c - m_regStart;
                 if (glyphIndex < 0 || glyphIndex >= m_regLength)
                     glyphIndex = m_regLength;
+
+                // Glyph starts from textpos, size is the size of the glyph with scaling applied to it
                 glm::vec4 destRect(textPos, m_glyphs[glyphIndex].size * scaling);
+                // Draw the glyph
                 batch.draw(destRect, m_glyphs[glyphIndex].uvRect, m_texID, depth, tint);
+                // Basically move the cursor
                 textPos.x += m_glyphs[glyphIndex].size.x * scaling.x;
             }
         }

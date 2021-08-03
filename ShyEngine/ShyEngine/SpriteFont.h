@@ -41,6 +41,14 @@ namespace ShyEngine {
         glm::vec2 size;
     };
 
+    typedef struct glyphdata {
+        int minX;
+        int maxX;
+        int minY;
+        int maxY;
+        int advance;
+    }GlyphData;
+
 #define FIRST_PRINTABLE_CHAR ((char)32)
 #define LAST_PRINTABLE_CHAR ((char)126)
 
@@ -51,7 +59,7 @@ namespace ShyEngine {
 
     class SpriteFont {
     public:
-        SpriteFont(const char* font, int size, char cs, char ce);
+        SpriteFont(const char* font, int size, unsigned char cs, unsigned char ce);
         SpriteFont(const char* font, int size) :
             SpriteFont(font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR) {
         }
@@ -69,7 +77,7 @@ namespace ShyEngine {
         void draw(SpriteBatch& batch, const char* s, glm::vec2 position, glm::vec2 scaling,
             float depth, ColorRGBA8 tint, Justification just = Justification::LEFT);
     private:
-        static std::vector<int>* createRows(glm::ivec4* rects, int rectsLength, int r, int padding, int& w);
+        static std::vector<int>* createRows(GlyphData* rects, int rectsLength, int r, int padding, int& w);
 
         int m_regStart, m_regLength;
         CharGlyph* m_glyphs;

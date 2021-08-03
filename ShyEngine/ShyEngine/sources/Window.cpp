@@ -73,9 +73,9 @@ namespace ShyEngine {
 			// TEST: draws the HUD
 			_hudBatch.begin();
 
-			char buffer[25];
-			sprintf_s(buffer, "Test text haha get it???");
-			_spriteFont->draw(_hudBatch, buffer, glm::vec2(10, 10), glm::vec2(2, 2), 1.0f,
+			char buffer[256];
+			sprintf_s(buffer, "abcdefghijklmnopqrstuvwxyz1234567890");
+			_spriteFont->draw(_hudBatch, buffer, glm::vec2(10, 10), glm::vec2(1, 1), 1.0f,
 				ColorRGBA8(255, 255, 255, 255));
 
 			_hudBatch.end();
@@ -145,7 +145,7 @@ namespace ShyEngine {
 		// TEST
 		_spriteBatch.init();
 		_hudBatch.init();
-		_spriteFont = new SpriteFont("fonts/chintzy.TTF", 32);
+		_spriteFont = new SpriteFont("fonts/04.TTF", 16);
 
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;

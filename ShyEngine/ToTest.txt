@@ -6,3 +6,7 @@ INPUT
 - buttonDown
 - buttonUp
 - buttonPressed
+
+RENDERING
+
+- Camera culling
