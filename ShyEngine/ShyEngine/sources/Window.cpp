@@ -73,10 +73,8 @@ namespace ShyEngine {
 			// TEST: draws the HUD
 			_hudBatch.begin();
 
-			char buffer[256];
-			sprintf_s(buffer, "abcdefghijklmnopqrstuvwxyz1234567890");
-			_spriteFont->draw(_hudBatch, buffer, glm::vec2(10, 10), glm::vec2(1, 1), 1.0f,
-				ColorRGBA8(255, 255, 255, 255));
+			_spriteFont->draw(_hudBatch, "abcdefghijklmnopqrstuvwxyz1234567890", glm::vec2(10, 10), glm::vec2(1, 1), 1.0f,
+				ColorRGBA8(255, 255, 255, 255), _gameWindow);
 
 			_hudBatch.end();
 			_hudBatch.render();

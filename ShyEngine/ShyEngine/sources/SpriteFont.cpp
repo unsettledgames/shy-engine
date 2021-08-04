@@ -1,4 +1,5 @@
 #include "SpriteFont.h"
+#include <iostream>
 
 #include "SpriteBatch.h"
 
@@ -24,48 +25,54 @@ namespace ShyEngine {
             TTF_Init();
 
         // Open the font
-        TTF_Font* currFont = TTF_OpenFont(font, size);
-        if (currFont == nullptr) 
+        _currFont = TTF_OpenFont(font, size);
+        if (_currFont == nullptr)
         {
             fprintf(stderr, "Failed to open TTF font %s\n", font);
             throw 281;
         }
         
         // Setting start stats
-        m_fontHeight = TTF_FontHeight(currFont);
+        m_fontHeight = TTF_FontHeight(_currFont);
         // Beginning character
         m_regStart = startChar;
         // Number of characters
-        m_regLength = endChar - startChar + 1;
+        m_nCharacters = endChar - startChar + 1;
         // FEATURE: let the user choose padding between letters
         int padding = size / 8;
 
         /*
             First measure all the regions
         */
-        GlyphData* glyphRects = new GlyphData[m_regLength];
+        GlyphData* glyphRects = new GlyphData[m_nCharacters];
         int i = 0, advance;
         for (unsigned char c = startChar; c <= endChar; c++) 
         {
-            TTF_GlyphMetrics(currFont, c, &glyphRects[i].minX, &glyphRects[i].maxX, &glyphRects[i].minY, &glyphRects[i].maxY, &advance);
+            TTF_GlyphMetrics(_currFont, c, &(glyphRects[i].minX), &(glyphRects[i].maxX), &(glyphRects[i].minY), &(glyphRects[i].maxY), &advance);
+            glyphRects[i].glyph = c;
             i++;
         }
 
         // Find best partitioning of glyphs
-        int rows = 1, width, height, bestWidth = 0, bestHeight = 0, area = MAX_TEXTURE_RES * MAX_TEXTURE_RES, bestRows = 0;
+        int rows = 1, bestRows = 0;
+        int currWidth, currHeight;
+        int bestWidth = 0, bestHeight = 0;
+        int textureArea = MAX_TEXTURE_RES * MAX_TEXTURE_RES;
         std::vector<int>* bestPartition = nullptr;
-        while (rows <= m_regLength) 
+
+        // OPTIMIZABLE: fix the packing algorithm (with the 04 font, it screws up at the 7th iteration
+        while (rows <= 1) 
         {
-            // to understand better
-            height = rows * (padding + m_fontHeight) + padding;
-            std::vector<int>* glyphRow = createRows(glyphRects, m_regLength, rows, padding, width);
+            // I have rows, each row has a height of m_fontHeight and I have to add padding to it
+            currHeight = rows * (padding + m_fontHeight);
+            std::vector<int>* glyphRow = createRows(glyphRects, m_nCharacters, rows, padding, currWidth);
 
             // Desire a power of 2 texture
-            width = closestPow2(width);
-            height = closestPow2(height);
+            currWidth = closestPow2(currWidth);
+            currHeight = closestPow2(currHeight);
 
             // A texture must be feasible
-            if (width > MAX_TEXTURE_RES || height > MAX_TEXTURE_RES) 
+            if (currWidth > MAX_TEXTURE_RES || currHeight > MAX_TEXTURE_RES) 
             {
                 rows++;
                 delete[] glyphRow;
@@ -73,14 +80,14 @@ namespace ShyEngine {
             }
 
             // Check for minimal area
-            if (area >= width * height) 
+            if (textureArea >= currWidth * currHeight) 
             {
                 if (bestPartition) delete[] bestPartition;
                 bestPartition = glyphRow;
-                bestWidth = width;
-                bestHeight = height;
+                bestWidth = currWidth;
+                bestHeight = currHeight;
                 bestRows = rows;
-                area = bestWidth * bestHeight;
+                textureArea = bestWidth * bestHeight;
                 rows++;
             }
             else
@@ -96,6 +103,7 @@ namespace ShyEngine {
             fprintf(stderr, "Failed to Map TTF font %s to texture. Try lowering resolution.\n", font);
             throw 282;
         }
+
         // Create the texture
         glGenTextures(1, &m_texID);
         glBindTexture(GL_TEXTURE_2D, m_texID);
@@ -119,7 +127,7 @@ namespace ShyEngine {
                 // Current glyph index
                 int glyphIdx = bestPartition[rowIdx][colIdx];
                 // Surface for the current glyph
-                SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(currFont, (unsigned char)(startChar + glyphIdx), foregroundColor);
+                SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(_currFont, (unsigned char)(startChar + glyphIdx), foregroundColor);
 
                 // Pre-multiplication occurs 
                 /* ISSUE: uncomment this
@@ -160,8 +168,8 @@ namespace ShyEngine {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
         // Create spriteBatch glyphs
-        m_glyphs = new CharGlyph[m_regLength + 1];
-        for (i = 0; i < m_regLength; i++) 
+        m_glyphs = new CharGlyph[m_nCharacters + 1];
+        for (i = 0; i < m_nCharacters; i++) 
         {
             m_glyphs[i].character = (unsigned char)(startChar + i);
             m_glyphs[i].size = glm::vec2(glyphRects[i].maxX, glyphRects[i].maxY);
@@ -172,14 +180,13 @@ namespace ShyEngine {
                 (float)glyphRects[i].maxY / -(float)bestHeight
             );
         }
-        m_glyphs[m_regLength].character = ' ';
-        m_glyphs[m_regLength].size = m_glyphs[0].size;
-        m_glyphs[m_regLength].uvRect = glm::vec4(0, 0, (float)rs / (float)bestWidth, (float)rs / -(float)bestHeight);
+        m_glyphs[m_nCharacters].character = ' ';
+        m_glyphs[m_nCharacters].size = m_glyphs[0].size;
+        m_glyphs[m_nCharacters].uvRect = glm::vec4(0, 0, (float)rs / (float)bestWidth, (float)rs / -(float)bestHeight);
 
         glBindTexture(GL_TEXTURE_2D, 0);
         delete[] glyphRects;
         delete[] bestPartition;
-        TTF_CloseFont(currFont);
     }
 
     void SpriteFont::dispose() 
@@ -201,6 +208,7 @@ namespace ShyEngine {
         // Blank initialize
         // Vettore di vettori contenenti interi, questa roba è una matrice di interi alta nRows
         std::vector<int>* rowList = new std::vector<int>[nRows]();
+        // Curr widths keeps track of the width of each row of glyphs
         int* currWidths = new int[nRows];
         for (int i = 0; i < nRows; i++)
             currWidths[i] = padding;
@@ -208,7 +216,7 @@ namespace ShyEngine {
         // Loop through all glyphs
         for (int i = 0; i < rectsLength; i++) 
         {
-            // Find row for placement
+            // Find row for placement: I put the character in the row that has less characters
             int rowIdx = 0;
             for (int j = 1; j < nRows; j++)
             {
@@ -249,8 +257,8 @@ namespace ShyEngine {
             else {
                 // Check for correct glyph
                 int gi = c - m_regStart;
-                if (gi < 0 || gi >= m_regLength)
-                    gi = m_regLength;
+                if (gi < 0 || gi >= m_nCharacters)
+                    gi = m_nCharacters;
                 cw += m_glyphs[gi].size.x;
             }
         }
@@ -262,32 +270,32 @@ namespace ShyEngine {
     /*
         SAFE
     */
-    void SpriteFont::draw(SpriteBatch& batch, const char* s, glm::vec2 position, glm::vec2 scaling,
-        float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */) 
+    void SpriteFont::draw(SpriteBatch& batch, const char* text, glm::vec2 position, glm::vec2 scaling,
+        float depth, ColorRGBA8 tint, SDL_Window* window, Justification just)
     {
         glm::vec2 textPos = position;
         // Apply justification
         if (just == Justification::MIDDLE)
-            textPos.x -= measure(s).x * scaling.x / 2;
+            textPos.x -= measure(text).x * scaling.x / 2;
         else if (just == Justification::RIGHT)
-            textPos.x -= measure(s).x * scaling.x;
+            textPos.x -= measure(text).x * scaling.x;
 
-        for (int strIndex = 0; s[strIndex] != 0; strIndex++) 
+        for (int strIndex = 0; text[strIndex] != 0; strIndex++)
         {
-            unsigned char c = s[strIndex];
+            unsigned char currChar = text[strIndex];
             // Returning to start of the line, moving to new line
-            if (c == '\n') 
+            if (currChar == '\n')
             {
                 textPos.y += m_fontHeight * scaling.y;
                 textPos.x = position.x;
             }
             // Print the current clyph
-            else 
+            else
             {
                 // Get correct glyph
-                int glyphIndex = c - m_regStart;
-                if (glyphIndex < 0 || glyphIndex >= m_regLength)
-                    glyphIndex = m_regLength;
+                int glyphIndex = currChar - m_regStart;
+                if (glyphIndex < 0 || glyphIndex >= m_nCharacters)
+                    glyphIndex = m_nCharacters;
 
                 // Glyph starts from textpos, size is the size of the glyph with scaling applied to it
                 glm::vec4 destRect(textPos, m_glyphs[glyphIndex].size * scaling);
@@ -297,6 +305,23 @@ namespace ShyEngine {
                 textPos.x += m_glyphs[glyphIndex].size.x * scaling.x;
             }
         }
+        /*
+        SDL_Rect pos;
+
+        pos.x = position.x;
+        pos.y = position.y;
+        //    - Render sulla surface
+        //    - Blit sulla surface della finestra (https://wiki.libsdl.org/SDL_GetWindowSurface)
+        // Render text on a surface
+        SDL_Surface* glyphSurface = TTF_RenderUNICODE_Blended(_currFont, (const Uint16*)s, tint.getSDLColor());
+
+        // Blit that surface onto the window
+        SDL_BlitSurface(glyphSurface, NULL, SDL_GetWindowSurface(window), NULL);
+        SDL_FreeSurface(glyphSurface);
+
+        SDL_Renderer* renderer = SDL_GetRenderer(window);
+        SDL_RenderPresent(renderer);
+        */
     }
 
 }

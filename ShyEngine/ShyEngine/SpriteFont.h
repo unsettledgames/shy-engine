@@ -26,6 +26,7 @@
 #include <map>
 #include <vector>
 #include <SDLttf2/SDL_ttf.h>
+#include <SDL/SDL.h>
 
 #include "Vertex.h"
 
@@ -47,6 +48,7 @@ namespace ShyEngine {
         int minY;
         int maxY;
         int advance;
+        unsigned char glyph;
     }GlyphData;
 
 #define FIRST_PRINTABLE_CHAR ((char)32)
@@ -75,11 +77,12 @@ namespace ShyEngine {
 
         /// Draws using a spritebatch
         void draw(SpriteBatch& batch, const char* s, glm::vec2 position, glm::vec2 scaling,
-            float depth, ColorRGBA8 tint, Justification just = Justification::LEFT);
+            float depth, ColorRGBA8 tint, SDL_Window* window, Justification just = Justification::LEFT);
     private:
         static std::vector<int>* createRows(GlyphData* rects, int rectsLength, int r, int padding, int& w);
+        TTF_Font* _currFont;
 
-        int m_regStart, m_regLength;
+        int m_regStart, m_nCharacters;
         CharGlyph* m_glyphs;
         int m_fontHeight;
 

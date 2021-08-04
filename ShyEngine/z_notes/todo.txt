@@ -1,0 +1,1 @@
+- Add a debug window and a debug manager where I can put textures and easily print stuff onto it

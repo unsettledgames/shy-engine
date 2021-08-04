@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <SDL/SDL.h>
 
 namespace ShyEngine
 {
@@ -16,6 +17,18 @@ namespace ShyEngine
 
 			ColorRGBA8(GLubyte R, GLubyte G, GLubyte B, GLubyte A) :
 				r(R), g(G), b(B), a(A){}
+
+			SDL_Color getSDLColor()
+			{
+				SDL_Color ret;
+
+				ret.r = this->r;
+				ret.g = this->g;
+				ret.b = this->b;
+				ret.a = this->a;
+
+				return ret;
+			}
 	};
 
 	// REFACTOR: this should be a gml::vec2
