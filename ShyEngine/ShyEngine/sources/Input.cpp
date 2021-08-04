@@ -32,24 +32,24 @@ namespace ShyEngine {
 
 				case SDL_QUIT:
 				{
-					this->_quitting = true;
+					this->m_quitting = true;
 					break;
 				}
 
 				case SDL_KEYDOWN:
 				{
 					SDL_Keycode key = inputEvent.key.keysym.sym;
-					std::unordered_map<SDL_Keycode, InputData>::iterator inputData = _keysMap.find(key);
+					std::unordered_map<SDL_Keycode, InputData>::iterator inputData = m_keysMap.find(key);
 					InputData toAdd;
 
-					if (inputData == _keysMap.end())
+					if (inputData == m_keysMap.end())
 					{
 						toAdd.isDown = true;
 						toAdd.startDownTime = SDL_GetTicks();
 						toAdd.lastDownTime = toAdd.startDownTime;
 						toAdd.upTime = 0;
 
-						_keysMap.insert(std::make_pair(key, toAdd));
+						m_keysMap.insert(std::make_pair(key, toAdd));
 					}
 					else if (!inputData->second.isDown) 
 					{
@@ -69,12 +69,12 @@ namespace ShyEngine {
 				case SDL_KEYUP:
 				{
 					SDL_Keycode key = inputEvent.key.keysym.sym;
-					std::unordered_map<SDL_Keycode, InputData>::iterator toUpdate = _keysMap.find(key);
+					std::unordered_map<SDL_Keycode, InputData>::iterator toUpdate = m_keysMap.find(key);
 
 					toUpdate->second.isDown = false;
 					toUpdate->second.upTime = SDL_GetTicks();
 
-					_lastKeyUp = key;
+					m_lastKeyUp = key;
 
 					break;
 				}
@@ -82,17 +82,17 @@ namespace ShyEngine {
 				case SDL_MOUSEBUTTONDOWN:
 				{
 					Uint8 button = inputEvent.button.button;
-					std::unordered_map<Uint8, InputData>::iterator inputData = _mouseMap.find(button);
+					std::unordered_map<Uint8, InputData>::iterator inputData = m_mouseMap.find(button);
 					InputData toAdd;
 
-					if (inputData == _mouseMap.end()) 
+					if (inputData == m_mouseMap.end()) 
 					{
 						toAdd.isDown = true;
 						toAdd.startDownTime = SDL_GetTicks();
 						toAdd.lastDownTime = toAdd.startDownTime;
 						toAdd.upTime = 0;
 
-						_mouseMap.insert(std::make_pair(button, toAdd));
+						m_mouseMap.insert(std::make_pair(button, toAdd));
 					}
 					else if (!inputData->second.isDown) 
 					{
@@ -112,12 +112,12 @@ namespace ShyEngine {
 				case SDL_MOUSEBUTTONUP:
 				{
 					Uint8 button = inputEvent.button.button;
-					std::unordered_map<Uint8, InputData>::iterator toUpdate = _mouseMap.find(button);
+					std::unordered_map<Uint8, InputData>::iterator toUpdate = m_mouseMap.find(button);
 
 					toUpdate->second.isDown = false;
 					toUpdate->second.upTime = SDL_GetTicks();
 
-					_lastButtonUp = inputEvent.button.button;
+					m_lastButtonUp = inputEvent.button.button;
 					break;
 				}
 
@@ -129,33 +129,33 @@ namespace ShyEngine {
 
 	void Input::clearInput()
 	{
-		this->_quitting = false;
+		this->m_quitting = false;
 
-		this->_lastKeyUp = -1;
-		this->_lastButtonUp = -1;
+		this->m_lastKeyUp = -1;
+		this->m_lastButtonUp = -1;
 	}
 
 	bool Input::isQuitting()
 	{
-		return this->_quitting;
+		return this->m_quitting;
 	}
 
 	bool Input::getKeyDown(SDL_Keycode key)
 	{
-		return _keysMap.find(key) != _keysMap.end() &&
-			_keysMap.find(key)->second.isDown;
+		return m_keysMap.find(key) != m_keysMap.end() &&
+			m_keysMap.find(key)->second.isDown;
 	}
 
 	bool Input::getKeyUp(SDL_Keycode key)
 	{
-		return _lastKeyUp != -1 && _lastKeyUp == key;
+		return m_lastKeyUp != -1 && m_lastKeyUp == key;
 	}
 
 	bool Input::keyPressed(SDL_Keycode key)
 	{
-		auto keyIt = _keysMap.find(key);
+		auto keyIt = m_keysMap.find(key);
 
-		if (keyIt != _keysMap.end())
+		if (keyIt != m_keysMap.end())
 		{
 			InputData data = keyIt->second;
 
@@ -168,20 +168,20 @@ namespace ShyEngine {
 
 	bool Input::getButtonDown(Uint8 button)
 	{
-		return _mouseMap.find(button) != _mouseMap.end() &&
-			_mouseMap.find(button)->second.isDown;
+		return m_mouseMap.find(button) != m_mouseMap.end() &&
+			m_mouseMap.find(button)->second.isDown;
 	}
 
 	bool Input::getButtonUp(Uint8 button)
 	{
-		return _lastButtonUp != -1 && _lastButtonUp == button;
+		return m_lastButtonUp != -1 && m_lastButtonUp == button;
 	}
 
 	bool Input::buttonPressed(Uint8 button)
 	{
-		auto buttonIt = _mouseMap.find(button);
+		auto buttonIt = m_mouseMap.find(button);
 
-		if (buttonIt != _mouseMap.end())
+		if (buttonIt != m_mouseMap.end())
 		{
 			InputData data = buttonIt->second;
 
@@ -194,12 +194,12 @@ namespace ShyEngine {
 
 	glm::vec2 Input::getMousePosition()
 	{
-		return this->_mousePosition;
+		return this->m_mousePosition;
 	}
 
 	void Input::setMousePosition(float x, float y)
 	{
-		this->_mousePosition.x = x;
-		this->_mousePosition.y = y;
+		this->m_mousePosition.x = x;
+		this->m_mousePosition.y = y;
 	}
 }

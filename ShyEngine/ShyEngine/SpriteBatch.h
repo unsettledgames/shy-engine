@@ -65,15 +65,15 @@ namespace ShyEngine
 	class SpriteBatch
 	{
 		private:
-			GLuint _vbo;
-			GLuint _vao;
-			GlyphSortType _sortType;
+			GLuint m_vbo = 0;
+			GLuint m_vao = 0;
+			GlyphSortType m_sortType = GlyphSortType::TEXTURE;
 			
 			// Used for sorting
-			std::vector<Glyph*> _glyphPointers;
+			std::vector<Glyph*> m_glyphPointers;
 			// Actual glyphs
-			std::vector<Glyph> _glyphs;
-			std::vector<RenderBatch> _renderBatches;
+			std::vector<Glyph> m_glyphs;
+			std::vector<RenderBatch> m_renderBatches;
 
 			void createVertexArray();
 			void createRenderBatches();

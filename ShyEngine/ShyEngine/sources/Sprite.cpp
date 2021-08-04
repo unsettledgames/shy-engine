@@ -3,70 +3,70 @@
 namespace ShyEngine {
 	Sprite::Sprite(float x, float y, float width, float height, std::string texturePath)
 	{
-		this->_xPos = x;
-		this->_yPos = y;
-		this->_width = width;
-		this->_height = height;
+		this->m_xPos = x;
+		this->m_yPos = y;
+		this->m_width = width;
+		this->m_height = height;
 
-		this->_buffer = 0;
-		this->_texture = ResourcesManager::getTexture(texturePath);
+		this->m_buffer = 0;
+		this->m_texture = ResourcesManager::getTexture(texturePath);
 
 		// Initializing the sprite
 		// Creating the buffer if I haven't yet
-		if (_buffer == 0)
-			glGenBuffers(1, &_buffer);
+		if (m_buffer == 0)
+			glGenBuffers(1, &m_buffer);
 
 		//First Triangle
 		// Top right
-		_vertexData[0].setPosition(_xPos + _width, _yPos + _height);
-		_vertexData[0].setUV(1.0f, -1.0f);
+		m_vertexData[0].setPosition(m_xPos + m_width, m_yPos + m_height);
+		m_vertexData[0].setUV(1.0f, -1.0f);
 
 		// Top left
-		_vertexData[1].setPosition(_xPos, _yPos + _height);
-		_vertexData[1].setUV(0.0f, -1.0f);
+		m_vertexData[1].setPosition(m_xPos, m_yPos + m_height);
+		m_vertexData[1].setUV(0.0f, -1.0f);
 
 		// Bottom left
-		_vertexData[2].setPosition(_xPos, _yPos);
-		_vertexData[2].setUV(0.0f, 0.0f);
+		m_vertexData[2].setPosition(m_xPos, m_yPos);
+		m_vertexData[2].setUV(0.0f, 0.0f);
 
 		//Second Triangle
 		// Bottom left
-		_vertexData[3].setPosition(_xPos, _yPos);
-		_vertexData[3].setUV(0.0f, 0.0f);
+		m_vertexData[3].setPosition(m_xPos, m_yPos);
+		m_vertexData[3].setUV(0.0f, 0.0f);
 
 		// Bottom right
-		_vertexData[4].setPosition(_xPos + _width, _yPos);
-		_vertexData[4].setUV(1.0f, 0.0f);
+		m_vertexData[4].setPosition(m_xPos + m_width, m_yPos);
+		m_vertexData[4].setUV(1.0f, 0.0f);
 
 		// Top right
-		_vertexData[5].setPosition(_xPos + _width, _yPos + _height);
-		_vertexData[5].setUV(1.0f, -1.0f);
+		m_vertexData[5].setPosition(m_xPos + m_width, m_yPos + m_height);
+		m_vertexData[5].setUV(1.0f, -1.0f);
 
 		for (int i = 0; i < 6; i++)
-			_vertexData[i].setColor(255, 0, 255, 255);
+			m_vertexData[i].setColor(255, 0, 255, 255);
 
-		_vertexData[2].setColor(0, 0, 255, 255);
-		_vertexData[5].setColor(0, 255, 0, 255);
+		m_vertexData[2].setColor(0, 0, 255, 255);
+		m_vertexData[5].setColor(0, 255, 0, 255);
 
 		// Putting the vertex data into the buffer
-		glBindBuffer(GL_ARRAY_BUFFER, _buffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(_vertexData), _vertexData, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertexData), m_vertexData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	Sprite::~Sprite()
 	{
 		// Cleaning the buffer if I was using it
-		if (this->_buffer != 0)
-			glDeleteBuffers(1, &_buffer);
+		if (this->m_buffer != 0)
+			glDeleteBuffers(1, &m_buffer);
 	}
 
 	void Sprite::render()
 	{
 		// OPTIMIZABLE: check if it's already binded
-		glBindTexture(GL_TEXTURE_2D, _texture.id);
+		glBindTexture(GL_TEXTURE_2D, m_texture.id);
 		// Binding the buffer and sending the vertex data
-		glBindBuffer(GL_ARRAY_BUFFER, _buffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
 
 		// Enabling arrays
 		glEnableVertexAttribArray(0);

@@ -2,11 +2,7 @@
 
 namespace ShyEngine
 {
-	FpsLimiter::FpsLimiter() : _targetFps(60), _currFps(60), _startTicks(0), _frameTime(0), 
-							   _isLimitingFps(false)
-	{
-
-	}
+	FpsLimiter::FpsLimiter() {}
 
 	void FpsLimiter::init(int fps)
 	{
@@ -18,31 +14,31 @@ namespace ShyEngine
 	void FpsLimiter::begin()
 	{
 		// Start and end times of the frame
-		_startTicks = SDL_GetTicks();
+		m_startTicks = SDL_GetTicks();
 
 		// Computing delta time for the current frame
-		const float DESIRED_FRAME_TIME = MS_PER_SEC / _targetFps;
-		this->_deltaTime = _frameTime / DESIRED_FRAME_TIME;
+		const float DESIRED_FRAME_TIME = MS_PER_SEC / m_targetFps;
+		this->m_deltaTime = m_frameTime / DESIRED_FRAME_TIME;
 	}
 
 	float FpsLimiter::end()
 	{
-		Uint32 frameTicks = SDL_GetTicks() - _startTicks;
+		Uint32 frameTicks = SDL_GetTicks() - m_startTicks;
 
 		calculateFPS();
 
-		if (_isLimitingFps)
+		if (m_isLimitingFps)
 		{
-			if (1000.0f / _targetFps > frameTicks)
-				SDL_Delay(1000.0f / (_targetFps - frameTicks));
+			if (1000.0f / m_targetFps > frameTicks)
+				SDL_Delay(1000.0f / (m_targetFps - frameTicks));
 		}
 
-		return this->_currFps;
+		return this->m_currFps;
 	}
 
 	void FpsLimiter::setTargetFps(int fps)
 	{
-		this->_targetFps = fps;
+		this->m_targetFps = fps;
 	}
 
 	void FpsLimiter::calculateFPS()
@@ -60,23 +56,23 @@ namespace ShyEngine
 			sum -= prevTime;
 
 		// Adding the new frame time
-		_frameTime = currTicks - prevTicks;
-		sum += _frameTime;
-		prevTime = _frameTime;
+		m_frameTime = currTicks - prevTicks;
+		sum += m_frameTime;
+		prevTime = m_frameTime;
 		timeIndex++;
 
 		// Computing FPS
-		_currFps = (1000.0f / (sum / NUM_SAMPLES));
+		m_currFps = (1000.0f / (sum / NUM_SAMPLES));
 		prevTicks = currTicks;
 	}
 
 	float FpsLimiter::getCurrentFps()
 	{
-		return this->_currFps;
+		return this->m_currFps;
 	}
 
 	void FpsLimiter::toggleFpsLimiting(bool state)
 	{
-		this->_isLimitingFps = state;
+		this->m_isLimitingFps = state;
 	}
 }

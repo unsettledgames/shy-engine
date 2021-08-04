@@ -1,10 +1,7 @@
 #include <ShaderProgram.h>
 
 namespace ShyEngine {
-	ShaderProgram::ShaderProgram() : _nAttributes(0), _vertShaderID(0), _fragShaderID(0), _programID(0)
-	{
-
-	}
+	ShaderProgram::ShaderProgram(){}
 
 	ShaderProgram::~ShaderProgram()
 	{
@@ -19,7 +16,7 @@ namespace ShyEngine {
 
 	GLuint ShaderProgram::getUniformLocation(const std::string& name)
 	{
-		GLint location = glGetUniformLocation(_programID, name.c_str());
+		GLint location = glGetUniformLocation(m_programID, name.c_str());
 
 		if (location == GL_INVALID_INDEX)
 			Error::fatal("Couldn't get uniform " + name + " location");
@@ -29,9 +26,9 @@ namespace ShyEngine {
 
 	void ShaderProgram::use(float time)
 	{
-		glUseProgram(_programID);
+		glUseProgram(m_programID);
 
-		for (int i = 0; i < _nAttributes; i++)
+		for (int i = 0; i < m_nAttributes; i++)
 			glEnableVertexAttribArray(i);
 
 		glActiveTexture(GL_TEXTURE0);
@@ -49,7 +46,7 @@ namespace ShyEngine {
 	{
 		glUseProgram(0);
 
-		for (int i = 0; i < _nAttributes; i++)
+		for (int i = 0; i < m_nAttributes; i++)
 			glDisableVertexAttribArray(i);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -58,40 +55,40 @@ namespace ShyEngine {
 	void ShaderProgram::linkShaders()
 	{
 		// Link our program
-		glLinkProgram(_programID);
+		glLinkProgram(m_programID);
 
 		GLint isLinked = 0;
-		glGetProgramiv(_programID, GL_LINK_STATUS, (int*)&isLinked);
+		glGetProgramiv(m_programID, GL_LINK_STATUS, (int*)&isLinked);
 		if (isLinked != GL_TRUE)
 		{
 			GLint maxLength = 0;
-			glGetProgramiv(_programID, GL_INFO_LOG_LENGTH, &maxLength);
+			glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &maxLength);
 
 			// The maxLength includes the NULL character
 			std::vector<GLchar> infoLog(maxLength);
-			glGetProgramInfoLog(_programID, maxLength, &maxLength, &infoLog[0]);
+			glGetProgramInfoLog(m_programID, maxLength, &maxLength, &infoLog[0]);
 
 			// We don't need the program anymore.
-			glDeleteProgram(_programID);
+			glDeleteProgram(m_programID);
 			// Don't leak shaders either.
-			glDeleteShader(_vertShaderID);
-			glDeleteShader(_fragShaderID);
+			glDeleteShader(m_vertShaderID);
+			glDeleteShader(m_fragShaderID);
 
 			Error::fatal("Shaders failed to link");
 			std::printf("%s\n", &(infoLog[0]));
 		}
 
 		// Always detach shaders after a successful link.
-		glDetachShader(_programID, _vertShaderID);
-		glDetachShader(_programID, _fragShaderID);
-		glDeleteShader(_vertShaderID);
-		glDeleteShader(_fragShaderID);
+		glDetachShader(m_programID, m_vertShaderID);
+		glDetachShader(m_programID, m_fragShaderID);
+		glDeleteShader(m_vertShaderID);
+		glDeleteShader(m_fragShaderID);
 	}
 
 	void ShaderProgram::addAttribute(const std::string& name)
 	{
-		glBindAttribLocation(_programID, _nAttributes, name.c_str());
-		_nAttributes++;
+		glBindAttribLocation(m_programID, m_nAttributes, name.c_str());
+		m_nAttributes++;
 	}
 
 	/*
@@ -102,24 +99,24 @@ namespace ShyEngine {
 	void ShaderProgram::compileShaders(const std::string& vertPath, const std::string& fragPath)
 	{
 		// Get a program object.
-		_programID = glCreateProgram();
+		m_programID = glCreateProgram();
 
 		// Creating shaders, handling errors
-		_vertShaderID = glCreateShader(GL_VERTEX_SHADER);
-		if (_vertShaderID == 0)
+		m_vertShaderID = glCreateShader(GL_VERTEX_SHADER);
+		if (m_vertShaderID == 0)
 			Error::fatal("Couldn't create vertex shader");
 
-		_fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-		if (_fragShaderID == 0)
+		m_fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+		if (m_fragShaderID == 0)
 			Error::fatal("Couldn't create fragment shader");
 
 		// Compile shaders
-		compileShader(vertPath, _vertShaderID);
-		compileShader(fragPath, _fragShaderID);
+		compileShader(vertPath, m_vertShaderID);
+		compileShader(fragPath, m_fragShaderID);
 
 		// Attach our shaders to our program
-		glAttachShader(_programID, _vertShaderID);
-		glAttachShader(_programID, _fragShaderID);
+		glAttachShader(m_programID, m_vertShaderID);
+		glAttachShader(m_programID, m_fragShaderID);
 	}
 
 	/*

@@ -14,6 +14,7 @@
 #include <Timing.h>
 #include <cstdlib>
 #include <SpriteFont.h>
+#include <AudioEngine.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
@@ -30,31 +31,38 @@ namespace ShyEngine {
 	class Window
 	{
 	private:
-		SDL_Window* _gameWindow;
-		SDL_GLContext _glContext;
+		SDL_Window* m_gameWindow;
+		SDL_GLContext m_glContext;
 
-		Input _input;
+		Input m_input;
 
-		GameState _state;
-		ShaderProgram _colorShader;
+		GameState m_state;
+		ShaderProgram m_colorShader;
 
 		// TEST
-		Camera2D _camera;
-		SpriteBatch _spriteBatch;
-		SpriteBatch _hudBatch;
-		FpsLimiter _fpsLimiter;
-		SpriteFont* _spriteFont;
+		Camera2D m_camera;
+		Camera2D m_hudCamera;
+
+		SpriteBatch m_spriteBatch;
+		SpriteBatch m_hudBatch;
+
+		FpsLimiter m_fpsLimiter;
+		SpriteFont* m_spriteFont;
+
+		AudioEngine m_audioEngine;
 
 		// REFACTOR: have a proper Time class
-		float _time;
+		float m_time;
 
 		// REFACTOR: Window attributes?
-		int _width;
-		int _height;
+		int m_width;
+		int m_height;
 
 		void initShaders();
 
 		void loop();
+
+		void drawUI();
 
 	public:
 		Window(int width, int height);

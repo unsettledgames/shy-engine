@@ -20,23 +20,23 @@ namespace ShyEngine {
 	class Input
 	{
 		private:
-			bool _quitting;
+			bool m_quitting;
 
 			// OPTIMIZABLE? Both SDL_Keycode and Uint8 are unsigned ints, so I could just have a single 
 			// map. Maybe research a little bit to understand if it's worth it <- definitely merge them,
 			// it'll make you save quite a lot of lines of code
 			// Used to save the state of keys
-			std::unordered_map<SDL_Keycode, InputData> _keysMap;
+			std::unordered_map<SDL_Keycode, InputData> m_keysMap;
 			// Used to save the state of mouse buttons
-			std::unordered_map<Uint8, InputData> _mouseMap;
+			std::unordered_map<Uint8, InputData> m_mouseMap;
 
 			// The key that has been released in the current frame (-1 if none)
-			SDL_Keycode _lastKeyUp;
+			SDL_Keycode m_lastKeyUp;
 			// The button that has been released in the current frame (-1 if none)
-			Uint8 _lastButtonUp;
+			Uint8 m_lastButtonUp;
 
 			// Current mouse position
-			glm::vec2 _mousePosition;
+			glm::vec2 m_mousePosition;
 
 			void setMousePosition(float x, float y);
 

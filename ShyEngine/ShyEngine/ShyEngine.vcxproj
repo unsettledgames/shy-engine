@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\AudioEngine.cpp" />
     <ClCompile Include="sources\Camera2D.cpp" />
     <ClCompile Include="sources\ShyEngine.cpp" />
     <ClCompile Include="sources\SpriteBatch.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="sources\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="ShyEngine.h" />
     <ClInclude Include="SpriteBatch.h" />

@@ -10,14 +10,14 @@ namespace ShyEngine
 	class FpsLimiter
 	{
 	private:
-		float _targetFps;
-		float _currFps;
+		float m_targetFps = 60;
+		float m_currFps = 60;
 
-		float _startTicks;
-		Uint32 _frameTime;
-		Uint32 _deltaTime;
+		float m_startTicks = 0;
+		Uint32 m_frameTime = 0;
+		Uint32 m_deltaTime = 0;
 
-		bool _isLimitingFps;
+		bool m_isLimitingFps = false;
 
 		void calculateFPS();
 

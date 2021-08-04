@@ -25,15 +25,15 @@ namespace ShyEngine {
             TTF_Init();
 
         // Open the font
-        _currFont = TTF_OpenFont(font, size);
-        if (_currFont == nullptr)
+        m_currFont = TTF_OpenFont(font, size);
+        if (m_currFont == nullptr)
         {
             fprintf(stderr, "Failed to open TTF font %s\n", font);
             throw 281;
         }
         
         // Setting start stats
-        m_fontHeight = TTF_FontHeight(_currFont);
+        m_fontHeight = TTF_FontHeight(m_currFont);
         // Beginning character
         m_regStart = startChar;
         // Number of characters
@@ -48,7 +48,7 @@ namespace ShyEngine {
         int i = 0, advance;
         for (unsigned char c = startChar; c <= endChar; c++) 
         {
-            TTF_GlyphMetrics(_currFont, c, &(glyphRects[i].minX), &(glyphRects[i].maxX), &(glyphRects[i].minY), &(glyphRects[i].maxY), &advance);
+            TTF_GlyphMetrics(m_currFont, c, &(glyphRects[i].minX), &(glyphRects[i].maxX), &(glyphRects[i].minY), &(glyphRects[i].maxY), &advance);
             glyphRects[i].glyph = c;
             i++;
         }
@@ -127,10 +127,9 @@ namespace ShyEngine {
                 // Current glyph index
                 int glyphIdx = bestPartition[rowIdx][colIdx];
                 // Surface for the current glyph
-                SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(_currFont, (unsigned char)(startChar + glyphIdx), foregroundColor);
+                SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(m_currFont, (unsigned char)(startChar + glyphIdx), foregroundColor);
 
                 // Pre-multiplication occurs 
-                /* ISSUE: uncomment this
                 unsigned char* surfacePixels = (unsigned char*)glyphSurface->pixels;
                 int nPixels = glyphSurface->w * glyphSurface->h * 4;
                 for (int i = 0; i < nPixels; i += 4) 
@@ -139,7 +138,7 @@ namespace ShyEngine {
                     surfacePixels[i] *= a;
                     surfacePixels[i + 1] = surfacePixels[i];
                     surfacePixels[i + 2] = surfacePixels[i];
-                }*/
+                }
 
                 // Save glyph image and update coordinates
                 // BUG: probabilmente il problema è negli offset in questa chiamata
@@ -271,7 +270,7 @@ namespace ShyEngine {
         SAFE
     */
     void SpriteFont::draw(SpriteBatch& batch, const char* text, glm::vec2 position, glm::vec2 scaling,
-        float depth, ColorRGBA8 tint, SDL_Window* window, Justification just)
+        float depth, ColorRGBA8 tint, Justification just)
     {
         glm::vec2 textPos = position;
         // Apply justification

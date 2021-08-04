@@ -9,7 +9,7 @@ namespace ShyEngine {
 	class TextureCache
 	{
 	private:
-		std::map<std::string, Texture> _cache;
+		std::map<std::string, Texture> m_cache;
 
 	public:
 		TextureCache();

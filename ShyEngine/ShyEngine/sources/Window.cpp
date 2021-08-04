@@ -2,15 +2,17 @@
 
 namespace ShyEngine {
 	Window::Window(int width, int height) :
-		_width(width), _height(height), _time(0), _state(GameState::GAME_STATE_PAUSED), _gameWindow(nullptr)
+		m_width(width), m_height(height), m_time(0), m_state(GameState::GAME_STATE_PAUSED), m_gameWindow(nullptr)
 	{
 	}
 
 	void Window::run()
 	{
-		this->_state = GameState::GAME_STATE_RUNNING;
+		this->m_state = GameState::GAME_STATE_RUNNING;
 
-		_camera.init(_width, _height);
+		m_camera.init(m_width, m_height);
+		m_hudCamera.init(m_width, m_height);
+		m_hudCamera.setPosition(glm::vec2(0, 0));
 
 		this->loop();
 	}
@@ -22,20 +24,20 @@ namespace ShyEngine {
 		const float MAX_DELTA_TIME = 1.0f;
 
 		// Running the engine loop until the user doesn't quit
-		while (this->_state == GameState::GAME_STATE_RUNNING)
+		while (this->m_state == GameState::GAME_STATE_RUNNING)
 		{
 			int currSimStep = 0;
-			_fpsLimiter.begin();
+			m_fpsLimiter.begin();
 
 			// Processing input for this frame
-			_input.processInput();
+			m_input.processInput();
 			
 			// Setting up the shader REFACTOR: put this in the SpriteRenderer class
-			_colorShader.use(_time);
+			m_colorShader.use(m_time);
 			// REFACTOR: since the shader will be a SpriteRenderer property, I should find a way
 			// to pass camera data to it. Or maybe have a currentShader in the Engine? Even though
 			// conceptually, shaders are linked to Rendering
-			_colorShader.setOrthoProjection("orthoProj", _camera.getCameraMatrix());
+			m_colorShader.setOrthoProjection("orthoProj", m_camera.getCameraMatrix());
 
 			// Clearing buffers REFACTOR: Renderer?
 			glClearDepth(1.0f);
@@ -58,49 +60,60 @@ namespace ShyEngine {
 			*/
 
 			// REFACTOR: this is probably part of Renderer as well
-			_spriteBatch.begin();
+			m_spriteBatch.begin();
 			ColorRGBA8 col = { 255, 255, 255, 255 };
 			//GLuint tex = ResourcesManager::getTexture("textures/5heartsSmall.png").id;
 			GLuint tex = ResourcesManager::getTexture("textures/Alice.png").id;
 			// TEST
-			_spriteBatch.draw(glm::vec4(0, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
-			_spriteBatch.draw(glm::vec4(200, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
-			_spriteBatch.draw(glm::vec4(400, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
+			m_spriteBatch.draw(glm::vec4(0, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
+			m_spriteBatch.draw(glm::vec4(200, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
+			m_spriteBatch.draw(glm::vec4(400, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
 
-			_spriteBatch.end();
-			_spriteBatch.render();
+			m_spriteBatch.end();
+			m_spriteBatch.render();
 
 			// TEST: draws the HUD
-			_hudBatch.begin();
-
-			_spriteFont->draw(_hudBatch, "abcdefghijklmnopqrstuvwxyz1234567890", glm::vec2(10, 10), glm::vec2(1, 1), 1.0f,
-				ColorRGBA8(255, 255, 255, 255), _gameWindow);
-
-			_hudBatch.end();
-			_hudBatch.render();
+			drawUI();
 
 			// Camera update REFACTOR: the camera should update on its own, in some way. Maybe the
 			// enine has an active camera and it updates it?
-			_camera.update();
+			m_camera.update();
+			m_hudCamera.update();
 
 			// Cleanup
-			SDL_GL_SwapWindow(this->_gameWindow);
-			_colorShader.unuse();
+			SDL_GL_SwapWindow(this->m_gameWindow);
+			m_colorShader.unuse();
 
 			// If the user decided to quit, I stop the loop
-			if (_input.isQuitting())
-				this->_state = GameState::GAME_STATE_STOPPED;
+			if (m_input.isQuitting())
+				this->m_state = GameState::GAME_STATE_STOPPED;
 
 			// TEST
-			if (_input.getKeyDown(SDLK_w))
-				_camera.setPosition(_camera.getPosition() + glm::vec2(0, 0.5f));
+			if (m_input.getKeyDown(SDLK_w))
+				m_camera.setPosition(m_camera.getPosition() + glm::vec2(0, 0.5f));
 
-			_fpsLimiter.end();
+			m_fpsLimiter.end();
 		}
+	}
+
+	void Window::drawUI()
+	{
+		glm::mat4 projMatrix = m_hudCamera.getCameraMatrix();
+		GLint pUniform = m_colorShader.getUniformLocation("orthoProj");
+		glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projMatrix[0][0]);
+
+		m_hudBatch.begin();
+
+		m_spriteFont->draw(m_hudBatch, "abcdefghijklmnopqrstuvwxyz1234567890", glm::vec2(0, 0), glm::vec2(1, 1), 1.0f,
+			ColorRGBA8(255, 255, 255, 255));
+
+		m_hudBatch.end();
+		m_hudBatch.render();
 	}
 
 	void Window::init(std::string windowName, unsigned int flags)
 	{
+
 		if (flags & WindowFlags::INVISIBLE) {
 			flags |= SDL_WINDOW_HIDDEN;
 		}
@@ -112,17 +125,17 @@ namespace ShyEngine {
 		}
 
 		// Creating the game window
-		this->_gameWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->_width, this->_height, flags);
+		this->m_gameWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->m_width, this->m_height, flags);
 
-		if (_gameWindow == nullptr)
+		if (m_gameWindow == nullptr)
 			Error::fatal("Couldn't create the main window.");
 
 		// Initializing opengl
-		this->_glContext = SDL_GL_CreateContext(_gameWindow);
-		if (this->_glContext == nullptr)
+		this->m_glContext = SDL_GL_CreateContext(m_gameWindow);
+		if (this->m_glContext == nullptr)
 			Error::fatal("Couldn't create GL context");
 		// Clearing input
-		this->_input.clearInput();
+		this->m_input.clearInput();
 
 		// Initializing glew
 		glewExperimental = GL_TRUE;
@@ -141,9 +154,12 @@ namespace ShyEngine {
 		initShaders();
 
 		// TEST
-		_spriteBatch.init();
-		_hudBatch.init();
-		_spriteFont = new SpriteFont("fonts/04.TTF", 16);
+		m_audioEngine.init();
+		m_spriteBatch.init();
+		m_hudBatch.init();
+		m_spriteFont = new SpriteFont("fonts/04.TTF", 16);
+
+		m_audioEngine.loadSoundEffect("sfx/wub.ogg").play();
 
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;
@@ -152,20 +168,20 @@ namespace ShyEngine {
 
 	void Window::initShaders()
 	{
-		_colorShader.compileShaders("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
-		_colorShader.addAttribute("vertPos");
-		_colorShader.addAttribute("vertColor");
-		_colorShader.addAttribute("vertUV");
-		_colorShader.linkShaders();
+		m_colorShader.compileShaders("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
+		m_colorShader.addAttribute("vertPos");
+		m_colorShader.addAttribute("vertColor");
+		m_colorShader.addAttribute("vertUV");
+		m_colorShader.linkShaders();
 	}
 
 	int Window::getScreenHeight()
 	{
-		return this->_height;
+		return this->m_height;
 	}
 
 	int Window::getScreenWidth()
 	{
-		return this->_width;
+		return this->m_width;
 	}
 }

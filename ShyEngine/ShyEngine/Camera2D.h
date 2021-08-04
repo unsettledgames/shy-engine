@@ -8,16 +8,16 @@ namespace ShyEngine {
 	{
 	private:
 		// OPTIMIZABLE: position should be part of some kind of transform component
-		glm::vec2 _position;
+		glm::vec2 m_position = glm::vec2(0.0f, 0.0f);
 
-		glm::mat4 _cameraMatrix;
-		glm::mat4 _orthoMatrix;
+		glm::mat4 m_cameraMatrix = glm::mat4(1.0f);
+		glm::mat4 m_orthoMatrix = glm::mat4(1.0f);
 
-		float _scale;
-		bool _matrixUpdated;
+		float m_scale = 1.0f;
+		bool m_matrixUpdated = true;
 
-		int _screenWidth;
-		int _screenHeight;
+		int m_screenWidth = -1;
+		int m_screenHeight = -1;
 
 	public:
 

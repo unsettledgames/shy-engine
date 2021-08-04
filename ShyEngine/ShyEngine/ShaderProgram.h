@@ -18,11 +18,11 @@ namespace ShyEngine {
 	class ShaderProgram
 	{
 	private:
-		int _nAttributes;
+		int m_nAttributes = 0;
 
-		GLuint _vertShaderID;
-		GLuint _fragShaderID;
-		GLuint _programID;
+		GLuint m_vertShaderID = 0;
+		GLuint m_fragShaderID = 0;
+		GLuint m_programID = 0;
 
 		void compileShader(const std::string& filePath, GLuint shaderID);
 
