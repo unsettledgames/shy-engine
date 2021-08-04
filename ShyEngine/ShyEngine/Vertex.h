@@ -5,6 +5,7 @@
 
 namespace ShyEngine
 {
+	// REFACTOR: put this in its own class
 	class ColorRGBA8
 	{
 		private:
