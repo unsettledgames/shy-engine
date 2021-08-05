@@ -15,6 +15,8 @@
 #include <cstdlib>
 #include <SpriteFont.h>
 #include <AudioEngine.h>
+#include <ParticleEngine2D.h>
+#include <ParticleBatch2D.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
@@ -50,6 +52,8 @@ namespace ShyEngine {
 		SpriteFont* m_spriteFont;
 
 		AudioEngine m_audioEngine;
+		ParticleEngine2D m_particleEngine;
+		ParticleBatch2D* m_testParticleBatch;
 
 		// REFACTOR: have a proper Time class
 		float m_time;

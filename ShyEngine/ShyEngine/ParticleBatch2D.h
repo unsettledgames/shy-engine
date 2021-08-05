@@ -33,21 +33,24 @@ namespace ShyEngine
 			float m_decayRate = 0.1f;
 
 			int m_maxParticles;
+			int m_lastFreeParticle = 0;
 
-			void update();
-
+			int getFreeParticle();
 
 		public:
 
 			~ParticleBatch2D();
 
-			ParticleBatch2D();
+			ParticleBatch2D() {};
 
-			void addParticle(const glm::vec2& position, const ColorRGBA8& color, const glm::vec2& velocity);
+			void addParticle(const glm::vec2& position, const ColorRGBA8& color, 
+							 const glm::vec2& velocity, const glm::vec2& scale);
 
 			void init(int maxParticles, float decayRate, Texture texture);
 
-			void draw(SpriteBatch batch);
+			void draw(SpriteBatch* batch);
+
+			void update();
 
 	};
 }

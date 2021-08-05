@@ -72,6 +72,10 @@ namespace ShyEngine {
 			m_spriteBatch.end();
 			m_spriteBatch.render();
 
+			if (m_input.getKeyDown(SDLK_p))
+				m_testParticleBatch->addParticle(glm::vec2(100, 100), ColorRGBA8(255, 0, 255, 255), glm::vec2(1.0f, 1.0f), glm::vec2(50.0f, 50.0f));
+			m_particleEngine.draw(&m_spriteBatch);
+
 			// TEST: draws the HUD
 			drawUI();
 
@@ -79,6 +83,7 @@ namespace ShyEngine {
 			// enine has an active camera and it updates it?
 			m_camera.update();
 			m_hudCamera.update();
+			m_particleEngine.update();
 
 			// Cleanup
 			SDL_GL_SwapWindow(this->m_gameWindow);
@@ -160,6 +165,10 @@ namespace ShyEngine {
 		m_spriteFont = new SpriteFont("fonts/04.TTF", 16);
 
 		m_audioEngine.loadSoundEffect("sfx/wub.ogg").play();
+
+		m_testParticleBatch = new ParticleBatch2D();
+		m_testParticleBatch->init(1000, 0.01f, ResourcesManager::getTexture("textures/particle.png"));
+		m_particleEngine.addParticleBatch(m_testParticleBatch);
 
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;

@@ -18,6 +18,7 @@ namespace ShyEngine
 
 			ColorRGBA8(GLubyte R, GLubyte G, GLubyte B, GLubyte A) :
 				r(R), g(G), b(B), a(A){}
+			
 
 			SDL_Color getSDLColor()
 			{
