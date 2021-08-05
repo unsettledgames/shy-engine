@@ -45,11 +45,13 @@ namespace ShyEngine
 		currParticle->m_lifetime = 1.0f;
 	}
 
-	void ParticleBatch2D::init(int maxParticles, float decayRate, Texture texture)
+	void ParticleBatch2D::init(int maxParticles, float decayRate, Texture texture, 
+		std::function<void(Particle2D& particle)> updateFunc /* = defaultUpdateParticle*/)
 	{
 		m_maxParticles = maxParticles;
 		m_decayRate = decayRate;
 		m_texture = texture;
+		m_particleUpdate = updateFunc;
 
 		m_particles = new Particle2D[m_maxParticles];
 	}
@@ -61,7 +63,7 @@ namespace ShyEngine
 			// Check if the particle is active
 			if (m_particles[i].m_lifetime > 0.0f)
 			{
-				m_particles[i].update();
+				m_particleUpdate(m_particles[i]);
 				m_particles[i].m_lifetime -= m_decayRate;
 			}
 		}
@@ -91,15 +93,9 @@ namespace ShyEngine
 				batch->end();
 				batch->render();
 
-				m_particles[i].update();
+				m_particleUpdate(m_particles[i]);
 				m_particles[i].m_lifetime -= m_decayRate;
 			}
 		}
-	}
-
-	void Particle2D::update()
-	{
-		// TODO: use delta time
-		m_position += m_velocity;
 	}
 }

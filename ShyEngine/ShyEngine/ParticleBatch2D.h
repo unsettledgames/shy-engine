@@ -4,6 +4,7 @@
 #include <Vertex.h>
 #include <SpriteBatch.h>
 #include <Texture.h>
+#include <functional>
 
 namespace ShyEngine
 {
@@ -11,7 +12,7 @@ namespace ShyEngine
 	{
 		friend class ParticleBatch2D;
 
-		private:
+		public:
 			glm::vec2 m_position = glm::vec2(0.0f, 0.0f);
 			glm::vec2 m_velocity = glm::vec2(0.0f, 0.0f);
 			glm::vec2 m_scale = glm::vec2(1.1f, 1.1f);
@@ -20,9 +21,12 @@ namespace ShyEngine
 
 			float m_lifetime = 0.0f;
 
-			void update();
-
 	};
+
+	inline void defaultParticleUpdate(Particle2D& particle)
+	{
+		particle.m_position += particle.m_velocity;
+	}
 
 	class ParticleBatch2D
 	{
@@ -35,6 +39,8 @@ namespace ShyEngine
 			int m_maxParticles;
 			int m_lastFreeParticle = 0;
 
+			std::function<void(Particle2D& particle)> m_particleUpdate;
+
 			int getFreeParticle();
 
 		public:
@@ -46,7 +52,8 @@ namespace ShyEngine
 			void addParticle(const glm::vec2& position, const ColorRGBA8& color, 
 							 const glm::vec2& velocity, const glm::vec2& scale);
 
-			void init(int maxParticles, float decayRate, Texture texture);
+			void init(int maxParticles, float decayRate, Texture texture, 
+				std::function<void(Particle2D& particle)> updateFunc = defaultParticleUpdate);
 
 			void draw(SpriteBatch* batch);
 
