@@ -86,7 +86,7 @@ namespace ShyEngine
 		// Update pointers for sorting
 		m_glyphPointers.resize(m_glyphs.size());
 		
-		for (int i = 0; i < m_glyphs.size(); i++)
+		for (auto i = 0; i < m_glyphs.size(); i++)
 		{
 			m_glyphPointers[i] = &m_glyphs[i];
 		}

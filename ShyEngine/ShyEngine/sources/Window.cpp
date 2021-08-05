@@ -1,9 +1,10 @@
 #include <Window.h>
 
 namespace ShyEngine {
-	Window::Window(int width, int height) :
-		m_width(width), m_height(height), m_time(0), m_state(GameState::GAME_STATE_PAUSED), m_gameWindow(nullptr)
+	Window::Window(int width, int height)
 	{
+		m_width = width;
+		m_height = height;
 	}
 
 	void Window::run()

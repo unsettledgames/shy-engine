@@ -33,12 +33,12 @@ namespace ShyEngine {
 	class Window
 	{
 	private:
-		SDL_Window* m_gameWindow;
+		SDL_Window* m_gameWindow = nullptr;
 		SDL_GLContext m_glContext;
 
 		Input m_input;
 
-		GameState m_state;
+		GameState m_state = GameState::GAME_STATE_PAUSED;
 		ShaderProgram m_colorShader;
 
 		// TEST
@@ -53,10 +53,10 @@ namespace ShyEngine {
 
 		AudioEngine m_audioEngine;
 		ParticleEngine2D m_particleEngine;
-		ParticleBatch2D* m_testParticleBatch;
+		ParticleBatch2D* m_testParticleBatch = nullptr;
 
 		// REFACTOR: have a proper Time class
-		float m_time;
+		float m_time = 0;
 
 		// REFACTOR: Window attributes?
 		int m_width;

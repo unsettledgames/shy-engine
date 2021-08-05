@@ -14,8 +14,8 @@ namespace ShyEngine
 			// REFACTOR: Move to some kind of VectorUtility class or something
 			glm::vec2 rotatePoint(glm::vec2 point, float angle);
 		public:
-			GLuint texture;
-			float depth;
+			GLuint texture = 0;
+			float depth = 0;
 
 			Vertex topLeft;
 			Vertex bottomLeft;

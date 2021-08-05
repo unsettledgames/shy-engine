@@ -36,7 +36,7 @@ namespace ShyEngine
 
 			float m_decayRate = 0.1f;
 
-			int m_maxParticles;
+			int m_maxParticles = 1000;
 			int m_lastFreeParticle = 0;
 
 			std::function<void(Particle2D& particle)> m_particleUpdate;
