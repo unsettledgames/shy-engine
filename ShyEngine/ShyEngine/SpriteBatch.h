@@ -10,37 +10,26 @@ namespace ShyEngine
 {
 	class Glyph
 	{
-	public:
-		GLuint texture;
-		float depth;
+		private:
+			// REFACTOR: Move to some kind of VectorUtility class or something
+			glm::vec2 rotatePoint(glm::vec2 point, float angle);
+		public:
+			GLuint texture;
+			float depth;
 
-		Vertex topLeft;
-		Vertex bottomLeft;
-		Vertex topRight;
-		Vertex bottomRight;
+			Vertex topLeft;
+			Vertex bottomLeft;
+			Vertex topRight;
+			Vertex bottomRight;
 
-		Glyph() {}
+			Glyph() {}
 
-		Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, float Depth,
-			const GLuint& Texture, const ColorRGBA8& color) : texture(Texture), depth(Depth)
-		{
-			this->topLeft.color = color;
-			this->topRight.color = color;
-			this->bottomRight.color = color;
-			this->bottomLeft.color = color;
+			Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, float Depth,
+				const GLuint& Texture, const ColorRGBA8& color);
 
-			this->topLeft.setPosition(destRect.x, destRect.y + destRect.w);
-			this->topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
-
-			this->bottomLeft.setPosition(destRect.x, destRect.y);
-			this->bottomLeft.setUV(uvRect.x, uvRect.y);
-
-			this->topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
-			this->topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
-
-			this->bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
-			this->bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
-		}
+			Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, float Depth,
+				const GLuint& Texture, const ColorRGBA8& color, float angle);
+		
 	};
 
 	enum class GlyphSortType
@@ -96,6 +85,12 @@ namespace ShyEngine
 
 			void draw(const glm::vec4& destinationRect, const glm::vec4& uvRect, float depth,
 				const GLuint& texture, const ColorRGBA8& color);
+
+			void draw(const glm::vec4& destinationRect, const glm::vec4& uvRect, float depth,
+				const GLuint& texture, const ColorRGBA8& color, float angle);
+
+			void draw(const glm::vec4& destinationRect, const glm::vec4& uvRect, float depth,
+				const GLuint& texture, const ColorRGBA8& color, glm::vec2 direction);
 
 			void render();
 	};

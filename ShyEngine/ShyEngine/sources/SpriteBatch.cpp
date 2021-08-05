@@ -2,6 +2,67 @@
 
 namespace ShyEngine
 {
+	Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, float Depth,
+		const GLuint& Texture, const ColorRGBA8& color) : texture(Texture), depth(Depth)
+	{
+		this->depth = Depth;
+		this->topLeft.color = color;
+		this->topRight.color = color;
+		this->bottomRight.color = color;
+		this->bottomLeft.color = color;
+
+		this->topLeft.setPosition(destRect.x, destRect.y + destRect.w);
+		this->topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
+
+		this->bottomLeft.setPosition(destRect.x, destRect.y);
+		this->bottomLeft.setUV(uvRect.x, uvRect.y);
+
+		this->topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
+		this->topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+
+		this->bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
+		this->bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
+	}
+
+	Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, float Depth,
+		const GLuint& Texture, const ColorRGBA8& color, float angle) : texture(Texture), depth(Depth)
+	{
+		// Get the corners
+		glm::vec2 halfSize(destRect.z / 2.0f, destRect.w / 2.0f);
+		glm::vec2 topLeft(-halfSize.x, halfSize.y);
+		glm::vec2 topRight(halfSize.x, halfSize.y);
+		glm::vec2 bottomRight(halfSize.x, -halfSize.y);
+		glm::vec2 bottomLeft(-halfSize.x, -halfSize.y);
+
+		// Rotate the points
+		topLeft = rotatePoint(topLeft, angle) + halfSize;
+		topRight = rotatePoint(topRight, angle) + halfSize;
+		bottomRight = rotatePoint(bottomRight, angle) + halfSize;
+		bottomLeft = rotatePoint(bottomLeft, angle) + halfSize;
+
+		this->topLeft.color = color;
+		this->topRight.color = color;
+		this->bottomRight.color = color;
+		this->bottomLeft.color = color;
+
+		this->topLeft.setPosition(destRect.x + topLeft.x, destRect.y + topLeft.y);
+		this->topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
+
+		this->bottomLeft.setPosition(destRect.x + bottomLeft.x, destRect.y + bottomLeft.y);
+		this->bottomLeft.setUV(uvRect.x, uvRect.y);
+
+		this->topRight.setPosition(destRect.x + topRight.x, destRect.y + topRight.y);
+		this->topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+
+		this->bottomRight.setPosition(destRect.x + bottomRight.x, destRect.y + bottomRight.y);
+		this->bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
+	}
+
+	glm::vec2 Glyph::rotatePoint(glm::vec2 point, float angle)
+	{
+		return glm::vec2(point.x * cos(angle) - point.y * sin(angle),
+			point.x * sin(angle) + point.y * cos(angle));
+	}
 
 	SpriteBatch::SpriteBatch() : m_vbo(0), m_vao(0), m_sortType(GlyphSortType::TEXTURE)
 	{
@@ -38,6 +99,23 @@ namespace ShyEngine
 		const GLuint& texture, const ColorRGBA8& color)
 	{
 		this->m_glyphs.emplace_back(destRect, uvRect, depth, texture, color);
+	}
+
+	void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, float depth,
+		const GLuint& texture, const ColorRGBA8& color, float angle)
+	{
+		this->m_glyphs.emplace_back(destRect, uvRect, depth, texture, color, angle);
+	}
+
+	void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, float depth,
+		const GLuint& texture, const ColorRGBA8& color, glm::vec2 direction)
+	{
+		const glm::vec2 right(1.0f, 0.0f);
+		float angle = acos(glm::dot(right, direction));
+		if (direction.y < 0)
+			angle *= -1;
+
+		this->m_glyphs.emplace_back(destRect, uvRect, depth, texture, color, angle);
 	}
 
 	void SpriteBatch::render()
