@@ -159,9 +159,12 @@
   <ItemGroup>
     <ClCompile Include="sources\AudioEngine.cpp" />
     <ClCompile Include="sources\Camera2D.cpp" />
+    <ClCompile Include="sources\IMainGame.cpp" />
     <ClCompile Include="sources\ParticleBatch2D.cpp" />
     <ClCompile Include="sources\ParticleEngine2D.cpp" />
+    <ClCompile Include="sources\ScreenList.cpp" />
     <ClCompile Include="sources\ShyEngine.cpp" />
+    <ClCompile Include="sources\SpatialGrid.cpp" />
     <ClCompile Include="sources\SpriteBatch.cpp" />
     <ClCompile Include="sources\SpriteFont.cpp" />
     <ClCompile Include="sources\Timing.cpp" />
@@ -180,9 +183,13 @@
   <ItemGroup>
     <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="IGameScreen.h" />
+    <ClInclude Include="IMainGame.h" />
     <ClInclude Include="ParticleBatch2D.h" />
     <ClInclude Include="ParticleEngine2D.h" />
+    <ClInclude Include="ScreenList.h" />
     <ClInclude Include="ShyEngine.h" />
+    <ClInclude Include="SpatialGrid.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="Timing.h" />

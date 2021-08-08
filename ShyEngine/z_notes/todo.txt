@@ -1,1 +1,21 @@
 - Add a debug window and a debug manager where I can put textures and easily print stuff onto it
+- Use the center of a sprite to be its pivot
+- Since vectors are contiguous only with reserve (they're not with resize), it could be useful to let the user register 
+	components and only after they're done, actually create the vectors
+- Custom spatial partitioning. I'm not sure I like Ben's implementation, I'd like to have something way more generic,
+	but I think I'd need a proper collision class and structure in order to do so. In spatial partitioning, instead of checking
+	all the objects against themselves, you just check the cells with *:
+	*	*	X
+	*	*	X
+	*	X	X
+- Collision system: start with circle / AABB colliders just to flesh out the basic structure.
+- IMainGame and IGameScreen suck big time, their only purpose is to take part of the window features and put them in a new
+	class. Kinda ok but it should be done in a different class (something like Engine probably, in which we take care of SDL
+	initialization and the Engine components initialization). The screen management part should be some kind of Scene system
+	instead.
+
+Games:
+- Stress test with ball game
+
+Polish:
+- Let the programmer choose how to group the data
