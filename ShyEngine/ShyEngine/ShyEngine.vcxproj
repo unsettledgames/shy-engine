@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sources\AudioEngine.cpp" />
+    <ClCompile Include="sources\Box.cpp" />
     <ClCompile Include="sources\Camera2D.cpp" />
     <ClCompile Include="sources\IMainGame.cpp" />
     <ClCompile Include="sources\ParticleBatch2D.cpp" />
@@ -182,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioEngine.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="IGameScreen.h" />
     <ClInclude Include="IMainGame.h" />

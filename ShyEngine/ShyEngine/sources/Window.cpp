@@ -171,6 +171,23 @@ namespace ShyEngine {
 		m_testParticleBatch->init(1000, 0.01f, ResourcesManager::getTexture("textures/particle.png"));
 		m_particleEngine.addParticleBatch(m_testParticleBatch);
 
+		// TEST PHYSICS MANAGEMENT
+		// Create the physics world
+		m_world = std::make_unique<b2World>(b2Vec2(0.0f, -9.81f));
+
+		// Create the ground
+		b2BodyDef groundBodyDef;
+		groundBodyDef.position.Set(0.0f, -10.0f);
+		b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
+		// Ground fixture
+		b2PolygonShape groundBox;
+		groundBox.SetAsBox(50.0f, 10.0f);
+		groundBody->CreateFixture(&groundBox, 0.0f);
+
+		// Create a few boxes
+		Box newBox;
+		newBox.init(m_world.get(), glm::vec2(0.0f, 14.0f), glm::vec2(15.0f, 15.0f));
+
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;
 		Utility::printOpenGLVersion();

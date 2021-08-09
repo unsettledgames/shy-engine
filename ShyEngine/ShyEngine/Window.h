@@ -17,6 +17,9 @@
 #include <AudioEngine.h>
 #include <ParticleEngine2D.h>
 #include <ParticleBatch2D.h>
+#include <box2d/box2d.h>
+#include <memory>
+#include <Box.h>
 
 enum class GameState {GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED};
 
@@ -54,6 +57,8 @@ namespace ShyEngine {
 		AudioEngine m_audioEngine;
 		ParticleEngine2D m_particleEngine;
 		ParticleBatch2D* m_testParticleBatch = nullptr;
+
+		std::unique_ptr<b2World> m_world;
 
 		// REFACTOR: have a proper Time class
 		float m_time = 0;
