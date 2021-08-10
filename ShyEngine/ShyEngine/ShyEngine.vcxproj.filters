@@ -67,10 +67,10 @@
     <Filter Include="Header Files\Timing">
       <UniqueIdentifier>{2b549b86-f57e-4e51-9073-ec0ca0f2d76d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Window">
+    <Filter Include="Header Files\Screen">
       <UniqueIdentifier>{31dd697c-c199-4da5-b393-b85f929efba2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Window">
+    <Filter Include="Source Files\Screen">
       <UniqueIdentifier>{12d6064e-36c7-477e-8ccc-1ae6bbe1a502}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -135,15 +135,6 @@
     <ClInclude Include="includes\ui\SpriteFont.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
-    <ClInclude Include="includes\window\IGameScreen.h">
-      <Filter>Header Files\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\window\ScreenList.h">
-      <Filter>Header Files\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\window\Window.h">
-      <Filter>Header Files\Window</Filter>
-    </ClInclude>
     <ClInclude Include="includes\IMainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -152,6 +143,12 @@
     </ClInclude>
     <ClInclude Include="includes\ShyEngine.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\screen\IGameScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\screen\ScreenList.h">
+      <Filter>Header Files\Screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,20 +206,17 @@
     <ClCompile Include="sources\ui\SpriteFont.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="sources\window\IMainGame.cpp">
-      <Filter>Source Files\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\window\ScreenList.cpp">
-      <Filter>Source Files\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\window\Window.cpp">
-      <Filter>Source Files\Window</Filter>
-    </ClCompile>
     <ClCompile Include="sources\ShyEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\SpatialGrid.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\screen\IMainGame.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\screen\ScreenList.cpp">
+      <Filter>Source Files\Screen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

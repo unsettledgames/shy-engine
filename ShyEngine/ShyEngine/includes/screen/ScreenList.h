@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <window/IGameScreen.h>
+#include <screen/IGameScreen.h>
 
 namespace ShyEngine
 {

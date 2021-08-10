@@ -1,14 +1,13 @@
 #include <iostream>
 
 #include <ShyEngine.h>
-#include <window/Window.h>
 
 
 int main(int argc, char** argv)
 {
-    ShyEngine::Window engine(700, 400);
-    
-    engine.init("Test", SDL_WINDOW_OPENGL);
+    ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);
+    engine.createWindow(700, 400, "Fancy test", SDL_WINDOW_OPENGL);
+
     engine.run();
 
     return 0;

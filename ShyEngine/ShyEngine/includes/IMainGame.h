@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include <window/ScreenList.h>
-#include <window/Window.h>
+#include <screen/ScreenList.h>
+#include <screen/IGameScreen.h>
 
 namespace ShyEngine
 {
@@ -15,7 +15,6 @@ namespace ShyEngine
 
 		bool m_isRunning = false;
 		float m_fps;
-		Window m_window;
 
 		void run();
 		void exit();
