@@ -18,6 +18,59 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="includes\audio\AudioEngine.h" />
+    <ClInclude Include="includes\data\ImageLoader.h" />
+    <ClInclude Include="includes\data\picopng.h" />
+    <ClInclude Include="includes\data\ResourcesManager.h" />
+    <ClInclude Include="includes\data\Texture.h" />
+    <ClInclude Include="includes\data\TextureCache.h" />
+    <ClInclude Include="includes\data\Vertex.h" />
+    <ClInclude Include="includes\IMainGame.h" />
+    <ClInclude Include="includes\input\EngineIO.h" />
+    <ClInclude Include="includes\input\Input.h" />
+    <ClInclude Include="includes\physics\Box.h" />
+    <ClInclude Include="includes\rendering\Camera2D.h" />
+    <ClInclude Include="includes\rendering\ParticleBatch2D.h" />
+    <ClInclude Include="includes\rendering\ParticleEngine2D.h" />
+    <ClInclude Include="includes\rendering\ShaderProgram.h" />
+    <ClInclude Include="includes\rendering\Sprite.h" />
+    <ClInclude Include="includes\rendering\SpriteBatch.h" />
+    <ClInclude Include="includes\ShyEngine.h" />
+    <ClInclude Include="includes\SpatialGrid.h" />
+    <ClInclude Include="includes\timing\Timing.h" />
+    <ClInclude Include="includes\ui\SpriteFont.h" />
+    <ClInclude Include="includes\util\Error.h" />
+    <ClInclude Include="includes\util\Utility.h" />
+    <ClInclude Include="includes\window\IGameScreen.h" />
+    <ClInclude Include="includes\window\ScreenList.h" />
+    <ClInclude Include="includes\window\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\audio\AudioEngine.cpp" />
+    <ClCompile Include="sources\data\ImageLoader.cpp" />
+    <ClCompile Include="sources\data\picopng.cpp" />
+    <ClCompile Include="sources\data\ResourcesManager.cpp" />
+    <ClCompile Include="sources\data\TextureCache.cpp" />
+    <ClCompile Include="sources\input\Input.cpp" />
+    <ClCompile Include="sources\physics\Box.cpp" />
+    <ClCompile Include="sources\rendering\Camera2D.cpp" />
+    <ClCompile Include="sources\rendering\EngineIO.cpp" />
+    <ClCompile Include="sources\rendering\ParticleBatch2D.cpp" />
+    <ClCompile Include="sources\rendering\ParticleEngine2D.cpp" />
+    <ClCompile Include="sources\rendering\ShaderProgram.cpp" />
+    <ClCompile Include="sources\rendering\Sprite.cpp" />
+    <ClCompile Include="sources\rendering\SpriteBatch.cpp" />
+    <ClCompile Include="sources\ShyEngine.cpp" />
+    <ClCompile Include="sources\SpatialGrid.cpp" />
+    <ClCompile Include="sources\timing\Timing.cpp" />
+    <ClCompile Include="sources\ui\SpriteFont.cpp" />
+    <ClCompile Include="sources\util\Error.cpp" />
+    <ClCompile Include="sources\util\Utility.cpp" />
+    <ClCompile Include="sources\window\IMainGame.cpp" />
+    <ClCompile Include="sources\window\ScreenList.cpp" />
+    <ClCompile Include="sources\window\Window.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -72,11 +125,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(ProjectDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)includes;$(ProjectDir);$(ProjectDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(ProjectDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)includes;$(ProjectDir);$(ProjectDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -156,59 +209,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="sources\AudioEngine.cpp" />
-    <ClCompile Include="sources\Box.cpp" />
-    <ClCompile Include="sources\Camera2D.cpp" />
-    <ClCompile Include="sources\IMainGame.cpp" />
-    <ClCompile Include="sources\ParticleBatch2D.cpp" />
-    <ClCompile Include="sources\ParticleEngine2D.cpp" />
-    <ClCompile Include="sources\ScreenList.cpp" />
-    <ClCompile Include="sources\ShyEngine.cpp" />
-    <ClCompile Include="sources\SpatialGrid.cpp" />
-    <ClCompile Include="sources\SpriteBatch.cpp" />
-    <ClCompile Include="sources\SpriteFont.cpp" />
-    <ClCompile Include="sources\Timing.cpp" />
-    <ClCompile Include="sources\Window.cpp" />
-    <ClCompile Include="sources\EngineIO.cpp" />
-    <ClCompile Include="sources\Error.cpp" />
-    <ClCompile Include="sources\ImageLoader.cpp" />
-    <ClCompile Include="sources\Input.cpp" />
-    <ClCompile Include="sources\picopng.cpp" />
-    <ClCompile Include="sources\ResourcesManager.cpp" />
-    <ClCompile Include="sources\ShaderProgram.cpp" />
-    <ClCompile Include="sources\Sprite.cpp" />
-    <ClCompile Include="sources\TextureCache.cpp" />
-    <ClCompile Include="sources\Utility.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AudioEngine.h" />
-    <ClInclude Include="Box.h" />
-    <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="IGameScreen.h" />
-    <ClInclude Include="IMainGame.h" />
-    <ClInclude Include="ParticleBatch2D.h" />
-    <ClInclude Include="ParticleEngine2D.h" />
-    <ClInclude Include="ScreenList.h" />
-    <ClInclude Include="ShyEngine.h" />
-    <ClInclude Include="SpatialGrid.h" />
-    <ClInclude Include="SpriteBatch.h" />
-    <ClInclude Include="SpriteFont.h" />
-    <ClInclude Include="Timing.h" />
-    <ClInclude Include="Window.h" />
-    <ClInclude Include="EngineIO.h" />
-    <ClInclude Include="Error.h" />
-    <ClInclude Include="ImageLoader.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="picopng.h" />
-    <ClInclude Include="ResourcesManager.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureCache.h" />
-    <ClInclude Include="Utility.h" />
-    <ClInclude Include="Vertex.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
