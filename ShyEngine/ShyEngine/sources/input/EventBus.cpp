@@ -4,10 +4,8 @@ namespace ShyEngine
 {
 	_EventBus::_EventBus() {}
 
-	// Use lambdas ffs
 	void _EventBus::subscribe(std::string eventName, // Name of the event the callee is subscribing to
-		void(*callback)(std::vector<void*>), // Pointer to the function used as a callback
-		std::vector<void*> args)	// Pointer to the vector of arguments
+		std::function<void(std::vector<void*>)> callback) // Pointer to the function used as a callback
 	{
 		// Find the vector corresponding to the event
 		auto callbackVec = m_callbacks.find(eventName);
@@ -19,22 +17,27 @@ namespace ShyEngine
 		m_callbacks.emplace(std::make_pair(eventName, callback));
 	}
 
-	void _EventBus::fire(std::string eventName)
+	void _EventBus::fire(std::string eventName, std::vector<void*> parameters)
 	{
 		// Find the vector corresponding to the event
 		auto callbackVec = m_callbacks.find(eventName);
 
+		// Call all its callbacks, pass the parameters
 		if (callbackVec != m_callbacks.end())
 		{
-			for (auto callback : callbackVec->second.first)
+			for (auto callback : callbackVec->second)
 			{
-				callback(callbackVec->second.second);
+				callback(parameters);
 			}
 		}
 	}
 
-	void _EventBus::unsubscribe(std::string eventName, void(*callback)(std::vector<void*>), std::vector<void*> args)
+	void _EventBus::unsubscribe(std::string eventName, 
+		std::function<void(std::vector<void*>)> callback)
 	{
-
+		// Find the vector for eventName and remove the callback
+		auto callbackVec = m_callbacks.find(eventName);
+		if (callbackVec != m_callbacks.end())
+			remove(callbackVec->second.begin(), callbackVec->second.end(), callback);
 	}
 }
