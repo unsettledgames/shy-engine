@@ -28,6 +28,7 @@
     <ClInclude Include="includes\data\Vertex.h" />
     <ClInclude Include="includes\IMainGame.h" />
     <ClInclude Include="includes\input\EngineIO.h" />
+    <ClInclude Include="includes\input\EventBus.h" />
     <ClInclude Include="includes\input\Input.h" />
     <ClInclude Include="includes\physics\Box.h" />
     <ClInclude Include="includes\rendering\Camera2D.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="sources\data\picopng.cpp" />
     <ClCompile Include="sources\data\ResourcesManager.cpp" />
     <ClCompile Include="sources\data\TextureCache.cpp" />
+    <ClCompile Include="sources\input\EventBus.cpp" />
     <ClCompile Include="sources\input\Input.cpp" />
     <ClCompile Include="sources\physics\Box.cpp" />
     <ClCompile Include="sources\rendering\Camera2D.cpp" />

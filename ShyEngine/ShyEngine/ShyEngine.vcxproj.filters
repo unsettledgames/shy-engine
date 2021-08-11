@@ -147,6 +147,9 @@
     <ClInclude Include="includes\screen\IGameScreen.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
+    <ClInclude Include="includes\input\EventBus.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -211,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="sources\screen\IMainGame.cpp">
       <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\input\EventBus.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
