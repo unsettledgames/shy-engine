@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <screen/ScreenList.h>
 #include <screen/IGameScreen.h>
 
 namespace ShyEngine
@@ -10,7 +9,6 @@ namespace ShyEngine
 	{
 	private:
 	protected:
-		std::unique_ptr<ScreenList> m_screens = nullptr;
 		IGameScreen* m_currScreen = nullptr;
 
 		bool m_isRunning = false;

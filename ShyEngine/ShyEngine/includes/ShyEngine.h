@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 
+#include <screen/IGameScreen.h>
 #include <input/Input.h>
 #include <iostream>
 #include <util/Error.h>
@@ -35,6 +36,8 @@ namespace ShyEngine {
 		private:
 			SDL_Window* m_gameWindow = nullptr;
 			SDL_GLContext m_glContext;
+
+			std::vector<IGameScreen> m_screens;
 
 			Input m_input;
 

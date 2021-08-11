@@ -37,7 +37,6 @@
     <ClInclude Include="includes\rendering\Sprite.h" />
     <ClInclude Include="includes\rendering\SpriteBatch.h" />
     <ClInclude Include="includes\screen\IGameScreen.h" />
-    <ClInclude Include="includes\screen\ScreenList.h" />
     <ClInclude Include="includes\ShyEngine.h" />
     <ClInclude Include="includes\SpatialGrid.h" />
     <ClInclude Include="includes\timing\Timing.h" />
@@ -61,7 +60,6 @@
     <ClCompile Include="sources\rendering\Sprite.cpp" />
     <ClCompile Include="sources\rendering\SpriteBatch.cpp" />
     <ClCompile Include="sources\screen\IMainGame.cpp" />
-    <ClCompile Include="sources\screen\ScreenList.cpp" />
     <ClCompile Include="sources\ShyEngine.cpp" />
     <ClCompile Include="sources\SpatialGrid.cpp" />
     <ClCompile Include="sources\timing\Timing.cpp" />

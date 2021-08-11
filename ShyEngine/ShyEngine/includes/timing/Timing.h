@@ -13,9 +13,11 @@ namespace ShyEngine
 		float m_targetFps = 60;
 		float m_currFps = 60;
 
+		float m_targetFrameTime = MS_PER_SEC / m_targetFps;
+
 		float m_startTicks = 0;
 		Uint32 m_frameTime = 0;
-		Uint32 m_deltaTime = 0;
+		Uint32 m_deltaTime = 1;
 
 		bool m_isLimitingFps = false;
 

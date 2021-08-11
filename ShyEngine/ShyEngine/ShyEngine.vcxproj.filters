@@ -147,9 +147,6 @@
     <ClInclude Include="includes\screen\IGameScreen.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
-    <ClInclude Include="includes\screen\ScreenList.h">
-      <Filter>Header Files\Screen</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -213,9 +210,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\screen\IMainGame.cpp">
-      <Filter>Source Files\Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\screen\ScreenList.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
   </ItemGroup>

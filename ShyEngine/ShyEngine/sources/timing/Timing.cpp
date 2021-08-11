@@ -38,7 +38,7 @@ namespace ShyEngine
 
 	void FpsLimiter::setTargetFps(int fps)
 	{
-		this->m_targetFps = fps;
+		m_targetFps = fps;
 	}
 
 	void FpsLimiter::calculateFPS()
@@ -74,5 +74,10 @@ namespace ShyEngine
 	void FpsLimiter::toggleFpsLimiting(bool state)
 	{
 		this->m_isLimitingFps = state;
+	}
+
+	float FpsLimiter::getDeltaTime()
+	{
+		return m_deltaTime;
 	}
 }

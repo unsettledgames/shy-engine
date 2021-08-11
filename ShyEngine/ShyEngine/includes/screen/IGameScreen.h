@@ -20,9 +20,7 @@ namespace ShyEngine
 		private:
 
 		protected:
-			int m_index = -1;
 			ScreenState m_currState = ScreenState::NONE;
-			IMainGame* m_game = nullptr;
 		public:
 			IGameScreen() {};
 			~IGameScreen() {};
@@ -33,14 +31,6 @@ namespace ShyEngine
 			virtual void onEnter() = 0;
 			virtual void onExit() = 0;
 
-			virtual void update() = 0;
-			virtual void draw() = 0;
-
-			virtual int getNextScreenIndex() const = 0;
-			virtual int getPrevScreenIndex() const = 0;
-
-			int getIndex() const { return m_index; }
-
-			void setParentGame(IMainGame* game) { m_game = game; }
+			virtual void updateSystems() = 0;
 	};
 }
