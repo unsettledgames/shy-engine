@@ -9,7 +9,7 @@ namespace ShyEngine {
 		this->m_height = height;
 
 		this->m_buffer = 0;
-		this->m_texture = ResourcesManager::getTexture(texturePath);
+		this->m_texture = ResourcesManager.getTexture(texturePath);
 
 		// Initializing the sprite
 		// Creating the buffer if I haven't yet

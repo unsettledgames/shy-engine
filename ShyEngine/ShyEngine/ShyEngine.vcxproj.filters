@@ -150,6 +150,9 @@
     <ClInclude Include="includes\input\EventBus.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="includes\data\ResourceCache.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="sources\input\EventBus.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\data\ResourceCache.cpp">
+      <Filter>Source Files\Data</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

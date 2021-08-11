@@ -15,6 +15,7 @@
 #include <rendering/Camera2D.h>
 #include <rendering/SpriteBatch.h>
 #include <data/ResourcesManager.h>
+#include <input/EventBus.h>
 #include <timing/Timing.h>
 #include <cstdlib>
 #include <ui/SpriteFont.h>

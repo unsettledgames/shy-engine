@@ -70,7 +70,7 @@ namespace ShyEngine {
 
 		// Test particle system
 		m_testParticleBatch = new ParticleBatch2D();
-		m_testParticleBatch->init(1000, 0.01f, ResourcesManager::getTexture("textures/particle.png"));
+		m_testParticleBatch->init(1000, 0.01f, ResourcesManager.getTexture("textures/particle.png"));
 		m_particleEngine.addParticleBatch(m_testParticleBatch);
 
 		// TEST PHYSICS MANAGEMENT
@@ -146,7 +146,7 @@ namespace ShyEngine {
 				m_spriteBatch.begin();
 				ColorRGBA8 col = { 255, 255, 255, 255 };
 				//GLuint tex = ResourcesManager::getTexture("textures/5heartsSmall.png").id;
-				GLuint tex = ResourcesManager::getTexture("textures/Alice.png").id;
+				GLuint tex = ResourcesManager.getTexture("textures/Alice.png").id;
 				// TEST
 				m_spriteBatch.draw(glm::vec4(0, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col, 0.785398f);
 				m_spriteBatch.draw(glm::vec4(200, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);

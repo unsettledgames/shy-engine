@@ -22,6 +22,7 @@
     <ClInclude Include="includes\audio\AudioEngine.h" />
     <ClInclude Include="includes\data\ImageLoader.h" />
     <ClInclude Include="includes\data\picopng.h" />
+    <ClInclude Include="includes\data\ResourceCache.h" />
     <ClInclude Include="includes\data\ResourcesManager.h" />
     <ClInclude Include="includes\data\Texture.h" />
     <ClInclude Include="includes\data\TextureCache.h" />
@@ -49,6 +50,7 @@
     <ClCompile Include="sources\audio\AudioEngine.cpp" />
     <ClCompile Include="sources\data\ImageLoader.cpp" />
     <ClCompile Include="sources\data\picopng.cpp" />
+    <ClCompile Include="sources\data\ResourceCache.cpp" />
     <ClCompile Include="sources\data\ResourcesManager.cpp" />
     <ClCompile Include="sources\data\TextureCache.cpp" />
     <ClCompile Include="sources\input\EventBus.cpp" />
