@@ -221,8 +221,5 @@
     <ClCompile Include="sources\input\EventBus.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="sources\data\ResourceCache.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

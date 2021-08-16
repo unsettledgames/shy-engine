@@ -78,7 +78,7 @@ namespace ShyEngine {
 
 			~ShyEngine();
 
-			void createWindow(int width, int height, std::string name, unsigned int flags);
+			void createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps = 60);
 
 			void run();
 

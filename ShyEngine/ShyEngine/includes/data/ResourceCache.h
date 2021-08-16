@@ -12,11 +12,31 @@ namespace ShyEngine
 		private:
 			std::map<std::string, T> m_resources;
 
-			std::function<T(std::string)> m_loaderFunction;
+			std::function<T(std::string&)> m_loaderFunction;
 
 		public:
-			ResourceCache(std::function<T(std::string&)> loader);
+			ResourceCache<T>(std::function<T(std::string&)> loader)
+			{
+				m_loaderFunction = loader;
+			}
 
-			T get(std::string& path);
+			T get(std::string& path)
+			{
+				// Try to find the resource
+				auto it = m_resources.find(path);
+				T ret;
+
+				// If it's not in the map, load it using the function
+				if (it == m_resources.end())
+				{
+					ret = m_loaderFunction(path);
+					m_resources.emplace(std::make_pair(path, m_loaderFunction(path)));
+				}
+				else
+					ret = it->second;
+
+				// Return the result
+				return ret;
+			}
 	};
 }

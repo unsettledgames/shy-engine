@@ -6,6 +6,7 @@ namespace ShyEngine
 
 	void FpsLimiter::init(int fps)
 	{
+		m_prevTicks = SDL_GetTicks();
 		setTargetFps(fps);
 	}
 
@@ -14,16 +15,18 @@ namespace ShyEngine
 	void FpsLimiter::begin()
 	{
 		// Start and end times of the frame
-		m_startTicks = SDL_GetTicks();
+		m_currTicks = SDL_GetTicks();
+		m_frameTime = m_currTicks - m_prevTicks;
+		m_prevTicks = m_currTicks;
 
 		// Computing delta time for the current frame
 		const float DESIRED_FRAME_TIME = MS_PER_SEC / m_targetFps;
-		this->m_deltaTime = m_frameTime / DESIRED_FRAME_TIME;
+		this->m_deltaTime = (float)m_frameTime / (float)DESIRED_FRAME_TIME;
 	}
 
 	float FpsLimiter::end()
 	{
-		Uint32 frameTicks = SDL_GetTicks() - m_startTicks;
+		Uint32 frameTicks = SDL_GetTicks() - m_currTicks;
 
 		calculateFPS();
 

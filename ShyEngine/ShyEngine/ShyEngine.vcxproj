@@ -50,7 +50,6 @@
     <ClCompile Include="sources\audio\AudioEngine.cpp" />
     <ClCompile Include="sources\data\ImageLoader.cpp" />
     <ClCompile Include="sources\data\picopng.cpp" />
-    <ClCompile Include="sources\data\ResourceCache.cpp" />
     <ClCompile Include="sources\data\ResourcesManager.cpp" />
     <ClCompile Include="sources\data\TextureCache.cpp" />
     <ClCompile Include="sources\input\EventBus.cpp" />

@@ -12,10 +12,11 @@ namespace ShyEngine {
 
 	ShyEngine::~ShyEngine() { }
 
-	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags)
+	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
 	{
 		m_screenWidth = width;
 		m_screenHeight = height;
+		m_fpsLimiter.init(fps);
 
 		if (flags & WindowFlags::INVISIBLE) {
 			flags |= SDL_WINDOW_HIDDEN;
@@ -118,15 +119,16 @@ namespace ShyEngine {
 		{
 			int currSimStep = 0;
 
-			// Delta time management
+			m_fpsLimiter.begin();
+			// Delta time management ISSUE: it's always 0
 			float totalDeltaTime = m_fpsLimiter.getDeltaTime();
+
 			while (totalDeltaTime > 0.0f && currSimStep < MAX_SIM_STEPS)
 			{
-				float deltaTime = std::min(MAX_DELTA_TIME, deltaTime);
+				std::cout << "Delta time: " << totalDeltaTime << std::endl;
+				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
 
 				// Update stuff, pass deltaTime to them
-				m_fpsLimiter.begin();
-
 				// Processing input for this frame
 				m_input.processInput();
 
@@ -182,9 +184,9 @@ namespace ShyEngine {
 
 				totalDeltaTime -= deltaTime;
 				currSimStep++;
-
-				m_fpsLimiter.end();
 			}
+
+			m_fpsLimiter.end();
 		}
 	}
 
