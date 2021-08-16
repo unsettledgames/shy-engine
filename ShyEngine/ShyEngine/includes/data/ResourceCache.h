@@ -10,17 +10,17 @@ namespace ShyEngine
 	class ResourceCache
 	{
 		private:
-			std::map<std::string, T> m_resources;
+			std::map<const std::string, T> m_resources;
 
-			std::function<T(std::string&)> m_loaderFunction;
+			std::function<T(const std::string&)> m_loaderFunction;
 
 		public:
-			ResourceCache<T>(std::function<T(std::string&)> loader)
+			ResourceCache<T>(std::function<T(const std::string&)> loader)
 			{
 				m_loaderFunction = loader;
 			}
 
-			T get(std::string& path)
+			T get(const std::string& path)
 			{
 				// Try to find the resource
 				auto it = m_resources.find(path);

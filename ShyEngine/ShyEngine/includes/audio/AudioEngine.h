@@ -18,6 +18,8 @@ namespace ShyEngine
 			Mix_Chunk* m_chunk = nullptr;
 		public:
 			void play(int loops = 0);
+
+			void setChunk(Mix_Chunk* chunk);
 	};
 
 	class Music
@@ -34,6 +36,8 @@ namespace ShyEngine
 			static void pause();
 
 			static void resume();
+
+			void setMusic(Mix_Music* music);
 	};
 
 	class AudioEngine
@@ -53,10 +57,6 @@ namespace ShyEngine
 			void init();
 
 			void destroy();
-
-			SoundEffect loadSoundEffect(const std::string& filePath);
-
-			Music loadMusic(const std::string& filePath);
 
 	};
 }

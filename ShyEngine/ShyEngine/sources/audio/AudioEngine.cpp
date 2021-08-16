@@ -13,10 +13,20 @@ namespace ShyEngine
 				Error::fatal("Couldn't play sound effect");
 	}
 
+	void SoundEffect::setChunk(Mix_Chunk* chunk)
+	{
+		m_chunk = chunk;
+	}
+
 	void Music::play(int loops /* = 1 */)
 	{
 		if (Mix_PlayMusic(m_music, loops) < 0)
 			Error::fatal("Couldn't play music");
+	}
+
+	void Music::setMusic(Mix_Music* music)
+	{
+		m_music = music;
 	}
 
 	void Music::pause()
@@ -74,49 +84,5 @@ namespace ShyEngine
 			Mix_CloseAudio();
 			Mix_Quit();
 		}
-	}
-
-	SoundEffect AudioEngine::loadSoundEffect(const std::string& fileName)
-	{
-		SoundEffect ret;
-		auto it = m_effectsCache.find(fileName);
-
-		// The effect isn't cached, load it
-		if (it == m_effectsCache.end())
-		{
-			Mix_Chunk* chunk = Mix_LoadWAV(fileName.c_str());
-			if (chunk == nullptr)
-				Error::fatal("Couldn't load the effect at path " + fileName);
-
-			m_effectsCache[fileName] = chunk;
-			ret.m_chunk = chunk;
-		}
-		// Use the cached version
-		else
-			ret.m_chunk = it->second;
-
-		return ret;
-	}
-
-	Music AudioEngine::loadMusic(const std::string& fileName)
-	{
-		Music ret;
-		auto it = m_musicCache.find(fileName);
-
-		// The effect isn't cached, load it
-		if (it == m_musicCache.end())
-		{
-			Mix_Music* chunk = Mix_LoadMUS(fileName.c_str());
-			if (chunk == nullptr)
-				Error::fatal("Couldn't load the effect at path " + fileName + ": " + Mix_GetError());
-
-			m_musicCache[fileName] = chunk;
-			ret.m_music = chunk;
-		}
-		// Use the cached version
-		else
-			ret.m_music = it->second;
-
-		return ret;
 	}
 }
