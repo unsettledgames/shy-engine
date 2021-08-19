@@ -3,21 +3,7 @@
 
 namespace ShyEngine
 {
-	void SoundEffect::play(int loops /* = 0 */)
-	{
-		// IMPROVEMENT: -1 is the number of channels, could be nice to have some smart way to
-		// select the right channel. Find a way to detect paused channels or something, in general have a 
-		// look at how channels work
-		if (Mix_PlayChannel(-1, m_chunk, loops) < 0)
-			if (Mix_PlayChannel(0, m_chunk, loops) < 0)
-				Error::fatal("Couldn't play sound effect");
-	}
-
-	void SoundEffect::setChunk(Mix_Chunk* chunk)
-	{
-		m_chunk = chunk;
-	}
-
+	/*******************************************MUSIC***********************************************************/
 	void Music::play(int loops /* = 1 */)
 	{
 		if (Mix_PlayMusic(m_music, loops) < 0)
@@ -43,6 +29,40 @@ namespace ShyEngine
 	{
 		Mix_ResumeMusic();
 	}
+
+	/*******************************************SOUND EFFECTS***********************************************************/
+
+	void SoundEffect::play(int loops /* = 0 */)
+	{
+		// IMPROVEMENT: -1 is the number of channels, could be nice to have some smart way to
+		// select the right channel. Find a way to detect paused channels or something, in general have a 
+		// look at how channels work
+		if (Mix_PlayChannel(-1, m_chunk, loops) < 0)
+			if (Mix_PlayChannel(0, m_chunk, loops) < 0)
+				Error::fatal("Couldn't play sound effect");
+	}
+
+	void SoundEffect::setChunk(Mix_Chunk* chunk)
+	{
+		m_chunk = chunk;
+	}
+
+	void SoundEffect::pause()
+	{
+		Mix_PauseMusic();
+	}
+
+	void SoundEffect::stop()
+	{
+		Mix_HaltMusic();
+	}
+
+	void SoundEffect::resume()
+	{
+		Mix_ResumeMusic();
+	}
+
+	/*******************************************AUDIO ENGINE***********************************************************/
 
 	AudioEngine::~AudioEngine()
 	{
@@ -73,16 +93,48 @@ namespace ShyEngine
 		{
 			m_initialized = false;
 
-			for (auto& it : m_effectsCache)
-				Mix_FreeChunk(it.second);
-			for (auto& it : m_musicCache)
-				Mix_FreeMusic(it.second);
-			
-			m_effectsCache.clear();
-			m_musicCache.clear();
-
 			Mix_CloseAudio();
 			Mix_Quit();
 		}
+	}
+
+	void AudioEngine::play(SoundEffect& toPlay, int loops)
+	{
+		toPlay.play(loops);
+	}
+
+	void AudioEngine::resume(SoundEffect& audio)
+	{
+		audio.resume();
+	}
+
+	void AudioEngine::pause(SoundEffect& audio)
+	{
+		audio.pause();
+	}
+
+	void AudioEngine::stop(SoundEffect& audio)
+	{
+		audio.stop();
+	}
+
+	void AudioEngine::play(Music& toPlay, int loops)
+	{
+		toPlay.play(loops);
+	}
+
+	void AudioEngine::resume(Music& audio)
+	{
+		audio.resume();
+	}
+
+	void AudioEngine::pause(Music& audio)
+	{
+		audio.pause();
+	}
+
+	void AudioEngine::stop(Music& audio)
+	{
+		audio.stop();
 	}
 }

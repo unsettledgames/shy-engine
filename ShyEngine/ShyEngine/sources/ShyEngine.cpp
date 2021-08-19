@@ -67,7 +67,7 @@ namespace ShyEngine {
 		// Test font
 		m_spriteFont = new SpriteFont("fonts/04.TTF", 16);
 		// Test SFX
-		//m_audioEngine.loadSoundEffect("sfx/wub.ogg").play();
+		m_audioEngine.play((Music&)ResourcesManager.getMusic("sfx/6th.mp3"), 1);
 
 		// Test particle system
 		m_testParticleBatch = new ParticleBatch2D();
@@ -125,7 +125,6 @@ namespace ShyEngine {
 
 			while (totalDeltaTime > 0.0f && currSimStep < MAX_SIM_STEPS)
 			{
-				std::cout << "Delta time: " << totalDeltaTime << std::endl;
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
 
 				// Update stuff, pass deltaTime to them

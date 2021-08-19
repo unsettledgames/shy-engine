@@ -44,6 +44,7 @@
     <ClInclude Include="includes\timing\Timing.h" />
     <ClInclude Include="includes\ui\SpriteFont.h" />
     <ClInclude Include="includes\util\Error.h" />
+    <ClInclude Include="includes\util\IdGenerator.h" />
     <ClInclude Include="includes\util\Utility.h" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +69,7 @@
     <ClCompile Include="sources\timing\Timing.cpp" />
     <ClCompile Include="sources\ui\SpriteFont.cpp" />
     <ClCompile Include="sources\util\Error.cpp" />
+    <ClCompile Include="sources\util\IdGenerator.cpp" />
     <ClCompile Include="sources\util\Utility.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
