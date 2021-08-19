@@ -90,9 +90,6 @@
     <ClInclude Include="includes\data\Texture.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
-    <ClInclude Include="includes\data\TextureCache.h">
-      <Filter>Header Files\Data</Filter>
-    </ClInclude>
     <ClInclude Include="includes\data\Vertex.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
@@ -156,6 +153,9 @@
     <ClInclude Include="includes\util\IdGenerator.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="includes\data\ColorRGBA8.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -168,9 +168,6 @@
       <Filter>Source Files\Data</Filter>
     </ClCompile>
     <ClCompile Include="sources\data\ResourcesManager.cpp">
-      <Filter>Source Files\Data</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\data\TextureCache.cpp">
       <Filter>Source Files\Data</Filter>
     </ClCompile>
     <ClCompile Include="sources\input\Input.cpp">
