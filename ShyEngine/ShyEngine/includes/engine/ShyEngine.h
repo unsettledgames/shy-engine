@@ -26,6 +26,7 @@
 #include <memory>
 #include <physics/Box.h>
 #include <engine/System.h>
+#include <engine/Entity.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 
@@ -85,7 +86,7 @@ namespace ShyEngine {
 
 			int getScreenHeight() { return m_screenHeight; }
 
-			Module createModule(ModuleTypes name);
-			Entity createEntity();
+			Module* createModule(ModuleTypes type);
+			Entity* createEntity(const std::string& name = "NewEntity");
 	};
 }

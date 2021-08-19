@@ -212,4 +212,51 @@ namespace ShyEngine {
 		m_colorShader.addAttribute("vertUV");
 		m_colorShader.linkShaders();
 	}
+
+	Module* ShyEngine::createModule(ModuleTypes name)
+	{
+		Module* ret;
+
+		switch (name)
+		{
+			case ModuleTypes::Camera:
+			{
+				break;
+			}
+
+			case ModuleTypes::Collider:
+			{
+				break;
+			}
+
+			case ModuleTypes::Physics:
+			{
+				break;
+			}
+
+			case ModuleTypes::Sprite:
+			{
+				break;
+			}
+
+			case ModuleTypes::Transform:
+			{
+				break;
+			}
+
+			default:
+				break;
+		}
+
+		ret->m_reference = ret;
+		return ret;
+	}
+
+	Entity* ShyEngine::createEntity(const std::string& name/* = "NewEntity"*/)
+	{
+		Entity* ret = new Entity(name);
+		ret->m_reference = ret;
+
+		return ret;
+	}
 }
