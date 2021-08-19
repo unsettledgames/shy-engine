@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <ShyEngine.h>
+#include <engine/ShyEngine.h>
 
 
 int main(int argc, char** argv)

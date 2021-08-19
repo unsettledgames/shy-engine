@@ -1,4 +1,4 @@
-#include <ShyEngine.h>
+#include <engine/ShyEngine.h>
 
 namespace ShyEngine {
 	ShyEngine::ShyEngine(unsigned int flags)
@@ -132,7 +132,7 @@ namespace ShyEngine {
 				m_input.processInput();
 
 				// Setting up the shader REFACTOR: put this in the SpriteRenderer class
-				m_colorShader.use(m_time);
+				m_colorShader.use(0);
 				// REFACTOR: since the shader will be a SpriteRenderer property, I should find a way
 				// to pass camera data to it. Or maybe have a currentShader in the Engine? Even though
 				// conceptually, shaders are linked to Rendering

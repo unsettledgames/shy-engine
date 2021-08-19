@@ -14,4 +14,9 @@ namespace ShyEngine {
 		SDL_Quit();
 		exit(-1);
 	}
+
+	void Error::runtime(std::string error)
+	{
+		std::cout << "RUNTIME: " << error << std::endl;
+	}
 }

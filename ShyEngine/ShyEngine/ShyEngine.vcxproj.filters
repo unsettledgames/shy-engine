@@ -73,6 +73,12 @@
     <Filter Include="Source Files\Screen">
       <UniqueIdentifier>{12d6064e-36c7-477e-8ccc-1ae6bbe1a502}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{ebb4818f-334a-4a32-9a22-ce8e837def52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{79461551-55cc-423a-8569-7d8b1a1f4f2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\audio\AudioEngine.h">
@@ -138,9 +144,6 @@
     <ClInclude Include="includes\SpatialGrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes\ShyEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="includes\screen\IGameScreen.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
@@ -155,6 +158,18 @@
     </ClInclude>
     <ClInclude Include="includes\data\ColorRGBA8.h">
       <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\Entity.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\Module.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\System.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\ShyEngine.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +224,6 @@
     <ClCompile Include="sources\ui\SpriteFont.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="sources\ShyEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sources\SpatialGrid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -223,6 +235,18 @@
     </ClCompile>
     <ClCompile Include="sources\util\IdGenerator.cpp">
       <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\Entity.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\Module.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\System.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\ShyEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

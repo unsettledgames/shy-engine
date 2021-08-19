@@ -25,6 +25,7 @@
 #include <box2d/box2d.h>
 #include <memory>
 #include <physics/Box.h>
+#include <engine/System.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 
@@ -38,12 +39,23 @@ namespace ShyEngine {
 			SDL_Window* m_gameWindow = nullptr;
 			SDL_GLContext m_glContext;
 
-			std::vector<IGameScreen> m_screens;
-
 			Input m_input;
 
 			GameState m_state = GameState::GAME_STATE_PAUSED;
 			ShaderProgram m_colorShader;
+
+			AudioEngine m_audioEngine;
+			std::vector<System> m_systems;
+			std::vector<Entity> m_entities;
+
+			int m_screenWidth;
+			int m_screenHeight;
+
+			void initShaders();
+
+			void loop();
+
+			void drawUI();
 
 			// TEST
 			Camera2D m_camera;
@@ -55,23 +67,10 @@ namespace ShyEngine {
 			FpsLimiter m_fpsLimiter;
 			SpriteFont* m_spriteFont;
 
-			AudioEngine m_audioEngine;
 			ParticleEngine2D m_particleEngine;
 			ParticleBatch2D* m_testParticleBatch = nullptr;
 
 			std::unique_ptr<b2World> m_world;
-
-			// REFACTOR: have a proper Time class
-			float m_time = 0;
-
-			int m_screenWidth;
-			int m_screenHeight;
-
-			void initShaders();
-
-			void loop();
-
-			void drawUI();
 
 		public:
 			ShyEngine(unsigned int flags);
@@ -85,5 +84,8 @@ namespace ShyEngine {
 			int getScreenWidth() { return m_screenWidth; }
 
 			int getScreenHeight() { return m_screenHeight; }
+
+			Module createModule(ModuleTypes name);
+			Entity createEntity();
 	};
 }
