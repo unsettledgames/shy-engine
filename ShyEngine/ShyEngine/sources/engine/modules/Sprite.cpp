@@ -101,4 +101,14 @@ namespace ShyEngine
 		// Nothing depends on Sprite, at the moment
 		return true;
 	}
+
+	void Sprite::useShader()
+	{
+		m_shader.use(SDL_GetTicks());
+	}
+
+	void Sprite::unuseShader()
+	{
+		m_shader.unuse();
+	}
 }

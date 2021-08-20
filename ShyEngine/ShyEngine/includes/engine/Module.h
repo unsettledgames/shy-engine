@@ -4,8 +4,6 @@
 
 namespace ShyEngine
 {
-	class Entity;
-
 	enum class ModuleTypes
 	{
 		Transform,
@@ -14,6 +12,8 @@ namespace ShyEngine
 		Camera,
 		Sprite
 	};
+
+	class Entity;
 
 	class Module
 	{

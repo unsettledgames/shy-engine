@@ -1,4 +1,5 @@
 #include <engine/Entity.h>
+#include <engine/Module.h>
 
 namespace ShyEngine
 {

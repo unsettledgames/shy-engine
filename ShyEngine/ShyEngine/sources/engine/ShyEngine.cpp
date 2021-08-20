@@ -1,4 +1,5 @@
 #include <engine/ShyEngine.h>
+#include <engine/systems/SpriteRenderer.h>
 
 namespace ShyEngine {
 	ShyEngine::ShyEngine(unsigned int flags)
@@ -11,6 +12,11 @@ namespace ShyEngine {
 	}
 
 	ShyEngine::~ShyEngine() { }
+
+	void ShyEngine::initSystems()
+	{
+		m_spriteRenderer = new SpriteRenderer();
+	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
 	{
@@ -96,6 +102,8 @@ namespace ShyEngine {
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;
 		Utility::printOpenGLVersion();
+
+		initSystems();
 	}
 
 	void ShyEngine::run()
@@ -129,37 +137,17 @@ namespace ShyEngine {
 			{
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
 
-				// Update stuff, pass deltaTime to them
 				// Processing input for this frame
 				m_input.processInput();
 
-				// Setting up the shader REFACTOR: put this in the SpriteRenderer class
-				m_colorShader.use(0);
-				// REFACTOR: since the shader will be a SpriteRenderer property, I should find a way
-				// to pass camera data to it. Or maybe have a currentShader in the Engine? Even though
-				// conceptually, shaders are linked to Rendering
-				m_colorShader.setOrthoProjection("orthoProj", m_camera.getCameraMatrix());
+				// Updating the shader values
+				updateShaders();
 
-				// Clearing buffers REFACTOR: Renderer?
-				glClearDepth(1.0f);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				glClearColor(0, 0, 1, 1);
+				// Update loop for the sprite renderer
+				m_spriteRenderer->updateModules();
 
-				// REFACTOR: this is probably part of Renderer as well
+				// Particle system test
 				/*
-				m_spriteBatch.begin();
-				ColorRGBA8 col = { 255, 255, 255, 255 };
-				//GLuint tex = ResourcesManager::getTexture("textures/5heartsSmall.png").id;
-				GLuint tex = ResourcesManager.getTexture("textures/Alice.png").id;
-				// TEST
-				m_spriteBatch.draw(glm::vec4(0, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col, 0.785398f);
-				m_spriteBatch.draw(glm::vec4(200, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
-				m_spriteBatch.draw(glm::vec4(400, 0, 200, 200), glm::vec4(0, 0, 1, -1), 0, tex, col);
-
-				m_spriteBatch.end();
-				m_spriteBatch.render();
-				
-
 				if (m_input.getKeyDown(SDLK_p))
 					m_testParticleBatch->addParticle(glm::vec2(100, 100), ColorRGBA8(255, 0, 255, 255), glm::vec2(1.0f, 1.0f), glm::vec2(50.0f, 50.0f));
 				m_particleEngine.draw(&m_spriteBatch);*/
@@ -175,7 +163,6 @@ namespace ShyEngine {
 
 				// Cleanup
 				SDL_GL_SwapWindow(this->m_gameWindow);
-				m_colorShader.unuse();
 
 				// If the user decided to quit, I stop the loop
 				if (m_input.isQuitting())
@@ -190,6 +177,14 @@ namespace ShyEngine {
 			}
 
 			m_fpsLimiter.end();
+		}
+	}
+
+	void ShyEngine::updateShaders()
+	{
+		for (auto shader : m_shaders)
+		{
+			shader->setOrthoProjection("orthoProj", m_camera.getCameraMatrix());
 		}
 	}
 
@@ -210,43 +205,18 @@ namespace ShyEngine {
 		*/
 	}
 
-	Module* ShyEngine::createModule(ModuleTypes name)
+	void ShyEngine::registerModule(Module* toRegister)
 	{
-		Module* ret = nullptr;
-
-		switch (name)
+		// REFACTOR: turn name into a type so it's less flexible
+		if (toRegister->getName().compare("Sprite") == 0)
 		{
-			case ModuleTypes::Camera:
-			{
-				break;
-			}
-
-			case ModuleTypes::Collider:
-			{
-				break;
-			}
-
-			case ModuleTypes::Physics:
-			{
-				break;
-			}
-
-			case ModuleTypes::Sprite:
-			{
-				break;
-			}
-
-			case ModuleTypes::Transform:
-			{
-				break;
-			}
-
-			default:
-				break;
+			m_spriteRenderer->addModule(*toRegister);
 		}
+	}
 
-		ret->m_reference = ret;
-		return ret;
+	void ShyEngine::registerShader(ShaderProgram* toRegister)
+	{
+		m_shaders.push_back(toRegister);
 	}
 
 	Entity* ShyEngine::createEntity(const std::string& name/* = "NewEntity"*/)

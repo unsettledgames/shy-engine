@@ -4,31 +4,39 @@
 #include <GL/glew.h>
 #include <vector>
 #include <string>
-
-#include <screen/IGameScreen.h>
-#include <input/Input.h>
 #include <iostream>
-#include <util/Error.h>
-#include <rendering/ShaderProgram.h>
-#include <util/Utility.h>
-#include <rendering/Camera2D.h>
-#include <data/ResourcesManager.h>
-#include <input/EventBus.h>
-#include <timing/Timing.h>
 #include <cstdlib>
-#include <audio/AudioEngine.h>
 #include <box2d/box2d.h>
 #include <memory>
+
+#include <input/Input.h>
+#include <input/EventBus.h>
+
+#include <util/Error.h>
+#include <util/Utility.h>
+#include <timing/Timing.h>
+
+#include <data/ResourcesManager.h>
+
+#include <rendering/ShaderProgram.h>
+#include <rendering/Camera2D.h>
+
+#include <audio/AudioEngine.h>
 #include <physics/Box.h>
+
 #include <engine/System.h>
 #include <engine/Entity.h>
+#include <engine/modules/Sprite.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 
 // 0x2 is used by SDL_WINDOW_OPENGL
 enum WindowFlags { INVISIBLE = 0x1, FULLSCREEN = 0x4, BORDERLESS = 0x8 };
 
-namespace ShyEngine {
+namespace ShyEngine 
+{
+	class SpriteRenderer;
+
 	class ShyEngine
 	{
 		private:
@@ -41,13 +49,19 @@ namespace ShyEngine {
 			ShaderProgram m_colorShader;
 
 			AudioEngine m_audioEngine;
-			std::vector<System> m_systems;
+
+			std::vector<System*> m_systems;
 			std::vector<Entity> m_entities;
+			std::vector<ShaderProgram*> m_shaders;
+			SpriteRenderer* m_spriteRenderer;
 
 			int m_screenWidth;
 			int m_screenHeight;
 
 			void initShaders();
+			void updateShaders();
+
+			void initSystems();
 
 			void loop();
 
@@ -80,7 +94,9 @@ namespace ShyEngine {
 
 			int getScreenHeight() { return m_screenHeight; }
 
-			Module* createModule(ModuleTypes type);
+			void registerModule(Module* toRegister);
+			void registerShader(ShaderProgram* toRegister);
+
 			Entity* createEntity(const std::string& name = "NewEntity");
 	};
 }

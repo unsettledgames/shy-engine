@@ -5,7 +5,7 @@
 
 namespace ShyEngine
 {
-	class Transform : Module
+	class Transform : public Module
 	{
 		private:
 			glm::vec2 m_position;

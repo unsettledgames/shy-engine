@@ -4,12 +4,13 @@
 #include <vector>
 #include <util/Error.h>
 #include <algorithm>
-#include <engine/Module.h>
 #include <util/IdGenerator.h>
 #include <engine/ShyEngine.h>
 
 namespace ShyEngine
 {
+	class Module;
+
 	class Entity
 	{
 		friend class ShyEngine;

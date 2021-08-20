@@ -15,7 +15,7 @@ namespace ShyEngine
 {
 	class SpriteRenderer;
 
-	class Sprite : Module
+	class Sprite : public Module
 	{
 		friend class SpriteRenderer;
 		friend bool operator==(const Sprite& s1, const Sprite& s2);
@@ -48,5 +48,8 @@ namespace ShyEngine
 
 			bool checkCompatibility(std::vector<Module>& otherModules);
 			bool checkDependency(std::vector<Module>& otherModules);
+
+			void useShader();
+			void unuseShader();
 	};
 }
