@@ -9,19 +9,14 @@
 #include <input/Input.h>
 #include <iostream>
 #include <util/Error.h>
-#include <rendering/Sprite.h>
 #include <rendering/ShaderProgram.h>
 #include <util/Utility.h>
 #include <rendering/Camera2D.h>
-#include <rendering/SpriteBatch.h>
 #include <data/ResourcesManager.h>
 #include <input/EventBus.h>
 #include <timing/Timing.h>
 #include <cstdlib>
-#include <ui/SpriteFont.h>
 #include <audio/AudioEngine.h>
-#include <rendering/ParticleEngine2D.h>
-#include <rendering/ParticleBatch2D.h>
 #include <box2d/box2d.h>
 #include <memory>
 #include <physics/Box.h>
@@ -62,14 +57,13 @@ namespace ShyEngine {
 			Camera2D m_camera;
 			Camera2D m_hudCamera;
 
-			SpriteBatch m_spriteBatch;
-			SpriteBatch m_hudBatch;
-
 			FpsLimiter m_fpsLimiter;
+			/*
 			SpriteFont* m_spriteFont;
 
 			ParticleEngine2D m_particleEngine;
 			ParticleBatch2D* m_testParticleBatch = nullptr;
+			*/
 
 			std::unique_ptr<b2World> m_world;
 

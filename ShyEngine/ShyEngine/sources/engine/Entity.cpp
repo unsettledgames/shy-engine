@@ -31,23 +31,31 @@ namespace ShyEngine
 
 	void Entity::attachModule(Module& toAttach)
 	{
-		m_modules.push_back(toAttach);
+		if (toAttach.checkCompatibility(m_modules))
+			m_modules.push_back(toAttach);
 	}
 
 	int Entity::detachModule(Module& toRemove)
 	{
-		// Remove the module from the list, warn the user if it doesn't exist
-		auto modIndex = std::find(m_modules.begin(), m_modules.end(), toRemove);
 		int error = 0;
 
-		if (modIndex == m_modules.end())
+		// If other modules don't depend on the module I want to remove
+		if (toRemove.checkDependency(m_modules))
 		{
-			Error::runtime("Couldn't find the module " + toRemove.getName() + " on the entity " + m_name +
-				" while attempting to detach it");
-			error = -1;
+			// Remove the module from the list, warn the user if it doesn't exist
+			auto modIndex = std::find(m_modules.begin(), m_modules.end(), toRemove);
+
+			if (modIndex == m_modules.end())
+			{
+				Error::runtime("Couldn't find the module " + toRemove.getName() + " on the entity " + m_name +
+					" while attempting to detach it");
+				error = -1;
+			}
+			else
+				m_modules.erase(modIndex);
 		}
 		else
-			m_modules.erase(modIndex);
+			error = -2;
 
 		return error;
 	}
@@ -55,7 +63,7 @@ namespace ShyEngine
 	void Entity::detachModules(const std::string& name)
 	{
 		std::remove_if(m_modules.begin(), m_modules.end(),
-			[&](Module other) {return other.getName().compare(name) == 0; });
+			[&](Module other) {return other.getName().compare(name) == 0 && other.checkDependency(m_modules); });
 	}
 
 	bool operator==(const Entity& e1, const Entity& e2)

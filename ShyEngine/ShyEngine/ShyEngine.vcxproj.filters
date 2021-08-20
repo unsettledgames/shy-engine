@@ -85,6 +85,12 @@
     <Filter Include="Source Files\Engine\Modules">
       <UniqueIdentifier>{fd11b458-6b2d-4e75-8186-e8f08ff608aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Systems">
+      <UniqueIdentifier>{89808ebb-ee0d-4ba6-b6bf-f782cac05c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Systems">
+      <UniqueIdentifier>{ae425ca2-975f-48cd-afab-f897b6976b9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\audio\AudioEngine.h">
@@ -126,23 +132,8 @@
     <ClInclude Include="includes\rendering\Camera2D.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\rendering\ParticleBatch2D.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\rendering\ParticleEngine2D.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="includes\rendering\ShaderProgram.h">
       <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\rendering\Sprite.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\rendering\SpriteBatch.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\ui\SpriteFont.h">
-      <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="includes\IMainGame.h">
       <Filter>Header Files</Filter>
@@ -180,6 +171,21 @@
     <ClInclude Include="includes\engine\modules\Sprite.h">
       <Filter>Header Files\Engine\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="includes\engine\modules\Physics.h">
+      <Filter>Header Files\Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\modules\Transform.h">
+      <Filter>Header Files\Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\modules\Camera.h">
+      <Filter>Header Files\Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\systems\SpriteRenderer.h">
+      <Filter>Header Files\Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\util\Math.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -215,23 +221,8 @@
     <ClCompile Include="sources\rendering\EngineIO.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="sources\rendering\ParticleBatch2D.cpp">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\rendering\ParticleEngine2D.cpp">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="sources\rendering\ShaderProgram.cpp">
       <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\rendering\Sprite.cpp">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\rendering\SpriteBatch.cpp">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\ui\SpriteFont.cpp">
-      <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="sources\SpatialGrid.cpp">
       <Filter>Source Files</Filter>
@@ -259,6 +250,18 @@
     </ClCompile>
     <ClCompile Include="sources\engine\modules\Sprite.cpp">
       <Filter>Source Files\Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\Camera.cpp">
+      <Filter>Source Files\Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\Physics.cpp">
+      <Filter>Source Files\Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\Transform.cpp">
+      <Filter>Source Files\Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\systems\SpriteRenderer.cpp">
+      <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,8 +1,6 @@
 #include "ui/SpriteFont.h"
 #include <iostream>
 
-#include "rendering/SpriteBatch.h"
-
 
 int closestPow2(int i) {
     i--;

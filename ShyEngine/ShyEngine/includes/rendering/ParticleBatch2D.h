@@ -2,7 +2,6 @@
 
 #include <glm/glm.hpp>
 #include <data/Vertex.h>
-#include <rendering/SpriteBatch.h>
 #include <data/Texture.h>
 #include <functional>
 

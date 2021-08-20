@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 namespace ShyEngine
 {
@@ -25,6 +26,7 @@ namespace ShyEngine
 			Module* m_reference;
 			Entity* m_entity;
 			std::string m_name;
+			int m_id;
 
 		public:
 			Module(const std::string& name) { m_name = name; };
@@ -34,5 +36,10 @@ namespace ShyEngine
 
 			const std::string getName() { return m_name; }
 			Entity* getEntity() { return m_entity; }
+
+			virtual bool checkCompatibility(std::vector<Module>& otherModules) { return true; }
+			virtual bool checkDependency(std::vector<Module>& otherModules) { return true; }
+
+			int getId() { return m_id; }
 	};
 }

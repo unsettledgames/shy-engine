@@ -17,5 +17,6 @@ namespace ShyEngine
 
 			void addModule(Module toAdd);
 			int removeModule(Module toRemove);
+			void updateModules() {};
 	};
 }
