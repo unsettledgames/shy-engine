@@ -79,6 +79,12 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{79461551-55cc-423a-8569-7d8b1a1f4f2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Modules">
+      <UniqueIdentifier>{4c38ce14-f533-4018-b158-f3e52072c25c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Modules">
+      <UniqueIdentifier>{fd11b458-6b2d-4e75-8186-e8f08ff608aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\audio\AudioEngine.h">
@@ -171,6 +177,9 @@
     <ClInclude Include="includes\engine\ShyEngine.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="includes\engine\modules\Sprite.h">
+      <Filter>Header Files\Engine\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -247,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="sources\engine\ShyEngine.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\Sprite.cpp">
+      <Filter>Source Files\Engine\Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

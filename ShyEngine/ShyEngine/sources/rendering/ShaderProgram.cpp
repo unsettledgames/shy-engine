@@ -8,6 +8,17 @@ namespace ShyEngine {
 
 	}
 
+	ShaderProgram::ShaderProgram(const std::string& vertPath, const std::string& fragPath)
+	{
+		compileShaders(vertPath, fragPath);
+
+		addAttribute("vertPos");
+		addAttribute("vertColor");
+		addAttribute("vertUV");
+
+		linkShaders();
+	}
+
 	void ShaderProgram::setOrthoProjection(const std::string& uniform, glm::mat4 val)
 	{
 		GLint orthoProjLocation = getUniformLocation("orthoProj");

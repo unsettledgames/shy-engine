@@ -57,8 +57,6 @@ namespace ShyEngine {
 		glEnable(GL_BLEND);
 		// IMPROVEMENT: let the user decide blending mode
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		// Initializing shaders
-		initShaders();
 
 		// Initialize the systems
 		m_audioEngine.init();
@@ -77,6 +75,8 @@ namespace ShyEngine {
 		// TEST PHYSICS MANAGEMENT
 		// Create the physics world
 		m_world = std::make_unique<b2World>(b2Vec2(0.0f, -9.81f));
+
+		m_colorShader = ShaderProgram::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
 
 		// Create the ground
 		b2BodyDef groundBodyDef;
@@ -204,18 +204,9 @@ namespace ShyEngine {
 		m_hudBatch.render();
 	}
 
-	void ShyEngine::initShaders()
-	{
-		m_colorShader.compileShaders("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
-		m_colorShader.addAttribute("vertPos");
-		m_colorShader.addAttribute("vertColor");
-		m_colorShader.addAttribute("vertUV");
-		m_colorShader.linkShaders();
-	}
-
 	Module* ShyEngine::createModule(ModuleTypes name)
 	{
-		Module* ret;
+		Module* ret = nullptr;
 
 		switch (name)
 		{

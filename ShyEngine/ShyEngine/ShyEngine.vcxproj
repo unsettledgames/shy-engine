@@ -29,6 +29,7 @@
     <ClInclude Include="includes\data\Vertex.h" />
     <ClInclude Include="includes\engine\Entity.h" />
     <ClInclude Include="includes\engine\Module.h" />
+    <ClInclude Include="includes\engine\modules\Sprite.h" />
     <ClInclude Include="includes\engine\ShyEngine.h" />
     <ClInclude Include="includes\engine\System.h" />
     <ClInclude Include="includes\IMainGame.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="sources\data\ResourcesManager.cpp" />
     <ClCompile Include="sources\engine\Entity.cpp" />
     <ClCompile Include="sources\engine\Module.cpp" />
+    <ClCompile Include="sources\engine\modules\Sprite.cpp" />
     <ClCompile Include="sources\engine\ShyEngine.cpp" />
     <ClCompile Include="sources\engine\System.cpp" />
     <ClCompile Include="sources\input\EventBus.cpp" />

@@ -27,6 +27,7 @@ namespace ShyEngine {
 		void compileShader(const std::string& filePath, GLuint shaderID);
 
 	public:
+		ShaderProgram(const std::string& vertPath, const std::string& fragPath);
 		ShaderProgram();
 
 		~ShaderProgram();
