@@ -46,7 +46,6 @@ namespace ShyEngine
 			Input m_input;
 
 			GameState m_state = GameState::GAME_STATE_PAUSED;
-			ShaderProgram m_colorShader;
 
 			AudioEngine m_audioEngine;
 

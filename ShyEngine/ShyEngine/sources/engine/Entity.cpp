@@ -7,11 +7,12 @@ namespace ShyEngine
 	{
 		m_id = m_ids.get();
 		m_name = name;
+		m_modules.resize(0);
 	}
 
 	Module* Entity::getModule(const std::string& name)
 	{
-		for (auto _module : m_modules)
+		for (Module _module : this->m_modules)
 			if (_module.getName().compare(name) == 0)
 				return _module.m_reference;
 
@@ -30,25 +31,25 @@ namespace ShyEngine
 		return ret;
 	}
 
-	void Entity::attachModule(Module& toAttach)
+	void Entity::attachModule(Module* toAttach)
 	{
-		if (toAttach.checkCompatibility(m_modules))
-			m_modules.push_back(toAttach);
+		if (toAttach->checkCompatibility(m_modules))
+			m_modules.push_back(*toAttach);
 	}
 
-	int Entity::detachModule(Module& toRemove)
+	int Entity::detachModule(Module* toRemove)
 	{
 		int error = 0;
 
 		// If other modules don't depend on the module I want to remove
-		if (toRemove.checkDependency(m_modules))
+		if (toRemove->checkDependency(m_modules))
 		{
 			// Remove the module from the list, warn the user if it doesn't exist
-			auto modIndex = std::find(m_modules.begin(), m_modules.end(), toRemove);
+			auto modIndex = std::find(m_modules.begin(), m_modules.end(), *toRemove);
 
 			if (modIndex == m_modules.end())
 			{
-				Error::runtime("Couldn't find the module " + toRemove.getName() + " on the entity " + m_name +
+				Error::runtime("Couldn't find the module " + toRemove->getName() + " on the entity " + m_name +
 					" while attempting to detach it");
 				error = -1;
 			}

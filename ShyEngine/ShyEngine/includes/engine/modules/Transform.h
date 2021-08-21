@@ -15,9 +15,9 @@ namespace ShyEngine
 
 		public:
 			Transform();
-			Transform(glm::vec2 pos);
-			Transform(glm::vec2 pos, glm::vec2 scale);
-			Transform(glm::vec2 pos, glm::vec2 scale, float angle);
+			Transform(Entity* entity, glm::vec2 pos);
+			Transform(Entity* entity, glm::vec2 pos, glm::vec2 scale);
+			Transform(Entity* entity, glm::vec2 pos, glm::vec2 scale, float angle);
 
 			bool checkDependency(std::vector<Module>& otherModules);
 			bool checkCompatibility(std::vector<Module>& otherModules);

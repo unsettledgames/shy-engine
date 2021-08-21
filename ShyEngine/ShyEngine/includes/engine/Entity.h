@@ -7,6 +7,8 @@
 #include <util/IdGenerator.h>
 #include <engine/ShyEngine.h>
 
+// BUG: Id system is wrong, should be a member of the engine instead
+
 namespace ShyEngine
 {
 	class Module;
@@ -32,8 +34,8 @@ namespace ShyEngine
 			Module* getModule(const std::string& name);
 			std::vector<Module> getModules(const std::string& name);
 
-			void attachModule(Module& toAttach);
-			int detachModule(Module& toRemove);
+			void attachModule(Module* toAttach);
+			int detachModule(Module* toRemove);
 			void detachModules(const std::string& toRemove);
 
 			int getId() { return m_id; }

@@ -3,6 +3,12 @@
 
 namespace ShyEngine
 {
+	Module::Module(const std::string& name, Entity* entity) 
+	{ 
+		m_name = name; 
+		m_entity = entity;
+	}
+
 	bool Module::operator==(Module* other)
 	{
 		return other->m_reference == m_reference;

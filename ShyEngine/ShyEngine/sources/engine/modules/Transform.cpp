@@ -2,28 +2,28 @@
 
 namespace ShyEngine
 {
-	Transform::Transform() : Module("Transform")
+	Transform::Transform() : Module("Transform", nullptr)
 	{
 		m_position = glm::vec2(0, 0);
 		m_scale = glm::vec2(1, 1);
 		m_angleRotation = 0;
 	}
 
-	Transform::Transform(glm::vec2 pos) : Module("Transform")
+	Transform::Transform(Entity* entity, glm::vec2 pos) : Module("Transform", entity)
 	{
 		m_position = pos;
 		m_scale = glm::vec2(1, 1);
 		m_angleRotation = 0;
 	}
 
-	Transform::Transform(glm::vec2 pos, glm::vec2 scale) : Module("Transform")
+	Transform::Transform(Entity* entity, glm::vec2 pos, glm::vec2 scale) : Module("Transform", entity)
 	{
 		m_position = pos;
 		m_scale = scale;
 		m_angleRotation = 0;
 	}
 
-	Transform::Transform(glm::vec2 pos, glm::vec2 scale, float angle) : Module("Transform")
+	Transform::Transform(Entity* entity, glm::vec2 pos, glm::vec2 scale, float angle) : Module("Transform", entity)
 	{
 		m_position = pos;
 		m_scale = scale;

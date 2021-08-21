@@ -29,6 +29,9 @@ namespace ShyEngine
 	class SpriteRenderer : public System
 	{
 		private:
+			// Sprites to render
+			std::vector<Sprite> m_modulesToUpdate;
+
 			// Vertex buffer object
 			GLuint m_vbo = 0;
 			// Vertex attribute object
@@ -93,5 +96,7 @@ namespace ShyEngine
 			*	Renders all the sprites
 			*/
 			void render();
+
+			void addModule(Sprite toAdd);
 	};
 }

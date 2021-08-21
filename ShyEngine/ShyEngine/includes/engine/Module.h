@@ -29,7 +29,8 @@ namespace ShyEngine
 			int m_id;
 
 		public:
-			Module(const std::string& name) { m_name = name; };
+			Module() {}
+			Module(const std::string& name, Entity* entity);
 			~Module() {};
 
 			bool operator==(Module* other);

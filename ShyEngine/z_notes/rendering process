@@ -1,0 +1,43 @@
+Procedura di rendering (1 per frame)
+
+- setOrthoProj
+- useShader:
+	- glUseProgram
+	- glEnableVertexAttribArray
+	- glActiveTexture
+	- glUniform1i
+- glClearDepth
+- glClear
+- glClearColor
+- render
+	- glBindVertexArray
+	- glBindTexture
+	- glDrawArrays
+	- glBindVertexArray(0)
+- unuseShader:
+	- glUseProgram(0)
+	- glDisableVertexAttribArray
+	- glBindTexture(0)
+- swapWindow
+
+Vecchia procedura di rendering (1 per frame)
+
+useShader:
+	- glUseProgram
+	- glEnableVertexAttribArray
+	- glActiveTexture
+	- glUniform1i
+- setOrthoProj
+- glClearDepth
+- glClearDepth
+- glClearColor
+- render
+	- glBindVertexArray
+	- glBindTexture
+	- glDrawArrays
+	- glBindVertexArray
+- swapWindow
+- unuseShader:
+	- glUseProgram(0)
+	- glDisableVertexAttribArray
+	- glBindTexture(0)

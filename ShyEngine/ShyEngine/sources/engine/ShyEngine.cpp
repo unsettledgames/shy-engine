@@ -1,6 +1,13 @@
 #include <engine/ShyEngine.h>
 #include <engine/systems/SpriteRenderer.h>
 
+/**
+*	CAN'T DRAW STUFF ON SCREEN BUG
+* 
+*	- UVs are passed instead of the vertex position (should fix this one first of all)
+*	- The camera is fucked up and doesn't work at all. Probably something to do with when I send the matrix
+*/
+
 namespace ShyEngine {
 	ShyEngine::ShyEngine(unsigned int flags)
 	{
@@ -16,6 +23,7 @@ namespace ShyEngine {
 	void ShyEngine::initSystems()
 	{
 		m_spriteRenderer = new SpriteRenderer();
+		m_audioEngine.init();
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -65,26 +73,23 @@ namespace ShyEngine {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// Initialize the systems
-		m_audioEngine.init();
-		//m_spriteBatch.init();
-		//m_hudBatch.init();
+		initSystems();
+
+		/*m_spriteBatch.init();
+		m_hudBatch.init();
 		// Test font
-		//m_spriteFont = new SpriteFont("fonts/04.TTF", 16);
+		m_spriteFont = new SpriteFont("fonts/04.TTF", 16);
 		// Test SFX
 		m_audioEngine.play((Music&)ResourcesManager.getMusic("sfx/6th.mp3"), 1);
 
 		// Test particle system
-		/*
 		m_testParticleBatch = new ParticleBatch2D();
 		m_testParticleBatch->init(1000, 0.01f, ResourcesManager.getTexture("textures/particle.png"));
 		m_particleEngine.addParticleBatch(m_testParticleBatch);
-		*/
 
 		// TEST PHYSICS MANAGEMENT
 		// Create the physics world
 		m_world = std::make_unique<b2World>(b2Vec2(0.0f, -9.81f));
-
-		m_colorShader = ShaderProgram::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
 
 		// Create the ground
 		b2BodyDef groundBodyDef;
@@ -98,12 +103,10 @@ namespace ShyEngine {
 		// Create a few boxes
 		Box newBox;
 		newBox.init(m_world.get(), glm::vec2(0.0f, 14.0f), glm::vec2(15.0f, 15.0f));
-
+		*/
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;
 		Utility::printOpenGLVersion();
-
-		initSystems();
 	}
 
 	void ShyEngine::run()
@@ -170,7 +173,13 @@ namespace ShyEngine {
 
 				// TEST
 				if (m_input.getKeyDown(SDLK_w))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0, 0.5f));
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -0.5f));
+				if (m_input.getKeyDown(SDLK_s))
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 0.5f));
+				if (m_input.getKeyDown(SDLK_a))
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-0.5f, 0.0f));
+				if (m_input.getKeyDown(SDLK_d))
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.5f, 0.0f));
 
 				totalDeltaTime -= deltaTime;
 				currSimStep++;
@@ -182,19 +191,21 @@ namespace ShyEngine {
 
 	void ShyEngine::updateShaders()
 	{
+		/*
 		for (auto shader : m_shaders)
 		{
 			shader->setOrthoProjection("orthoProj", m_camera.getCameraMatrix());
 		}
+		*/
 	}
 
 	void ShyEngine::drawUI()
 	{
+		/*
+		
 		glm::mat4 projMatrix = m_hudCamera.getCameraMatrix();
 		GLint pUniform = m_colorShader.getUniformLocation("orthoProj");
 		glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projMatrix[0][0]);
-
-		/*
 		m_hudBatch.begin();
 
 		m_spriteFont->draw(m_hudBatch, "abcdefghijklmnopqrstuvwxyz1234567890", glm::vec2(0, 0), glm::vec2(1, 1), 1.0f,
@@ -207,10 +218,11 @@ namespace ShyEngine {
 
 	void ShyEngine::registerModule(Module* toRegister)
 	{
+		toRegister->m_reference = toRegister;
 		// REFACTOR: turn name into a type so it's less flexible
 		if (toRegister->getName().compare("Sprite") == 0)
 		{
-			m_spriteRenderer->addModule(*toRegister);
+			m_spriteRenderer->addModule(*(dynamic_cast<Sprite*>(toRegister)));
 		}
 	}
 

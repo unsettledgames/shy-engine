@@ -8,12 +8,13 @@ namespace ShyEngine
 		return s1.m_id == s2.m_id;
 	}
 
-	Sprite::Sprite() : Module("Sprite") 
+	Sprite::Sprite() : Module("Sprite", nullptr) 
 	{
 		init();
 	}
 
-	Sprite::Sprite(const std::string& texturePath, ShaderProgram& shader, ColorRGBA8 color) : Module("Sprite")
+	Sprite::Sprite(Entity* entity, const std::string& texturePath, ShaderProgram& shader, ColorRGBA8 color) : 
+		Module("Sprite", entity)
 	{
 		m_texture = ResourcesManager.getTexture(texturePath);
 		m_shader = shader;
@@ -22,8 +23,8 @@ namespace ShyEngine
 		init();
 	}
 
-	Sprite::Sprite(const std::string& texturePath, const std::string& vertPath, const std::string& fragPath,
-		ColorRGBA8 color) : Module("Sprite")
+	Sprite::Sprite(Entity* entity, const std::string& texturePath, const std::string& vertPath, 
+		const std::string& fragPath, ColorRGBA8 color) : Module("Sprite", entity)
 	{
 		m_texture = ResourcesManager.getTexture(texturePath);
 		m_shader = ShaderProgram::ShaderProgram(vertPath, fragPath);
@@ -38,6 +39,7 @@ namespace ShyEngine
 		glm::vec2 pos = transform.getPos();
 		glm::vec2 scale = transform.getScale();
 		float angle = transform.getAngle();
+		m_depth = 1;
 
 		// Get the corners
 		glm::vec2 halfSize(scale.x / 2.0f, scale.y / 2.0f);

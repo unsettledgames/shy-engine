@@ -37,10 +37,10 @@ namespace ShyEngine
 
 		public:
 			Sprite();
-			Sprite(const std::string& texturePath, ShaderProgram& shader, 
+			Sprite(Entity* entity, const std::string& texturePath, ShaderProgram& shader, 
 				ColorRGBA8 color = ColorRGBA8(255, 255, 255, 255));
-			Sprite(const std::string& texturePath, const std::string& vertPath, const std::string& fragPath, 
-				ColorRGBA8 color = ColorRGBA8(255, 255, 255, 255));
+			Sprite(Entity* entity, const std::string& texturePath, const std::string& vertPath, 
+				const std::string& fragPath, ColorRGBA8 color = ColorRGBA8(255, 255, 255, 255));
 
 			int attachShader(ShaderProgram& shader);
 			int attachTexture(Texture& texture);

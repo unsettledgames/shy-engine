@@ -11,25 +11,26 @@ namespace ShyEngine
 	{
 		Sprite* currSprite;
 
-		glClearDepth(1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0, 0, 1, 1);
-
 		// OPTIMIZABLE: sort sprites by shaders? Organize batches by texture + shader
 		// Rendering process
 		begin();
 
+		glClearDepth(1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0, 0, 1, 1);
+
+		m_modulesToUpdate[0].useShader();
+
 		for (auto _module : m_modulesToUpdate)
 		{
 			currSprite = dynamic_cast<Sprite*>(&_module);
-			
-			currSprite->useShader();
 			draw(currSprite);
-			currSprite->unuseShader();
 		}
 
 		end();
 		render();
+
+		m_modulesToUpdate[0].unuseShader();
 	}
 
 	void SpriteRenderer::begin(SpriteSortType sortType)
@@ -42,7 +43,7 @@ namespace ShyEngine
 	void SpriteRenderer::draw(Sprite* toDraw)
 	{
 		// OPTIMIZABLE: save the transform as well?
-		m_spritePointers.emplace_back(toDraw);
+		m_sprites.emplace_back(*toDraw);
 	}
 
 	void SpriteRenderer::end()
@@ -65,6 +66,7 @@ namespace ShyEngine
 		{
 			glBindTexture(GL_TEXTURE_2D, m_renderBatches[i].texture);
 			glDrawArrays(GL_TRIANGLES, m_renderBatches[i].offset, m_renderBatches[i].nVertices);
+			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
 		glBindVertexArray(0);
@@ -145,7 +147,7 @@ namespace ShyEngine
 		glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}	
+	}
 
 	void SpriteRenderer::sortSprites()
 	{
@@ -185,5 +187,10 @@ namespace ShyEngine
 	bool SpriteRenderer::compareTexture(Sprite* a, Sprite* b)
 	{
 		return a->m_texture.id < b->m_texture.id;
+	}
+
+	void SpriteRenderer::addModule(Sprite toAdd)
+	{
+		m_modulesToUpdate.push_back(toAdd);
 	}
 }

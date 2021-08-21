@@ -1,0 +1,2 @@
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\SampleGame.exe
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\SampleGame.pdb

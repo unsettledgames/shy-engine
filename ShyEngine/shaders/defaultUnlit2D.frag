@@ -1,8 +1,8 @@
 #version 130
 
+in vec2 fragUV;
 in vec4 fragColor;
 in vec2 fragPos;
-in vec2 fragUV;
 
 out vec4 finalFragColor;
 
@@ -11,7 +11,11 @@ uniform float time;
 
 void main()
 { 
-	vec4 texColor = texture(mainTexture, fragUV) * fragColor;
+	vec4 texColor = vec4(1,0,0,1);
+	texColor.xy = fragPos.xy; //texture(mainTexture, fragUV) * fragColor;
+	
+	// Useless
+	vec4 sas2 = texture(mainTexture, fragUV);
 	float sas = time;
 	
 	/*	finalFragColor = vec4(

@@ -46,6 +46,7 @@ namespace ShyEngine {
 
 		// Applying texture
 		GLuint textureLocation = getUniformLocation("mainTexture");
+		// ISSUE: why 0 and not the texture id?
 		glUniform1i(textureLocation, 0);
 
 		// Applying time
@@ -70,6 +71,7 @@ namespace ShyEngine {
 
 		GLint isLinked = 0;
 		glGetProgramiv(m_programID, GL_LINK_STATUS, (int*)&isLinked);
+		// All this stuff just to handler errors
 		if (isLinked != GL_TRUE)
 		{
 			GLint maxLength = 0;

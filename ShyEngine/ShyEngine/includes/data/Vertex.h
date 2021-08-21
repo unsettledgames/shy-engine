@@ -7,11 +7,23 @@
 
 namespace ShyEngine
 {
+	typedef struct _position
+	{
+		float x;
+		float y;
+	} Position;
+
+	typedef struct _uv
+	{
+		float u;
+		float v;
+	} UV;
+
 	struct Vertex
 	{
+		Position position;
 		ColorRGBA8 color;
-		glm::vec2 position;
-		glm::vec2 uv;
+		UV uv;
 
 		void setColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a)
 		{
@@ -26,8 +38,8 @@ namespace ShyEngine
 
 		void setUV(float u, float v)
 		{
-			uv.x = u;
-			uv.y = v;
+			uv.u = u;
+			uv.v = v;
 		}
 	};
 }
