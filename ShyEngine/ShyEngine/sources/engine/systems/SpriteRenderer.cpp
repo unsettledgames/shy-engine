@@ -66,7 +66,6 @@ namespace ShyEngine
 		{
 			glBindTexture(GL_TEXTURE_2D, m_renderBatches[i].texture);
 			glDrawArrays(GL_TRIANGLES, m_renderBatches[i].offset, m_renderBatches[i].nVertices);
-			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
 		glBindVertexArray(0);

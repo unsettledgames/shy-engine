@@ -6,6 +6,7 @@
 * 
 *	- UVs are passed instead of the vertex position (should fix this one first of all)
 *	- The camera is fucked up and doesn't work at all. Probably something to do with when I send the matrix
+*	- Textures are correctly passed, the problem is in the UVs
 */
 
 namespace ShyEngine {

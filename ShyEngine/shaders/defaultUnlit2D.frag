@@ -10,9 +10,9 @@ uniform sampler2D mainTexture;
 uniform float time;
 
 void main()
-{ 
-	vec4 texColor = vec4(1,0,0,1);
-	texColor.xy = fragPos.xy; //texture(mainTexture, fragUV) * fragColor;
+{
+	vec4 texColor = vec4(0,0,0,1);
+	texColor = texture(mainTexture, fragUV) * fragColor;
 	
 	// Useless
 	vec4 sas2 = texture(mainTexture, fragUV);

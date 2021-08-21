@@ -13,7 +13,7 @@ uniform mat4 orthoProj;
 void main()
 {
 	// Previous was gl_Position.xy = (orthoProj * vec4(vertPos, 0.0, 1.0)).xy;
-	gl_Position.xy = vertPos.xy; /*(orthoProj * vec4(vertPos, 0.0, 1.0)).xy;*/
+	gl_Position.xy = (orthoProj * vec4(vertPos, 0.0, 1.0)).xy;
 	gl_Position.z = 0.0;
 	gl_Position.w = 1.0;
 	
