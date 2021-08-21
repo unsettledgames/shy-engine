@@ -1,3 +1,2 @@
-﻿  Sprite.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Sprite.cpp(109,28): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
+﻿  ShyEngine.cpp
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

@@ -51,5 +51,7 @@ namespace ShyEngine
 
 			void useShader();
 			void unuseShader();
+
+			ShaderProgram* getShader() { return &m_shader; }
 	};
 }

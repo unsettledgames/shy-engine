@@ -3,6 +3,7 @@
 #include <engine/System.h>
 #include <engine/modules/Sprite.h>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 // OPTIMIZABLE: use the modulesToUpdate vector to keep track of the glyphs to draw
 namespace ShyEngine
@@ -75,7 +76,7 @@ namespace ShyEngine
 			/**
 			*	Renders all the sprites in the list of modules to update
 			*/
-			void updateModules();
+			void updateModules(glm::mat4 cameraMatrix);
 
 			/**
 			*	Marks the beginning of a rendering phase. Sets the sort type, initializes the process.

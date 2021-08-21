@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     engine.registerShader(&shader);
     test = engine.createEntity("Test entity");
 
-    testTransform = new ShyEngine::Transform(test, glm::vec2(0, 0), glm::vec2(1, 1));
+    testTransform = new ShyEngine::Transform(test, glm::vec2(0, 0), glm::vec2(200, 200));
     engine.registerModule(testTransform);
     test->attachModule(testTransform);
 

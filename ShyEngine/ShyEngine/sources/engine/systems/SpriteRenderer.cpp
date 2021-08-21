@@ -7,7 +7,7 @@ namespace ShyEngine
 		createVertexArray();
 	}
 
-	void SpriteRenderer::updateModules()
+	void SpriteRenderer::updateModules(glm::mat4 cameraMatrix)
 	{
 		Sprite* currSprite;
 
@@ -23,6 +23,7 @@ namespace ShyEngine
 
 		for (auto _module : m_modulesToUpdate)
 		{
+			m_modulesToUpdate[0].getShader()->setOrthoProjection("orthoProj", cameraMatrix);
 			currSprite = dynamic_cast<Sprite*>(&_module);
 			draw(currSprite);
 		}

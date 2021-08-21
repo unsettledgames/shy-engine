@@ -23,6 +23,7 @@ namespace ShyEngine {
 
 	void ShyEngine::initSystems()
 	{
+		m_camera.init(m_screenWidth, m_screenHeight);
 		m_spriteRenderer = new SpriteRenderer();
 		m_audioEngine.init();
 	}
@@ -113,8 +114,7 @@ namespace ShyEngine {
 	void ShyEngine::run()
 	{
 		this->m_state = GameState::GAME_STATE_RUNNING;
-
-		m_camera.init(m_screenWidth, m_screenHeight);
+		
 		m_hudCamera.init(m_screenWidth, m_screenHeight);
 		m_hudCamera.setPosition(glm::vec2(0, 0));
 
@@ -145,10 +145,10 @@ namespace ShyEngine {
 				m_input.processInput();
 
 				// Updating the shader values
-				updateShaders();
+				//updateShaders();
 
 				// Update loop for the sprite renderer
-				m_spriteRenderer->updateModules();
+				m_spriteRenderer->updateModules(m_camera.getCameraMatrix());
 
 				// Particle system test
 				/*
@@ -174,9 +174,9 @@ namespace ShyEngine {
 
 				// TEST
 				if (m_input.getKeyDown(SDLK_w))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -0.5f));
-				if (m_input.getKeyDown(SDLK_s))
 					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 0.5f));
+				if (m_input.getKeyDown(SDLK_s))
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -0.5f));
 				if (m_input.getKeyDown(SDLK_a))
 					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-0.5f, 0.0f));
 				if (m_input.getKeyDown(SDLK_d))
@@ -192,12 +192,10 @@ namespace ShyEngine {
 
 	void ShyEngine::updateShaders()
 	{
-		/*
 		for (auto shader : m_shaders)
 		{
 			shader->setOrthoProjection("orthoProj", m_camera.getCameraMatrix());
 		}
-		*/
 	}
 
 	void ShyEngine::drawUI()
