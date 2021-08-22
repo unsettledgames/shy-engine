@@ -186,12 +186,6 @@
     <ClInclude Include="includes\util\Math.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="includes\ui\SpriteFont.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\engine\modules\Text.h">
-      <Filter>Header Files\Engine\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="includes\engine\systems\TextRenderer.h">
       <Filter>Header Files\Engine\Systems</Filter>
     </ClInclude>
@@ -200,6 +194,12 @@
     </ClInclude>
     <ClInclude Include="includes\engine\systems\Renderer.h">
       <Filter>Header Files\Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\ui\Glyph.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\modules\Text.h">
+      <Filter>Header Files\Engine\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -278,14 +278,14 @@
     <ClCompile Include="sources\engine\systems\SpriteRenderer.cpp">
       <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="sources\ui\SpriteFont.cpp">
+    <ClCompile Include="sources\engine\systems\TextRenderer.cpp">
+      <Filter>Source Files\Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\ui\Glyph.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="sources\engine\modules\Text.cpp">
       <Filter>Source Files\Engine\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\engine\systems\TextRenderer.cpp">
-      <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

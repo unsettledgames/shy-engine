@@ -1,9 +1,50 @@
-﻿  ShyEngine.cpp
-  SpriteRenderer.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(99,2): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(95): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Sprite>::end(void)'
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(33): message : see reference to function template instantiation 'void ShyEngine::Renderer<ShyEngine::Sprite>::end(void)' being compiled
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\SpriteRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Sprite>' being compiled
+﻿  Text.cpp
+  ShyEngine.cpp
   TextRenderer.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(21,34): error C2061: syntax error: identifier 'Sprite'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(22,34): error C2061: syntax error: identifier 'Sprite'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(23,30): error C2061: syntax error: identifier 'Sprite'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(5,31): error C2084: function 'ShyEngine::TextRenderer::TextRenderer(void)' already has a body
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(17): message : see previous definition of '{ctor}'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(11,2): error C2509: 'updateModules': member function not declared in 'ShyEngine::TextRenderer'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(12): message : see declaration of 'ShyEngine::TextRenderer'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(40,2): error C2509: 'createRenderBatches': member function not declared in 'ShyEngine::TextRenderer'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(12): message : see declaration of 'ShyEngine::TextRenderer'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(97,89): error C3867: 'ShyEngine::TextRenderer::compareBackToFront': non-standard syntax; use '&' to create a pointer to member
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(97,9): error C2672: 'std::stable_sort': no matching overloaded function found
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(97,89): error C2780: 'void std::stable_sort(const _BidIt,const _BidIt)': expects 2 arguments - 3 provided
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\algorithm(7995): message : see declaration of 'std::stable_sort'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(102,89): error C3867: 'ShyEngine::TextRenderer::compareFrontToBack': non-standard syntax; use '&' to create a pointer to member
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(102,9): error C2672: 'std::stable_sort': no matching overloaded function found
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(102,89): error C2780: 'void std::stable_sort(const _BidIt,const _BidIt)': expects 2 arguments - 3 provided
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\algorithm(7995): message : see declaration of 'std::stable_sort'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(107,85): error C3867: 'ShyEngine::TextRenderer::compareTexture': non-standard syntax; use '&' to create a pointer to member
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(107,9): error C2672: 'std::stable_sort': no matching overloaded function found
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(107,85): error C2780: 'void std::stable_sort(const _BidIt,const _BidIt)': expects 2 arguments - 3 provided
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\algorithm(7995): message : see declaration of 'std::stable_sort'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(115,40): error C2065: 'Sprite': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(115,48): error C2065: 'a': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(115,51): error C2065: 'Sprite': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(115,59): error C2065: 'b': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(115,60): error C2761: 'bool ShyEngine::TextRenderer::compareFrontToBack(void)': redeclaration of member is not allowed
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(116,2): error C2448: 'ShyEngine::TextRenderer::compareFrontToBack': function-style initializer appears to be a function definition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(120,40): error C2065: 'Sprite': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(120,48): error C2065: 'a': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(120,51): error C2065: 'Sprite': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(120,59): error C2065: 'b': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(120,60): error C2761: 'bool ShyEngine::TextRenderer::compareBackToFront(void)': redeclaration of member is not allowed
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(121,2): error C2448: 'ShyEngine::TextRenderer::compareBackToFront': function-style initializer appears to be a function definition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(125,36): error C2065: 'Sprite': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(125,44): error C2065: 'a': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(125,47): error C2065: 'Sprite': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(125,55): error C2065: 'b': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(125,56): error C2761: 'bool ShyEngine::TextRenderer::compareTexture(void)': redeclaration of member is not allowed
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(126,2): error C2448: 'ShyEngine::TextRenderer::compareTexture': function-style initializer appears to be a function definition
+  Glyph.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\ui\Glyph.h(28,31): error C2065: 'uv': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\ui\Glyph.h(29,37): error C2065: 'destRect': undeclared identifier
+  SpriteFont.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\ui\SpriteFont.cpp(136,42): warning C4244: '*=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\ui\SpriteFont.cpp(296,38): error C2039: 'destRect': is not a member of 'ShyEngine::CharGlyph'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\ui\SpriteFont.h(38): message : see declaration of 'ShyEngine::CharGlyph'
   Generating Code...
-  ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

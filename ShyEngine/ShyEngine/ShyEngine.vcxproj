@@ -50,7 +50,7 @@
     <ClInclude Include="includes\screen\IGameScreen.h" />
     <ClInclude Include="includes\SpatialGrid.h" />
     <ClInclude Include="includes\timing\Timing.h" />
-    <ClInclude Include="includes\ui\SpriteFont.h" />
+    <ClInclude Include="includes\ui\Glyph.h" />
     <ClInclude Include="includes\util\Error.h" />
     <ClInclude Include="includes\util\IdGenerator.h" />
     <ClInclude Include="includes\util\Math.h" />
@@ -81,7 +81,7 @@
     <ClCompile Include="sources\screen\IMainGame.cpp" />
     <ClCompile Include="sources\SpatialGrid.cpp" />
     <ClCompile Include="sources\timing\Timing.cpp" />
-    <ClCompile Include="sources\ui\SpriteFont.cpp" />
+    <ClCompile Include="sources\ui\Glyph.cpp" />
     <ClCompile Include="sources\util\Error.cpp" />
     <ClCompile Include="sources\util\IdGenerator.cpp" />
     <ClCompile Include="sources\util\Utility.cpp" />

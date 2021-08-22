@@ -27,6 +27,7 @@
 #include <engine/System.h>
 #include <engine/Entity.h>
 #include <engine/modules/Sprite.h>
+#include <engine/systems/TextRenderer.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 
@@ -52,7 +53,9 @@ namespace ShyEngine
 			std::vector<System*> m_systems;
 			std::vector<Entity> m_entities;
 			std::vector<ShaderProgram*> m_shaders;
+
 			SpriteRenderer* m_spriteRenderer;
+			TextRenderer* m_textRenderer;
 
 			int m_screenWidth;
 			int m_screenHeight;
