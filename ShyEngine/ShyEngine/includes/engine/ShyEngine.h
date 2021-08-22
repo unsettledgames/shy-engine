@@ -58,7 +58,6 @@ namespace ShyEngine
 			int m_screenHeight;
 
 			void initShaders();
-			void updateShaders();
 
 			void initSystems();
 
@@ -71,9 +70,8 @@ namespace ShyEngine
 			Camera2D m_hudCamera;
 
 			FpsLimiter m_fpsLimiter;
-			/*
-			SpriteFont* m_spriteFont;
 
+			/*
 			ParticleEngine2D m_particleEngine;
 			ParticleBatch2D* m_testParticleBatch = nullptr;
 			*/

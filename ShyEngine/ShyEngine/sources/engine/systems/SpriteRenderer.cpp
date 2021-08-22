@@ -2,12 +2,12 @@
 
 namespace ShyEngine
 {
-	SpriteRenderer::SpriteRenderer() : System("SpriteRenderer")
+	SpriteRenderer::SpriteRenderer() : Renderer("SpriteRenderer")
 	{
 		createVertexArray();
 	}
 
-	void SpriteRenderer::updateModules(glm::mat4 cameraMatrix)
+	void SpriteRenderer::updateModules(ShaderData shaderData)
 	{
 		Sprite* currSprite;
 
@@ -15,15 +15,17 @@ namespace ShyEngine
 		// Rendering process
 		begin();
 
+		// REFACTOR: put this in the engine so they don't have to be repeated across Renderers
 		glClearDepth(1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0, 0, 1, 1);
 
+		// OPTIMIZABLE: use the correct shader lol
 		m_modulesToUpdate[0].useShader();
 
 		for (auto _module : m_modulesToUpdate)
 		{
-			m_modulesToUpdate[0].getShader()->setOrthoProjection("orthoProj", cameraMatrix);
+			m_modulesToUpdate[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 			currSprite = dynamic_cast<Sprite*>(&_module);
 			draw(currSprite);
 		}
@@ -32,70 +34,6 @@ namespace ShyEngine
 		render();
 
 		m_modulesToUpdate[0].unuseShader();
-	}
-
-	void SpriteRenderer::begin(SpriteSortType sortType)
-	{
-		m_sortType = sortType;
-		m_renderBatches.clear();
-		m_sprites.clear();
-	}
-
-	void SpriteRenderer::draw(Sprite* toDraw)
-	{
-		// OPTIMIZABLE: save the transform as well?
-		m_sprites.emplace_back(*toDraw);
-	}
-
-	void SpriteRenderer::end()
-	{
-		// Update pointers for sorting
-		m_spritePointers.resize(m_sprites.size());
-
-		for (int i = 0; i < m_sprites.size(); i++)
-			m_spritePointers[i] = &m_sprites[i];
-
-		sortSprites();
-		createRenderBatches();
-	}
-
-	void SpriteRenderer::render()
-	{
-		glBindVertexArray(m_vao);
-
-		for (unsigned int i = 0; i < m_renderBatches.size(); i++)
-		{
-			glBindTexture(GL_TEXTURE_2D, m_renderBatches[i].texture);
-			glDrawArrays(GL_TRIANGLES, m_renderBatches[i].offset, m_renderBatches[i].nVertices);
-		}
-
-		glBindVertexArray(0);
-	}
-
-	void SpriteRenderer::createVertexArray()
-	{
-		// Generate the vertex attribute array and the vertex buffer object
-		if (m_vao == 0)
-			glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
-
-		if (m_vbo == 0)
-			glGenBuffers(1, &m_vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-
-		// Enabling arrays
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
-
-		// Bind position
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-		// Bind color
-		glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
-		// Bind UVs
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
-
-		glBindVertexArray(0);
 	}
 
 	void SpriteRenderer::createRenderBatches()
@@ -187,10 +125,5 @@ namespace ShyEngine
 	bool SpriteRenderer::compareTexture(Sprite* a, Sprite* b)
 	{
 		return a->m_texture.id < b->m_texture.id;
-	}
-
-	void SpriteRenderer::addModule(Sprite toAdd)
-	{
-		m_modulesToUpdate.push_back(toAdd);
 	}
 }

@@ -13,6 +13,7 @@
 	class. Kinda ok but it should be done in a different class (something like Engine probably, in which we take care of SDL
 	initialization and the Engine components initialization). The screen management part should be some kind of Scene system
 	instead.
+- Add proper destructors
 
 Games:
 - Stress test with ball game

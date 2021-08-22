@@ -1,11 +1,14 @@
 #pragma once
 
-#include <engine/Module.h>
-#include <engine/Entity.h>
 #include <string>
+#include <vector>
+
+#include <engine/Module.h>
 
 namespace ShyEngine
 {
+	class Entity;
+
 	class System
 	{
 		protected:

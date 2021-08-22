@@ -82,7 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(SolutionDir)/ShyEngine/deps/include;$(SolutionDir)/ShyEngine;$(SolutionDir)/Headers;$(SolutionDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(SolutionDir)/ShyEngine/deps/include;C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes;$(SolutionDir)/ShyEngine;$(SolutionDir)/Headers;$(SolutionDir)deps/include/;$(VC_IncludePath)/Headers;$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps/lib;$(SolutionDir)Release;$(LibraryPath)</LibraryPath>
     <SourcePath>$(VC_SourcePath)/Sources;</SourcePath>
   </PropertyGroup>

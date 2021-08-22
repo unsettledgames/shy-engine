@@ -5,7 +5,6 @@
 #include <util/Error.h>
 #include <algorithm>
 #include <util/IdGenerator.h>
-#include <engine/ShyEngine.h>
 
 // BUG: Id system is wrong, should be a member of the engine instead
 

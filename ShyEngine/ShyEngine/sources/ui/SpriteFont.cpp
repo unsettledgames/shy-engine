@@ -198,7 +198,6 @@ namespace ShyEngine {
         }
     }
 
-    // The problem is probably here
     std::vector<int>* SpriteFont::createRows(GlyphData* rects, int rectsLength, int nRows, 
         int padding, int& rowWidth) 
     {
@@ -239,7 +238,7 @@ namespace ShyEngine {
         return rowList;
     }
 
-    // SAFE returns the size of a string
+    // returns the size of a string
     glm::vec2 SpriteFont::measure(const char* s) {
         glm::vec2 size(0, m_fontHeight);
         float cw = 0;
@@ -264,9 +263,6 @@ namespace ShyEngine {
         return size;
     }
 
-    /*
-        SAFE
-    */
     void SpriteFont::draw(SpriteBatch& batch, const char* text, glm::vec2 position, glm::vec2 scaling,
         float depth, ColorRGBA8 tint, Justification just)
     {
@@ -297,28 +293,11 @@ namespace ShyEngine {
                 // Glyph starts from textpos, size is the size of the glyph with scaling applied to it
                 glm::vec4 destRect(textPos, m_glyphs[glyphIndex].size * scaling);
                 // Draw the glyph
-                batch.draw(destRect, m_glyphs[glyphIndex].uvRect, m_texID, depth, tint);
+                //batch.draw(destRect, m_glyphs[glyphIndex].uvRect, m_texID, depth, tint);
                 // Basically move the cursor
                 textPos.x += m_glyphs[glyphIndex].size.x * scaling.x;
             }
         }
-        /*
-        SDL_Rect pos;
-
-        pos.x = position.x;
-        pos.y = position.y;
-        //    - Render sulla surface
-        //    - Blit sulla surface della finestra (https://wiki.libsdl.org/SDL_GetWindowSurface)
-        // Render text on a surface
-        SDL_Surface* glyphSurface = TTF_RenderUNICODE_Blended(_currFont, (const Uint16*)s, tint.getSDLColor());
-
-        // Blit that surface onto the window
-        SDL_BlitSurface(glyphSurface, NULL, SDL_GetWindowSurface(window), NULL);
-        SDL_FreeSurface(glyphSurface);
-
-        SDL_Renderer* renderer = SDL_GetRenderer(window);
-        SDL_RenderPresent(renderer);
-        */
     }
 
 }

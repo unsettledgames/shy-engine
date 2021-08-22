@@ -1,6 +1,4 @@
-﻿  Generating code
-  0 of 1341 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  UnsettledEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\SampleGame.exe
+﻿  MainGame.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'

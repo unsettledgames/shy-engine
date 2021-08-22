@@ -1,2 +1,9 @@
 ﻿  ShyEngine.cpp
+  SpriteRenderer.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(99,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(95): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Sprite>::end(void)'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(33): message : see reference to function template instantiation 'void ShyEngine::Renderer<ShyEngine::Sprite>::end(void)' being compiled
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\SpriteRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Sprite>' being compiled
+  TextRenderer.cpp
+  Generating Code...
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

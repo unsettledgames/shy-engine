@@ -1,13 +1,7 @@
 #include <engine/ShyEngine.h>
-#include <engine/systems/SpriteRenderer.h>
 
-/**
-*	CAN'T DRAW STUFF ON SCREEN BUG
-* 
-*	- UVs are passed instead of the vertex position (should fix this one first of all)
-*	- The camera is fucked up and doesn't work at all. Probably something to do with when I send the matrix
-*	- Textures are correctly passed, the problem is in the UVs
-*/
+#include <engine/systems/Renderer.h>
+#include <engine/systems/SpriteRenderer.h>
 
 namespace ShyEngine {
 	ShyEngine::ShyEngine(unsigned int flags)
@@ -123,6 +117,9 @@ namespace ShyEngine {
 
 	void ShyEngine::loop()
 	{
+		// Debugger time
+		static int debugTime = 0;
+
 		// Delta time
 		static int frameCounter = 1;
 		const int MAX_SIM_STEPS = 6;
@@ -140,15 +137,13 @@ namespace ShyEngine {
 			while (totalDeltaTime > 0.0f && currSimStep < MAX_SIM_STEPS)
 			{
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
+				ShaderData shaderData = { m_camera.getCameraMatrix() };
 
 				// Processing input for this frame
 				m_input.processInput();
 
-				// Updating the shader values
-				//updateShaders();
-
 				// Update loop for the sprite renderer
-				m_spriteRenderer->updateModules(m_camera.getCameraMatrix());
+				m_spriteRenderer->updateModules(shaderData);
 
 				// Particle system test
 				/*
@@ -186,15 +181,11 @@ namespace ShyEngine {
 				currSimStep++;
 			}
 
+			if (debugTime % 100 == 0)
+				std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;
 			m_fpsLimiter.end();
-		}
-	}
 
-	void ShyEngine::updateShaders()
-	{
-		for (auto shader : m_shaders)
-		{
-			shader->setOrthoProjection("orthoProj", m_camera.getCameraMatrix());
+			debugTime++;
 		}
 	}
 

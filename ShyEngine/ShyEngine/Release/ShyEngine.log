@@ -1,2 +1,92 @@
-﻿  IMainGame.cpp
-  ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\ShyEngine.lib
+﻿  Entity.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\Entity.cpp(67,8): warning C4834: discarding return value of function with 'nodiscard' attribute
+  Module.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'
+  Sprite.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Sprite.cpp(109,28): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
+  ShyEngine.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(6,2): error C2011: 'ShyEngine::SpriteSortType': 'enum' type redefinition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(5): message : see declaration of 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(14,2): error C2011: 'ShyEngine::ShaderData': 'struct' type redefinition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(13): message : see declaration of 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(19,2): error C2011: 'ShyEngine::RenderBatch': 'class' type redefinition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(18): message : see declaration of 'ShyEngine::RenderBatch'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\ShyEngine.cpp(138,16): error C2079: 'shaderData' uses undefined struct 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\ShyEngine.cpp(138,58): error C2440: 'initializing': cannot convert from 'glm::mat4' to 'int'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\ShyEngine.cpp(138,58): message : Reason: cannot convert from 'glm::mat4' to 'int'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\ShyEngine.cpp(138,55): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\ShyEngine.cpp(144,47): error C2664: 'void ShyEngine::SpriteRenderer::updateModules(ShyEngine::ShaderData)': cannot convert argument 1 from 'int' to 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\ShyEngine.cpp(144,47): message : use of undefined type 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(13,9): message : see declaration of 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\SpriteRenderer.h(40,9): message : see declaration of 'ShyEngine::SpriteRenderer::updateModules'
+  System.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'
+  Renderer.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(15,3): error C2653: 'glm': is not a class or namespace name
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(15,25): error C3646: 'cameraMatrix': unknown override specifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(15,25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\Renderer.cpp(35,3): error C3861: 'sortSprites': identifier not found
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\Renderer.cpp(35,14): message : 'sortSprites': function declaration must be available as none of the arguments depend on a template parameter
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\Renderer.cpp(36,3): error C3861: 'createRenderBatches': identifier not found
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\Renderer.cpp(36,22): message : 'createRenderBatches': function declaration must be available as none of the arguments depend on a template parameter
+  SpriteRenderer.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(15,3): error C2653: 'glm': is not a class or namespace name
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(15,25): error C3646: 'cameraMatrix': unknown override specifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(15,25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C2143: syntax error: missing ';' before '*'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\ShyEngine.h(73,28): error C2238: unexpected token(s) preceding ';'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(6,2): error C2011: 'ShyEngine::SpriteSortType': 'enum' type redefinition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(5): message : see declaration of 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(14,2): error C2011: 'ShyEngine::ShaderData': 'struct' type redefinition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(13): message : see declaration of 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(19,2): error C2011: 'ShyEngine::RenderBatch': 'class' type redefinition
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(18): message : see declaration of 'ShyEngine::RenderBatch'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(10,23): error C2027: use of undefined type 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(13): message : see declaration of 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(45,57): error C2027: use of undefined type 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(5): message : see declaration of 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(45,1): error C2065: 'TEXTURE': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(28,80): error C2027: use of undefined type 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(13): message : see declaration of 'ShyEngine::ShaderData'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(28,93): error C2660: 'ShyEngine::ShaderProgram::setOrthoProjection': function does not take 1 arguments
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\rendering\ShaderProgram.h(43,8): message : see declaration of 'ShyEngine::ShaderProgram::setOrthoProjection'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(69,27): error C2027: use of undefined type 'ShyEngine::RenderBatch'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(18): message : see declaration of 'ShyEngine::RenderBatch'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(95,25): error C2027: use of undefined type 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(5): message : see declaration of 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(95,38): error C2065: 'BACK_TO_FRONT': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(95,38): error C2131: expression did not evaluate to a constant
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(95,38): message : a non-constant (sub-)expression was encountered
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(100,25): error C2027: use of undefined type 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(5): message : see declaration of 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(100,38): error C2065: 'FRONT_TO_BACK': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(100,38): error C2131: expression did not evaluate to a constant
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(100,38): message : a non-constant (sub-)expression was encountered
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(105,25): error C2027: use of undefined type 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\data\RenderData.h(5): message : see declaration of 'ShyEngine::SpriteSortType'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(105,32): error C2065: 'TEXTURE': undeclared identifier
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(105,32): error C2131: expression did not evaluate to a constant
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(105,32): message : a non-constant (sub-)expression was encountered
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(95,2): error C2051: case expression not constant
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(100,2): error C2051: case expression not constant
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(105,2): error C2051: case expression not constant
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\SpriteRenderer.cpp(112,3): warning C4065: switch statement contains 'default' but no 'case' labels
+  SpriteFont.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\ui\SpriteFont.cpp(136,42): warning C4244: '*=': conversion from 'float' to 'unsigned char', possible loss of data

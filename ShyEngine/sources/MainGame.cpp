@@ -17,15 +17,23 @@ int main(int argc, char** argv)
     
     shader = ShyEngine::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
     engine.registerShader(&shader);
-    test = engine.createEntity("Test entity");
+    
 
-    testTransform = new ShyEngine::Transform(test, glm::vec2(0, 0), glm::vec2(200, 200));
-    engine.registerModule(testTransform);
-    test->attachModule(testTransform);
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            test = engine.createEntity("Test entity");
 
-    testSprite = new ShyEngine::Sprite(test, "textures/Alice.png", shader);
-    engine.registerModule(testSprite);
-    test->attachModule(testSprite);
+            testTransform = new ShyEngine::Transform(test, glm::vec2(100*i, 100*j), glm::vec2(200, 200));
+            engine.registerModule(testTransform);
+            test->attachModule(testTransform);
+
+            testSprite = new ShyEngine::Sprite(test, "textures/Alice.png", shader);
+            engine.registerModule(testSprite);
+            test->attachModule(testSprite);
+        }
+    }
 
     engine.run();
 

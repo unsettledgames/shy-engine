@@ -1,3 +1,4 @@
+#include <engine/Entity.h>
 #include <engine/System.h>
 #include <util/Error.h>
 
