@@ -94,36 +94,21 @@ namespace ShyEngine
 		{
 			case SpriteSortType::BACK_TO_FRONT:
 			{
-				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), compareBackToFront);
+				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareBackToFront);
 				break;
 			}
 			case SpriteSortType::FRONT_TO_BACK:
 			{
-				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), compareFrontToBack);
+				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareFrontToBack);
 				break;
 			}
 			case SpriteSortType::TEXTURE:
 			{
-				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), compareTexture);
+				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareTexture);
 				break;
 			}
 			default:
 				break;
 		}
-	}
-
-	bool SpriteRenderer::compareFrontToBack(Sprite* a, Sprite* b)
-	{
-		return a->m_depth < b->m_depth;
-	}
-
-	bool SpriteRenderer::compareBackToFront(Sprite* a, Sprite* b)
-	{
-		return a->m_depth > b->m_depth;
-	}
-
-	bool SpriteRenderer::compareTexture(Sprite* a, Sprite* b)
-	{
-		return a->m_texture.id < b->m_texture.id;
-	}
+	}	
 }

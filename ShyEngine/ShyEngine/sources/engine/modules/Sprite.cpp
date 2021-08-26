@@ -13,6 +13,15 @@ namespace ShyEngine
 		init();
 	}
 
+	Sprite::Sprite(Entity* entity, Texture& texture, ShaderProgram& shader, ColorRGBA8 color) : Module("Sprite", entity)
+	{
+		m_texture = texture;
+		m_shader = shader;
+		m_color = color;
+
+		init();
+	}
+
 	Sprite::Sprite(Entity* entity, const std::string& texturePath, ShaderProgram& shader, ColorRGBA8 color) : 
 		Module("Sprite", entity)
 	{
@@ -112,5 +121,20 @@ namespace ShyEngine
 	void Sprite::unuseShader()
 	{
 		m_shader.unuse();
+	}
+
+	bool Sprite::compareFrontToBack(Sprite* a, Sprite* b)
+	{
+		return a->m_depth < b->m_depth;
+	}
+
+	bool Sprite::compareBackToFront(Sprite* a, Sprite* b)
+	{
+		return a->m_depth > b->m_depth;
+	}
+
+	bool Sprite::compareTexture(Sprite* a, Sprite* b)
+	{
+		return a->m_texture.id < b->m_texture.id;
 	}
 }

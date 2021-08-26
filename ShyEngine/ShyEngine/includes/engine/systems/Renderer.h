@@ -6,6 +6,7 @@
 #include <engine/System.h>
 #include <data/RenderData.h>
 #include <data/Vertex.h>
+#include <engine/modules/Sprite.h>
 
 #include <vector>
 #include <string>
@@ -22,9 +23,9 @@ namespace ShyEngine
 			std::vector<T> m_modulesToUpdate;
 
 			// Used for sorting
-			std::vector<T*> m_spritePointers;
+			std::vector<Sprite*> m_spritePointers;
 			// Actual sprites
-			std::vector<T> m_sprites;
+			std::vector<Sprite> m_sprites;
 			// List of batches
 			std::vector<RenderBatch> m_renderBatches;
 
@@ -96,7 +97,7 @@ namespace ShyEngine
 				// Update pointers for sorting
 				m_spritePointers.resize(m_sprites.size());
 
-				for (int i = 0; i < m_sprites.size(); i++)
+				for (unsigned int i = 0; i < m_sprites.size(); i++)
 					m_spritePointers[i] = &m_sprites[i];
 
 				sortSprites();

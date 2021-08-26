@@ -19,9 +19,6 @@
 
 #pragma once
 
-#ifndef Text_h__
-#define Text_h__
-
 #include <map>
 #include <vector>
 #include <string>
@@ -30,6 +27,7 @@
 #include <SDLttf2/SDL_ttf.h>
 #include <SDL/SDL.h>
 
+#include <engine/modules/Sprite.h>
 #include <engine/Entity.h>
 #include <engine/Module.h>
 #include <rendering/ShaderProgram.h>
@@ -66,12 +64,19 @@ namespace ShyEngine {
 
     class Text : public Module 
     {
+        friend bool operator==(const Text& s1, const Text& s2);
+
         private:
             
             TTF_Font* m_currFont;
             CharGlyph* m_glyphs;
             ShaderProgram m_shader;
 
+            std::string m_text;
+            ColorRGBA8 m_color;
+            Justification m_justification;
+
+            float m_depth;
             int m_regStart, m_nCharacters;
             int m_fontHeight;
 
@@ -82,27 +87,25 @@ namespace ShyEngine {
 
         public:
             Text(Entity* entity, const std::string& font, int size, unsigned char cs, unsigned char ce);
-            Text(Entity* entity, const std::string& font, ShaderProgram shader, int size) :
-                Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR) {
-            }
-            Text(Entity* entity, const std::string& font, const std::string& vertShader, const std::string& fragShader, int size) :
-                Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR) {
-            }
+            Text(Entity* entity, const std::string& font, ShaderProgram shader, int size, float depth, std::string& text);
+            Text(Entity* entity, const std::string& font, const std::string& vertShader, const std::string& fragShader,
+                int size, float depth, std::string& text);
+
+            void setText(std::string& text) { m_text = text; }
+            std::string getText() { return m_text; }
+
             /// Destroys the font resources
             void dispose();
 
-            int getFontHeight() const {
-                return m_fontHeight;
-            }
+            int getFontHeight() const { return m_fontHeight; }
+            float getDepth() const { return m_depth; }
+            GLuint getTextureId() const { return m_texID; }
 
             /// Measures the dimensions of the text
-            glm::vec2 measure(const char* s);
+            glm::vec2 measure(const std::string& s);
 
             /// Draws using a spritebatch
-            std::vector<CharGlyph> draw(SpriteBatch& batch, const char* s, glm::vec2 position, glm::vec2 scaling,
-                float depth, ColorRGBA8 tint, Justification just = Justification::LEFT);
+            std::vector<Sprite> getSprites();
     };
 
 }
-
-#endif // SpriteFont_h__

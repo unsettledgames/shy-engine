@@ -1,25 +1,44 @@
 #include <engine/modules/Text.h>
 #include <iostream>
 
+namespace ShyEngine 
+{
+    #define MAX_TEXTURE_RES 4096
 
-int closestPow2(int i) {
-    i--;
-    int pi = 1;
-    while (i > 0) {
-        i >>= 1;
-        pi <<= 1;
+    bool operator==(const Text& s1, const Text& s2)
+    {
+        return s1.m_id == s2.m_id;
     }
-    return pi;
-}
 
-#define MAX_TEXTURE_RES 4096
-
-namespace ShyEngine {
+    int closestPow2(int i) {
+        i--;
+        int pi = 1;
+        while (i > 0) {
+            i >>= 1;
+            pi <<= 1;
+        }
+        return pi;
+    }
 
     Text::Text(Entity* entity, const std::string& font, int size, unsigned char startChar, unsigned char endChar) : 
         Module("Text", entity)
     {
-        
+        init(font, size, startChar, endChar);
+    }
+
+    Text::Text(Entity* entity, const std::string& font, ShaderProgram shader, int size, float depth, std::string& text) :
+        Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR) 
+    {
+        m_depth = depth;
+        m_text = text;
+    }
+
+    Text::Text(Entity* entity, const std::string& font, const std::string& vertShader, const std::string& fragShader,
+        int size, float depth, std::string& text) :
+        Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR)
+    {
+        m_depth = depth;
+        m_text = text;
     }
 
     void Text::init(const std::string& font, int size, unsigned int startChar, unsigned int endChar)
@@ -32,7 +51,7 @@ namespace ShyEngine {
         m_currFont = TTF_OpenFont(font.c_str(), size);
         if (m_currFont == nullptr)
         {
-            fprintf(stderr, "Failed to open TTF font %s\n", font);
+            fprintf(stderr, "Failed to open TTF font %s\n", font.c_str());
             throw 281;
         }
 
@@ -104,7 +123,7 @@ namespace ShyEngine {
         // Can a bitmap font be made?
         if (!bestPartition)
         {
-            fprintf(stderr, "Failed to Map TTF font %s to texture. Try lowering resolution.\n", font);
+            fprintf(stderr, "Failed to Map TTF font %s to texture. Try lowering resolution.\n", font.c_str());
             throw 282;
         }
 
@@ -245,7 +264,7 @@ namespace ShyEngine {
     }
 
     // returns the size of a string
-    glm::vec2 Text::measure(const char* s) {
+    glm::vec2 Text::measure(const std::string& s) {
         glm::vec2 size(0, m_fontHeight);
         float cw = 0;
         for (int si = 0; s[si] != 0; si++) {
@@ -269,21 +288,28 @@ namespace ShyEngine {
         return size;
     }
 
-    std::vector<CharGlyph>  Text::draw(SpriteBatch& batch, const char* text, glm::vec2 position, glm::vec2 scaling,
-        float depth, ColorRGBA8 tint, Justification just)
+    std::vector<Sprite> Text::getSprites()
     {
-        std::vector<CharGlyph> ret;
+        Transform* transform = (Transform*)m_entity->getModule("Transform");
+        glm::vec2 position = transform->getPos();
+        glm::vec2 scaling = transform->getScale();
+
+        std::vector<Sprite> ret;
+        Sprite currSprite;
+        Texture currTexture;
+
+        currTexture.id = m_texID;
 
         glm::vec2 textPos = position;
         // Apply justification
-        if (just == Justification::MIDDLE)
-            textPos.x -= measure(text).x * scaling.x / 2;
-        else if (just == Justification::RIGHT)
-            textPos.x -= measure(text).x * scaling.x;
+        if (m_justification == Justification::MIDDLE)
+            textPos.x -= measure(m_text).x * scaling.x / 2;
+        else if (m_justification == Justification::RIGHT)
+            textPos.x -= measure(m_text).x * scaling.x;
 
-        for (int strIndex = 0; text[strIndex] != 0; strIndex++)
+        for (int strIndex = 0; m_text[strIndex] != 0; strIndex++)
         {
-            unsigned char currChar = text[strIndex];
+            unsigned char currChar = m_text[strIndex];
             // Returning to start of the line, moving to new line
             if (currChar == '\n')
             {
@@ -298,15 +324,19 @@ namespace ShyEngine {
                 if (glyphIndex < 0 || glyphIndex >= m_nCharacters)
                     glyphIndex = m_nCharacters;
 
+                // Yes that's great now how tf do I set the transform oh god oh god oh god unregistered transform?
+                currSprite = Sprite(nullptr, currTexture, m_shader, m_color);
+
                 // Glyph starts from textpos, size is the size of the glyph with scaling applied to it
                 //m_glyphs[glyphIndex].destRect = glm::vec4(textPos, m_glyphs[glyphIndex].size * scaling);
                 // Draw the glyph
-                ret.push_back(m_glyphs[glyphIndex]);
+                ret.push_back(currSprite);
                 //batch.draw(destRect, m_glyphs[glyphIndex].uvRect, m_texID, depth, tint);
                 // Basically move the cursor
                 textPos.x += m_glyphs[glyphIndex].size.x * scaling.x;
             }
         }
-    }
 
+        return ret;
+    }
 }

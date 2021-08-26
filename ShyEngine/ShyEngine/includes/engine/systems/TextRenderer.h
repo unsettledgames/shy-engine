@@ -2,24 +2,27 @@
 
 #include <vector>
 
-#include <ui/Glyph.h>
+#include <engine/modules/Sprite.h>
 #include <engine/modules/Text.h>
 #include <engine/systems/Renderer.h>
 #include <data/RenderData.h>
+#include <algorithm>
 
 namespace ShyEngine
 {
-	class TextRenderer : public Renderer<Glyph>
+	class TextRenderer : public Renderer<Text>
 	{
 		private:
+			std::vector<Text*> m_texts;
 
 		public:
-			TextRenderer() : Renderer<Text>("TextRenderer"){}
+			TextRenderer();
 			~TextRenderer() {}
 
 			void sortSprites();
-			bool compareFrontToBack(Glyph* a, Glyph* b);
-			bool compareBackToFront(Glyph* a, Glyph* b);
-			bool compareTexture(Glyph* a, Glyph* b);
+			void draw(Text* toDraw);
+			void updateModules(ShaderData shaderData);
+			void createRenderBatches();
+			void addSprites(std::vector<Sprite> toAdd);
 	};
 }

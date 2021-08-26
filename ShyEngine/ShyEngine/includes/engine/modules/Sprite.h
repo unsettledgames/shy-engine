@@ -14,10 +14,13 @@
 namespace ShyEngine
 {
 	class SpriteRenderer;
+	class TextRenderer;
 
 	class Sprite : public Module
 	{
 		friend class SpriteRenderer;
+		friend class TextRenderer;
+
 		friend bool operator==(const Sprite& s1, const Sprite& s2);
 
 		private:
@@ -37,6 +40,8 @@ namespace ShyEngine
 
 		public:
 			Sprite();
+			Sprite(Entity* entity, Texture& texture, ShaderProgram& shader,
+				ColorRGBA8 color = ColorRGBA8(255, 255, 255, 255));
 			Sprite(Entity* entity, const std::string& texturePath, ShaderProgram& shader, 
 				ColorRGBA8 color = ColorRGBA8(255, 255, 255, 255));
 			Sprite(Entity* entity, const std::string& texturePath, const std::string& vertPath, 
@@ -53,5 +58,11 @@ namespace ShyEngine
 			void unuseShader();
 
 			ShaderProgram* getShader() { return &m_shader; }
+			/**
+			*	Comparison functions used to sort the sprites
+			*/
+			static bool compareFrontToBack(Sprite* a, Sprite* b);
+			static bool compareBackToFront(Sprite* a, Sprite* b);
+			static bool compareTexture(Sprite* a, Sprite* b);
 	};
 }

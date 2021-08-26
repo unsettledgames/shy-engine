@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-// OPTIMIZABLE: use the modulesToUpdate vector to keep track of the glyphs to draw
+// OPTIMIZABLE: use the modulesToUpdate vector to keep track of the glyphs to draw instead of using m_sprites
 namespace ShyEngine
 {
 	class SpriteRenderer : public Renderer<Sprite>
@@ -23,13 +23,6 @@ namespace ShyEngine
 			*	Sorts the sprites depending on their texture
 			*/
 			void sortSprites();
-
-			/**
-			*	Comparison functions used to sort the sprites
-			*/
-			static bool compareFrontToBack(Sprite* a, Sprite* b);
-			static bool compareBackToFront(Sprite* a, Sprite* b);
-			static bool compareTexture(Sprite* a, Sprite* b);
 
 		public:
 			SpriteRenderer();
