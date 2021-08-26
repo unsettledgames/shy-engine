@@ -1,3 +1,6 @@
-﻿  Glyph.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\ui\Glyph.cpp(74,28): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
+﻿  ShyEngine.cpp
+  SpriteRenderer.cpp
+  TextRenderer.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(12,9): warning C4101: 'currText': unreferenced local variable
+  Generating Code...
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

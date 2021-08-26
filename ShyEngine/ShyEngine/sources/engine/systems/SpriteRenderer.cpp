@@ -38,7 +38,7 @@ namespace ShyEngine
 
 	void SpriteRenderer::createRenderBatches()
 	{
-		if (m_sprites.empty())
+		if (m_renderables.empty())
 			return;
 
 		unsigned int currentVert = 0;
@@ -46,34 +46,34 @@ namespace ShyEngine
 
 		int offset = 0;
 		std::vector<Vertex> vertices;
-		vertices.resize(m_sprites.size() * 6);
+		vertices.resize(m_renderables.size() * 6);
 
 		// Putting the first sprite so that it can be used as a comparison in the next iterations
-		m_renderBatches.emplace_back(offset, 6, m_spritePointers[0]->m_texture.id);
-		vertices[currentVert++] = m_spritePointers[0]->m_topLeft;
-		vertices[currentVert++] = m_spritePointers[0]->m_bottomLeft;
-		vertices[currentVert++] = m_spritePointers[0]->m_bottomRight;
-		vertices[currentVert++] = m_spritePointers[0]->m_bottomRight;
-		vertices[currentVert++] = m_spritePointers[0]->m_topRight;
-		vertices[currentVert++] = m_spritePointers[0]->m_topLeft;
+		m_renderBatches.emplace_back(offset, 6, m_renderablesPointers[0]->m_texture.id);
+		vertices[currentVert++] = m_renderablesPointers[0]->m_topLeft;
+		vertices[currentVert++] = m_renderablesPointers[0]->m_bottomLeft;
+		vertices[currentVert++] = m_renderablesPointers[0]->m_bottomRight;
+		vertices[currentVert++] = m_renderablesPointers[0]->m_bottomRight;
+		vertices[currentVert++] = m_renderablesPointers[0]->m_topRight;
+		vertices[currentVert++] = m_renderablesPointers[0]->m_topLeft;
 
 		offset += 6;
 
 		// Adding all the sprites
-		for (currentGlyph = 1; currentGlyph < m_sprites.size(); currentGlyph++)
+		for (currentGlyph = 1; currentGlyph < m_renderables.size(); currentGlyph++)
 		{
 			// Changing batch if the texture changes
-			if (m_spritePointers[currentGlyph]->m_texture.id != m_spritePointers[currentGlyph - 1]->m_texture.id)
-				m_renderBatches.emplace_back(offset, 6, m_spritePointers[currentGlyph]->m_texture.id);
+			if (m_renderablesPointers[currentGlyph]->m_texture.id != m_renderablesPointers[currentGlyph - 1]->m_texture.id)
+				m_renderBatches.emplace_back(offset, 6, m_renderablesPointers[currentGlyph]->m_texture.id);
 			else
 				m_renderBatches.back().nVertices += 6;
 
-			vertices[currentVert++] = m_spritePointers[currentGlyph]->m_topLeft;
-			vertices[currentVert++] = m_spritePointers[currentGlyph]->m_bottomLeft;
-			vertices[currentVert++] = m_spritePointers[currentGlyph]->m_bottomRight;
-			vertices[currentVert++] = m_spritePointers[currentGlyph]->m_bottomRight;
-			vertices[currentVert++] = m_spritePointers[currentGlyph]->m_topRight;
-			vertices[currentVert++] = m_spritePointers[currentGlyph]->m_topLeft;
+			vertices[currentVert++] = m_renderablesPointers[currentGlyph]->m_topLeft;
+			vertices[currentVert++] = m_renderablesPointers[currentGlyph]->m_bottomLeft;
+			vertices[currentVert++] = m_renderablesPointers[currentGlyph]->m_bottomRight;
+			vertices[currentVert++] = m_renderablesPointers[currentGlyph]->m_bottomRight;
+			vertices[currentVert++] = m_renderablesPointers[currentGlyph]->m_topRight;
+			vertices[currentVert++] = m_renderablesPointers[currentGlyph]->m_topLeft;
 
 			offset += 6;
 		}
@@ -94,17 +94,17 @@ namespace ShyEngine
 		{
 			case SpriteSortType::BACK_TO_FRONT:
 			{
-				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareBackToFront);
+				std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Sprite::compareBackToFront);
 				break;
 			}
 			case SpriteSortType::FRONT_TO_BACK:
 			{
-				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareFrontToBack);
+				std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Sprite::compareFrontToBack);
 				break;
 			}
 			case SpriteSortType::TEXTURE:
 			{
-				std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareTexture);
+				std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Sprite::compareTexture);
 				break;
 			}
 			default:

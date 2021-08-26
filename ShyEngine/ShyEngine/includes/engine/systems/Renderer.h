@@ -23,9 +23,9 @@ namespace ShyEngine
 			std::vector<M> m_modulesToUpdate;
 
 			// Used for sorting
-			std::vector<T*> m_spritePointers;
+			std::vector<T*> m_renderablesPointers;
 			// Actual sprites
-			std::vector<T> m_sprites;
+			std::vector<T> m_renderables;
 			// List of batches
 			std::vector<RenderBatch> m_renderBatches;
 
@@ -77,7 +77,7 @@ namespace ShyEngine
 			{
 				m_sortType = sortType;
 				m_renderBatches.clear();
-				m_sprites.clear();
+				m_renderables.clear();
 			}
 
 			/**
@@ -86,7 +86,7 @@ namespace ShyEngine
 			void draw(T* toDraw)
 			{
 				// OPTIMIZABLE: save the transform as well?
-				m_sprites.emplace_back(*toDraw);
+				m_renderables.emplace_back(*toDraw);
 			}
 
 			/**
@@ -95,10 +95,10 @@ namespace ShyEngine
 			void end()
 			{
 				// Update pointers for sorting
-				m_spritePointers.resize(m_sprites.size());
+				m_renderablesPointers.resize(m_renderables.size());
 
-				for (unsigned int i = 0; i < m_sprites.size(); i++)
-					m_spritePointers[i] = &m_sprites[i];
+				for (unsigned int i = 0; i < m_renderables.size(); i++)
+					m_renderablesPointers[i] = &m_renderables[i];
 
 				sortSprites();
 				createRenderBatches();
