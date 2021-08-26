@@ -2,7 +2,6 @@
 
 #include <vector>
 
-#include <engine/modules/Sprite.h>
 #include <engine/modules/Text.h>
 #include <engine/systems/Renderer.h>
 #include <data/RenderData.h>
@@ -11,7 +10,7 @@
 
 namespace ShyEngine
 {
-	class TextRenderer : public Renderer<Text>
+	class TextRenderer : public Renderer<Text, Glyph>
 	{
 		private:
 			std::vector<Text*> m_texts;

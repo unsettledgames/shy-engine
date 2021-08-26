@@ -50,5 +50,12 @@ namespace ShyEngine
 			void unuseShader();
 
 			ShaderProgram getShader() { return m_shader; }
+
+			/**
+			*	Comparison functions used to sort the glyphs
+			*/
+			static bool compareFrontToBack(Glyph* a, Glyph* b);
+			static bool compareBackToFront(Glyph* a, Glyph* b);
+			static bool compareTexture(Glyph* a, Glyph* b);
 	};
 }

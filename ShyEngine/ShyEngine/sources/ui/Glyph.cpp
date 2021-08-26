@@ -3,6 +3,21 @@
 
 namespace ShyEngine
 {
+	bool Glyph::compareFrontToBack(Glyph* a, Glyph* b)
+	{
+		return a->m_depth < b->m_depth;
+	}
+
+	bool Glyph::compareBackToFront(Glyph* a, Glyph* b)
+	{
+		return a->m_depth > b->m_depth;
+	}
+
+	bool Glyph::compareTexture(Glyph* a, Glyph* b)
+	{
+		return a->m_texture.id < b->m_texture.id;
+	}
+
 	bool operator==(const Glyph& e1, const Glyph& e2)
 	{
 		// If a glyph represents the same character, has the same texture id and the same position

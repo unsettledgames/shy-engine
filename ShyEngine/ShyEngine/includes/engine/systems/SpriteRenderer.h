@@ -9,7 +9,7 @@
 // OPTIMIZABLE: use the modulesToUpdate vector to keep track of the glyphs to draw instead of using m_sprites
 namespace ShyEngine
 {
-	class SpriteRenderer : public Renderer<Sprite>
+	class SpriteRenderer : public Renderer<Sprite, Sprite>
 	{
 		private:
 

@@ -119,17 +119,17 @@ namespace ShyEngine
 		{
 		case SpriteSortType::BACK_TO_FRONT:
 		{
-			std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareBackToFront);
+			std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Glyph::compareBackToFront);
 			break;
 		}
 		case SpriteSortType::FRONT_TO_BACK:
 		{
-			std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareFrontToBack);
+			std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Glyph::compareFrontToBack);
 			break;
 		}
 		case SpriteSortType::TEXTURE:
 		{
-			std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Sprite::compareTexture);
+			std::stable_sort(m_spritePointers.begin(), m_spritePointers.end(), Glyph::compareTexture);
 			break;
 		}
 		default:
