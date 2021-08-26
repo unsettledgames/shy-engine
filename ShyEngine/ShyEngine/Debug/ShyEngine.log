@@ -1,6 +1,3 @@
-﻿  ShyEngine.cpp
-  SpriteRenderer.cpp
-  TextRenderer.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(12,9): warning C4101: 'currText': unreferenced local variable
-  Generating Code...
+﻿  Text.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Text.cpp(168,42): warning C4244: '*=': conversion from 'float' to 'unsigned char', possible loss of data
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

@@ -141,13 +141,18 @@ namespace ShyEngine {
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
 				ShaderData shaderData = { m_camera.getCameraMatrix() };
 
+				/*******************INPUT******************/
 				// Processing input for this frame
 				m_input.processInput();
 
+				/********************RENDERING****************/
+				glClearDepth(1.0f);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				glClearColor(0, 0, 1, 1);
 				// Update loop for the sprite renderer
 				m_spriteRenderer->updateModules(shaderData);
 				// Update loop for the text renderer
-				//m_textRenderer->updateModules(shaderData);
+				m_textRenderer->updateModules(shaderData);
 
 				// Particle system test
 				/*

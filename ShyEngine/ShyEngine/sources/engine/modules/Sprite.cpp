@@ -47,7 +47,7 @@ namespace ShyEngine
 		glm::vec2 pos = transform.getPos();
 		glm::vec2 scale = transform.getScale();
 		float angle = transform.getAngle();
-		m_depth = 1;
+		m_depth = 0.0f;
 
 		// Get the corners
 		glm::vec2 halfSize(scale.x / 2.0f, scale.y / 2.0f);

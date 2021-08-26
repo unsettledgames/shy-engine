@@ -13,9 +13,6 @@ namespace ShyEngine
 	class TextRenderer : public Renderer<Text, Glyph>
 	{
 		private:
-			std::vector<Text*> m_texts;
-			std::vector<Glyph> m_glyphs;
-			std::vector<Glyph*> m_glyphPointers;
 
 		public:
 			TextRenderer();

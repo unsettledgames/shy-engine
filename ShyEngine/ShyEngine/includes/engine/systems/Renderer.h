@@ -77,7 +77,9 @@ namespace ShyEngine
 			{
 				m_sortType = sortType;
 				m_renderBatches.clear();
+
 				m_renderables.clear();
+				m_renderablesPointers.clear();
 			}
 
 			/**

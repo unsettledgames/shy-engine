@@ -26,19 +26,26 @@ namespace ShyEngine
         init(font, size, startChar, endChar);
     }
 
-    Text::Text(Entity* entity, const std::string& font, ShaderProgram shader, int size, float depth, const std::string& text) :
+    Text::Text(Entity* entity, const std::string& font, ShaderProgram shader, ColorRGBA8 color, int size, float depth,
+        const std::string& text, Justification justification) :
         Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR) 
     {
         m_depth = depth;
         m_text = text;
+        m_shader = shader;
+        m_color = color;
+        m_justification = justification;
     }
 
     Text::Text(Entity* entity, const std::string& font, const std::string& vertShader, const std::string& fragShader,
-        int size, float depth, std::string& text) :
+        ColorRGBA8 color, int size, float depth, std::string& text, Justification justification) :
         Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR)
     {
         m_depth = depth;
         m_text = text;
+        m_shader = ShaderProgram::ShaderProgram(vertShader, fragShader);
+        m_color = color;
+        m_justification = justification;
     }
 
     void Text::init(const std::string& font, int size, unsigned int startChar, unsigned int endChar)
@@ -324,15 +331,10 @@ namespace ShyEngine
                 if (glyphIndex < 0 || glyphIndex >= m_nCharacters)
                     glyphIndex = m_nCharacters;
 
-                // Yes that's great now how tf do I set the transform oh god oh god oh god 
-                // unregistered transform and fake entity?
-                currGlyph = Glyph(currChar, currTexture, m_shader, m_color, position, scaling, m_depth);
-
-                // Glyph starts from textpos, size is the size of the glyph with scaling applied to it
-                //m_glyphs[glyphIndex].destRect = glm::vec4(textPos, m_glyphs[glyphIndex].size * scaling);
-                // Draw the glyph
+                // Creating a glyph for the current character
+                currGlyph = Glyph(currChar, currTexture, m_shader, m_color, textPos, scaling, m_depth);
+                // Add the glyph
                 ret.push_back(currGlyph);
-                //batch.draw(destRect, m_glyphs[glyphIndex].uvRect, m_texID, depth, tint);
                 // Basically move the cursor
                 textPos.x += m_glyphs[glyphIndex].size.x * scaling.x;
             }

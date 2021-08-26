@@ -15,11 +15,6 @@ namespace ShyEngine
 		// Rendering process
 		begin();
 
-		// REFACTOR: put this in the engine so they don't have to be repeated across Renderers
-		glClearDepth(1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0, 0, 1, 1);
-
 		// OPTIMIZABLE: use the correct shader lol
 		m_modulesToUpdate[0].useShader();
 
