@@ -18,8 +18,10 @@ namespace ShyEngine {
 	void ShyEngine::initSystems()
 	{
 		m_camera.init(m_screenWidth, m_screenHeight);
-		m_spriteRenderer = new SpriteRenderer();
 		m_audioEngine.init();
+
+		m_spriteRenderer = new SpriteRenderer();
+		m_textRenderer = new TextRenderer();
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -144,6 +146,8 @@ namespace ShyEngine {
 
 				// Update loop for the sprite renderer
 				m_spriteRenderer->updateModules(shaderData);
+				// Update loop for the text renderer
+				//m_textRenderer->updateModules(shaderData);
 
 				// Particle system test
 				/*
@@ -213,6 +217,10 @@ namespace ShyEngine {
 		if (toRegister->getName().compare("Sprite") == 0)
 		{
 			m_spriteRenderer->addModule(*(dynamic_cast<Sprite*>(toRegister)));
+		}
+		else if (toRegister->getName().compare("Text") == 0)
+		{
+			m_textRenderer->addModule(*(dynamic_cast<Text*>(toRegister)));
 		}
 	}
 

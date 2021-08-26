@@ -10,7 +10,6 @@ namespace ShyEngine
 
 	Sprite::Sprite() : Module("Sprite", nullptr) 
 	{
-		init();
 	}
 
 	Sprite::Sprite(Entity* entity, Texture& texture, ShaderProgram& shader, ColorRGBA8 color) : Module("Sprite", entity)

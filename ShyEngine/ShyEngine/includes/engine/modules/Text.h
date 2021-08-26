@@ -32,6 +32,7 @@
 #include <engine/Module.h>
 #include <rendering/ShaderProgram.h>
 #include <data/Vertex.h>
+#include <ui/Glyph.h>
 
 #define FIRST_PRINTABLE_CHAR ((char)32)
 #define LAST_PRINTABLE_CHAR ((char)126)
@@ -84,10 +85,10 @@ namespace ShyEngine {
 
             std::vector<int>* createRows(GlyphData* rects, int rectsLength, int r, int padding, int& w);
             void init(const std::string& font, int size, unsigned int startChar, unsigned int endChar);
+            Text(Entity* entity, const std::string& font, int size, unsigned char cs, unsigned char ce);
 
         public:
-            Text(Entity* entity, const std::string& font, int size, unsigned char cs, unsigned char ce);
-            Text(Entity* entity, const std::string& font, ShaderProgram shader, int size, float depth, std::string& text);
+            Text(Entity* entity, const std::string& font, ShaderProgram shader, int size, float depth, const std::string& text);
             Text(Entity* entity, const std::string& font, const std::string& vertShader, const std::string& fragShader,
                 int size, float depth, std::string& text);
 
@@ -105,7 +106,7 @@ namespace ShyEngine {
             glm::vec2 measure(const std::string& s);
 
             /// Draws using a spritebatch
-            std::vector<Sprite> getSprites();
+            std::vector<Glyph> getGlyphs();
     };
 
 }

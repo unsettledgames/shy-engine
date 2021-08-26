@@ -27,6 +27,7 @@
 #include <engine/System.h>
 #include <engine/Entity.h>
 #include <engine/modules/Sprite.h>
+#include <engine/modules/Text.h>
 #include <engine/systems/TextRenderer.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };

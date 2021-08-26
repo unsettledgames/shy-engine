@@ -6,6 +6,7 @@
 #include <engine/modules/Text.h>
 #include <engine/systems/Renderer.h>
 #include <data/RenderData.h>
+#include <ui/Glyph.h>
 #include <algorithm>
 
 namespace ShyEngine
@@ -14,6 +15,8 @@ namespace ShyEngine
 	{
 		private:
 			std::vector<Text*> m_texts;
+			std::vector<Glyph> m_glyphs;
+			std::vector<Glyph*> m_glyphPointers;
 
 		public:
 			TextRenderer();
@@ -23,6 +26,6 @@ namespace ShyEngine
 			void draw(Text* toDraw);
 			void updateModules(ShaderData shaderData);
 			void createRenderBatches();
-			void addSprites(std::vector<Sprite> toAdd);
+			void addGlyphs(std::vector<Glyph> toAdd);
 	};
 }

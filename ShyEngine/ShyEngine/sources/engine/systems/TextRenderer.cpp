@@ -10,7 +10,7 @@ namespace ShyEngine
 	void TextRenderer::updateModules(ShaderData shaderData)
 	{
 		Text* currText;
-		std::vector<Sprite> glyphs = m_modulesToUpdate[0].getSprites();
+		std::vector<Glyph> glyphs = m_modulesToUpdate[0].getGlyphs();
 		// OPTIMIZABLE: sort sprites by shaders? Organize batches by texture + shader
 		// Rendering process
 		begin();
@@ -25,7 +25,7 @@ namespace ShyEngine
 
 		for (auto _module : m_modulesToUpdate)
 		{
-			glyphs[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+			glyphs[0].getShader().setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 			draw(dynamic_cast<Text*>(&_module));
 		}
 
@@ -38,7 +38,7 @@ namespace ShyEngine
 	void TextRenderer::draw(Text* toDraw)
 	{
 		m_texts.push_back(toDraw);
-		addSprites(toDraw->getSprites());
+		addGlyphs(toDraw->getGlyphs());
 	}
 
 	void TextRenderer::createRenderBatches()
@@ -51,26 +51,26 @@ namespace ShyEngine
 
 		int offset = 0;
 		bool first = true;
-		std::vector<Sprite> currSprites;
+		std::vector<Glyph> currGlyphs;
 		std::vector<Vertex> vertices;
 
-		currSprites = m_modulesToUpdate[0].getSprites();
-		vertices.resize(currSprites.size() * 6);
+		currGlyphs = m_modulesToUpdate[0].getGlyphs();
+		vertices.resize(currGlyphs.size() * 6);
 
 		// Putting the first sprite so that it can be used as a comparison in the next iterations
-		m_renderBatches.emplace_back(offset, 6, currSprites[0].m_texture.id);
-		vertices[currentVert++] = currSprites[0].m_topLeft;
-		vertices[currentVert++] = currSprites[0].m_bottomLeft;
-		vertices[currentVert++] = currSprites[0].m_bottomRight;
-		vertices[currentVert++] = currSprites[0].m_bottomRight;
-		vertices[currentVert++] = currSprites[0].m_topRight;
-		vertices[currentVert++] = currSprites[0].m_topLeft;
+		m_renderBatches.emplace_back(offset, 6, currGlyphs[0].m_texture.id);
+		vertices[currentVert++] = currGlyphs[0].m_topLeft;
+		vertices[currentVert++] = currGlyphs[0].m_bottomLeft;
+		vertices[currentVert++] = currGlyphs[0].m_bottomRight;
+		vertices[currentVert++] = currGlyphs[0].m_bottomRight;
+		vertices[currentVert++] = currGlyphs[0].m_topRight;
+		vertices[currentVert++] = currGlyphs[0].m_topLeft;
 
 		offset += 6;
 
 		for (Text t : m_modulesToUpdate)
 		{
-			for (Sprite s : t.getSprites())
+			for (Glyph s : t.getGlyphs())
 			{
 				if (!first)
 				{
@@ -103,12 +103,12 @@ namespace ShyEngine
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-	void TextRenderer::addSprites(std::vector<Sprite> toAdd)
+	void TextRenderer::addGlyphs(std::vector<Glyph> toAdd)
 	{
-		for (Sprite s : toAdd)
+		for (Glyph s : toAdd)
 		{
-			m_sprites.push_back(s);
-			m_spritePointers.push_back((Sprite*)s.m_reference);
+			m_glyphs.push_back(s);
+			m_glyphPointers.push_back(&s);
 		}
 	}
 

@@ -26,7 +26,7 @@ namespace ShyEngine
         init(font, size, startChar, endChar);
     }
 
-    Text::Text(Entity* entity, const std::string& font, ShaderProgram shader, int size, float depth, std::string& text) :
+    Text::Text(Entity* entity, const std::string& font, ShaderProgram shader, int size, float depth, const std::string& text) :
         Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR) 
     {
         m_depth = depth;
@@ -288,15 +288,15 @@ namespace ShyEngine
         return size;
     }
 
-    std::vector<Sprite> Text::getSprites()
+    std::vector<Glyph> Text::getGlyphs()
     {
+        Texture currTexture;
+        Glyph currGlyph;
+        std::vector<Glyph> ret;
         Transform* transform = (Transform*)m_entity->getModule("Transform");
+
         glm::vec2 position = transform->getPos();
         glm::vec2 scaling = transform->getScale();
-
-        std::vector<Sprite> ret;
-        Sprite currSprite;
-        Texture currTexture;
 
         currTexture.id = m_texID;
 
@@ -324,13 +324,14 @@ namespace ShyEngine
                 if (glyphIndex < 0 || glyphIndex >= m_nCharacters)
                     glyphIndex = m_nCharacters;
 
-                // Yes that's great now how tf do I set the transform oh god oh god oh god unregistered transform?
-                currSprite = Sprite(nullptr, currTexture, m_shader, m_color);
+                // Yes that's great now how tf do I set the transform oh god oh god oh god 
+                // unregistered transform and fake entity?
+                currGlyph = Glyph(currChar, currTexture, m_shader, m_color, position, scaling, m_depth);
 
                 // Glyph starts from textpos, size is the size of the glyph with scaling applied to it
                 //m_glyphs[glyphIndex].destRect = glm::vec4(textPos, m_glyphs[glyphIndex].size * scaling);
                 // Draw the glyph
-                ret.push_back(currSprite);
+                ret.push_back(currGlyph);
                 //batch.draw(destRect, m_glyphs[glyphIndex].uvRect, m_texID, depth, tint);
                 // Basically move the cursor
                 textPos.x += m_glyphs[glyphIndex].size.x * scaling.x;
