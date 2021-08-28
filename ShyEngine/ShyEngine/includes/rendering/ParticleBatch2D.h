@@ -1,8 +1,5 @@
 /**
 	PARTICLE:
-		- Shouldn't be a single entity
-		- Needs a transform
-		- Basically a glyph
 		- Probably needs some physics stuff (velocity, forces etc)
 		- Needs to be updated every frame (it could be seen as a module of the ParticleSystem)
 	

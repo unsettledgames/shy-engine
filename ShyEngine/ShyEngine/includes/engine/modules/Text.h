@@ -32,7 +32,7 @@
 #include <engine/Module.h>
 #include <rendering/ShaderProgram.h>
 #include <data/Vertex.h>
-#include <ui/Glyph.h>
+#include <data/Glyph.h>
 
 #define FIRST_PRINTABLE_CHAR ((char)32)
 #define LAST_PRINTABLE_CHAR ((char)126)

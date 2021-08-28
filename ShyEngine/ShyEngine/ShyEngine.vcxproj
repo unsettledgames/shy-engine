@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClInclude Include="includes\audio\AudioEngine.h" />
     <ClInclude Include="includes\data\ColorRGBA8.h" />
+    <ClInclude Include="includes\data\Glyph.h" />
     <ClInclude Include="includes\data\ImageLoader.h" />
+    <ClInclude Include="includes\data\Particle.h" />
     <ClInclude Include="includes\data\picopng.h" />
     <ClInclude Include="includes\data\RenderData.h" />
     <ClInclude Include="includes\data\ResourceCache.h" />
@@ -52,7 +54,6 @@
     <ClInclude Include="includes\screen\IGameScreen.h" />
     <ClInclude Include="includes\SpatialGrid.h" />
     <ClInclude Include="includes\timing\Timing.h" />
-    <ClInclude Include="includes\ui\Glyph.h" />
     <ClInclude Include="includes\util\Error.h" />
     <ClInclude Include="includes\util\IdGenerator.h" />
     <ClInclude Include="includes\util\Math.h" />
@@ -60,7 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp" />
+    <ClCompile Include="sources\data\Glyph.cpp" />
     <ClCompile Include="sources\data\ImageLoader.cpp" />
+    <ClCompile Include="sources\data\Particle.cpp" />
     <ClCompile Include="sources\data\picopng.cpp" />
     <ClCompile Include="sources\data\ResourcesManager.cpp" />
     <ClCompile Include="sources\engine\Entity.cpp" />
@@ -85,7 +88,6 @@
     <ClCompile Include="sources\screen\IMainGame.cpp" />
     <ClCompile Include="sources\SpatialGrid.cpp" />
     <ClCompile Include="sources\timing\Timing.cpp" />
-    <ClCompile Include="sources\ui\Glyph.cpp" />
     <ClCompile Include="sources\util\Error.cpp" />
     <ClCompile Include="sources\util\IdGenerator.cpp" />
     <ClCompile Include="sources\util\Utility.cpp" />

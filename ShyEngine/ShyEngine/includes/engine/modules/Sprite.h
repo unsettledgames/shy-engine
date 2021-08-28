@@ -7,6 +7,7 @@
 #include <data/Vertex.h>
 #include <data/ColorRGBA8.h>
 #include <data/ResourcesManager.h>
+#include <data/Glyph.h>
 #include <vector>
 #include <engine/modules/Transform.h>
 #include <util/Math.h>
@@ -16,26 +17,11 @@ namespace ShyEngine
 	class SpriteRenderer;
 	class TextRenderer;
 
-	class Sprite : public Module
+	class Sprite : public Module, public Glyph
 	{
 		friend class SpriteRenderer;
-		friend class TextRenderer;
-
-		friend bool operator==(const Sprite& s1, const Sprite& s2);
 
 		private:
-			Texture m_texture;
-			ShaderProgram m_shader;
-
-			Vertex m_topLeft;
-			Vertex m_bottomLeft;
-			Vertex m_topRight;
-			Vertex m_bottomRight;
-
-			ColorRGBA8 m_color;
-
-			float m_depth;
-
 			void init();
 
 		public:
@@ -53,16 +39,5 @@ namespace ShyEngine
 
 			bool checkCompatibility(std::vector<Module>& otherModules);
 			bool checkDependency(std::vector<Module>& otherModules);
-
-			void useShader();
-			void unuseShader();
-
-			ShaderProgram* getShader() { return &m_shader; }
-			/**
-			*	Comparison functions used to sort the sprites
-			*/
-			static bool compareFrontToBack(Sprite* a, Sprite* b);
-			static bool compareBackToFront(Sprite* a, Sprite* b);
-			static bool compareTexture(Sprite* a, Sprite* b);
 	};
 }

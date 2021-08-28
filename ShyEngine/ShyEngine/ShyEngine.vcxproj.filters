@@ -195,9 +195,6 @@
     <ClInclude Include="includes\engine\systems\Renderer.h">
       <Filter>Header Files\Engine\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="includes\ui\Glyph.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
     <ClInclude Include="includes\engine\modules\Text.h">
       <Filter>Header Files\Engine\Modules</Filter>
     </ClInclude>
@@ -206,6 +203,12 @@
     </ClInclude>
     <ClInclude Include="includes\engine\systems\ParticleRenderer.h">
       <Filter>Header Files\Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\data\Glyph.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\data\Particle.h">
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,9 +290,6 @@
     <ClCompile Include="sources\engine\systems\TextRenderer.cpp">
       <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="sources\ui\Glyph.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="sources\engine\modules\Text.cpp">
       <Filter>Source Files\Engine\Modules</Filter>
     </ClCompile>
@@ -298,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="sources\engine\modules\ParticleSystem.cpp">
       <Filter>Source Files\Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\data\Glyph.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\data\Particle.cpp">
+      <Filter>Source Files\Data</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

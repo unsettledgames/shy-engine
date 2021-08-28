@@ -1,16 +1,25 @@
 #pragma once
 
+#include <functional>
+
 #include <engine/systems/Renderer.h>
 #include <engine/modules/ParticleSystem.h>
-#include <ui/Glyph.h>
+
+#include <data/Particle.h>
 
 namespace ShyEngine
 {
-	class ParticleRenderer : Renderer<ParticleSystem, Glyph>
+	inline void defaultParticleUpdate(Particle& particle)
+	{
+		particle.setPosition(particle.getPosition() + particle.getVelocity());
+	}
+
+	class ParticleRenderer : Renderer<ParticleSystem, Particle>
 	{
 		private:
+			
+
 		public:
-			ParticleRenderer();
-			~ParticleRenderer();
+			
 	};
 }

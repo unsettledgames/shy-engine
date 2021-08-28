@@ -3,11 +3,6 @@
 
 namespace ShyEngine
 {
-	bool operator==(const Sprite& s1, const Sprite& s2)
-	{
-		return s1.m_id == s2.m_id;
-	}
-
 	Sprite::Sprite() : Module("Sprite", nullptr) 
 	{
 	}
@@ -22,7 +17,7 @@ namespace ShyEngine
 	}
 
 	Sprite::Sprite(Entity* entity, const std::string& texturePath, ShaderProgram& shader, ColorRGBA8 color) : 
-		Module("Sprite", entity)
+		Module("Sprite", entity), Glyph(ResourcesManager.getTexture(texturePath), shader, color, 0.0f)
 	{
 		m_texture = ResourcesManager.getTexture(texturePath);
 		m_shader = shader;
@@ -110,30 +105,5 @@ namespace ShyEngine
 	{
 		// Nothing depends on Sprite, at the moment
 		return true;
-	}
-
-	void Sprite::useShader()
-	{
-		m_shader.use(SDL_GetTicks());
-	}
-
-	void Sprite::unuseShader()
-	{
-		m_shader.unuse();
-	}
-
-	bool Sprite::compareFrontToBack(Sprite* a, Sprite* b)
-	{
-		return a->m_depth < b->m_depth;
-	}
-
-	bool Sprite::compareBackToFront(Sprite* a, Sprite* b)
-	{
-		return a->m_depth > b->m_depth;
-	}
-
-	bool Sprite::compareTexture(Sprite* a, Sprite* b)
-	{
-		return a->m_texture.id < b->m_texture.id;
 	}
 }

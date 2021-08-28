@@ -331,7 +331,7 @@ namespace ShyEngine
                 CharGlyph charGlyph = m_glyphs[glyphIndex];
 
                 // Creating a glyph for the current character
-                currGlyph = Glyph(currChar, currTexture, m_shader, m_color, textPos,
+                currGlyph = Glyph(currTexture, m_shader, m_color, textPos,
                     glm::vec2(scaling.x * charGlyph.size.x, scaling.y * charGlyph.size.y), charGlyph.uvRect, m_depth);
                 // Add the glyph
                 ret.push_back(currGlyph);
