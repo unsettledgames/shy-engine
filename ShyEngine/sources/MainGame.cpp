@@ -37,12 +37,12 @@ int main(int argc, char** argv)
 
     test = engine.createEntity("TextEntity");
 
-    testTransform = new ShyEngine::Transform(test, glm::vec2(20, 20), glm::vec2(200,200));
+    testTransform = new ShyEngine::Transform(test, glm::vec2(0, 80), glm::vec2(1, 1));
     engine.registerModule(testTransform);
     test->attachModule(testTransform);
 
     testText = new ShyEngine::Text(test, "fonts/04.ttf", shader, ShyEngine::ColorRGBA8(255,255,255,255), 
-        14, 1.0f, "abcdefghijklmnopqrstuvwxyz0123456789");
+        40, 1.0f, "abcdefghijklmnopqrstuvwxyz\n0123456789");
     engine.registerModule(testText);
     test->attachModule(testText);
 

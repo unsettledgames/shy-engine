@@ -20,7 +20,7 @@ namespace ShyEngine
 
 		for (auto _module : m_modulesToUpdate)
 		{
-			glyphs[0].getShader().setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+			glyphs[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 			draw(dynamic_cast<Text*>(&_module));
 		}
 

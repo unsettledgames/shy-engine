@@ -9,6 +9,8 @@
 #include <data/Vertex.h>
 #include <data/Texture.h>
 
+// REFACTOR: make Sprite derive from Glyph too
+
 namespace ShyEngine
 {
 	class TextRenderer;
@@ -31,6 +33,7 @@ namespace ShyEngine
 
 			glm::vec2 m_pos;
 			glm::vec2 m_scale;
+			glm::vec4 m_uv;
 
 			float m_depth;
 			char m_character;
@@ -39,7 +42,7 @@ namespace ShyEngine
 
 		public:
 			Glyph() {}
-			Glyph(char character, Texture& texture, ShaderProgram& shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, float depth);
+			Glyph(char character, Texture& texture, ShaderProgram& shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, glm::vec4 uvs, float depth);
 			~Glyph() {}
 
 			Texture getTextureId() { return m_texture; }
@@ -49,7 +52,7 @@ namespace ShyEngine
 			void useShader();
 			void unuseShader();
 
-			ShaderProgram getShader() { return m_shader; }
+			ShaderProgram* getShader() { return &m_shader; }
 
 			/**
 			*	Comparison functions used to sort the glyphs

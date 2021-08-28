@@ -144,8 +144,6 @@ namespace ShyEngine
         // Now draw all the glyphs
         SDL_Color foregroundColor = { 255, 255, 255, 255 };
 
-        // what the flying fuck Ben I love your tutorials but please add a fucking comment once
-        // every 100 lines ffs
         int yOffset = padding;
         // For each glyph row
         for (int rowIdx = 0; rowIdx < bestRows; rowIdx++)
@@ -169,10 +167,10 @@ namespace ShyEngine
                     surfacePixels[i + 1] = surfacePixels[i];
                     surfacePixels[i + 2] = surfacePixels[i];
                 }
-
+                
+                // BUG PROBABLY HERE
                 // Save glyph image and update coordinates
-                // BUG: probabilmente il problema è negli offset in questa chiamata
-                glTexSubImage2D(GL_TEXTURE_2D, 0, xOffset, bestHeight - yOffset - glyphSurface->h,
+                glTexSubImage2D(GL_TEXTURE_2D, 0, xOffset, bestHeight - yOffset / size - glyphSurface->h,
                     glyphSurface->w, glyphSurface->h, GL_BGRA, GL_UNSIGNED_BYTE, glyphSurface->pixels);
                 glyphRects[glyphIdx].minX = xOffset;
                 glyphRects[glyphIdx].minY = yOffset;
@@ -204,14 +202,14 @@ namespace ShyEngine
             m_glyphs[i].size = glm::vec2(glyphRects[i].maxX, glyphRects[i].maxY);
             m_glyphs[i].uvRect = glm::vec4(
                 (float)glyphRects[i].minX / (float)bestWidth,
-                (float)glyphRects[i].minY / -(float)bestHeight,
+                (float)glyphRects[i].minY / (float)bestHeight,
                 (float)glyphRects[i].maxX / (float)bestWidth,
-                (float)glyphRects[i].maxY / -(float)bestHeight
+                (float)glyphRects[i].maxY / (float)bestHeight
             );
         }
         m_glyphs[m_nCharacters].character = ' ';
         m_glyphs[m_nCharacters].size = m_glyphs[0].size;
-        m_glyphs[m_nCharacters].uvRect = glm::vec4(0, 0, (float)rs / (float)bestWidth, (float)rs / -(float)bestHeight);
+        m_glyphs[m_nCharacters].uvRect = glm::vec4(0, 0, (float)rs / (float)bestWidth, (float)rs / (float)bestHeight);
 
         glBindTexture(GL_TEXTURE_2D, 0);
         delete[] glyphRects;
@@ -320,8 +318,8 @@ namespace ShyEngine
             // Returning to start of the line, moving to new line
             if (currChar == '\n')
             {
-                textPos.y += m_fontHeight * scaling.y;
                 textPos.x = position.x;
+                textPos.y -= m_fontHeight * scaling.y;
             }
             // Print the current clyph
             else
@@ -330,13 +328,15 @@ namespace ShyEngine
                 int glyphIndex = currChar - m_regStart;
                 if (glyphIndex < 0 || glyphIndex >= m_nCharacters)
                     glyphIndex = m_nCharacters;
+                CharGlyph charGlyph = m_glyphs[glyphIndex];
 
                 // Creating a glyph for the current character
-                currGlyph = Glyph(currChar, currTexture, m_shader, m_color, textPos, scaling, m_depth);
+                currGlyph = Glyph(currChar, currTexture, m_shader, m_color, textPos,
+                    glm::vec2(scaling.x * charGlyph.size.x, scaling.y * charGlyph.size.y), charGlyph.uvRect, m_depth);
                 // Add the glyph
                 ret.push_back(currGlyph);
                 // Basically move the cursor
-                textPos.x += m_glyphs[glyphIndex].size.x * scaling.x;
+                textPos.x += charGlyph.size.x * scaling.x;
             }
         }
 

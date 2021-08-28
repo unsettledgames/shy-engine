@@ -1,2 +1,12 @@
 ﻿  ShyEngine.cpp
+  Sprite.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Sprite.cpp(117,28): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
+  Text.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Text.cpp(166,42): warning C4244: '*=': conversion from 'float' to 'unsigned char', possible loss of data
+  SpriteRenderer.cpp
+  TextRenderer.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(12,9): warning C4101: 'currText': unreferenced local variable
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(63,21): warning C4018: '<': signed/unsigned mismatch
+  Glyph.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\ui\Glyph.cpp(85,28): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\ShyEngine.lib

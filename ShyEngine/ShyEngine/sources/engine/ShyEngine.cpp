@@ -17,6 +17,9 @@ namespace ShyEngine {
 
 	void ShyEngine::initSystems()
 	{
+		m_hudCamera.init(m_screenWidth, m_screenHeight);
+		m_hudCamera.setPosition(glm::vec2(0, 0));
+
 		m_camera.init(m_screenWidth, m_screenHeight);
 		m_audioEngine.init();
 
@@ -73,12 +76,14 @@ namespace ShyEngine {
 		// Initialize the systems
 		initSystems();
 
+		//m_audioEngine.play((Music&)ResourcesManager.getMusic("sfx/6th.mp3"), 1);
+
 		/*m_spriteBatch.init();
 		m_hudBatch.init();
 		// Test font
 		m_spriteFont = new SpriteFont("fonts/04.TTF", 16);
 		// Test SFX
-		m_audioEngine.play((Music&)ResourcesManager.getMusic("sfx/6th.mp3"), 1);
+		
 
 		// Test particle system
 		m_testParticleBatch = new ParticleBatch2D();
@@ -109,10 +114,7 @@ namespace ShyEngine {
 
 	void ShyEngine::run()
 	{
-		this->m_state = GameState::GAME_STATE_RUNNING;
-		
-		m_hudCamera.init(m_screenWidth, m_screenHeight);
-		m_hudCamera.setPosition(glm::vec2(0, 0));
+		this->m_state = GameState::GAME_STATE_RUNNING;		
 
 		this->loop();
 	}
@@ -138,8 +140,14 @@ namespace ShyEngine {
 
 			while (totalDeltaTime > 0.0f && currSimStep < MAX_SIM_STEPS)
 			{
+				// Camera update REFACTOR: the camera should update on its own, in some way. Maybe the
+				// engine has an active camera and it updates it?
+				m_camera.update();
+				m_hudCamera.update();
+
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
-				ShaderData shaderData = { m_camera.getCameraMatrix() };
+				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix() };
+				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix() };
 
 				/*******************INPUT******************/
 				// Processing input for this frame
@@ -149,24 +157,18 @@ namespace ShyEngine {
 				glClearDepth(1.0f);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				glClearColor(0, 0, 1, 1);
+
 				// Update loop for the sprite renderer
-				m_spriteRenderer->updateModules(shaderData);
+				m_spriteRenderer->updateModules(spriteRendererShaderData);
 				// Update loop for the text renderer
-				m_textRenderer->updateModules(shaderData);
+				m_textRenderer->updateModules(textRendererShaderData);
 
 				// Particle system test
 				/*
 				if (m_input.getKeyDown(SDLK_p))
 					m_testParticleBatch->addParticle(glm::vec2(100, 100), ColorRGBA8(255, 0, 255, 255), glm::vec2(1.0f, 1.0f), glm::vec2(50.0f, 50.0f));
 				m_particleEngine.draw(&m_spriteBatch);*/
-
-				// TEST: draws the HUD
-				drawUI();
-
-				// Camera update REFACTOR: the camera should update on its own, in some way. Maybe the
-				// enine has an active camera and it updates it?
-				m_camera.update();
-				m_hudCamera.update();
+				
 				//m_particleEngine.update();
 
 				// Cleanup
@@ -196,23 +198,6 @@ namespace ShyEngine {
 
 			debugTime++;
 		}
-	}
-
-	void ShyEngine::drawUI()
-	{
-		/*
-		
-		glm::mat4 projMatrix = m_hudCamera.getCameraMatrix();
-		GLint pUniform = m_colorShader.getUniformLocation("orthoProj");
-		glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projMatrix[0][0]);
-		m_hudBatch.begin();
-
-		m_spriteFont->draw(m_hudBatch, "abcdefghijklmnopqrstuvwxyz1234567890", glm::vec2(0, 0), glm::vec2(1, 1), 1.0f,
-			ColorRGBA8(255, 255, 255, 255));
-
-		m_hudBatch.end();
-		m_hudBatch.render();
-		*/
 	}
 
 	void ShyEngine::registerModule(Module* toRegister)
