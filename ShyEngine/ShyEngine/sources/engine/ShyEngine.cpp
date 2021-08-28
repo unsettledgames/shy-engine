@@ -78,13 +78,7 @@ namespace ShyEngine {
 
 		//m_audioEngine.play((Music&)ResourcesManager.getMusic("sfx/6th.mp3"), 1);
 
-		/*m_spriteBatch.init();
-		m_hudBatch.init();
-		// Test font
-		m_spriteFont = new SpriteFont("fonts/04.TTF", 16);
-		// Test SFX
-		
-
+		/*
 		// Test particle system
 		m_testParticleBatch = new ParticleBatch2D();
 		m_testParticleBatch->init(1000, 0.01f, ResourcesManager.getTexture("textures/particle.png"));

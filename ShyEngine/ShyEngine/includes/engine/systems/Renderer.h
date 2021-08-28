@@ -15,17 +15,17 @@
 
 namespace ShyEngine
 {
-	template <class M, class T>
+	template <class ModuleType, class RenderableType>
 	class Renderer : public System
 	{
 		protected:
 			// Sprites to render
-			std::vector<M> m_modulesToUpdate;
+			std::vector<ModuleType> m_modulesToUpdate;
 
 			// Used for sorting
-			std::vector<T*> m_renderablesPointers;
+			std::vector<RenderableType*> m_renderablesPointers;
 			// Actual sprites
-			std::vector<T> m_renderables;
+			std::vector<RenderableType> m_renderables;
 			// List of batches
 			std::vector<RenderBatch> m_renderBatches;
 
@@ -85,7 +85,7 @@ namespace ShyEngine
 			/**
 			*	Adds a sprite to the list of sprites to be drawn.
 			*/
-			void draw(T* toDraw)
+			void draw(RenderableType* toDraw)
 			{
 				// OPTIMIZABLE: save the transform as well?
 				m_renderables.emplace_back(*toDraw);
@@ -122,7 +122,7 @@ namespace ShyEngine
 				glBindVertexArray(0);
 			}
 
-			void addModule(M toAdd)
+			void addModule(ModuleType toAdd)
 			{
 				m_modulesToUpdate.push_back(toAdd);
 			}

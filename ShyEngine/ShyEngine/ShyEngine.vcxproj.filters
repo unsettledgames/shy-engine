@@ -201,6 +201,12 @@
     <ClInclude Include="includes\engine\modules\Text.h">
       <Filter>Header Files\Engine\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="includes\engine\modules\ParticleSystem.h">
+      <Filter>Header Files\Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\systems\ParticleRenderer.h">
+      <Filter>Header Files\Engine\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -285,6 +291,12 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="sources\engine\modules\Text.cpp">
+      <Filter>Source Files\Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\systems\ParticleRenderer.cpp">
+      <Filter>Source Files\Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\ParticleSystem.cpp">
       <Filter>Source Files\Engine\Modules</Filter>
     </ClCompile>
   </ItemGroup>

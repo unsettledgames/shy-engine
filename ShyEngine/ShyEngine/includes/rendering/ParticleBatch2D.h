@@ -1,3 +1,27 @@
+/**
+	PARTICLE:
+		- Shouldn't be a single entity
+		- Needs a transform
+		- Basically a glyph
+		- Probably needs some physics stuff (velocity, forces etc)
+		- Needs to be updated every frame (it could be seen as a module of the ParticleSystem)
+	
+	PARTICLE SYSTEM:
+		- Renders the particles
+		- Updates the properties of the particles
+		- Must support adding particles
+		
+	OPTIONAL PARTICLE ENGINE:
+		- Holds all the particle systems and renders them. Could be a system of systems?
+	
+	OTHER:
+		- Let's start with a single ParticleSystem that can be created and registered through the ShyEngine.
+		- 
+
+*/
+
+
+
 #pragma once
 
 #include <glm/glm.hpp>

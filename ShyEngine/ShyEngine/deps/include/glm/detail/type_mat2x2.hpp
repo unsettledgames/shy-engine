@@ -46,10 +46,10 @@ namespace glm
 
 		// -- Conversions --
 
-		template<typename U, typename V, typename M, typename N>
+		template<typename U, typename V, typename ModuleType, typename N>
 		GLM_FUNC_DECL GLM_CONSTEXPR mat(
 			U const& x1, V const& y1,
-			M const& x2, N const& y2);
+			ModuleType const& x2, N const& y2);
 
 		template<typename U, typename V>
 		GLM_FUNC_DECL GLM_CONSTEXPR mat(
