@@ -5,9 +5,11 @@
 
 #include <engine/System.h>
 #include <data/RenderData.h>
+#include <data/Glyph.h>
 #include <data/Vertex.h>
 #include <engine/modules/Sprite.h>
 
+#include <type_traits>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -18,6 +20,8 @@ namespace ShyEngine
 	template <class ModuleType, class RenderableType>
 	class Renderer : public System
 	{
+		static_assert(std::is_base_of<Glyph, RenderableType>::value, "T must inherit from list");
+
 		protected:
 			// Sprites to render
 			std::vector<ModuleType> m_modulesToUpdate;
@@ -127,7 +131,84 @@ namespace ShyEngine
 				m_modulesToUpdate.push_back(toAdd);
 			}
 
-			virtual void sortSprites() = 0;
-			virtual void createRenderBatches() = 0;
+			/**
+			*	Sorts the sprites depending on their texture
+			*/
+			void sortSprites()
+			{
+				// Sort the sprites depending on the sort type
+				switch (this->m_sortType)
+				{
+				case SpriteSortType::BACK_TO_FRONT:
+				{
+					std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareBackToFront);
+					break;
+				}
+				case SpriteSortType::FRONT_TO_BACK:
+				{
+					std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareFrontToBack);
+					break;
+				}
+				case SpriteSortType::TEXTURE:
+				{
+					std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareTexture);
+					break;
+				}
+				default:
+					break;
+				}
+			}
+
+			virtual void createRenderBatches()
+			{
+				if (m_renderables.empty())
+					return;
+
+				unsigned int currentVert = 0;
+				unsigned int currentGlyph = 0;
+
+				int offset = 0;
+				std::vector<Vertex> vertices;
+				Glyph currGlyph = m_renderables[0];
+
+				vertices.resize(m_renderables.size() * 6);
+
+				// Putting the first sprite so that it can be used as a comparison in the next iterations
+				m_renderBatches.emplace_back(offset, 6, currGlyph.m_texture.id);
+				vertices[currentVert++] = currGlyph.m_topLeft;
+				vertices[currentVert++] = currGlyph.m_bottomLeft;
+				vertices[currentVert++] = currGlyph.m_bottomRight;
+				vertices[currentVert++] = currGlyph.m_bottomRight;
+				vertices[currentVert++] = currGlyph.m_topRight;
+				vertices[currentVert++] = currGlyph.m_topLeft;
+
+				offset += 6;
+
+				for (int i = 1; i < m_renderables.size(); i++)
+				{
+					// Changing batch if the texture changes
+					if (m_renderablesPointers[i]->m_texture.id != m_renderablesPointers[i - 1]->m_texture.id)
+						m_renderBatches.emplace_back(offset, 6, m_renderablesPointers[i]->m_texture.id);
+					else
+						m_renderBatches.back().nVertices += 6;
+
+					vertices[currentVert++] = m_renderablesPointers[i]->m_topLeft;
+					vertices[currentVert++] = m_renderablesPointers[i]->m_bottomLeft;
+					vertices[currentVert++] = m_renderablesPointers[i]->m_bottomRight;
+					vertices[currentVert++] = m_renderablesPointers[i]->m_bottomRight;
+					vertices[currentVert++] = m_renderablesPointers[i]->m_topRight;
+					vertices[currentVert++] = m_renderablesPointers[i]->m_topLeft;
+
+					offset += 6;
+				}
+
+				glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+				// Orphan the buffer
+				glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
+				// Upload the data
+				glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
+
+				glBindBuffer(GL_ARRAY_BUFFER, 0);
+			}
 	};
 }

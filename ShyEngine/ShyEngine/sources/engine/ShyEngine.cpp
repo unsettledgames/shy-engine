@@ -206,6 +206,10 @@ namespace ShyEngine {
 		{
 			m_textRenderer->addModule(*(dynamic_cast<Text*>(toRegister)));
 		}
+		else if (toRegister->getName().compare("ParticleSystem") == 0)
+		{
+			m_particleRenderer->addModule(*(dynamic_cast<ParticleSystem*>(toRegister)));
+		}
 	}
 
 	void ShyEngine::registerShader(ShaderProgram* toRegister)

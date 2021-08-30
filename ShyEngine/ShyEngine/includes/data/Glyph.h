@@ -13,12 +13,11 @@
 
 namespace ShyEngine
 {
-	class TextRenderer;
-	
 	class Glyph
 	{
+		template <class ModuleType, class RenderableType>
+		friend class Renderer;
 		friend bool operator==(const Glyph& e1, const Glyph& e2);
-		friend class TextRenderer;
 
 		protected:
 			Texture m_texture;

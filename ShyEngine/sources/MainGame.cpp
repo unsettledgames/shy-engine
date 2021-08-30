@@ -9,6 +9,7 @@ int main(int argc, char** argv)
     ShyEngine::Entity* test;
 
     ShyEngine::Transform* testTransform;
+    ShyEngine::ParticleSystem* testParticleSystem;
     ShyEngine::Sprite* testSprite;
     ShyEngine::Text* testText;
 
@@ -35,6 +36,7 @@ int main(int argc, char** argv)
         }
     }
 
+    // Testing text
     test = engine.createEntity("TextEntity");
 
     testTransform = new ShyEngine::Transform(test, glm::vec2(0, 80), glm::vec2(1, 1));
@@ -43,6 +45,17 @@ int main(int argc, char** argv)
 
     testText = new ShyEngine::Text(test, "fonts/04.ttf", shader, ShyEngine::ColorRGBA8(255,255,255,255), 
         40, 1.0f, "abcdefghijklmnopqrstuvwxyz\n0123456789");
+    engine.registerModule(testText);
+    test->attachModule(testText);
+
+    // Testing particle systems
+    test = engine.createEntity("ParticleSystemEntity");
+
+    testTransform = new ShyEngine::Transform(test, glm::vec2(200, 200), glm::vec2(1, 1));
+    engine.registerModule(testTransform);
+    test->attachModule(testTransform);
+
+    testParticleSystem = new ShyEngine::ParticleSystem(1000);
     engine.registerModule(testText);
     test->attachModule(testText);
 

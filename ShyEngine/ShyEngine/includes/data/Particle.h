@@ -5,8 +5,12 @@
 
 namespace ShyEngine
 {
+	class ParticleSystem;
+
 	class Particle : public Glyph
 	{
+		friend class ParticleSystem;
+
 		private:
 			glm::vec2 m_velocity = glm::vec2(0, 0);
 			float m_lifetime = 0.0f;

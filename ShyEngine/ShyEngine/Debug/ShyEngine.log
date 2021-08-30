@@ -1,18 +1,15 @@
-﻿  Glyph.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\data\Glyph.cpp(98,28): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
-  Particle.cpp
+﻿  ParticleSystem.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(17,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(23,23): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(59,21): warning C4018: '<': signed/unsigned mismatch
   ShyEngine.cpp
-  ParticleSystem.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(16,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(22,30): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(47,21): warning C4018: '<': signed/unsigned mismatch
-  Sprite.cpp
-  Text.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Text.cpp(166,42): warning C4244: '*=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(187,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(163): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>::createRenderBatches(void)'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\SpriteRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>' being compiled
   ParticleRenderer.cpp
-  SpriteRenderer.cpp
-  TextRenderer.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(12,9): warning C4101: 'currText': unreferenced local variable
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(63,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(9,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(187,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(163): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>::createRenderBatches(void)'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\ParticleRenderer.h(14): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>' being compiled
   Generating Code...
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

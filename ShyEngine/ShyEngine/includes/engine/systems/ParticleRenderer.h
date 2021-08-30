@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <vector>
 
 #include <engine/systems/Renderer.h>
 #include <engine/modules/ParticleSystem.h>
@@ -9,17 +10,15 @@
 
 namespace ShyEngine
 {
-	inline void defaultParticleUpdate(Particle& particle)
-	{
-		particle.setPosition(particle.getPosition() + particle.getVelocity());
-	}
-
-	class ParticleRenderer : Renderer<ParticleSystem, Particle>
+	class ParticleRenderer : public Renderer<ParticleSystem, Particle>
 	{
 		private:
-			
 
 		public:
-			
+			ParticleRenderer() : Renderer<ParticleSystem, Particle>("ParticleRenderer") {};
+			~ParticleRenderer() {}
+
+			void updateModules();
+			void draw(std::vector<Particle> toDraw);
 	};
 }

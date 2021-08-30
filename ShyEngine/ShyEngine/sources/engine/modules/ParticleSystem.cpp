@@ -11,7 +11,8 @@ namespace ShyEngine
 		init();
 	}
 
-	ParticleSystem::ParticleSystem(int maxParticles, std::function<void(Particle& particle)> particleUpdate) : ParticleSystem()
+	ParticleSystem::ParticleSystem(int maxParticles, 
+		std::function<void(Particle& particle, float deltaTime)> particleUpdate) : ParticleSystem()
 	{
 		m_maxParticles = maxParticles;
 		m_particleUpdate = particleUpdate;
@@ -19,17 +20,28 @@ namespace ShyEngine
 
 	void ParticleSystem::init()
 	{
-		m_particles = new Particle[m_maxParticles];
+		m_particles.reserve(m_maxParticles);
 
 		m_initialized = true;
 	}
 
+	void ParticleSystem::update(float deltaTime)
+	{
+		for (int i = 0; i < m_maxParticles; i++)
+		{
+			// Check if the particle is active
+			if (m_particles[i].m_lifetime > 0.0f)
+			{
+				m_particleUpdate(m_particles[i], deltaTime * m_simulationSpeed);
+				m_particles[i].m_lifetime -= deltaTime * m_simulationSpeed;
+			}
+		}
+	}
+
 	void ParticleSystem::setMaxParticles(unsigned int amount)
 	{
-		if (m_initialized)
-			delete m_particles;
-
-		m_particles = new Particle[amount];
+		m_particles.clear();
+		m_particles.reserve(amount);
 	}
 
 	int ParticleSystem::getFreeParticle()

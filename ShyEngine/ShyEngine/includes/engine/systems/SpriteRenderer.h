@@ -11,19 +11,6 @@ namespace ShyEngine
 {
 	class SpriteRenderer : public Renderer<Sprite, Sprite>
 	{
-		private:
-
-			/**
-			*	Creates the batches given the sprites that must be drawn. Groups sprites with the same
-			*	texture into a single batch, must be called after sortSprites
-			*/
-			void createRenderBatches();
-
-			/**
-			*	Sorts the sprites depending on their texture
-			*/
-			void sortSprites();
-
 		public:
 			SpriteRenderer();
 

@@ -28,6 +28,9 @@
 #include <engine/Entity.h>
 #include <engine/modules/Sprite.h>
 #include <engine/modules/Text.h>
+#include <engine/modules/ParticleSystem.h>
+
+#include <engine/systems/ParticleRenderer.h>
 #include <engine/systems/TextRenderer.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
@@ -57,6 +60,7 @@ namespace ShyEngine
 
 			SpriteRenderer* m_spriteRenderer;
 			TextRenderer* m_textRenderer;
+			ParticleRenderer* m_particleRenderer;
 
 			int m_screenWidth;
 			int m_screenHeight;
