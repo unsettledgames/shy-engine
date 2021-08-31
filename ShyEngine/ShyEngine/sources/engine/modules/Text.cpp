@@ -26,24 +26,13 @@ namespace ShyEngine
         init(font, size, startChar, endChar);
     }
 
-    Text::Text(Entity* entity, const std::string& font, ShaderProgram shader, ColorRGBA8 color, int size, float depth,
+    Text::Text(Entity* entity, const std::string& font, ShaderProgram* shader, ColorRGBA8 color, int size, float depth,
         const std::string& text, Justification justification) :
         Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR) 
     {
         m_depth = depth;
         m_text = text;
         m_shader = shader;
-        m_color = color;
-        m_justification = justification;
-    }
-
-    Text::Text(Entity* entity, const std::string& font, const std::string& vertShader, const std::string& fragShader,
-        ColorRGBA8 color, int size, float depth, std::string& text, Justification justification) :
-        Text(entity, font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR)
-    {
-        m_depth = depth;
-        m_text = text;
-        m_shader = ShaderProgram::ShaderProgram(vertShader, fragShader);
         m_color = color;
         m_justification = justification;
     }

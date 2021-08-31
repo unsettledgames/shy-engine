@@ -7,7 +7,7 @@ namespace ShyEngine
 	{
 	}
 
-	Sprite::Sprite(Entity* entity, Texture& texture, ShaderProgram& shader, ColorRGBA8 color) : Module("Sprite", entity)
+	Sprite::Sprite(Entity* entity, Texture& texture, ShaderProgram* shader, ColorRGBA8 color) : Module("Sprite", entity)
 	{
 		m_texture = texture;
 		m_shader = shader;
@@ -16,21 +16,11 @@ namespace ShyEngine
 		init();
 	}
 
-	Sprite::Sprite(Entity* entity, const std::string& texturePath, ShaderProgram& shader, ColorRGBA8 color) : 
+	Sprite::Sprite(Entity* entity, const std::string& texturePath, ShaderProgram* shader, ColorRGBA8 color) : 
 		Module("Sprite", entity), Glyph(ResourcesManager.getTexture(texturePath), shader, color, 0.0f)
 	{
 		m_texture = ResourcesManager.getTexture(texturePath);
 		m_shader = shader;
-		m_color = color;
-
-		init();
-	}
-
-	Sprite::Sprite(Entity* entity, const std::string& texturePath, const std::string& vertPath, 
-		const std::string& fragPath, ColorRGBA8 color) : Module("Sprite", entity)
-	{
-		m_texture = ResourcesManager.getTexture(texturePath);
-		m_shader = ShaderProgram::ShaderProgram(vertPath, fragPath);
 		m_color = color;
 
 		init();
@@ -76,7 +66,7 @@ namespace ShyEngine
 		this->m_bottomRight.setUV(1, 0);
 	}
 	
-	int Sprite::attachShader(ShaderProgram& shader)
+	int Sprite::attachShader(ShaderProgram* shader)
 	{
 		m_shader = shader;
 		return 0;

@@ -42,5 +42,6 @@ namespace ShyEngine
 			virtual bool checkDependency(std::vector<Module>& otherModules) { return true; }
 
 			int getId() { return m_id; }
+			Module* getReference() { return m_reference; }
 	};
 }

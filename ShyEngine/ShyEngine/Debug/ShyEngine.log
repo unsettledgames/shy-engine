@@ -1,15 +1,6 @@
-﻿  ParticleSystem.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(17,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(23,23): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(59,21): warning C4018: '<': signed/unsigned mismatch
-  ShyEngine.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(187,2): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(163): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>::createRenderBatches(void)'
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\SpriteRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>' being compiled
-  ParticleRenderer.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(9,21): warning C4018: '<': signed/unsigned mismatch
+﻿  ParticleRenderer.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(21,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(187,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(163): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\ParticleRenderer.h(14): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>' being compiled
-  Generating Code...
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

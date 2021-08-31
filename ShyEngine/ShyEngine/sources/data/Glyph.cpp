@@ -25,7 +25,7 @@ namespace ShyEngine
 		return e1.m_id == e2.m_id;
 	}
 
-	Glyph::Glyph(Texture&& texture, ShaderProgram& shader, ColorRGBA8 color, float depth)
+	Glyph::Glyph(Texture&& texture, ShaderProgram* shader, ColorRGBA8 color, float depth)
 	{
 		m_texture = texture;
 		m_shader = shader;
@@ -33,7 +33,7 @@ namespace ShyEngine
 		m_depth = depth;
 	}
 
-	Glyph::Glyph(Texture& texture, ShaderProgram& shader, ColorRGBA8 color, float depth)
+	Glyph::Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, float depth)
 	{
 		m_texture = texture;
 		m_shader = shader;
@@ -41,7 +41,7 @@ namespace ShyEngine
 		m_depth = depth;
 	}
 
-	Glyph::Glyph(Texture& texture, ShaderProgram& shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, glm::vec4 uv, float depth)
+	Glyph::Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, glm::vec4 uv, float depth)
 	{
 		m_texture = texture;
 		m_shader = shader;
@@ -95,11 +95,11 @@ namespace ShyEngine
 
 	void Glyph::useShader()
 	{
-		m_shader.use(SDL_GetTicks());
+		m_shader->use(SDL_GetTicks());
 	}
 
 	void Glyph::unuseShader()
 	{
-		m_shader.unuse();
+		m_shader->unuse();
 	}
 }

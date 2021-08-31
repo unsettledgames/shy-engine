@@ -16,6 +16,7 @@ namespace ShyEngine
 	struct ShaderData
 	{
 		glm::mat4 cameraMatrix;
+		float deltaTime;
 	};
 
 	class RenderBatch

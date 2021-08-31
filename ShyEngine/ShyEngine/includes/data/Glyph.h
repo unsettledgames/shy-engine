@@ -21,7 +21,7 @@ namespace ShyEngine
 
 		protected:
 			Texture m_texture;
-			ShaderProgram m_shader;
+			ShaderProgram* m_shader;
 
 			Vertex m_topLeft;
 			Vertex m_bottomLeft;
@@ -41,9 +41,9 @@ namespace ShyEngine
 
 		public:
 			Glyph() {}
-			Glyph(Texture& texture, ShaderProgram& shader, ColorRGBA8 color, float depth);
-			Glyph(Texture&& texture, ShaderProgram& shader, ColorRGBA8 color, float depth);
-			Glyph(Texture& texture, ShaderProgram& shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, glm::vec4 uvs, float depth);
+			Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, float depth);
+			Glyph(Texture&& texture, ShaderProgram* shader, ColorRGBA8 color, float depth);
+			Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, glm::vec4 uvs, float depth);
 			~Glyph() {}
 
 			Texture getTextureId() { return m_texture; }
@@ -61,7 +61,7 @@ namespace ShyEngine
 			void useShader();
 			void unuseShader();
 
-			ShaderProgram* getShader() { return &m_shader; }
+			ShaderProgram* getShader() { return m_shader; }
 
 			/**
 			*	Comparison functions used to sort the glyphs

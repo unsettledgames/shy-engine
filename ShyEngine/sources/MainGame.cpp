@@ -30,7 +30,7 @@ int main(int argc, char** argv)
             engine.registerModule(testTransform);
             test->attachModule(testTransform);
 
-            testSprite = new ShyEngine::Sprite(test, "textures/Alice.png", shader);
+            testSprite = new ShyEngine::Sprite(test, "textures/Alice.png", &shader);
             engine.registerModule(testSprite);
             test->attachModule(testSprite);
         }
@@ -39,11 +39,11 @@ int main(int argc, char** argv)
     // Testing text
     test = engine.createEntity("TextEntity");
 
-    testTransform = new ShyEngine::Transform(test, glm::vec2(0, 80), glm::vec2(1, 1));
+    testTransform = new ShyEngine::Transform(test, glm::vec2(0, 0), glm::vec2(1, 1));
     engine.registerModule(testTransform);
     test->attachModule(testTransform);
 
-    testText = new ShyEngine::Text(test, "fonts/04.ttf", shader, ShyEngine::ColorRGBA8(255,255,255,255), 
+    testText = new ShyEngine::Text(test, "fonts/04.ttf", &shader, ShyEngine::ColorRGBA8(255,255,255,255), 
         40, 1.0f, "abcdefghijklmnopqrstuvwxyz\n0123456789");
     engine.registerModule(testText);
     test->attachModule(testText);
@@ -55,9 +55,18 @@ int main(int argc, char** argv)
     engine.registerModule(testTransform);
     test->attachModule(testTransform);
 
-    testParticleSystem = new ShyEngine::ParticleSystem(1000);
-    engine.registerModule(testText);
-    test->attachModule(testText);
+    testParticleSystem = new ShyEngine::ParticleSystem(test, 1000, "textures/particle.png", &shader);
+    engine.registerModule(testParticleSystem);
+    test->attachModule(testParticleSystem);
+
+    /* IMPORTANT:
+    *   - At the moment the engine saves the modules, not their pointers
+    *   - This is to allow for fast caching
+    *   - Unfortunately, this makes it so that the pointers are updated, but the copies are not
+    *       - Update the copies before using them?
+    *       - Find some way to save the pointers and get the right copies?
+    *   - Another problem is that the user can't update the values of a certain module
+    */ 
 
     engine.run();
 

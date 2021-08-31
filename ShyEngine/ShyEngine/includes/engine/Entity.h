@@ -7,6 +7,8 @@
 #include <util/IdGenerator.h>
 
 // BUG: Id system is wrong, should be a member of the engine instead
+// REFACTOR: if registering a module to the entity's only purpose is to set the entity, why shouldn't this happen
+//		in the module constructor?
 
 namespace ShyEngine
 {

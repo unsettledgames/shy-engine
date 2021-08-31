@@ -25,6 +25,7 @@ namespace ShyEngine {
 
 		m_spriteRenderer = new SpriteRenderer();
 		m_textRenderer = new TextRenderer();
+		m_particleRenderer = new ParticleRenderer();
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -77,13 +78,7 @@ namespace ShyEngine {
 		initSystems();
 
 		//m_audioEngine.play((Music&)ResourcesManager.getMusic("sfx/6th.mp3"), 1);
-
-		/*
-		// Test particle system
-		m_testParticleBatch = new ParticleBatch2D();
-		m_testParticleBatch->init(1000, 0.01f, ResourcesManager.getTexture("textures/particle.png"));
-		m_particleEngine.addParticleBatch(m_testParticleBatch);
-
+/*
 		// TEST PHYSICS MANAGEMENT
 		// Create the physics world
 		m_world = std::make_unique<b2World>(b2Vec2(0.0f, -9.81f));
@@ -140,8 +135,8 @@ namespace ShyEngine {
 				m_hudCamera.update();
 
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
-				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix() };
-				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix() };
+				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), totalDeltaTime };
+				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), totalDeltaTime };
 
 				/*******************INPUT******************/
 				// Processing input for this frame
@@ -156,14 +151,8 @@ namespace ShyEngine {
 				m_spriteRenderer->updateModules(spriteRendererShaderData);
 				// Update loop for the text renderer
 				m_textRenderer->updateModules(textRendererShaderData);
-
-				// Particle system test
-				/*
-				if (m_input.getKeyDown(SDLK_p))
-					m_testParticleBatch->addParticle(glm::vec2(100, 100), ColorRGBA8(255, 0, 255, 255), glm::vec2(1.0f, 1.0f), glm::vec2(50.0f, 50.0f));
-				m_particleEngine.draw(&m_spriteBatch);*/
-				
-				//m_particleEngine.update();
+				// Update loop for the particle renderer
+				m_particleRenderer->updateModules(spriteRendererShaderData);
 
 				// Cleanup
 				SDL_GL_SwapWindow(this->m_gameWindow);
@@ -186,8 +175,8 @@ namespace ShyEngine {
 				currSimStep++;
 			}
 
-			if (debugTime % 100 == 0)
-				std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;
+			/*if (debugTime % 100 == 0)
+				std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;*/
 			m_fpsLimiter.end();
 
 			debugTime++;

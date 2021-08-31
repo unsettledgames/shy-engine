@@ -71,7 +71,7 @@ namespace ShyEngine {
             
             TTF_Font* m_currFont;
             CharGlyph* m_glyphs;
-            ShaderProgram m_shader;
+            ShaderProgram* m_shader;
 
             std::string m_text;
             ColorRGBA8 m_color;
@@ -88,10 +88,8 @@ namespace ShyEngine {
             Text(Entity* entity, const std::string& font, int size, unsigned char cs, unsigned char ce);
 
         public:
-            Text(Entity* entity, const std::string& font, ShaderProgram shader, ColorRGBA8 color, int size, float depth,
+            Text(Entity* entity, const std::string& font, ShaderProgram* shader, ColorRGBA8 color, int size, float depth,
                 const std::string& text, Justification = Justification::LEFT);
-            Text(Entity* entity, const std::string& font, const std::string& vertShader, const std::string& fragShader,
-                ColorRGBA8 color, int size, float depth, std::string& text, Justification = Justification::LEFT);
 
             void setText(std::string& text) { m_text = text; }
             std::string getText() { return m_text; }
