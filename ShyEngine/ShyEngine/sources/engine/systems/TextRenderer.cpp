@@ -9,22 +9,24 @@ namespace ShyEngine
 
 	void TextRenderer::updateModules(ShaderData shaderData)
 	{
-		Text* currText;
-		std::vector<Glyph> glyphs = m_modulesToUpdate[0].getGlyphs();
 		// OPTIMIZABLE: sort sprites by shaders? Organize batches by texture + shader
 		// Rendering process
 		begin();
 
-		// OPTIMIZABLE: use the correct shader lol
-		glyphs[0].useShader();
+		Text* currText;
+		std::vector<Glyph> glyphs = m_modulesToUpdate[0].getGlyphs();
 
 		for (auto _module : m_modulesToUpdate)
 		{
-			glyphs[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 			draw(dynamic_cast<Text*>(&_module));
 		}
 
 		end();
+
+		// OPTIMIZABLE: use the correct shader lol
+		glyphs[0].useShader();
+		glyphs[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+
 		render();
 
 		glyphs[0].unuseShader();

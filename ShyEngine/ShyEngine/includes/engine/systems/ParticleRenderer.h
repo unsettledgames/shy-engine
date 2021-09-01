@@ -15,7 +15,7 @@ namespace ShyEngine
 		private:
 
 		public:
-			ParticleRenderer() : Renderer<ParticleSystem, Particle>("ParticleRenderer") {};
+			ParticleRenderer();
 			~ParticleRenderer() {}
 
 			void updateModules(ShaderData& shaderData);

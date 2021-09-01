@@ -9,8 +9,8 @@ namespace ShyEngine
 	{
 		m_entity = entity;
 		m_transform = (Transform*)m_entity->getModule("Transform");
-
-		init();
+		m_lifetime = 1.0f;
+		m_maxParticles = 100;
 	}
 
 	ParticleSystem::ParticleSystem(Entity* entity, int maxParticles, Texture texture, ShaderProgram* shader,
@@ -20,6 +20,8 @@ namespace ShyEngine
 		m_maxParticles = maxParticles;
 		m_particleUpdate = particleUpdate;
 		m_shader = shader;
+
+		init();
 	}
 
 	ParticleSystem::ParticleSystem(Entity* entity, int maxParticles, std::string& texture, ShaderProgram* shader,
@@ -31,8 +33,7 @@ namespace ShyEngine
 
 	void ParticleSystem::init()
 	{
-		m_particles.reserve(m_maxParticles);
-
+		m_particles.resize(m_maxParticles);
 		m_initialized = true;
 		play();
 	}
@@ -59,8 +60,6 @@ namespace ShyEngine
 			{
 				addParticles(m_emissionRate);
 				m_nextEmissionTime = 0;
-
-				std::printf("N particles: %d\n", m_particles.size());
 			}
 
 			for (int i = 0; i < m_maxParticles && i < m_particles.size(); i++)
@@ -89,7 +88,7 @@ namespace ShyEngine
 		{
 			if (m_particles[i].getLifetime() <= 0.0f)
 			{
-				m_lastFreeParticle = i;
+				m_lastFreeParticle = (i + 1) % 1000;
 				return i;
 			}
 		}
@@ -99,42 +98,29 @@ namespace ShyEngine
 		{
 			if (m_particles[i].getLifetime() <= 0.0f)
 			{
-				m_lastFreeParticle = i;
+				m_lastFreeParticle = (i+1) % 1000;
 				return i;
 			}
 		}
 
-		// No particles are free, overwrite the first one
-		return 0;
+		// No particles are free, overwrite the next one
+		m_lastFreeParticle = (m_lastFreeParticle + 1) % 1000;
+		return m_lastFreeParticle;
 	}
 
 	void ParticleSystem::addParticles(int amount)
 	{
-		Particle* currParticle;
-
 		for (int i = 0; i < amount; i++)
 		{
-			if (m_particles.size() > 0)
-			{
-				int lastIndex = getFreeParticle();
+			int lastIndex = getFreeParticle();
 
-				currParticle = &m_particles[lastIndex];
-			}
-			else
-			{
-				Particle added;
-
-				m_particles.push_back(added);
-				currParticle = &m_particles[0];
-			}
-
-			currParticle->m_pos = m_transform->getPos();
-			currParticle->m_velocity = m_particleVelocity;
-			currParticle->m_color = m_particleColor;
-			currParticle->m_scale = m_transform->getScale();
-			currParticle->m_lifetime = m_lifetime;
-			currParticle->m_shader = m_shader;
-			currParticle->m_texture = m_texture;
+			m_particles[lastIndex].m_pos = m_transform->getPos();
+			m_particles[lastIndex].m_velocity = m_particleVelocity;
+			m_particles[lastIndex].m_color = m_particleColor;
+			m_particles[lastIndex].m_scale = m_transform->getScale();
+			m_particles[lastIndex].m_lifetime = m_lifetime;
+			m_particles[lastIndex].m_shader = m_shader;
+			m_particles[lastIndex].m_texture = m_texture;
 		}
 	}
 

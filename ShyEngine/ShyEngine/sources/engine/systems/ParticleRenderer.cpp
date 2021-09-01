@@ -2,33 +2,50 @@
 
 namespace ShyEngine
 {
+	ParticleRenderer::ParticleRenderer() : Renderer<ParticleSystem, Particle>("ParticleRenderer")
+	{
+		createVertexArray();
+	}
+
 	void ParticleRenderer::updateModules(ShaderData& shaderData)
 	{
-		if (m_modulesToUpdate.size() > 0)
+		if (m_modulesPointers.size() > 0)
 		{
-			std::vector<Particle> firstParticles = m_modulesToUpdate[0].getParticles();
-			Particle firstParticle;
+			bool useShader = false;
 
 			begin();
+			m_renderables.clear();
 
-			if (firstParticles.size() > 0)
+			std::vector<Particle> firstParticles = m_modulesToUpdate[0].getParticles();
+			Particle particleShader;
+
+			for (int i = 0; i < firstParticles.size(); i++)
 			{
-				firstParticle = m_modulesToUpdate[0].getParticles()[0];
-				firstParticle.useShader();
-				firstParticle.getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+				if (firstParticles[i].getLifetime() > 0)
+				{
+					particleShader = firstParticles[i];
+					useShader = true;
+					break;
+				}
 			}
 
-			for (int i = 0; i < m_modulesToUpdate.size(); i++)
+			if (useShader)
 			{
-				m_modulesToUpdate[i].update(shaderData.deltaTime);
+				particleShader.useShader();
+				particleShader.getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+			}
+
+			for (int i = 0; i < m_modulesPointers.size(); i++)
+			{
+				m_modulesPointers[i]->update(shaderData.deltaTime);
 				draw(m_modulesToUpdate[i].getParticles());
 			}
 
 			end();
 			render();
 
-			if (firstParticles.size() > 0)
-				firstParticle.unuseShader();
+			if (useShader)
+				particleShader.unuseShader();
 		}
 	}
 

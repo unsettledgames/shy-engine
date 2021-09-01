@@ -36,6 +36,12 @@ namespace ShyEngine
 			position.y = y;
 		}
 
+		void setPosition(glm::vec2 pos)
+		{
+			position.x = pos.x;
+			position.y = pos.y;
+		}
+
 		void setUV(float u, float v)
 		{
 			uv.u = u;

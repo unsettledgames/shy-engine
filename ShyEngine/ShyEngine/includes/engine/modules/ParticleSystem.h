@@ -16,6 +16,8 @@
 // REFACTOR: try to think more about what the update function should do. Is a user defined function really needed?
 // Isn't it better to let the user create animations and set the parameters then leave the rest to the engine?
 
+// REFACTOR: m_maxParticles should be an int
+
 namespace ShyEngine
 {
 	inline void defaultParticleUpdate(Particle& particle, float deltaTime)
@@ -52,6 +54,8 @@ namespace ShyEngine
 			void init();
 			int getFreeParticle();
 		public:
+			ParticleSystem() {}
+
 			ParticleSystem(Entity* entity);
 
 			ParticleSystem(Entity* entity, int maxParticles, std::string& texture, ShaderProgram* shader,

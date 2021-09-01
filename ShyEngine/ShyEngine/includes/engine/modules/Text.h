@@ -88,6 +88,7 @@ namespace ShyEngine {
             Text(Entity* entity, const std::string& font, int size, unsigned char cs, unsigned char ce);
 
         public:
+            Text() {}
             Text(Entity* entity, const std::string& font, ShaderProgram* shader, ColorRGBA8 color, int size, float depth,
                 const std::string& text, Justification = Justification::LEFT);
 

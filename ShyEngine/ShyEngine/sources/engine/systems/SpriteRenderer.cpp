@@ -15,17 +15,18 @@ namespace ShyEngine
 		// Rendering process
 		begin();
 
-		// OPTIMIZABLE: use the correct shader lol
-		m_modulesToUpdate[0].useShader();
-
 		for (auto _module : m_modulesToUpdate)
 		{
-			m_modulesToUpdate[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 			currSprite = dynamic_cast<Sprite*>(&_module);
 			draw(currSprite);
 		}
 
 		end();
+
+		// OPTIMIZABLE: use the correct shader lol
+		m_modulesToUpdate[0].useShader();
+		m_modulesToUpdate[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+
 		render();
 
 		m_modulesToUpdate[0].unuseShader();

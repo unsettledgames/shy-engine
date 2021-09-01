@@ -59,14 +59,15 @@ int main(int argc, char** argv)
     engine.registerModule(testParticleSystem);
     test->attachModule(testParticleSystem);
 
-    /* IMPORTANT:
-    *   - At the moment the engine saves the modules, not their pointers
-    *   - This is to allow for fast caching
-    *   - Unfortunately, this makes it so that the pointers are updated, but the copies are not
-    *       - Update the copies before using them?
-    *       - Find some way to save the pointers and get the right copies?
-    *   - Another problem is that the user can't update the values of a certain module
-    */ 
+    testParticleSystem->setEmissionRate(2);
+    testParticleSystem->setLifetime(100);
+
+    /*
+        The particle system seems to be working
+        - Lifetime too small?
+        - Particles too small?
+        - Particles too fast?
+    */
 
     engine.run();
 

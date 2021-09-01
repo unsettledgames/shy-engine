@@ -163,20 +163,20 @@ namespace ShyEngine {
 
 				// TEST
 				if (m_input.getKeyDown(SDLK_w))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 0.5f));
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 3.0f) * totalDeltaTime);
 				if (m_input.getKeyDown(SDLK_s))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -0.5f));
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -3.0f) * totalDeltaTime);
 				if (m_input.getKeyDown(SDLK_a))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-0.5f, 0.0f));
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-3.0f, 0.0f) * totalDeltaTime);
 				if (m_input.getKeyDown(SDLK_d))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.5f, 0.0f));
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(3.0f, 0.0f) * totalDeltaTime);
 
 				totalDeltaTime -= deltaTime;
 				currSimStep++;
 			}
 
-			/*if (debugTime % 100 == 0)
-				std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;*/
+			if (debugTime % 100 == 0)
+				std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;
 			m_fpsLimiter.end();
 
 			debugTime++;
@@ -189,15 +189,15 @@ namespace ShyEngine {
 		// REFACTOR: turn name into a type so it's less flexible
 		if (toRegister->getName().compare("Sprite") == 0)
 		{
-			m_spriteRenderer->addModule(*(dynamic_cast<Sprite*>(toRegister)));
+			m_spriteRenderer->addModule(dynamic_cast<Sprite*>(toRegister));
 		}
 		else if (toRegister->getName().compare("Text") == 0)
 		{
-			m_textRenderer->addModule(*(dynamic_cast<Text*>(toRegister)));
+			m_textRenderer->addModule(dynamic_cast<Text*>(toRegister));
 		}
 		else if (toRegister->getName().compare("ParticleSystem") == 0)
 		{
-			m_particleRenderer->addModule(*(dynamic_cast<ParticleSystem*>(toRegister)));
+			m_particleRenderer->addModule(dynamic_cast<ParticleSystem*>(toRegister));
 		}
 	}
 

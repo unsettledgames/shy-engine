@@ -102,4 +102,24 @@ namespace ShyEngine
 	{
 		m_shader->unuse();
 	}
+
+	void Glyph::setColor(ColorRGBA8 color)
+	{
+		m_color = color;
+
+		m_topLeft.color = color;
+		m_bottomLeft.color = color;
+		m_bottomRight.color = color;
+		m_topRight.color = color;
+	}
+
+	void Glyph::setPosition(glm::vec2 pos)
+	{
+		m_pos = pos;
+
+		m_topLeft.setPosition(pos);
+		m_bottomLeft.setPosition(pos);
+		m_bottomRight.setPosition(pos);
+		m_topRight.setPosition(pos);
+	}
 }

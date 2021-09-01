@@ -53,8 +53,9 @@ namespace ShyEngine
 			glm::vec2 getScale() { return m_scale; }
 			glm::vec4 getUV() { return m_uv; }
 
-			void setColor(ColorRGBA8 color) { m_color = color; }
-			void setPosition(glm::vec2 pos) { m_pos = pos; }
+			void setColor(ColorRGBA8 color);
+			void setPosition(glm::vec2 pos);
+			// REFACTOR: reimplement this in Glyph.cpp so that they update the vertices
 			void setScale(glm::vec2 scale) { m_scale = scale; }
 			void setUV(glm::vec4 uv) { m_uv = uv; }
 

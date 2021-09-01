@@ -13,7 +13,10 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-// REFACTOR: change spritePointers and sprites to glyphPointers and glyphs
+
+// OPTIMIZABLE: optimize the rendering process with less copies.
+// OPTIMIZABLE: only update the render batches if the modules vector changed
+// OPTIMIZABLE: https://discord.com/channels/506164002003484673/582608229629165578/882597437884235846
 
 namespace ShyEngine
 {
@@ -23,8 +26,10 @@ namespace ShyEngine
 		static_assert(std::is_base_of<Glyph, RenderableType>::value, "T must inherit from list");
 
 		protected:
-			// Sprites to render
+			// Modules to update
 			std::vector<ModuleType> m_modulesToUpdate;
+			// Pointers to the modules to update
+			std::vector<ModuleType*> m_modulesPointers;
 
 			// Used for sorting
 			std::vector<RenderableType*> m_renderablesPointers;
@@ -84,6 +89,10 @@ namespace ShyEngine
 
 				m_renderables.clear();
 				m_renderablesPointers.clear();
+
+				m_modulesToUpdate.resize(m_modulesPointers.size());
+				for (int i = 0; i < m_modulesPointers.size(); i++)
+					m_modulesToUpdate[i] = (*(m_modulesPointers[i]));
 			}
 
 			/**
@@ -91,7 +100,6 @@ namespace ShyEngine
 			*/
 			void draw(RenderableType* toDraw)
 			{
-				// OPTIMIZABLE: save the transform as well?
 				m_renderables.emplace_back(*toDraw);
 			}
 
@@ -126,9 +134,9 @@ namespace ShyEngine
 				glBindVertexArray(0);
 			}
 
-			void addModule(ModuleType toAdd)
+			void addModule(ModuleType* toAdd)
 			{
-				m_modulesToUpdate.push_back(toAdd);
+				m_modulesPointers.push_back(toAdd);
 			}
 
 			/**
@@ -141,17 +149,17 @@ namespace ShyEngine
 				{
 				case SpriteSortType::BACK_TO_FRONT:
 				{
-					std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareBackToFront);
+					std::sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareBackToFront);
 					break;
 				}
 				case SpriteSortType::FRONT_TO_BACK:
 				{
-					std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareFrontToBack);
+					std::sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareFrontToBack);
 					break;
 				}
 				case SpriteSortType::TEXTURE:
 				{
-					std::stable_sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareTexture);
+					std::sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareTexture);
 					break;
 				}
 				default:
