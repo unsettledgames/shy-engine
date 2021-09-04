@@ -14,7 +14,15 @@ namespace ShyEngine
 			bool useShader = false;
 
 			begin();
-			m_renderables.clear();
+
+			for (int i = 0; i < m_modulesPointers.size(); i++)
+			{
+				m_modulesPointers[i]->update(shaderData.deltaTime);
+				// The bug is probably at particle level
+				draw(m_modulesToUpdate[i].getParticles());
+			}
+
+			end();
 
 			std::vector<Particle> firstParticles = m_modulesToUpdate[0].getParticles();
 			Particle particleShader;
@@ -35,13 +43,6 @@ namespace ShyEngine
 				particleShader.getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 			}
 
-			for (int i = 0; i < m_modulesPointers.size(); i++)
-			{
-				m_modulesPointers[i]->update(shaderData.deltaTime);
-				draw(m_modulesToUpdate[i].getParticles());
-			}
-
-			end();
 			render();
 
 			if (useShader)
@@ -51,6 +52,8 @@ namespace ShyEngine
 
 	void ParticleRenderer::draw(std::vector<Particle> particles)
 	{
-		m_renderables.insert(m_renderables.begin(), particles.begin(), particles.end());
+		for (Particle p : particles)
+			if (p.getLifetime() > 0)
+				m_renderables.emplace_back(p);
 	}
 }

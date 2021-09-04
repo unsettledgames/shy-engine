@@ -37,14 +37,13 @@ namespace ShyEngine
 			float m_depth;
 			unsigned int m_id;
 
-			void init();
-
 		public:
 			Glyph() {}
 			Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, float depth);
 			Glyph(Texture&& texture, ShaderProgram* shader, ColorRGBA8 color, float depth);
 			Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, glm::vec4 uvs, float depth);
 			~Glyph() {}
+			void updateVertices();
 
 			Texture getTextureId() { return m_texture; }
 			float getDepth() { return m_depth; }
@@ -56,7 +55,7 @@ namespace ShyEngine
 			void setColor(ColorRGBA8 color);
 			void setPosition(glm::vec2 pos);
 			// REFACTOR: reimplement this in Glyph.cpp so that they update the vertices
-			void setScale(glm::vec2 scale) { m_scale = scale; }
+			void setScale(glm::vec2 scale);
 			void setUV(glm::vec4 uv) { m_uv = uv; }
 
 			void useShader();

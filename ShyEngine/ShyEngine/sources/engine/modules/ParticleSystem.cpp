@@ -58,7 +58,7 @@ namespace ShyEngine
 			// Emit particle if needed
 			if (m_nextEmissionTime > (1 / m_emissionRate))
 			{
-				addParticles(m_emissionRate);
+				addParticles(std::ceil(m_emissionRate));
 				m_nextEmissionTime = 0;
 			}
 
@@ -104,7 +104,7 @@ namespace ShyEngine
 		}
 
 		// No particles are free, overwrite the next one
-		m_lastFreeParticle = (m_lastFreeParticle + 1) % 1000;
+		m_lastFreeParticle = (m_lastFreeParticle + 1) % m_maxParticles;
 		return m_lastFreeParticle;
 	}
 
@@ -121,6 +121,9 @@ namespace ShyEngine
 			m_particles[lastIndex].m_lifetime = m_lifetime;
 			m_particles[lastIndex].m_shader = m_shader;
 			m_particles[lastIndex].m_texture = m_texture;
+
+			m_particles[lastIndex].setUV(glm::vec4(0, 0, 1, 1));
+			m_particles[lastIndex].updateVertices();
 		}
 	}
 

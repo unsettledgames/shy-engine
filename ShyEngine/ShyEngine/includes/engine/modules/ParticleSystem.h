@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <string>
+#include <glm/glm.hpp>
 
 #include <rendering/ShaderProgram.h>
 
@@ -34,13 +35,13 @@ namespace ShyEngine
 			Texture m_texture;
 
 			// Particle System parameters
-			float m_maxParticles = 1.0f;
+			int m_maxParticles = 1;
 			float m_simulationSpeed = 1.0f;
 			float m_emissionRate = 1.0f;
 
 			// Parameters per particle
 			float m_lifetime;
-			glm::vec2 m_particleVelocity = glm::vec2(1, 1);
+			glm::vec2 m_particleVelocity = glm::vec2(0.1f, 0.1f);
 			ColorRGBA8 m_particleColor = ColorRGBA8(255, 255, 255, 255);
 
 			// State

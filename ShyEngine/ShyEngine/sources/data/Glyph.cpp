@@ -39,6 +39,8 @@ namespace ShyEngine
 		m_shader = shader;
 		m_color = color;
 		m_depth = depth;
+
+		updateVertices();
 	}
 
 	Glyph::Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, glm::vec2 pos, glm::vec2 scale, glm::vec4 uv, float depth)
@@ -51,11 +53,11 @@ namespace ShyEngine
 		m_depth = depth;
 		m_uv = uv;
 
-		init();
+		updateVertices();
 	}
 
 	// IMPROVABLE: make text rotatable
-	void Glyph::init()
+	void Glyph::updateVertices()
 	{
 		// Get the corners
 		glm::vec2 topLeft(0, m_scale.y);
@@ -116,10 +118,12 @@ namespace ShyEngine
 	void Glyph::setPosition(glm::vec2 pos)
 	{
 		m_pos = pos;
+		updateVertices();
+	}
 
-		m_topLeft.setPosition(pos);
-		m_bottomLeft.setPosition(pos);
-		m_bottomRight.setPosition(pos);
-		m_topRight.setPosition(pos);
+	void Glyph::setScale(glm::vec2 scale)
+	{
+		m_scale = scale;
+		updateVertices();
 	}
 }

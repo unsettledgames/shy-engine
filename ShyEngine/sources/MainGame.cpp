@@ -51,23 +51,16 @@ int main(int argc, char** argv)
     // Testing particle systems
     test = engine.createEntity("ParticleSystemEntity");
 
-    testTransform = new ShyEngine::Transform(test, glm::vec2(200, 200), glm::vec2(1, 1));
+    testTransform = new ShyEngine::Transform(test, glm::vec2(200, 200), glm::vec2(100, 100));
     engine.registerModule(testTransform);
     test->attachModule(testTransform);
 
-    testParticleSystem = new ShyEngine::ParticleSystem(test, 1000, "textures/particle.png", &shader);
+    testParticleSystem = new ShyEngine::ParticleSystem(test, 100, "textures/particle.png", &shader);
     engine.registerModule(testParticleSystem);
     test->attachModule(testParticleSystem);
 
-    testParticleSystem->setEmissionRate(2);
-    testParticleSystem->setLifetime(100);
-
-    /*
-        The particle system seems to be working
-        - Lifetime too small?
-        - Particles too small?
-        - Particles too fast?
-    */
+    testParticleSystem->setEmissionRate(0.05);
+    testParticleSystem->setLifetime(20000);
 
     engine.run();
 
