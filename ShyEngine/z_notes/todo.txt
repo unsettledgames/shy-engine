@@ -1,5 +1,4 @@
 - AABB collisions and CollisionManager
-- Camera culling
 - Circle collisions
 - Spatial partitioning
 - Physics

@@ -287,7 +287,7 @@ namespace ShyEngine
         Texture currTexture;
         Glyph currGlyph;
         std::vector<Glyph> ret;
-        Transform* transform = (Transform*)m_entity->getModule("Transform");
+        Transform* transform = m_entity->getTransform();
 
         glm::vec2 position = transform->getPos();
         glm::vec2 scaling = transform->getScale();

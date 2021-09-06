@@ -55,11 +55,6 @@ namespace ShyEngine {
 		*/
 		glm::vec2 screenToWorld(glm::vec2 screenCoords);
 
-		/*
-			Checks whether or not the box passed as a parameter is in the camera view
-		*/
-		bool isBoxInView(const glm::vec2& position, const glm::vec2& dimensions);
-
 		glm::vec4 getViewportRect();
 	};
 }

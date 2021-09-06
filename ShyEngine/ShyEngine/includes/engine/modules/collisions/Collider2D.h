@@ -21,14 +21,11 @@ namespace ShyEngine
 
 		public:
 			Collider2D();
-			~Collider2D();
+			~Collider2D() {}
 
 			bool checkCollision(Collider2D* otherCollider);
 			bool checkCollision(Transform* otherTransform);
 			bool checkCollision(glm::vec4 otherRect);
-
-			bool collisionEntered();
-			bool collisionExited();
 
 			bool checkCompatibility(std::vector<Module>& otherModules);
 			bool checkDependency(std::vector<Module>& otherModules);

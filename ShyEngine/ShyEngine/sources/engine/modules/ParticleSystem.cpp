@@ -8,7 +8,7 @@ namespace ShyEngine
 	ParticleSystem::ParticleSystem(Entity* entity) : Module("ParticleSystem", entity)
 	{
 		m_entity = entity;
-		m_transform = (Transform*)m_entity->getModule("Transform");
+		m_transform = m_entity->getTransform();
 		m_lifetime = 1.0f;
 		m_maxParticles = 100;
 	}

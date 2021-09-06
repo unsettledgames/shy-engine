@@ -4,6 +4,7 @@
 #include <vector>
 #include <util/Error.h>
 #include <algorithm>
+#include <engine/modules/Transform.h>
 #include <util/IdGenerator.h>
 
 // BUG: Id system is wrong, should be a member of the engine instead
@@ -26,6 +27,7 @@ namespace ShyEngine
 			Entity* m_reference;
 
 			std::vector<Module> m_modules;
+			Transform* m_transform;
 
 		public:
 			friend bool operator==(const Entity& e1, const Entity& e2);
@@ -43,5 +45,7 @@ namespace ShyEngine
 			
 			std::string getName() { return m_name; }
 			void setName(const std::string& name) { m_name = name; }
+
+			Transform* getTransform() { return m_transform; }
 	};	
 }

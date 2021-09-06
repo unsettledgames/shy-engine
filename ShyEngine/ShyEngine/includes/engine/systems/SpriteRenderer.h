@@ -1,7 +1,7 @@
 #pragma once
 
 #include <engine/systems/Renderer.h>
-#include <data/RenderData.h>
+#include <data/SystemData.h>
 #include <engine/modules/Sprite.h>
 #include <GL/glew.h>
 #include <glm/glm.hpp>

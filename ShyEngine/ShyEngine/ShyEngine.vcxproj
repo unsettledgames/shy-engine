@@ -25,7 +25,7 @@
     <ClInclude Include="includes\data\ImageLoader.h" />
     <ClInclude Include="includes\data\Particle.h" />
     <ClInclude Include="includes\data\picopng.h" />
-    <ClInclude Include="includes\data\RenderData.h" />
+    <ClInclude Include="includes\data\SystemData.h" />
     <ClInclude Include="includes\data\ResourceCache.h" />
     <ClInclude Include="includes\data\ResourcesManager.h" />
     <ClInclude Include="includes\data\Texture.h" />
@@ -45,6 +45,7 @@
     <ClInclude Include="includes\engine\System.h" />
     <ClInclude Include="includes\engine\systems\CollisionManager.h" />
     <ClInclude Include="includes\engine\systems\ParticleRenderer.h" />
+    <ClInclude Include="includes\engine\systems\PhysicsManager.h" />
     <ClInclude Include="includes\engine\systems\Renderer.h" />
     <ClInclude Include="includes\engine\systems\SpriteRenderer.h" />
     <ClInclude Include="includes\engine\systems\TextRenderer.h" />
@@ -85,6 +86,7 @@
     <ClCompile Include="sources\engine\System.cpp" />
     <ClCompile Include="sources\engine\systems\CollisionManager.cpp" />
     <ClCompile Include="sources\engine\systems\ParticleRenderer.cpp" />
+    <ClCompile Include="sources\engine\systems\PhysicsManager.cpp" />
     <ClCompile Include="sources\engine\systems\SpriteRenderer.cpp" />
     <ClCompile Include="sources\engine\systems\TextRenderer.cpp" />
     <ClCompile Include="sources\input\EventBus.cpp" />

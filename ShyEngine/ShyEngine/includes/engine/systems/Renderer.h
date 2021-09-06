@@ -4,7 +4,7 @@
 #include <SDL/SDL.h>
 
 #include <engine/System.h>
-#include <data/RenderData.h>
+#include <data/SystemData.h>
 #include <data/Glyph.h>
 #include <data/Vertex.h>
 #include <engine/modules/Sprite.h>
@@ -21,6 +21,17 @@
 
 namespace ShyEngine
 {
+	class RenderBatch
+	{
+	private:
+	public:
+		RenderBatch(GLuint off, GLuint numVertices, GLuint tex) : offset(off), nVertices(numVertices), texture(tex) {}
+
+		GLuint offset;
+		GLuint nVertices;
+		GLuint texture;
+	};
+
 	template <class ModuleType, class RenderableType>
 	class Renderer : public System
 	{

@@ -26,6 +26,9 @@ namespace ShyEngine {
 		m_spriteRenderer = new SpriteRenderer();
 		m_textRenderer = new TextRenderer();
 		m_particleRenderer = new ParticleRenderer();
+
+		m_physicsManager = new PhysicsManager();
+		m_collisionManager = new CollisionManager();
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -137,10 +140,16 @@ namespace ShyEngine {
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
 				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), m_camera.getViewportRect(), totalDeltaTime };
 				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), m_hudCamera.getViewportRect(), totalDeltaTime };
+				PhysicsData physicsData = { m_physicsManager->getGravity(), deltaTime };
 
 				/*******************INPUT******************/
 				// Processing input for this frame
 				m_input.processInput();
+
+				/********************PHYSICS******************/
+				// Update loop for the physics and collision manager
+				m_collisionManager->updateModules(physicsData);
+				m_physicsManager->updateModules(physicsData);
 
 				/********************RENDERING****************/
 				glClearDepth(1.0f);
@@ -198,6 +207,14 @@ namespace ShyEngine {
 		else if (toRegister->getName().compare("ParticleSystem") == 0)
 		{
 			m_particleRenderer->addModule(dynamic_cast<ParticleSystem*>(toRegister));
+		}
+		else if (toRegister->getName().compare("Physics") == 0)
+		{
+			m_physicsManager->addModule(dynamic_cast<Physics*>(toRegister));
+		}
+		else if (toRegister->getName().find("Collider") != std::string::npos)
+		{
+			m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
 		}
 	}
 

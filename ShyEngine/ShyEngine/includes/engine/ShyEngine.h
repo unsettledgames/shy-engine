@@ -26,12 +26,20 @@
 
 #include <engine/System.h>
 #include <engine/Entity.h>
+
 #include <engine/modules/Sprite.h>
 #include <engine/modules/Text.h>
 #include <engine/modules/ParticleSystem.h>
 
+#include <engine/modules/collisions/CircleCollider2D.h>
+#include <engine/modules/Physics.h>
+#include <engine/modules/collisions/Collider2D.h>
+#include <engine/modules/collisions/CircleCollider2D.h>
+
 #include <engine/systems/ParticleRenderer.h>
 #include <engine/systems/TextRenderer.h>
+#include <engine/systems/PhysicsManager.h>
+#include <engine/systems/CollisionManager.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 
@@ -58,6 +66,11 @@ namespace ShyEngine
 			std::vector<Entity> m_entities;
 			std::vector<ShaderProgram*> m_shaders;
 
+			// Managers
+			PhysicsManager* m_physicsManager;
+			CollisionManager* m_collisionManager;
+
+			// Renderers
 			SpriteRenderer* m_spriteRenderer;
 			TextRenderer* m_textRenderer;
 			ParticleRenderer* m_particleRenderer;

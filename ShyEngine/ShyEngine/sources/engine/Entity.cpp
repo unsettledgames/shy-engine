@@ -8,6 +8,7 @@ namespace ShyEngine
 		m_id = m_ids.get();
 		m_name = name;
 		m_modules.resize(0);
+		m_transform = new Transform(this, glm::vec2(0, 0), glm::vec2(0, 0));
 	}
 
 	Module* Entity::getModule(const std::string& name)

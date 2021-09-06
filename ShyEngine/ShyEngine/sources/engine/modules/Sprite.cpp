@@ -28,7 +28,7 @@ namespace ShyEngine
 
 	void Sprite::init() 
 	{ 
-		Transform transform = *(Transform*)m_entity->getModule("Transform");
+		Transform transform = *(m_entity->getTransform());
 		glm::vec2 pos = transform.getPos();
 		glm::vec2 scale = transform.getScale();
 		float angle = transform.getAngle();
