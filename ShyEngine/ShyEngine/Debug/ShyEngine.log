@@ -1,7 +1,11 @@
-﻿  ParticleSystem.cpp
+﻿  ParticleRenderer.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(77,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(77,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(89,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(101,57): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(111,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(19,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(37,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(196,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(172): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>::createRenderBatches(void)'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\ParticleRenderer.h(14): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>' being compiled
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(95,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(87): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>::begin(ShyEngine::SpriteSortType)'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(17): message : see reference to function template instantiation 'void ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>::begin(ShyEngine::SpriteSortType)' being compiled
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

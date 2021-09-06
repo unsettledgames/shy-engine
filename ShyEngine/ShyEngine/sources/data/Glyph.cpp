@@ -60,10 +60,10 @@ namespace ShyEngine
 	void Glyph::updateVertices()
 	{
 		// Get the corners
-		glm::vec2 topLeft(0, m_scale.y);
-		glm::vec2 topRight(m_scale.x, m_scale.y);
-		glm::vec2 bottomRight(m_scale.x, 0);
-		glm::vec2 bottomLeft(0, 0);
+		glm::vec2 topLeft(-m_scale.x / 2, m_scale.y / 2);
+		glm::vec2 topRight(m_scale.x / 2, m_scale.y / 2);
+		glm::vec2 bottomRight(m_scale.x / 2, -m_scale.y / 2);
+		glm::vec2 bottomLeft(-m_scale.x / 2, -m_scale.y / 2);
 
 		this->m_topLeft.color = m_color;
 		this->m_topRight.color = m_color;

@@ -16,9 +16,6 @@
     <Filter Include="Header Files\Audio">
       <UniqueIdentifier>{5b8a275a-f4f9-4cf8-87d8-88ac10333dea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Collisions">
-      <UniqueIdentifier>{f2c8f075-f7e6-425b-8520-99c6187a0c3d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Data">
       <UniqueIdentifier>{0169f439-a5d8-40eb-8694-8c4ed1c5aa57}</UniqueIdentifier>
     </Filter>
@@ -30,9 +27,6 @@
     </Filter>
     <Filter Include="Source Files\Audio">
       <UniqueIdentifier>{779e59b9-f33e-4118-9711-7b86960ca626}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Collisions">
-      <UniqueIdentifier>{95f5203c-ca29-4cc1-8a55-1e81a94eeaae}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Data">
       <UniqueIdentifier>{499b5df3-e288-4bab-812a-9b6340527516}</UniqueIdentifier>
@@ -90,6 +84,12 @@
     </Filter>
     <Filter Include="Source Files\Engine\Systems">
       <UniqueIdentifier>{ae425ca2-975f-48cd-afab-f897b6976b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Modules\Collisions">
+      <UniqueIdentifier>{95f5203c-ca29-4cc1-8a55-1e81a94eeaae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Modules\Collisions">
+      <UniqueIdentifier>{f2c8f075-f7e6-425b-8520-99c6187a0c3d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +210,18 @@
     <ClInclude Include="includes\data\Particle.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
+    <ClInclude Include="includes\engine\modules\collisions\CircleCollider2D.h">
+      <Filter>Header Files\Engine\Modules\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\modules\collisions\Collider2D.h">
+      <Filter>Header Files\Engine\Modules\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\modules\collisions\RectCollider2D.h">
+      <Filter>Header Files\Engine\Modules\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\systems\CollisionManager.h">
+      <Filter>Header Files\Engine\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -304,6 +316,18 @@
     </ClCompile>
     <ClCompile Include="sources\data\Particle.cpp">
       <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\collisions\CircleCollider2D.cpp">
+      <Filter>Source Files\Engine\Modules\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\collisions\Collider2D.cpp">
+      <Filter>Source Files\Engine\Modules\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\collisions\RectCollider2D.cpp">
+      <Filter>Source Files\Engine\Modules\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\systems\CollisionManager.cpp">
+      <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

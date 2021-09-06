@@ -1,5 +1,11 @@
+- AABB collisions and CollisionManager
+- Camera culling
+- Circle collisions
+- Spatial partitioning
+- Physics
+
+
 - Add a debug window and a debug manager where I can put textures and easily print stuff onto it
-- Use the center of a sprite to be its pivot
 - Since vectors are contiguous only with reserve (they're not with resize), it could be useful to let the user register 
 	components and only after they're done, actually create the vectors
 - Custom spatial partitioning. I'm not sure I like Ben's implementation, I'd like to have something way more generic,

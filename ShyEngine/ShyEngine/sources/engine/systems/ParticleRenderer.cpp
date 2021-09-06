@@ -19,11 +19,12 @@ namespace ShyEngine
 			for (int i = 0; i < m_modulesPointers.size(); i++)
 			{
 				m_modulesPointers[i]->updateSystem(shaderData.deltaTime);
-				
+
 				for (int j = 0; j < m_modulesToUpdate[i].getMaxParticles(); j++)
 				{
 					currParticle = m_modulesPointers[i]->updateParticle(j, shaderData.deltaTime);
-					if (!currParticle.m_dead)
+
+					if (!currParticle.m_dead && Collider2D::AABB(glm::vec4(currParticle.getPosition(), currParticle.getScale()), shaderData.cameraViewport))
 						draw(currParticle);
 				}
 			}

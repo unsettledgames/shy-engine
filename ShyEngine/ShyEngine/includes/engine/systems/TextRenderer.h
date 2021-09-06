@@ -18,8 +18,8 @@ namespace ShyEngine
 			TextRenderer();
 			~TextRenderer() {}
 
-			void draw(Text* toDraw);
+			void draw(Text* toDraw, ShaderData shaderData);
 			void updateModules(ShaderData shaderData);
-			void addGlyphs(std::vector<Glyph> toAdd);
+			void addGlyphs(std::vector<Glyph> toAdd, ShaderData shaderData);
 	};
 }

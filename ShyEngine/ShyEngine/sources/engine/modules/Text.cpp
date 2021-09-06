@@ -331,4 +331,14 @@ namespace ShyEngine
 
         return ret;
     }
+
+    bool Text::checkCompatibility(std::vector<Module>& otherModules)
+    {
+        return true;
+    }
+
+    bool Text::checkDependency(std::vector<Module>& otherModules)
+    {
+        return false;
+    }
 }

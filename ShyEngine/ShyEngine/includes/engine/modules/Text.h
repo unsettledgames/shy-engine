@@ -105,8 +105,11 @@ namespace ShyEngine {
             /// Measures the dimensions of the text
             glm::vec2 measure(const std::string& s);
 
-            /// Draws using a spritebatch
+            /// Returns all the glyphs for the current text
             std::vector<Glyph> getGlyphs();
+
+            bool checkCompatibility(std::vector<Module>& otherModules);
+            bool checkDependency(std::vector<Module>& otherModules);
     };
 
 }

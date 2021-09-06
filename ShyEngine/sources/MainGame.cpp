@@ -23,9 +23,9 @@ int main(int argc, char** argv)
     shader = ShyEngine::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
     engine.registerShader(&shader);
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 100; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 100; j++)
         {
             test = engine.createEntity("Test entity");
 
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
     // Testing text
     test = engine.createEntity("TextEntity");
 
-    testTransform = new ShyEngine::Transform(test, glm::vec2(0, 0), glm::vec2(1, 1));
+    testTransform = new ShyEngine::Transform(test, glm::vec2(-320, -100), glm::vec2(1, 1));
     engine.registerModule(testTransform);
     test->attachModule(testTransform);
 
@@ -52,6 +52,7 @@ int main(int argc, char** argv)
     test->attachModule(testText);
 
     // Testing particle systems
+    /*
     test = engine.createEntity("ParticleSystemEntity");
 
     testTransform = new ShyEngine::Transform(test, glm::vec2(200, 200), glm::vec2(100, 100));
@@ -64,7 +65,7 @@ int main(int argc, char** argv)
 
     testParticleSystem->setEmissionRate(2);
     testParticleSystem->setLifetime(1000);
-
+    */
     engine.run();
 
     return 0;

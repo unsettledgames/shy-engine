@@ -135,8 +135,8 @@ namespace ShyEngine {
 				m_hudCamera.update();
 
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
-				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), totalDeltaTime };
-				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), totalDeltaTime };
+				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), m_camera.getViewportRect(), totalDeltaTime };
+				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), m_hudCamera.getViewportRect(), totalDeltaTime };
 
 				/*******************INPUT******************/
 				// Processing input for this frame

@@ -9,7 +9,7 @@ namespace ShyEngine {
 		this->m_screenWidth = width;
 		this->m_screenHeight = height;
 
-		this->m_orthoMatrix = glm::ortho(0.0f, (float)this->m_screenWidth, 0.0f, (float)this->m_screenHeight);
+		this->m_orthoMatrix = glm::ortho(0.0f, (float)this->m_screenWidth / m_scale, 0.0f, (float)this->m_screenHeight / m_scale);
 		this->m_matrixUpdated = true;
 	}
 
@@ -17,13 +17,13 @@ namespace ShyEngine {
 	{
 		if (m_matrixUpdated)
 		{
+			// Camera translation
+			glm::vec3 translateVector(-this->m_position.x + m_screenWidth / 2, -this->m_position.y + m_screenHeight / 2, 0.0f);
+			m_cameraMatrix = glm::translate(this->m_orthoMatrix, translateVector);
+
 			// Camera scaling
 			glm::vec3 scale(this->m_scale, this->m_scale, 0.0f);
-			m_cameraMatrix = glm::scale(glm::mat4(1.0f), scale) * m_orthoMatrix;
-
-			// Camera translation
-			glm::vec3 translateVector(-this->m_position.x, -this->m_position.y, 0.0f);
-			m_cameraMatrix = glm::translate(this->m_orthoMatrix, translateVector);
+			m_cameraMatrix = glm::scale(glm::mat4(1.0f), scale) * m_cameraMatrix;
 
 			m_matrixUpdated = false;
 		}
@@ -91,5 +91,10 @@ namespace ShyEngine {
 			return true;
 
 		return false;
+	}
+
+	glm::vec4 Camera2D::getViewportRect()
+	{
+		return glm::vec4(m_position, glm::vec2(m_screenWidth, m_screenHeight) / m_scale);
 	}
 }

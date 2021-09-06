@@ -33,6 +33,9 @@
     <ClInclude Include="includes\engine\Entity.h" />
     <ClInclude Include="includes\engine\Module.h" />
     <ClInclude Include="includes\engine\modules\Camera.h" />
+    <ClInclude Include="includes\engine\modules\collisions\CircleCollider2D.h" />
+    <ClInclude Include="includes\engine\modules\collisions\Collider2D.h" />
+    <ClInclude Include="includes\engine\modules\collisions\RectCollider2D.h" />
     <ClInclude Include="includes\engine\modules\ParticleSystem.h" />
     <ClInclude Include="includes\engine\modules\Physics.h" />
     <ClInclude Include="includes\engine\modules\Sprite.h" />
@@ -40,6 +43,7 @@
     <ClInclude Include="includes\engine\modules\Transform.h" />
     <ClInclude Include="includes\engine\ShyEngine.h" />
     <ClInclude Include="includes\engine\System.h" />
+    <ClInclude Include="includes\engine\systems\CollisionManager.h" />
     <ClInclude Include="includes\engine\systems\ParticleRenderer.h" />
     <ClInclude Include="includes\engine\systems\Renderer.h" />
     <ClInclude Include="includes\engine\systems\SpriteRenderer.h" />
@@ -69,6 +73,9 @@
     <ClCompile Include="sources\engine\Entity.cpp" />
     <ClCompile Include="sources\engine\Module.cpp" />
     <ClCompile Include="sources\engine\modules\Camera.cpp" />
+    <ClCompile Include="sources\engine\modules\collisions\CircleCollider2D.cpp" />
+    <ClCompile Include="sources\engine\modules\collisions\Collider2D.cpp" />
+    <ClCompile Include="sources\engine\modules\collisions\RectCollider2D.cpp" />
     <ClCompile Include="sources\engine\modules\ParticleSystem.cpp" />
     <ClCompile Include="sources\engine\modules\Physics.cpp" />
     <ClCompile Include="sources\engine\modules\Sprite.cpp" />
@@ -76,6 +83,7 @@
     <ClCompile Include="sources\engine\modules\Transform.cpp" />
     <ClCompile Include="sources\engine\ShyEngine.cpp" />
     <ClCompile Include="sources\engine\System.cpp" />
+    <ClCompile Include="sources\engine\systems\CollisionManager.cpp" />
     <ClCompile Include="sources\engine\systems\ParticleRenderer.cpp" />
     <ClCompile Include="sources\engine\systems\SpriteRenderer.cpp" />
     <ClCompile Include="sources\engine\systems\TextRenderer.cpp" />

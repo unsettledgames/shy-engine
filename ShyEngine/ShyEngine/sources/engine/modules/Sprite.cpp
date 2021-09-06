@@ -32,7 +32,10 @@ namespace ShyEngine
 		glm::vec2 pos = transform.getPos();
 		glm::vec2 scale = transform.getScale();
 		float angle = transform.getAngle();
+
 		m_depth = 0.0f;
+		m_pos = pos;
+		m_scale = scale;
 
 		// Get the corners
 		glm::vec2 halfSize(scale.x / 2.0f, scale.y / 2.0f);
@@ -42,10 +45,10 @@ namespace ShyEngine
 		glm::vec2 bottomLeft(-halfSize.x, -halfSize.y);
 
 		// Rotate the points
-		topLeft = Math::rotatePoint(topLeft, angle) + halfSize;
-		topRight = Math::rotatePoint(topRight, angle) + halfSize;
-		bottomRight = Math::rotatePoint(bottomRight, angle) + halfSize;
-		bottomLeft = Math::rotatePoint(bottomLeft, angle) + halfSize;
+		topLeft = Math::rotatePoint(topLeft, angle);
+		topRight = Math::rotatePoint(topRight, angle);
+		bottomRight = Math::rotatePoint(bottomRight, angle);
+		bottomLeft = Math::rotatePoint(bottomLeft, angle) ;
 
 		this->m_topLeft.color = m_color;
 		this->m_topRight.color = m_color;

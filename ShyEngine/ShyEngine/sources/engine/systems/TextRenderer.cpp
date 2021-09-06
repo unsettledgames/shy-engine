@@ -18,7 +18,7 @@ namespace ShyEngine
 
 		for (auto _module : m_modulesToUpdate)
 		{
-			draw(dynamic_cast<Text*>(&_module));
+			draw(dynamic_cast<Text*>(&_module), shaderData);
 		}
 
 		end();
@@ -32,17 +32,20 @@ namespace ShyEngine
 		glyphs[0].unuseShader();
 	}
 
-	void TextRenderer::draw(Text* toDraw)
+	void TextRenderer::draw(Text* toDraw, ShaderData shaderData)
 	{
-		addGlyphs(toDraw->getGlyphs());
+		addGlyphs(toDraw->getGlyphs(), shaderData);
 	}
 
-	void TextRenderer::addGlyphs(std::vector<Glyph> toAdd)
+	void TextRenderer::addGlyphs(std::vector<Glyph> toAdd, ShaderData shaderData)
 	{
 		for (Glyph s : toAdd)
 		{
-			m_renderables.push_back(s);
-			m_renderablesPointers.push_back(&s);
+			if (Collider2D::AABB(glm::vec4(s.getPosition(), s.getScale()), shaderData.cameraViewport))
+			{
+				m_renderables.push_back(s);
+				m_renderablesPointers.push_back(&s);
+			}
 		}
 	}
 }

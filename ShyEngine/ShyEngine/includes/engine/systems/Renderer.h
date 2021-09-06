@@ -8,6 +8,7 @@
 #include <data/Glyph.h>
 #include <data/Vertex.h>
 #include <engine/modules/Sprite.h>
+#include <engine/modules/collisions/Collider2D.h>
 
 #include <type_traits>
 #include <vector>
