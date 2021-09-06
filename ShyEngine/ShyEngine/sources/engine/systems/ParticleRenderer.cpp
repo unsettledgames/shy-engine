@@ -11,15 +11,21 @@ namespace ShyEngine
 	{
 		if (m_modulesPointers.size() > 0)
 		{
+			Particle currParticle;
 			bool useShader = false;
 
 			begin();
 
 			for (int i = 0; i < m_modulesPointers.size(); i++)
 			{
-				m_modulesPointers[i]->update(shaderData.deltaTime);
-				// The bug is probably at particle level
-				draw(m_modulesToUpdate[i].getParticles());
+				m_modulesPointers[i]->updateSystem(shaderData.deltaTime);
+				
+				for (int j = 0; j < m_modulesToUpdate[i].getMaxParticles(); j++)
+				{
+					currParticle = m_modulesPointers[i]->updateParticle(j, shaderData.deltaTime);
+					if (!currParticle.m_dead)
+						draw(currParticle);
+				}
 			}
 
 			end();
@@ -55,5 +61,10 @@ namespace ShyEngine
 		for (Particle p : particles)
 			if (p.getLifetime() > 0)
 				m_renderables.emplace_back(p);
+	}
+
+	void ParticleRenderer::draw(Particle p)
+	{
+		m_renderables.emplace_back(p);
 	}
 }

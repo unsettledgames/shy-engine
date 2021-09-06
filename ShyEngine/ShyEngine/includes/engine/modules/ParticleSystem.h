@@ -28,6 +28,9 @@ namespace ShyEngine
 
 	class ParticleSystem : public Module
 	{
+		class ParticleRenderer;
+		friend class ParticleRenderer;
+
 		private:
 			ShaderProgram* m_shader;
 			Transform* m_transform;
@@ -41,7 +44,7 @@ namespace ShyEngine
 
 			// Parameters per particle
 			float m_lifetime;
-			glm::vec2 m_particleVelocity = glm::vec2(0.1f, 0.1f);
+			glm::vec2 m_particleVelocity = glm::vec2((float)rand()*5 / RAND_MAX, (float)rand()*5 / RAND_MAX);
 			ColorRGBA8 m_particleColor = ColorRGBA8(255, 255, 255, 255);
 
 			// State
@@ -83,7 +86,10 @@ namespace ShyEngine
 			void play();
 			void stop(bool destroyParticles = false);
 
-			void update(float deltaTime);
+			void updateAll(float deltaTime);
+			void updateSystem(float deltaTime);
+			Particle updateParticle(int index, float deltaTime);
+
 			std::vector<Particle> getParticles();
 	};
 }

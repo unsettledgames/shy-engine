@@ -19,6 +19,8 @@ namespace ShyEngine
 			~ParticleRenderer() {}
 
 			void updateModules(ShaderData& shaderData);
+			
 			void draw(std::vector<Particle> toDraw);
+			void draw(Particle toDraw);
 	};
 }

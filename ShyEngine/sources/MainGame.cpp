@@ -1,10 +1,13 @@
 #include <iostream>
+#include <time.h>
 
 #include <engine/ShyEngine.h>
 #include <string>
 
 int main(int argc, char** argv)
 {
+    srand((unsigned)time(NULL));
+
     ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);
     ShyEngine::Entity* test;
 
@@ -59,8 +62,8 @@ int main(int argc, char** argv)
     engine.registerModule(testParticleSystem);
     test->attachModule(testParticleSystem);
 
-    testParticleSystem->setEmissionRate(0.05);
-    testParticleSystem->setLifetime(20000);
+    testParticleSystem->setEmissionRate(2);
+    testParticleSystem->setLifetime(1000);
 
     engine.run();
 

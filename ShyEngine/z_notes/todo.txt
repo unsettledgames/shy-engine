@@ -14,6 +14,7 @@
 	initialization and the Engine components initialization). The screen management part should be some kind of Scene system
 	instead.
 - Add proper destructors
+- Use the correct shader when rendering a Glyph
 
 Games:
 - Stress test with ball game

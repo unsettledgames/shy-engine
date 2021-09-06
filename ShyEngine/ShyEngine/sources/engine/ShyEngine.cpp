@@ -149,10 +149,10 @@ namespace ShyEngine {
 
 				// Update loop for the sprite renderer
 				m_spriteRenderer->updateModules(spriteRendererShaderData);
-				// Update loop for the text renderer
-				m_textRenderer->updateModules(textRendererShaderData);
 				// Update loop for the particle renderer
 				m_particleRenderer->updateModules(spriteRendererShaderData);
+				// Update loop for the text renderer
+				m_textRenderer->updateModules(textRendererShaderData);
 
 				// Cleanup
 				SDL_GL_SwapWindow(this->m_gameWindow);

@@ -51,10 +51,26 @@ namespace ShyEngine
 			m_particles.clear();
 	}
 
-	void ParticleSystem::update(float deltaTime)
+	Particle ParticleSystem::updateParticle(int index, float deltaTime)
+	{
+		if (m_particles[index].m_lifetime > 0)
+		{
+			m_particleUpdate(m_particles[index], deltaTime * m_simulationSpeed);
+			m_particles[index].m_lifetime -= deltaTime * m_simulationSpeed;
+
+			m_particles[index].m_dead = false;
+		}
+		else
+			m_particles[index].m_dead = true;
+
+		return m_particles[index];
+	}
+
+	void ParticleSystem::updateSystem(float deltaTime)
 	{
 		if (m_isPlaying)
 		{
+			m_particleVelocity = glm::vec2((float)rand() * 5 / RAND_MAX, (float)rand() * 5 / RAND_MAX);
 			// Emit particle if needed
 			if (m_nextEmissionTime > (1 / m_emissionRate))
 			{
@@ -62,18 +78,16 @@ namespace ShyEngine
 				m_nextEmissionTime = 0;
 			}
 
-			for (int i = 0; i < m_maxParticles && i < m_particles.size(); i++)
-			{
-				// Check if the particle is active
-				if (m_particles[i].m_lifetime > 0.0f)
-				{
-					m_particleUpdate(m_particles[i], deltaTime * m_simulationSpeed);
-					m_particles[i].m_lifetime -= deltaTime * m_simulationSpeed;
-				}
-			}
-
 			m_nextEmissionTime += deltaTime;
 		}
+	}
+
+	void ParticleSystem::updateAll(float deltaTime)
+	{
+		updateSystem(deltaTime);
+
+		for (int i = 0; i < m_particles.size(); i++)
+			updateParticle(i, deltaTime);
 	}
 
 	void ParticleSystem::setMaxParticles(unsigned int amount)
@@ -114,16 +128,9 @@ namespace ShyEngine
 		{
 			int lastIndex = getFreeParticle();
 
-			m_particles[lastIndex].m_pos = m_transform->getPos();
-			m_particles[lastIndex].m_velocity = m_particleVelocity;
-			m_particles[lastIndex].m_color = m_particleColor;
-			m_particles[lastIndex].m_scale = m_transform->getScale();
-			m_particles[lastIndex].m_lifetime = m_lifetime;
-			m_particles[lastIndex].m_shader = m_shader;
-			m_particles[lastIndex].m_texture = m_texture;
-
-			m_particles[lastIndex].setUV(glm::vec4(0, 0, 1, 1));
-			m_particles[lastIndex].updateVertices();
+			m_particles[lastIndex] = Particle::Particle(m_transform->getPos(), m_particleVelocity, 
+				m_transform->getScale(), m_particleColor, m_shader, m_texture, 0.0f);
+			m_particles[lastIndex].init(m_lifetime, glm::vec4(0, 0, 1, 1));
 		}
 	}
 
