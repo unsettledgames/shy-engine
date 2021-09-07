@@ -91,6 +91,12 @@
     <Filter Include="Header Files\Engine\Modules\Collisions">
       <UniqueIdentifier>{f2c8f075-f7e6-425b-8520-99c6187a0c3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Collisions">
+      <UniqueIdentifier>{210ceb58-eb0c-4b51-9cef-89fb021ee117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collisions">
+      <UniqueIdentifier>{f553494a-5461-4571-986e-0d062fbb5fd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\audio\AudioEngine.h">
@@ -225,6 +231,9 @@
     <ClInclude Include="includes\data\SystemData.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
+    <ClInclude Include="includes\collisions\Collidable.h">
+      <Filter>Header Files\Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -334,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="sources\engine\systems\PhysicsManager.cpp">
       <Filter>Source Files\Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\collisions\Collidable.cpp">
+      <Filter>Source Files\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

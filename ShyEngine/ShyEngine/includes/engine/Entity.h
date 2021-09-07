@@ -35,7 +35,7 @@ namespace ShyEngine
 			~Entity() { m_ids.add(m_id); }
 
 			Module* getModule(const std::string& name);
-			std::vector<Module> getModules(const std::string& name);
+			std::vector<Module*> getModules(const std::string& name);
 
 			void attachModule(Module* toAttach);
 			int detachModule(Module* toRemove);

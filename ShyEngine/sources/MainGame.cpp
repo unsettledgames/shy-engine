@@ -16,15 +16,15 @@ int main(int argc, char** argv)
 
     engine.registerShader(shader);
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 100; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 100; j++)
         {
             ball = engine.createEntity("Ballin");
 
             // Adjusting the transform
-            ball->getTransform()->setScale(glm::vec2(50, 50));
-            ball->getTransform()->setPos(glm::vec2(50 * i, 50 * j));
+            ball->getTransform()->setScale(glm::vec2(20, 20));
+            ball->getTransform()->setPos(glm::vec2(25 * i, 25 * j));
 
             // Adding the sprite
             ShyEngine::Sprite* ballSprite = new ShyEngine::Sprite(ball, "textures/AH.png",
@@ -41,6 +41,7 @@ int main(int argc, char** argv)
             ShyEngine::Physics* physics = new ShyEngine::Physics(ball);
             engine.registerModule(physics);
             ball->attachModule(physics);
+
             // Adjusting physics
             physics->setMass(0.02f);
             physics->setVelocity(glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 10.0f, (((float)rand() / RAND_MAX)) * 10.0f));

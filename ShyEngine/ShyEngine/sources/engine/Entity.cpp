@@ -21,13 +21,13 @@ namespace ShyEngine
 		return nullptr;
 	}
 
-	std::vector<Module> Entity::getModules(const std::string& name)
+	std::vector<Module*> Entity::getModules(const std::string& name)
 	{
-		std::vector<Module> ret;
+		std::vector<Module*> ret;
 
 		for (auto _module : m_modules)
 			if (_module.getName().compare(name) == 0)
-				ret.push_back(_module);
+				ret.push_back(_module.m_reference);
 		
 		return ret;
 	}

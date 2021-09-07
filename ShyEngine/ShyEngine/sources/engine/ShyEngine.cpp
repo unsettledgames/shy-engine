@@ -21,6 +21,7 @@ namespace ShyEngine {
 		m_hudCamera.setPosition(glm::vec2(0, 0));
 
 		m_camera.init(m_screenWidth, m_screenHeight);
+		m_camera.setScale(0.5);
 		m_audioEngine.init();
 
 		m_spriteRenderer = new SpriteRenderer();
@@ -173,13 +174,13 @@ namespace ShyEngine {
 
 				// TEST
 				if (m_input.getKeyDown(SDLK_w))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 3.0f) * totalDeltaTime);
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 6.0f) * totalDeltaTime);
 				if (m_input.getKeyDown(SDLK_s))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -3.0f) * totalDeltaTime);
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -6.0f) * totalDeltaTime);
 				if (m_input.getKeyDown(SDLK_a))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-3.0f, 0.0f) * totalDeltaTime);
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-6.0f, 0.0f) * totalDeltaTime);
 				if (m_input.getKeyDown(SDLK_d))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(3.0f, 0.0f) * totalDeltaTime);
+					m_camera.setPosition(m_camera.getPosition() + glm::vec2(6.0f, 0.0f) * totalDeltaTime);
 
 				totalDeltaTime -= deltaTime;
 				currSimStep++;
@@ -215,7 +216,7 @@ namespace ShyEngine {
 		}
 		else if (toRegister->getName().find("Collider") != std::string::npos)
 		{
-			m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
+			//m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
 		}
 	}
 

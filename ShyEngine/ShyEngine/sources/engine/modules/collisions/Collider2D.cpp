@@ -13,6 +13,16 @@ namespace ShyEngine
 
 	Collider2D::Collider2D(Entity* entity) : Collider2D("Collider2D", entity) {}
 
+	bool Collider2D::checkCollision(std::vector<Collider2D*> colliders)
+	{
+		bool ret = false;
+
+		for (auto collider : colliders)
+			ret = ret || checkCollision(collider);
+		
+		return ret;
+	}
+
 	bool Collider2D::checkCollision(Transform* other)
 	{
 		return checkCollision(glm::vec4(other->getPos(), other->getScale()));
