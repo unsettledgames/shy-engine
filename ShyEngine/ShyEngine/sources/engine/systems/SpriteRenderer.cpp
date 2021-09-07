@@ -18,6 +18,7 @@ namespace ShyEngine
 		for (auto _module : m_modulesToUpdate)
 		{
 			currSprite = dynamic_cast<Sprite*>(&_module);
+			currSprite->updateVertices();
 			// Only draw if the object is visible
 			if (Collider2D::AABB(glm::vec4(currSprite->getPosition(), currSprite->getScale()), shaderData.cameraViewport))
 				draw(currSprite);

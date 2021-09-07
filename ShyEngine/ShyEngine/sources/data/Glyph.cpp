@@ -80,7 +80,6 @@ namespace ShyEngine
 			top left: x, y + w
 			top right: x + z, y + w
 		*/
-
 		// UV = (0, 0, 1, -1);
 		this->m_topLeft.setPosition(m_pos.x + topLeft.x, m_pos.y + topLeft.y);
 		this->m_topLeft.setUV(m_uv.x, m_uv.y - m_uv.w);

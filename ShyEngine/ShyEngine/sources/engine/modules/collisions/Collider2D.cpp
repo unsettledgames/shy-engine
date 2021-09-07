@@ -4,6 +4,15 @@ namespace ShyEngine
 {
 	Collider2D::Collider2D() {}
 
+	Collider2D::Collider2D(std::string&& name, Entity* entity) : Collider2D(name, entity) {}
+
+	Collider2D::Collider2D(std::string& name, Entity* entity) : Module(name, entity) 
+	{
+		m_transform = entity->getTransform();
+	}
+
+	Collider2D::Collider2D(Entity* entity) : Collider2D("Collider2D", entity) {}
+
 	bool Collider2D::checkCollision(Transform* other)
 	{
 		return checkCollision(glm::vec4(other->getPos(), other->getScale()));

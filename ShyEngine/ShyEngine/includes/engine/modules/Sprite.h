@@ -22,7 +22,7 @@ namespace ShyEngine
 		friend class SpriteRenderer;
 
 		private:
-			void init();
+			void updateVertices();
 
 		public:
 			Sprite();

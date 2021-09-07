@@ -13,7 +13,7 @@ namespace ShyEngine
 		m_shader = shader;
 		m_color = color;
 
-		init();
+		updateVertices();
 	}
 
 	Sprite::Sprite(Entity* entity, const std::string& texturePath, ShaderProgram* shader, ColorRGBA8 color) : 
@@ -23,10 +23,10 @@ namespace ShyEngine
 		m_shader = shader;
 		m_color = color;
 
-		init();
+		updateVertices();
 	}
 
-	void Sprite::init() 
+	void Sprite::updateVertices() 
 	{ 
 		Transform transform = *(m_entity->getTransform());
 		glm::vec2 pos = transform.getPos();

@@ -149,7 +149,8 @@ namespace ShyEngine {
 				/********************PHYSICS******************/
 				// Update loop for the physics and collision manager
 				m_collisionManager->updateModules(physicsData);
-				m_physicsManager->updateModules(physicsData);
+				if (m_input.getKeyDown(SDLK_p))
+					m_physicsManager->updateModules(physicsData);
 
 				/********************RENDERING****************/
 				glClearDepth(1.0f);

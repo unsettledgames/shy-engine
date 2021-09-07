@@ -9,7 +9,7 @@ namespace ShyEngine
 	{
 		Transform* transform = m_entity->getTransform();
 
-		transform->setPos(transform->getPos() + m_velocity * data.deltaTime);
-		m_velocity += data.gravity * data.deltaTime;
+		transform->setPos(transform->getPos() + m_velocity * data.deltaTime );
+		m_velocity += data.gravity * data.deltaTime * m_mass;
 	}
 }

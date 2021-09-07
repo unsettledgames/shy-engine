@@ -12,6 +12,7 @@ namespace ShyEngine
 	{
 		private:
 			glm::vec2 m_velocity = glm::vec2(0.0f, 0.0f);
+			float m_mass = 1.0f;
 
 		public:
 			Physics() : Module("Physics", nullptr) {}
@@ -22,5 +23,8 @@ namespace ShyEngine
 
 			void setVelocity(glm::vec2 vel) { m_velocity = vel; }
 			glm::vec2 getVelocity() { return m_velocity; }
+
+			void setMass(float mass) { m_mass = mass; }
+			float getMass() { return m_mass; }
 	};
 }

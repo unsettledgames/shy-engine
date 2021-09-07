@@ -13,23 +13,26 @@ namespace ShyEngine
 		// Rendering process
 		begin();
 
-		Text* currText;
-		std::vector<Glyph> glyphs = m_modulesToUpdate[0].getGlyphs();
-
-		for (auto _module : m_modulesToUpdate)
+		if (m_modulesToUpdate.size() > 0)
 		{
-			draw(dynamic_cast<Text*>(&_module), shaderData);
-		}
+			Text* currText;
+			std::vector<Glyph> glyphs = m_modulesToUpdate[0].getGlyphs();
 
-		end();
+			for (auto _module : m_modulesToUpdate)
+			{
+				draw(dynamic_cast<Text*>(&_module), shaderData);
+			}
 
-		// OPTIMIZABLE: use the correct shader lol
-		glyphs[0].useShader();
-		glyphs[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+			end();
 
-		render();
+			// OPTIMIZABLE: use the correct shader lol
+			glyphs[0].useShader();
+			glyphs[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 
-		glyphs[0].unuseShader();
+			render();
+
+			glyphs[0].unuseShader();
+		}		
 	}
 
 	void TextRenderer::draw(Text* toDraw, ShaderData shaderData)

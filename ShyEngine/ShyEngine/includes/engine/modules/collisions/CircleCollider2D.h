@@ -11,7 +11,7 @@ namespace ShyEngine
 
 		public:
 			CircleCollider2D();
-			CircleCollider2D(float radius);
+			CircleCollider2D(Entity* entity, float radius);
 			~CircleCollider2D() {};
 
 	};
