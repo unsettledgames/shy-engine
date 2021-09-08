@@ -3,6 +3,8 @@
 
 namespace ShyEngine
 {
+	CLASS_DEFINITION(Module, Sprite)
+
 	Sprite::Sprite() : Module("Sprite", nullptr) 
 	{
 	}

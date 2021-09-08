@@ -22,6 +22,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <util/Classes.h>
 
 #include <glm/glm.hpp>
 #include <SDLttf2/SDL_ttf.h>
@@ -37,7 +38,8 @@
 #define FIRST_PRINTABLE_CHAR ((char)32)
 #define LAST_PRINTABLE_CHAR ((char)126)
 
-namespace ShyEngine {
+namespace ShyEngine 
+{
 
     class GLTexture;
     class SpriteBatch;
@@ -65,6 +67,8 @@ namespace ShyEngine {
 
     class Text : public Module 
     {
+        CLASS_DECLARATION(Text);
+
         friend bool operator==(const Text& s1, const Text& s2);
 
         private:

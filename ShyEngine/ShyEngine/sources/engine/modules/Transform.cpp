@@ -2,6 +2,8 @@
 
 namespace ShyEngine
 {
+	CLASS_DEFINITION(Module, Transform)
+
 	Transform::Transform() : Module("Transform", nullptr)
 	{
 		m_position = glm::vec2(0, 0);

@@ -60,6 +60,7 @@
     <ClInclude Include="includes\screen\IGameScreen.h" />
     <ClInclude Include="includes\SpatialGrid.h" />
     <ClInclude Include="includes\timing\Timing.h" />
+    <ClInclude Include="includes\util\Classes.h" />
     <ClInclude Include="includes\util\Error.h" />
     <ClInclude Include="includes\util\IdGenerator.h" />
     <ClInclude Include="includes\util\Math.h" />
@@ -67,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp" />
-    <ClCompile Include="sources\collisions\Collidable.cpp" />
     <ClCompile Include="sources\data\Glyph.cpp" />
     <ClCompile Include="sources\data\ImageLoader.cpp" />
     <ClCompile Include="sources\data\Particle.cpp" />
@@ -76,9 +76,6 @@
     <ClCompile Include="sources\engine\Entity.cpp" />
     <ClCompile Include="sources\engine\Module.cpp" />
     <ClCompile Include="sources\engine\modules\Camera.cpp" />
-    <ClCompile Include="sources\engine\modules\collisions\CircleCollider2D.cpp" />
-    <ClCompile Include="sources\engine\modules\collisions\Collider2D.cpp" />
-    <ClCompile Include="sources\engine\modules\collisions\RectCollider2D.cpp" />
     <ClCompile Include="sources\engine\modules\ParticleSystem.cpp" />
     <ClCompile Include="sources\engine\modules\Physics.cpp" />
     <ClCompile Include="sources\engine\modules\Sprite.cpp" />
@@ -86,7 +83,6 @@
     <ClCompile Include="sources\engine\modules\Transform.cpp" />
     <ClCompile Include="sources\engine\ShyEngine.cpp" />
     <ClCompile Include="sources\engine\System.cpp" />
-    <ClCompile Include="sources\engine\systems\CollisionManager.cpp" />
     <ClCompile Include="sources\engine\systems\ParticleRenderer.cpp" />
     <ClCompile Include="sources\engine\systems\PhysicsManager.cpp" />
     <ClCompile Include="sources\engine\systems\SpriteRenderer.cpp" />
@@ -100,6 +96,7 @@
     <ClCompile Include="sources\screen\IMainGame.cpp" />
     <ClCompile Include="sources\SpatialGrid.cpp" />
     <ClCompile Include="sources\timing\Timing.cpp" />
+    <ClCompile Include="sources\util\Classes.cpp" />
     <ClCompile Include="sources\util\Error.cpp" />
     <ClCompile Include="sources\util\IdGenerator.cpp" />
     <ClCompile Include="sources\util\Utility.cpp" />

@@ -15,6 +15,7 @@
 #include <util/Error.h>
 #include <util/Utility.h>
 #include <timing/Timing.h>
+#include <util/IdGenerator.h>
 
 #include <data/ResourcesManager.h>
 
@@ -65,6 +66,9 @@ namespace ShyEngine
 			std::vector<System*> m_systems;
 			std::vector<Entity> m_entities;
 			std::vector<ShaderProgram*> m_shaders;
+
+			// ID generators
+			IdGenerator m_entityIdGenerator;
 
 			// Managers
 			PhysicsManager* m_physicsManager;

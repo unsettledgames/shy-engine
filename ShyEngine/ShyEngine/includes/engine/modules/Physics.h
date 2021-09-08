@@ -1,5 +1,6 @@
 #pragma once
 
+#include <util/Classes.h>
 #include <engine/Module.h>
 #include <engine/Entity.h>
 #include <data/SystemData.h>
@@ -10,6 +11,8 @@ namespace ShyEngine
 {
 	class Physics : public Module
 	{
+		CLASS_DECLARATION(Physics)
+
 		private:
 			glm::vec2 m_velocity = glm::vec2(0.0f, 0.0f);
 			float m_mass = 1.0f;

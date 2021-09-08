@@ -1,7 +1,8 @@
 - AABB collisions and CollisionManager
 - Circle collisions
 - Spatial partitioning
-- Physics
+
+- getModules and getModule should check if the name contains the string, not if it's equal to it
 
 
 - Add a debug window and a debug manager where I can put textures and easily print stuff onto it

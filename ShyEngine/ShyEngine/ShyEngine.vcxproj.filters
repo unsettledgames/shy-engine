@@ -234,6 +234,9 @@
     <ClInclude Include="includes\collisions\Collidable.h">
       <Filter>Header Files\Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="includes\util\Classes.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -329,23 +332,11 @@
     <ClCompile Include="sources\data\Particle.cpp">
       <Filter>Source Files\Data</Filter>
     </ClCompile>
-    <ClCompile Include="sources\engine\modules\collisions\CircleCollider2D.cpp">
-      <Filter>Source Files\Engine\Modules\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\engine\modules\collisions\Collider2D.cpp">
-      <Filter>Source Files\Engine\Modules\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\engine\modules\collisions\RectCollider2D.cpp">
-      <Filter>Source Files\Engine\Modules\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\engine\systems\CollisionManager.cpp">
-      <Filter>Source Files\Engine\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="sources\engine\systems\PhysicsManager.cpp">
       <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="sources\collisions\Collidable.cpp">
-      <Filter>Source Files\Collisions</Filter>
+    <ClCompile Include="sources\util\Classes.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

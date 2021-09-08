@@ -18,14 +18,16 @@ namespace ShyEngine
 	class Collidable : public Module
 	{
 		private:
-
+			bool m_prevContact = false;
 		public:
 			Collidable();
 			Collidable(Entity* entity) : Module("Collidable", entity) {}
 			~Collidable();
 
-			void onCollisionStarted();
-			void onCollisionFinished();
-			void onCollisionStay();
+			void handleCollision(bool contact);
+
+			void onCollisionStarted() {};
+			void onCollisionFinished() {};
+			void onCollisionStay() {};
 	};
 }

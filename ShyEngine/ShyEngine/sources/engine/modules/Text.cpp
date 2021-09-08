@@ -5,6 +5,8 @@ namespace ShyEngine
 {
     #define MAX_TEXTURE_RES 4096
 
+    CLASS_DEFINITION(Module, Text)
+
     bool operator==(const Text& s1, const Text& s2)
     {
         return s1.m_id == s2.m_id;

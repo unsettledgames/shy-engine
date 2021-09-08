@@ -2,11 +2,14 @@
 
 #include <engine/Module.h>
 #include <glm/glm.hpp>
+#include <util/Classes.h>
 
 namespace ShyEngine
 {
 	class Transform : public Module
 	{
+		CLASS_DECLARATION(Transform);
+
 		private:
 			glm::vec2 m_position;
 			glm::vec2 m_scale;

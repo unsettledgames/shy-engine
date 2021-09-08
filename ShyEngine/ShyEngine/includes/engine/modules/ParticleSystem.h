@@ -3,6 +3,7 @@
 #include <functional>
 #include <string>
 #include <glm/glm.hpp>
+#include <util/Classes.h>
 
 #include <rendering/ShaderProgram.h>
 
@@ -28,6 +29,7 @@ namespace ShyEngine
 
 	class ParticleSystem : public Module
 	{
+		CLASS_DECLARATION(ParticleSystem);
 		class ParticleRenderer;
 		friend class ParticleRenderer;
 

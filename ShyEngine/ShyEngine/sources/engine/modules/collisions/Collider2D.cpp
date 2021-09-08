@@ -23,6 +23,17 @@ namespace ShyEngine
 		return ret;
 	}
 
+	bool Collider2D::checkCollisionOptimized(std::vector<Collider2D*> colliders)
+	{
+		for (auto collider : colliders)
+		{
+			if (checkCollision(collider))
+				return true;
+		}
+
+		return false;
+	}
+
 	bool Collider2D::checkCollision(Transform* other)
 	{
 		return checkCollision(glm::vec4(other->getPos(), other->getScale()));
@@ -51,7 +62,7 @@ namespace ShyEngine
 	}
 
 	bool Collider2D::checkCompatibility(std::vector<Module>& otherModules) 
-	{ 
+	{
 		// There must exist a Transform component
 		return std::find_if(otherModules.begin(), otherModules.end(),
 			[](Module other) { return other.getName() == "Transform"; }) != otherModules.end();

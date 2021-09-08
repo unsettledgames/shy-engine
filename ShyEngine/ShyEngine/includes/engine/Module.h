@@ -29,6 +29,8 @@ namespace ShyEngine
 			int m_id;
 
 		public:
+			static const std::size_t Type;
+
 			Module() {}
 			Module(const std::string& name, Entity* entity);
 			~Module() {};
@@ -40,6 +42,7 @@ namespace ShyEngine
 
 			virtual bool checkCompatibility(std::vector<Module>& otherModules) { return true; }
 			virtual bool checkDependency(std::vector<Module>& otherModules) { return true; }
+			virtual bool IsClassType(const std::size_t classType) const { return classType == Type; }
 
 			int getId() { return m_id; }
 			Module* getReference() { return m_reference; }

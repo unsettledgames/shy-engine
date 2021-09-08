@@ -1,6 +1,7 @@
 #pragma once
 
 #include <data/Texture.h>
+#include <util/Classes.h>
 #include <rendering/ShaderProgram.h>
 #include <glm/glm.hpp>
 #include <string>
@@ -19,6 +20,8 @@ namespace ShyEngine
 
 	class Sprite : public Module, public Glyph
 	{
+		CLASS_DECLARATION(Sprite);
+
 		friend class SpriteRenderer;
 
 		private:

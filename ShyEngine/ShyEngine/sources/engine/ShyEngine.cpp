@@ -228,7 +228,9 @@ namespace ShyEngine {
 	Entity* ShyEngine::createEntity(const std::string& name/* = "NewEntity"*/)
 	{
 		Entity* ret = new Entity(name);
+
 		ret->m_reference = ret;
+		ret->m_id = m_entityIdGenerator.get();
 
 		return ret;
 	}

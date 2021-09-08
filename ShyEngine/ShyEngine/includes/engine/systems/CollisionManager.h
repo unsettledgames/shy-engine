@@ -2,6 +2,8 @@
 
 #include <collisions/Collidable.h>
 #include <data/SystemData.h>
+
+#include <engine/Entity.h>
 #include <engine/System.h>
 
 #include <vector>
@@ -15,13 +17,10 @@ namespace ShyEngine
 		friend class CollisionManager;
 
 		private:
-			std::vector<Collidable*> m_objects;
+			std::vector<Entity*> m_objects;
 		public:
 			SpatialPartitioningCell();
 			~SpatialPartitioningCell() {}
-
-			void addObject(Collidable* toAdd);
-			void removeObject(int index);
 	};
 
 	class CollisionManager : public System
@@ -34,7 +33,9 @@ namespace ShyEngine
 			glm::vec2 m_gridSize = glm::vec2(100.0f, 100.0f);
 			glm::vec2 m_nCells = glm::vec2(5, 5);
 
-			int addToGrid(Collidable* toAdd, int x, int y);
+			int addToGrid(Entity* toAdd, int x, int y);
+
+			void cellCollision(Collider2D* collider, int x, int y);
 
 		public:
 			CollisionManager(float cellSize, glm::vec2 gridPos, glm::vec2 gridSize);

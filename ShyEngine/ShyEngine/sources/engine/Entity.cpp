@@ -32,6 +32,17 @@ namespace ShyEngine
 		return ret;
 	}
 
+	std::vector<Collidable*> Entity::getCollidables()
+	{
+		std::vector<Collidable*> ret;
+
+		for (auto _module : m_modules)
+			if (_module.getName().find("Collidable") != std::string::npos)
+				ret.push_back(dynamic_cast<Collidable*>(&_module));
+
+		return ret;
+	}
+
 	void Entity::attachModule(Module* toAttach)
 	{
 		if (toAttach->checkCompatibility(m_modules))

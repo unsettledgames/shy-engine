@@ -33,9 +33,10 @@ int main(int argc, char** argv)
             ball->attachModule(ballSprite);
 
             // Adding a circle collider
+            /*
             ShyEngine::CircleCollider2D* circleCollider = new ShyEngine::CircleCollider2D(ball, 100);
             engine.registerModule(circleCollider);
-            ball->attachModule(circleCollider);
+            ball->attachModule(circleCollider);*/
 
             // Adding a physics module
             ShyEngine::Physics* physics = new ShyEngine::Physics(ball);
