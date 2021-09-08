@@ -18,7 +18,7 @@ namespace ShyEngine
 			float m_mass = 1.0f;
 
 		public:
-			Physics() : Module("Physics", nullptr) {}
+			Physics() : Module(nullptr) {}
 			Physics(Entity* entity);
 			~Physics();
 

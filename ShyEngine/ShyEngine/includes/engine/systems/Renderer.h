@@ -146,6 +146,7 @@ namespace ShyEngine
 				glBindVertexArray(0);
 			}
 
+			template <class ModuleType>
 			void addModule(ModuleType* toAdd)
 			{
 				m_modulesPointers.push_back(toAdd);

@@ -34,9 +34,7 @@
     <ClInclude Include="includes\engine\Entity.h" />
     <ClInclude Include="includes\engine\Module.h" />
     <ClInclude Include="includes\engine\modules\Camera.h" />
-    <ClInclude Include="includes\engine\modules\collisions\CircleCollider2D.h" />
     <ClInclude Include="includes\engine\modules\collisions\Collider2D.h" />
-    <ClInclude Include="includes\engine\modules\collisions\RectCollider2D.h" />
     <ClInclude Include="includes\engine\modules\ParticleSystem.h" />
     <ClInclude Include="includes\engine\modules\Physics.h" />
     <ClInclude Include="includes\engine\modules\Sprite.h" />
@@ -44,7 +42,6 @@
     <ClInclude Include="includes\engine\modules\Transform.h" />
     <ClInclude Include="includes\engine\ShyEngine.h" />
     <ClInclude Include="includes\engine\System.h" />
-    <ClInclude Include="includes\engine\systems\CollisionManager.h" />
     <ClInclude Include="includes\engine\systems\ParticleRenderer.h" />
     <ClInclude Include="includes\engine\systems\PhysicsManager.h" />
     <ClInclude Include="includes\engine\systems\Renderer.h" />
@@ -68,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp" />
+    <ClCompile Include="sources\collisions\Collidable.cpp" />
     <ClCompile Include="sources\data\Glyph.cpp" />
     <ClCompile Include="sources\data\ImageLoader.cpp" />
     <ClCompile Include="sources\data\Particle.cpp" />
@@ -76,6 +74,7 @@
     <ClCompile Include="sources\engine\Entity.cpp" />
     <ClCompile Include="sources\engine\Module.cpp" />
     <ClCompile Include="sources\engine\modules\Camera.cpp" />
+    <ClCompile Include="sources\engine\modules\collisions\Collider2D.cpp" />
     <ClCompile Include="sources\engine\modules\ParticleSystem.cpp" />
     <ClCompile Include="sources\engine\modules\Physics.cpp" />
     <ClCompile Include="sources\engine\modules\Sprite.cpp" />

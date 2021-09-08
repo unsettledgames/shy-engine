@@ -29,8 +29,8 @@ int main(int argc, char** argv)
             // Adding the sprite
             ShyEngine::Sprite* ballSprite = new ShyEngine::Sprite(ball, "textures/AH.png",
                 shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
-            engine.registerModule(ballSprite);
-            ball->attachModule(ballSprite);
+            engine.registerModule<ShyEngine::Sprite>(ballSprite);
+            ball->attachModule<ShyEngine::Sprite>(ballSprite);
 
             // Adding a circle collider
             /*
@@ -40,8 +40,8 @@ int main(int argc, char** argv)
 
             // Adding a physics module
             ShyEngine::Physics* physics = new ShyEngine::Physics(ball);
-            engine.registerModule(physics);
-            ball->attachModule(physics);
+            engine.registerModule<ShyEngine::Physics>(physics);
+            ball->attachModule<ShyEngine::Physics>(physics);
 
             // Adjusting physics
             physics->setMass(0.02f);

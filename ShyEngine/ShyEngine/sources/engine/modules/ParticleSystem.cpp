@@ -3,9 +3,11 @@
 
 namespace ShyEngine
 {
+	CLASS_DEFINITION(Module, ParticleSystem);
+
 	ParticleSystem::~ParticleSystem() {}
 
-	ParticleSystem::ParticleSystem(Entity* entity) : Module("ParticleSystem", entity)
+	ParticleSystem::ParticleSystem(Entity* entity) : Module(entity)
 	{
 		m_entity = entity;
 		m_transform = m_entity->getTransform();

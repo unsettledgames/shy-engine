@@ -22,8 +22,6 @@ namespace ShyEngine
 		public:
 			Collider2D();
 			Collider2D(Entity* entity);
-			Collider2D(std::string& name, Entity* entity);
-			Collider2D(std::string&& name, Entity* entity);
 			~Collider2D() {}
 
 			bool checkCollision(std::vector<Collider2D*> colliders);

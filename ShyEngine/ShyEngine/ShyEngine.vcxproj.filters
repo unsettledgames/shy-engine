@@ -213,29 +213,20 @@
     <ClInclude Include="includes\data\Particle.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
-    <ClInclude Include="includes\engine\modules\collisions\CircleCollider2D.h">
-      <Filter>Header Files\Engine\Modules\Collisions</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\engine\modules\collisions\Collider2D.h">
-      <Filter>Header Files\Engine\Modules\Collisions</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\engine\modules\collisions\RectCollider2D.h">
-      <Filter>Header Files\Engine\Modules\Collisions</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\engine\systems\CollisionManager.h">
-      <Filter>Header Files\Engine\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="includes\engine\systems\PhysicsManager.h">
       <Filter>Header Files\Engine\Systems</Filter>
     </ClInclude>
     <ClInclude Include="includes\data\SystemData.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
+    <ClInclude Include="includes\util\Classes.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
     <ClInclude Include="includes\collisions\Collidable.h">
       <Filter>Header Files\Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="includes\util\Classes.h">
-      <Filter>Header Files\Util</Filter>
+    <ClInclude Include="includes\engine\modules\collisions\Collider2D.h">
+      <Filter>Header Files\Engine\Modules\Collisions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +328,12 @@
     </ClCompile>
     <ClCompile Include="sources\util\Classes.cpp">
       <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\collisions\Collidable.cpp">
+      <Filter>Source Files\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\collisions\Collider2D.cpp">
+      <Filter>Source Files\Engine\Modules\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

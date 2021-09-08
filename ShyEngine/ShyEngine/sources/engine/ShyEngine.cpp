@@ -29,7 +29,7 @@ namespace ShyEngine {
 		m_particleRenderer = new ParticleRenderer();
 
 		m_physicsManager = new PhysicsManager();
-		m_collisionManager = new CollisionManager();
+		//m_collisionManager = new CollisionManager();
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -149,7 +149,7 @@ namespace ShyEngine {
 
 				/********************PHYSICS******************/
 				// Update loop for the physics and collision manager
-				m_collisionManager->updateModules(physicsData);
+				//m_collisionManager->updateModules(physicsData);
 				if (m_input.getKeyDown(SDLK_p))
 					m_physicsManager->updateModules(physicsData);
 
@@ -194,30 +194,32 @@ namespace ShyEngine {
 		}
 	}
 
-	void ShyEngine::registerModule(Module* toRegister)
+	template <class ModuleType>
+	void ShyEngine::registerModule(ModuleType* toRegister)
 	{
 		toRegister->m_reference = toRegister;
 		// REFACTOR: turn name into a type so it's less flexible
-		if (toRegister->getName().compare("Sprite") == 0)
+		if (toRegister->Type == Sprite::Type)
 		{
 			m_spriteRenderer->addModule(dynamic_cast<Sprite*>(toRegister));
 		}
-		else if (toRegister->getName().compare("Text") == 0)
+		else if (toRegister->Type == Text::Type)
 		{
 			m_textRenderer->addModule(dynamic_cast<Text*>(toRegister));
 		}
-		else if (toRegister->getName().compare("ParticleSystem") == 0)
+		else if (toRegister->Type == ParticleSystem::Type)
 		{
 			m_particleRenderer->addModule(dynamic_cast<ParticleSystem*>(toRegister));
 		}
-		else if (toRegister->getName().compare("Physics") == 0)
+		else if (toRegister->Type == Physics::Type)
 		{
 			m_physicsManager->addModule(dynamic_cast<Physics*>(toRegister));
 		}
-		else if (toRegister->getName().find("Collider") != std::string::npos)
+		/*
+		else if (toRegister->Type == Collider::Type)
 		{
-			//m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
-		}
+			m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
+		}*/
 	}
 
 	void ShyEngine::registerShader(ShaderProgram* toRegister)

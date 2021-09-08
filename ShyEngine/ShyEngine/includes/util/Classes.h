@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <engine/Module.h>
 
 #pragma once
 
@@ -19,6 +20,7 @@
 #define CLASS_DECLARATION( classname )                                                      \
 public:                                                                                     \
     static const std::size_t Type;                                                          \
+    static const std::string m_name;                                                        \
     virtual bool IsClassType( const std::size_t classType ) const override;                 \
 
 //****************
@@ -31,13 +33,9 @@ public:                                                                         
 //****************
 #define CLASS_DEFINITION( parentclass, childclass )                                         \
 const std::size_t childclass::Type = std::hash< std::string >()( TO_STRING( childclass ) ); \
+const std::string childclass::m_name = "childclass";                                        \
 bool childclass::IsClassType( const std::size_t classType ) const {                         \
         if ( classType == childclass::Type )                                                \
             return true;                                                                    \
         return parentclass::IsClassType( classType );                                       \
-}                                                                                           \
-
-namespace ShyEngine
-{
-    const std::size_t Module::Type = std::hash<std::string>()(TO_STRING(Component));
-}
+}      

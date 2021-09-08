@@ -1,6 +1,7 @@
 #pragma once
 
 #include <engine/Module.h>
+#include <engine/modules/Sprite.h>
 #include <glm/glm.hpp>
 #include <util/Classes.h>
 
@@ -8,7 +9,7 @@ namespace ShyEngine
 {
 	class Transform : public Module
 	{
-		CLASS_DECLARATION(Transform);
+		CLASS_DECLARATION(Transform)
 
 		private:
 			glm::vec2 m_position;

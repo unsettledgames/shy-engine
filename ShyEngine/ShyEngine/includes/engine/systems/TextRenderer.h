@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-
 #include <engine/modules/Text.h>
 #include <engine/systems/Renderer.h>
 #include <data/SystemData.h>

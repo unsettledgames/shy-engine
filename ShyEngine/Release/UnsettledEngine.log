@@ -1,8 +1,5 @@
-﻿  MainGame.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(79,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(207,2): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(183): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>::createRenderBatches(void)'
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(14): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>' being compiled
-MainGame.obj : error LNK2001: unresolved external symbol "public: void __thiscall ShyEngine::Entity::attachModule<class ShyEngine::Physics>(class ShyEngine::Physics *)" (??$attachModule@VPhysics@ShyEngine@@$$V@Entity@ShyEngine@@QAEXPAVPhysics@1@@Z)
-MainGame.obj : error LNK2001: unresolved external symbol "public: void __thiscall ShyEngine::Entity::attachModule<class ShyEngine::Sprite>(class ShyEngine::Sprite *)" (??$attachModule@VSprite@ShyEngine@@$$V@Entity@ShyEngine@@QAEXPAVSprite@1@@Z)
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\SampleGame.exe : fatal error LNK1120: 2 unresolved externals
+﻿MainGame.obj : error LNK2001: unresolved external symbol "public: void __thiscall ShyEngine::Entity::attachModule<class ShyEngine::Physics>(class ShyEngine::Physics *)" (??$attachModule@VPhysics@ShyEngine@@@Entity@ShyEngine@@QAEXPAVPhysics@1@@Z)
+MainGame.obj : error LNK2001: unresolved external symbol "public: void __thiscall ShyEngine::Entity::attachModule<class ShyEngine::Sprite>(class ShyEngine::Sprite *)" (??$attachModule@VSprite@ShyEngine@@@Entity@ShyEngine@@QAEXPAVSprite@1@@Z)
+MainGame.obj : error LNK2001: unresolved external symbol "public: void __thiscall ShyEngine::ShyEngine::registerModule<class ShyEngine::Physics>(class ShyEngine::Physics *)" (??$registerModule@VPhysics@ShyEngine@@@ShyEngine@0@QAEXPAVPhysics@0@@Z)
+MainGame.obj : error LNK2001: unresolved external symbol "public: void __thiscall ShyEngine::ShyEngine::registerModule<class ShyEngine::Sprite>(class ShyEngine::Sprite *)" (??$registerModule@VSprite@ShyEngine@@@ShyEngine@0@QAEXPAVSprite@0@@Z)
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\SampleGame.exe : fatal error LNK1120: 4 unresolved externals

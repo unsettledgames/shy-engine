@@ -11,45 +11,49 @@ namespace ShyEngine
 		m_transform = new Transform(this, glm::vec2(0, 0), glm::vec2(0, 0));
 	}
 
-	Module* Entity::getModule(const std::string& name)
+	template <class ModuleType>
+	ModuleType* Entity::getModule()
 	{
 		for (Module _module : this->m_modules)
-			if (_module.getName().compare(name) == 0)
-				return _module.m_reference;
+			if (_module.IsClassType(ModuleType::Type))
+				return static_cast<ModuleType>(_module.m_reference);
 
-		Error::runtime("Couldn't find module " + name + " on entity " + m_name);
+		Error::runtime("Couldn't find module " + ModuleType::m_name + " on entity " + m_name);
 		return nullptr;
 	}
 
-	std::vector<Module*> Entity::getModules(const std::string& name)
+	template <class ModuleType>
+	std::vector<ModuleType*> Entity::getModules()
 	{
-		std::vector<Module*> ret;
+		std::vector<ModuleType*> ret;
 
 		for (auto _module : m_modules)
-			if (_module.getName().compare(name) == 0)
+			if (_module.IsClassType(ModuleType::Type))
 				ret.push_back(_module.m_reference);
 		
 		return ret;
 	}
 
-	std::vector<Collidable*> Entity::getCollidables()
+	template <class ModuleType, typename... Args>
+	ModuleType* Entity::attachModule(Args... parameters)
 	{
-		std::vector<Collidable*> ret;
+		ModuleType* ret = new ModuleType(parameters);
 
-		for (auto _module : m_modules)
-			if (_module.getName().find("Collidable") != std::string::npos)
-				ret.push_back(dynamic_cast<Collidable*>(&_module));
+		if (ret->checkCompatibility(m_modules))
+			m_modules.push_back(ret);
 
 		return ret;
 	}
 
-	void Entity::attachModule(Module* toAttach)
+	template <class ModuleType>
+	void Entity::attachModule(ModuleType* toAttach)
 	{
 		if (toAttach->checkCompatibility(m_modules))
-			m_modules.push_back(*toAttach);
+			m_modules.push_back(toAttach);
 	}
 
-	int Entity::detachModule(Module* toRemove)
+	template <class ModuleType>
+	int Entity::detachModule(ModuleType* toRemove)
 	{
 		int error = 0;
 
@@ -72,12 +76,6 @@ namespace ShyEngine
 			error = -2;
 
 		return error;
-	}
-
-	void Entity::detachModules(const std::string& name)
-	{
-		std::remove_if(m_modules.begin(), m_modules.end(),
-			[&](Module other) {return other.getName().compare(name) == 0 && other.checkDependency(m_modules); });
 	}
 
 	bool operator==(const Entity& e1, const Entity& e2)

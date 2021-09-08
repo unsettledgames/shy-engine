@@ -67,7 +67,7 @@ namespace ShyEngine
 
     class Text : public Module 
     {
-        CLASS_DECLARATION(Text);
+        CLASS_DECLARATION(Text)
 
         friend bool operator==(const Text& s1, const Text& s2);
 

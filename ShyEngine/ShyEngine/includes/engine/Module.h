@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <util/Classes.h>
 
 namespace ShyEngine
 {
@@ -25,19 +26,18 @@ namespace ShyEngine
 		protected:
 			Module* m_reference;
 			Entity* m_entity;
-			std::string m_name;
 			int m_id;
 
 		public:
 			static const std::size_t Type;
+			static const std::string m_name;
 
 			Module() {}
-			Module(const std::string& name, Entity* entity);
+			Module(Entity* entity);
 			~Module() {};
 
 			bool operator==(Module* other);
 
-			const std::string getName() { return m_name; }
 			Entity* getEntity() { return m_entity; }
 
 			virtual bool checkCompatibility(std::vector<Module>& otherModules) { return true; }

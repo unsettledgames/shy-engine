@@ -11,6 +11,7 @@
 #include <data/Glyph.h>
 #include <vector>
 #include <engine/modules/Transform.h>
+#include <engine/modules/Transform.h>
 #include <util/Math.h>
 
 namespace ShyEngine
@@ -20,7 +21,7 @@ namespace ShyEngine
 
 	class Sprite : public Module, public Glyph
 	{
-		CLASS_DECLARATION(Sprite);
+		CLASS_DECLARATION(Sprite)
 
 		friend class SpriteRenderer;
 

@@ -21,7 +21,7 @@ namespace ShyEngine
 			bool m_prevContact = false;
 		public:
 			Collidable();
-			Collidable(Entity* entity) : Module("Collidable", entity) {}
+			Collidable(Entity* entity) : Module(entity) {}
 			~Collidable();
 
 			void handleCollision(bool contact);

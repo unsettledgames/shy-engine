@@ -29,7 +29,7 @@ namespace ShyEngine
 
 	class ParticleSystem : public Module
 	{
-		CLASS_DECLARATION(ParticleSystem);
+		CLASS_DECLARATION(ParticleSystem)
 		class ParticleRenderer;
 		friend class ParticleRenderer;
 

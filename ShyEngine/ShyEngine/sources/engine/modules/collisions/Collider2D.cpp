@@ -4,14 +4,10 @@ namespace ShyEngine
 {
 	Collider2D::Collider2D() {}
 
-	Collider2D::Collider2D(std::string&& name, Entity* entity) : Collider2D(name, entity) {}
-
-	Collider2D::Collider2D(std::string& name, Entity* entity) : Module(name, entity) 
+	Collider2D::Collider2D(Entity* entity) : Module(entity) 
 	{
 		m_transform = entity->getTransform();
 	}
-
-	Collider2D::Collider2D(Entity* entity) : Collider2D("Collider2D", entity) {}
 
 	bool Collider2D::checkCollision(std::vector<Collider2D*> colliders)
 	{
@@ -65,7 +61,7 @@ namespace ShyEngine
 	{
 		// There must exist a Transform component
 		return std::find_if(otherModules.begin(), otherModules.end(),
-			[](Module other) { return other.getName() == "Transform"; }) != otherModules.end();
+			[](Module other) { return other.Type == Transform::Type; }) != otherModules.end();
 	}
 
 	bool Collider2D::checkDependency(std::vector<Module>& otherModules) 

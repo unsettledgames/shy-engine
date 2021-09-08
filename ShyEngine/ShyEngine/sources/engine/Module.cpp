@@ -3,9 +3,11 @@
 
 namespace ShyEngine
 {
-	Module::Module(const std::string& name, Entity* entity) 
+	const std::size_t Module::Type = std::hash<std::string>()(TO_STRING(Module));
+	const std::string Module::m_name = "Module";
+
+	Module::Module(Entity* entity) 
 	{ 
-		m_name = name; 
 		m_entity = entity;
 	}
 

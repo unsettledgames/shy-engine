@@ -5,11 +5,11 @@ namespace ShyEngine
 {
 	CLASS_DEFINITION(Module, Sprite)
 
-	Sprite::Sprite() : Module("Sprite", nullptr) 
+	Sprite::Sprite() : Module(nullptr) 
 	{
 	}
 
-	Sprite::Sprite(Entity* entity, Texture& texture, ShaderProgram* shader, ColorRGBA8 color) : Module("Sprite", entity)
+	Sprite::Sprite(Entity* entity, Texture& texture, ShaderProgram* shader, ColorRGBA8 color) : Module(entity)
 	{
 		m_texture = texture;
 		m_shader = shader;
@@ -19,7 +19,7 @@ namespace ShyEngine
 	}
 
 	Sprite::Sprite(Entity* entity, const std::string& texturePath, ShaderProgram* shader, ColorRGBA8 color) : 
-		Module("Sprite", entity), Glyph(ResourcesManager.getTexture(texturePath), shader, color, 0.0f)
+		Module(entity), Glyph(ResourcesManager.getTexture(texturePath), shader, color, 0.0f)
 	{
 		m_texture = ResourcesManager.getTexture(texturePath);
 		m_shader = shader;
@@ -93,7 +93,7 @@ namespace ShyEngine
 	{
 		// There must exist a Transform component
 		return std::find_if(otherModules.begin(), otherModules.end(), 
-			[](Module other) { return other.getName() == "Transform";}) != otherModules.end();
+			[](Module other) { return other.Type == Transform::Type;}) != otherModules.end();
 	}
 
 	bool Sprite::checkDependency(std::vector<Module>& otherModules)

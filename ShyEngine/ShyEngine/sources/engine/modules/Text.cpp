@@ -23,7 +23,7 @@ namespace ShyEngine
     }
 
     Text::Text(Entity* entity, const std::string& font, int size, unsigned char startChar, unsigned char endChar) : 
-        Module("Text", entity)
+        Module(entity)
     {
         init(font, size, startChar, endChar);
     }

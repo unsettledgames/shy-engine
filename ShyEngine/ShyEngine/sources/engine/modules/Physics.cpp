@@ -4,7 +4,7 @@ namespace ShyEngine
 {
 	CLASS_DEFINITION(Module, Physics)
 
-	Physics::Physics(Entity* entity) : Module("Physics", entity) {}
+	Physics::Physics(Entity* entity) : Module(entity) {}
 	Physics::~Physics() {}
 
 	void Physics::update(PhysicsData data)
