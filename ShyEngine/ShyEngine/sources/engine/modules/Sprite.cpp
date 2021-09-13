@@ -89,14 +89,14 @@ namespace ShyEngine
 		return 0;
 	}
 
-	bool Sprite::checkCompatibility(std::vector<Module>& otherModules)
+	bool Sprite::checkCompatibility(std::vector<Module*>& otherModules)
 	{
 		// There must exist a Transform component
 		return std::find_if(otherModules.begin(), otherModules.end(), 
-			[](Module other) { return other.Type == Transform::Type;}) != otherModules.end();
+			[](Module* other) { return other->Type == Transform::Type;}) != otherModules.end();
 	}
 
-	bool Sprite::checkDependency(std::vector<Module>& otherModules)
+	bool Sprite::checkDependency(std::vector<Module*>& otherModules)
 	{
 		// Nothing depends on Sprite, at the moment
 		return true;

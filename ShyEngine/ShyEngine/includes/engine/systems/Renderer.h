@@ -35,7 +35,7 @@ namespace ShyEngine
 	template <class ModuleType, class RenderableType>
 	class Renderer : public System
 	{
-		static_assert(std::is_base_of<Glyph, RenderableType>::value, "T must inherit from list");
+		static_assert(std::is_base_of<Glyph, RenderableType>::value, "RenderableType must inherit from Glyph");
 
 		protected:
 			// Modules to update

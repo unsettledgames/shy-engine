@@ -28,7 +28,7 @@ namespace ShyEngine
 			std::string m_name;
 			Entity* m_reference;
 
-			std::vector<Module> m_modules;
+			std::vector<Module*> m_modules;
 			Transform* m_transform;
 
 		public:
@@ -37,19 +37,71 @@ namespace ShyEngine
 			~Entity() { m_ids.add(m_id); }
 
 			template <class ModuleType>
-			ModuleType* getModule();
+			ModuleType* getModule()
+			{
+				for (Module _module : this->m_modules)
+					if (_module.IsClassType(ModuleType::Type))
+						return static_cast<ModuleType>(_module.m_reference);
+
+				Error::runtime("Couldn't find module " + ModuleType::m_name + " on entity " + m_name);
+				return nullptr;
+			}
 
 			template <class ModuleType>
-			std::vector<ModuleType*> getModules();
+			std::vector<ModuleType*> getModules()
+			{
+				std::vector<ModuleType*> ret;
+
+				for (auto _module : m_modules)
+					if (_module.IsClassType(ModuleType::Type))
+						ret.push_back(_module.m_reference);
+
+				return ret;
+			}
 
 			template <class ModuleType>
-			void attachModule(ModuleType* module);
+			void attachModule(ModuleType* toAttach)
+			{
+				if (toAttach->checkCompatibility(m_modules))
+					m_modules.push_back(toAttach);
+			}
 
 			template <class ModuleType, typename... Args>
-			ModuleType* attachModule(Args... parameters);
+			ModuleType* attachModule(Args... parameters)
+			{
+				ModuleType* ret = new ModuleType(parameters);
+
+				if (ret->checkCompatibility(m_modules))
+					m_modules.push_back(ret);
+
+				return ret;
+			}
 
 			template <class ModuleType>
-			int detachModule(ModuleType* toRemove);
+			int detachModule(ModuleType* toRemove)
+			{
+				int error = 0;
+
+				// If other modules don't depend on the module I want to remove
+				if (toRemove->checkDependency(m_modules))
+				{
+					// Remove the module from the list, warn the user if it doesn't exist
+					auto modIndex = std::find(m_modules.begin(), m_modules.end(), *toRemove);
+
+					if (modIndex == m_modules.end())
+					{
+						Error::runtime("Couldn't find the module " + toRemove->getName() + " on the entity " + m_name +
+							" while attempting to detach it");
+						error = -1;
+					}
+					else
+						m_modules.erase(modIndex);
+				}
+				else
+					error = -2;
+
+				return error;
+			}
 
 			int getId() { return m_id; }
 			

@@ -112,8 +112,8 @@ namespace ShyEngine
             /// Returns all the glyphs for the current text
             std::vector<Glyph> getGlyphs();
 
-            bool checkCompatibility(std::vector<Module>& otherModules);
-            bool checkDependency(std::vector<Module>& otherModules);
+            bool checkCompatibility(std::vector<Module*>& otherModules);
+            bool checkDependency(std::vector<Module*>& otherModules);
     };
 
 }

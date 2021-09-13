@@ -14,6 +14,7 @@
 
 #include <util/Error.h>
 #include <util/Utility.h>
+#include <util/Classes.h>
 #include <timing/Timing.h>
 #include <util/IdGenerator.h>
 
@@ -36,6 +37,7 @@
 #include <engine/modules/collisions/Collider2D.h>
 //#include <engine/modules/collisions/CircleCollider2D.h>
 
+#include <engine/systems/SpriteRenderer.h>
 #include <engine/systems/ParticleRenderer.h>
 #include <engine/systems/TextRenderer.h>
 #include <engine/systems/PhysicsManager.h>
@@ -116,7 +118,33 @@ namespace ShyEngine
 			int getScreenHeight() { return m_screenHeight; }
 
 			template <class ModuleType>
-			void registerModule(ModuleType* toRegister);
+			void registerModule(ModuleType* toRegister)
+			{
+				toRegister->m_reference = toRegister;
+				// REFACTOR: turn name into a type so it's less flexible
+				if (toRegister->Type == Sprite::Type)
+				{
+					m_spriteRenderer->addModule(dynamic_cast<Sprite*>(toRegister));
+				}
+				else if (toRegister->Type == Text::Type)
+				{
+					m_textRenderer->addModule(dynamic_cast<Text*>(toRegister));
+				}
+				else if (toRegister->Type == ParticleSystem::Type)
+				{
+					m_particleRenderer->addModule(dynamic_cast<ParticleSystem*>(toRegister));
+				}
+				else if (toRegister->Type == Physics::Type)
+				{
+					m_physicsManager->addModule(dynamic_cast<Physics*>(toRegister));
+				}
+				/*
+				else if (toRegister->Type == Collider::Type)
+				{
+					m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
+				}*/
+			}
+
 			void registerShader(ShaderProgram* toRegister);
 
 			Entity* createEntity(const std::string& name = "NewEntity");

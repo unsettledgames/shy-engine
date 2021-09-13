@@ -194,34 +194,6 @@ namespace ShyEngine {
 		}
 	}
 
-	template <class ModuleType>
-	void ShyEngine::registerModule(ModuleType* toRegister)
-	{
-		toRegister->m_reference = toRegister;
-		// REFACTOR: turn name into a type so it's less flexible
-		if (toRegister->Type == Sprite::Type)
-		{
-			m_spriteRenderer->addModule(dynamic_cast<Sprite*>(toRegister));
-		}
-		else if (toRegister->Type == Text::Type)
-		{
-			m_textRenderer->addModule(dynamic_cast<Text*>(toRegister));
-		}
-		else if (toRegister->Type == ParticleSystem::Type)
-		{
-			m_particleRenderer->addModule(dynamic_cast<ParticleSystem*>(toRegister));
-		}
-		else if (toRegister->Type == Physics::Type)
-		{
-			m_physicsManager->addModule(dynamic_cast<Physics*>(toRegister));
-		}
-		/*
-		else if (toRegister->Type == Collider::Type)
-		{
-			m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
-		}*/
-	}
-
 	void ShyEngine::registerShader(ShaderProgram* toRegister)
 	{
 		m_shaders.push_back(toRegister);

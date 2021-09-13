@@ -32,17 +32,17 @@ namespace ShyEngine
 		m_angleRotation = angle;
 	}
 
-	bool Transform::checkDependency(std::vector<Module>& otherModules)
+	bool Transform::checkDependency(std::vector<Module*>& otherModules)
 	{
 		// Sprite depends on Transform, so there shouldn't be a Sprite
 		return std::find_if(otherModules.begin(), otherModules.end(),
-			[](Module& other) { return other.Type == Sprite::Type; }) == otherModules.end();
+			[](Module* other) { return other->Type == Sprite::Type; }) == otherModules.end();
 	}
 
-	bool Transform::checkCompatibility(std::vector<Module>& otherModules)
+	bool Transform::checkCompatibility(std::vector<Module*>& otherModules)
 	{
 		// There shouldn't be another Transform module when adding one
 		return std::find_if(otherModules.begin(), otherModules.end(),
-			[](Module& other) { return other.Type == Transform::Type; }) == otherModules.end();
+			[](Module* other) { return other->Type == Transform::Type; }) == otherModules.end();
 	}
 }

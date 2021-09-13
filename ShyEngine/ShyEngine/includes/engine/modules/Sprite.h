@@ -39,7 +39,7 @@ namespace ShyEngine
 			int attachTexture(Texture& texture);
 			int attachTexture(const std::string& texturePath);
 
-			bool checkCompatibility(std::vector<Module>& otherModules);
-			bool checkDependency(std::vector<Module>& otherModules);
+			bool checkCompatibility(std::vector<Module*>& otherModules);
+			bool checkDependency(std::vector<Module*>& otherModules);
 	};
 }
