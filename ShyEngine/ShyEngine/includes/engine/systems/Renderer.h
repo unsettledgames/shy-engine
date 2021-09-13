@@ -38,8 +38,6 @@ namespace ShyEngine
 		static_assert(std::is_base_of<Glyph, RenderableType>::value, "RenderableType must inherit from Glyph");
 
 		protected:
-			// Modules to update
-			std::vector<ModuleType> m_modulesToUpdate;
 			// Pointers to the modules to update
 			std::vector<ModuleType*> m_modulesPointers;
 
@@ -101,10 +99,6 @@ namespace ShyEngine
 
 				m_renderables.clear();
 				m_renderablesPointers.clear();
-
-				m_modulesToUpdate.resize(m_modulesPointers.size());
-				for (int i = 0; i < m_modulesPointers.size(); i++)
-					m_modulesToUpdate[i] = (*(m_modulesPointers[i]));
 			}
 
 			/**

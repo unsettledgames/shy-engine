@@ -20,7 +20,7 @@ namespace ShyEngine
 			{
 				m_modulesPointers[i]->updateSystem(shaderData.deltaTime);
 
-				for (int j = 0; j < m_modulesToUpdate[i].getMaxParticles(); j++)
+				for (int j = 0; j < m_modulesPointers[i]->getMaxParticles(); j++)
 				{
 					currParticle = m_modulesPointers[i]->updateParticle(j, shaderData.deltaTime);
 
@@ -31,7 +31,7 @@ namespace ShyEngine
 
 			end();
 
-			std::vector<Particle> firstParticles = m_modulesToUpdate[0].getParticles();
+			std::vector<Particle> firstParticles = m_modulesPointers[0]->getParticles();
 			Particle particleShader;
 
 			for (int i = 0; i < firstParticles.size(); i++)

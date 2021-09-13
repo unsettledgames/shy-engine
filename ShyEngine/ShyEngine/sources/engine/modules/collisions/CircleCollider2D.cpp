@@ -4,7 +4,7 @@ namespace ShyEngine
 {
 	CircleCollider2D::CircleCollider2D() {}
 
-	CircleCollider2D::CircleCollider2D(Entity* entity, float radius) : Collider2D("CircleCollider2D", entity)
+	CircleCollider2D::CircleCollider2D(Entity* entity, float radius) : Collider2D(entity)
 	{
 		m_radius = radius;
 	}

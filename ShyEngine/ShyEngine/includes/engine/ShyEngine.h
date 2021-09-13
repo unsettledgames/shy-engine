@@ -35,13 +35,13 @@
 
 #include <engine/modules/Physics.h>
 #include <engine/modules/collisions/Collider2D.h>
-//#include <engine/modules/collisions/CircleCollider2D.h>
+#include <engine/modules/collisions/CircleCollider2D.h>
 
 #include <engine/systems/SpriteRenderer.h>
 #include <engine/systems/ParticleRenderer.h>
 #include <engine/systems/TextRenderer.h>
 #include <engine/systems/PhysicsManager.h>
-//#include <engine/systems/CollisionManager.h>
+#include <engine/systems/CollisionManager.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 
@@ -73,7 +73,7 @@ namespace ShyEngine
 
 			// Managers
 			PhysicsManager* m_physicsManager;
-			//CollisionManager* m_collisionManager;
+			CollisionManager* m_collisionManager;
 
 			// Renderers
 			SpriteRenderer* m_spriteRenderer;

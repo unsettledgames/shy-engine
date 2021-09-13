@@ -14,7 +14,6 @@ namespace ShyEngine
 	class System
 	{
 		protected:
-			std::vector<Module> m_modulesToUpdate;
 			std::vector<Module*> m_modulesPointers;
 			std::string m_name;
 

@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 
     engine.registerShader(shader);
 
-    for (int i = 0; i < 400; i++)
+    for (int i = 0; i < 100; i++)
     {
         for (int j = 0; j < 100; j++)
         {
@@ -33,10 +33,10 @@ int main(int argc, char** argv)
             ball->attachModule<ShyEngine::Sprite>(ballSprite);
 
             // Adding a circle collider
-            /*
+            
             ShyEngine::CircleCollider2D* circleCollider = new ShyEngine::CircleCollider2D(ball, 100);
             engine.registerModule(circleCollider);
-            ball->attachModule(circleCollider);*/
+            ball->attachModule(circleCollider);
 
             // Adding a physics module
             ShyEngine::Physics* physics = new ShyEngine::Physics(ball);

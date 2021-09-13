@@ -29,7 +29,7 @@ namespace ShyEngine {
 		m_particleRenderer = new ParticleRenderer();
 
 		m_physicsManager = new PhysicsManager();
-		//m_collisionManager = new CollisionManager();
+		m_collisionManager = new CollisionManager();
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)

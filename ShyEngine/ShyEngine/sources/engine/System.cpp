@@ -11,10 +11,10 @@ namespace ShyEngine
 
 	int System::removeModule(Module* toRemove)
 	{
-		auto _module = std::find(m_modulesToUpdate.begin(), m_modulesToUpdate.end(), *toRemove);
-		if (_module != m_modulesToUpdate.end())
+		auto _module = std::find(m_modulesPointers.begin(), m_modulesPointers.end(), toRemove);
+		if (_module != m_modulesPointers.end())
 		{
-			m_modulesToUpdate.erase(_module);
+			m_modulesPointers.erase(_module);
 			return 0;
 		}
 		else

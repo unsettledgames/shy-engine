@@ -15,9 +15,9 @@ namespace ShyEngine
 		// Rendering process
 		begin();
 
-		for (auto _module : m_modulesToUpdate)
+		for (auto _module : m_modulesPointers)
 		{
-			currSprite = dynamic_cast<Sprite*>(&_module);
+			currSprite = dynamic_cast<Sprite*>(_module);
 			currSprite->updateVertices();
 			// Only draw if the object is visible
 			if (Collider2D::AABB(glm::vec4(currSprite->getPosition(), currSprite->getScale()), shaderData.cameraViewport))
@@ -27,11 +27,11 @@ namespace ShyEngine
 		end();
 
 		// OPTIMIZABLE: use the correct shader lol
-		m_modulesToUpdate[0].useShader();
-		m_modulesToUpdate[0].getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
+		m_modulesPointers[0]->useShader();
+		m_modulesPointers[0]->getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 
 		render();
 
-		m_modulesToUpdate[0].unuseShader();
+		m_modulesPointers[0]->unuseShader();
 	}
 }

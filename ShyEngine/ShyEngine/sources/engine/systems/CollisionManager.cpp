@@ -28,8 +28,7 @@ namespace ShyEngine
 			// Take all the colliders of the current object
 			for (auto currEntity : currEntities)
 			{
-				currModules = currEntity->getModules("Collider2D");
-				currColliders = std::vector<Collider2D*>(currModules.begin(), currModules.end());
+				currColliders = currEntity->getModules<Collider2D>();
 
 				for (auto currCollider : currColliders)
 				{
@@ -66,20 +65,19 @@ namespace ShyEngine
 			// Ignore collisions with colliders of the same object
 			if (currObject->getId() != collider->getEntity()->getId())
 			{
-				currModules = currObject->getModules("Collider2D");
-				currColliders = std::vector<Collider2D*>(currModules.begin(), currModules.end());
+				currColliders = currObject->getModules<Collider2D>();
 
 				// If it collides
 				if (collider->checkCollisionOptimized(currColliders))
 				{
 					// Trigger the enter / stay functions for all the Collidable modules
-					for (auto collidable : currObject->getCollidables())
+					for (auto collidable : currObject->getModules<Collidable>())
 						((Collidable*)collidable)->handleCollision(true);
 				}
 				else
 				{
 					// Trigger the enter / stay functions for all the Collidable modules
-					for (auto collidable : currObject->getCollidables())
+					for (auto collidable : currObject->getModules<Collidable>())
 						((Collidable*)collidable)->handleCollision(false);
 				}
 			}
@@ -93,7 +91,7 @@ namespace ShyEngine
 		int yIndex;
 
 		// Transform
-		Transform* otherTransform = (Transform*)toAdd->getEntity()->getModule("Transform");
+		Transform* otherTransform = (Transform*)toAdd->getEntity()->getModule<Transform>();
 		
 		// Putting the object in the grid
 		glm::vec2 otherPos = otherTransform->getPos();

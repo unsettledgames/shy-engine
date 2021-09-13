@@ -13,14 +13,14 @@ namespace ShyEngine
 		// Rendering process
 		begin();
 
-		if (m_modulesToUpdate.size() > 0)
+		if (m_modulesPointers.size() > 0)
 		{
 			Text* currText;
-			std::vector<Glyph> glyphs = m_modulesToUpdate[0].getGlyphs();
+			std::vector<Glyph> glyphs = m_modulesPointers[0]->getGlyphs();
 
-			for (auto _module : m_modulesToUpdate)
+			for (auto _module : m_modulesPointers)
 			{
-				draw(dynamic_cast<Text*>(&_module), shaderData);
+				draw(dynamic_cast<Text*>(_module), shaderData);
 			}
 
 			end();

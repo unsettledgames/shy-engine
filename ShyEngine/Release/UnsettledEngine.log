@@ -1,11 +1,12 @@
 ﻿  MainGame.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(79,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(208,2): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(184): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>::createRenderBatches(void)'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>' being compiled
-  Generating code
-  1 of 2045 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  UnsettledEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\SampleGame.exe
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\Entity.h(65,1): error C2664: 'bool ShyEngine::Collider2D::checkCompatibility(std::vector<ShyEngine::Module,std::allocator<ShyEngine::Module>> &)': cannot convert argument 1 from 'std::vector<ShyEngine::Module *,std::allocator<ShyEngine::Module *>>' to 'std::vector<ShyEngine::Module,std::allocator<ShyEngine::Module>> &'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\collisions\Collider2D.h(34,9): message : see declaration of 'ShyEngine::Collider2D::checkCompatibility'
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\sources\MainGame.cpp(39): message : see reference to function template instantiation 'void ShyEngine::Entity::attachModule<ShyEngine::CircleCollider2D>(ModuleType *)' being compiled
+          with
+          [
+              ModuleType=ShyEngine::CircleCollider2D
+          ]
