@@ -31,8 +31,8 @@ namespace ShyEngine
 			bool checkCollision(Transform* otherTransform);
 			bool checkCollision(glm::vec4 otherRect);
 
-			bool checkCompatibility(std::vector<Module>& otherModules);
-			bool checkDependency(std::vector<Module>& otherModules);
+			bool checkCompatibility(std::vector<Module*>& otherModules);
+			bool checkDependency(std::vector<Module*>& otherModules);
 
 			static bool AABB(glm::vec4 first, glm::vec4 second);
 	};

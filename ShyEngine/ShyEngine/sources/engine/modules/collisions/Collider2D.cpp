@@ -57,14 +57,14 @@ namespace ShyEngine
 		return depth.x > 0 && depth.y > 0;
 	}
 
-	bool Collider2D::checkCompatibility(std::vector<Module>& otherModules) 
+	bool Collider2D::checkCompatibility(std::vector<Module*>& otherModules) 
 	{
 		// There must exist a Transform component
 		return std::find_if(otherModules.begin(), otherModules.end(),
-			[](Module other) { return other.Type == Transform::Type; }) != otherModules.end();
+			[](Module* other) { return other->Type == Transform::Type; }) != otherModules.end();
 	}
 
-	bool Collider2D::checkDependency(std::vector<Module>& otherModules) 
+	bool Collider2D::checkDependency(std::vector<Module*>& otherModules) 
 	{ 
 		return false; 
 	}

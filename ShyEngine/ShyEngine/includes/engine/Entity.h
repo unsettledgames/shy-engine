@@ -39,9 +39,9 @@ namespace ShyEngine
 			template <class ModuleType>
 			ModuleType* getModule()
 			{
-				for (Module _module : this->m_modules)
-					if (_module.IsClassType(ModuleType::Type))
-						return static_cast<ModuleType>(_module.m_reference);
+				for (Module* _module : this->m_modules)
+					if (_module->IsClassType(ModuleType::Type))
+						return dynamic_cast<ModuleType*>(_module->m_reference);
 
 				Error::runtime("Couldn't find module " + ModuleType::m_name + " on entity " + m_name);
 				return nullptr;
@@ -53,8 +53,8 @@ namespace ShyEngine
 				std::vector<ModuleType*> ret;
 
 				for (auto _module : m_modules)
-					if (_module.IsClassType(ModuleType::Type))
-						ret.push_back(_module.m_reference);
+					if (_module->IsClassType(ModuleType::Type))
+						ret.push_back(dynamic_cast<ModuleType*>(_module));
 
 				return ret;
 			}
