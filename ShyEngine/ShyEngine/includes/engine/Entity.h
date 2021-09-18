@@ -5,7 +5,7 @@
 #include <util/Error.h>
 #include <algorithm>
 
-#include <collisions/Collidable.h>
+#include <util/Classes.h>
 #include <engine/modules/Transform.h>
 #include <util/IdGenerator.h>
 
@@ -41,7 +41,7 @@ namespace ShyEngine
 			{
 				for (Module* _module : this->m_modules)
 					if (_module->IsClassType(ModuleType::Type))
-						return dynamic_cast<ModuleType*>(_module->m_reference);
+						return dynamic_cast<ModuleType*>(_module);
 
 				Error::runtime("Couldn't find module " + ModuleType::m_name + " on entity " + m_name);
 				return nullptr;

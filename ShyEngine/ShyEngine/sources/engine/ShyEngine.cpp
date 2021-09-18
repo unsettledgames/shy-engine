@@ -29,7 +29,7 @@ namespace ShyEngine {
 		m_particleRenderer = new ParticleRenderer();
 
 		m_physicsManager = new PhysicsManager();
-		m_collisionManager = new CollisionManager();
+		m_collisionManager = new CollisionManager(50, glm::vec2(0, 0), glm::vec2(200, 200));
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -149,7 +149,7 @@ namespace ShyEngine {
 
 				/********************PHYSICS******************/
 				// Update loop for the physics and collision manager
-				//m_collisionManager->updateModules(physicsData);
+				m_collisionManager->updateModules(physicsData);
 				if (m_input.getKeyDown(SDLK_p))
 					m_physicsManager->updateModules(physicsData);
 

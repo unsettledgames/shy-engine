@@ -3,8 +3,6 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 
-#include <engine/modules/collisions/Collider2D.h>
-
 namespace ShyEngine
 {
 	enum class SpriteSortType

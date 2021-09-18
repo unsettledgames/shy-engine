@@ -93,7 +93,7 @@ namespace ShyEngine
 	{
 		// There must exist a Transform component
 		return std::find_if(otherModules.begin(), otherModules.end(), 
-			[](Module* other) { return other->Type == Transform::Type;}) != otherModules.end();
+			[](Module* other) { return other->IsClassType(Transform::Type);}) != otherModules.end();
 	}
 
 	bool Sprite::checkDependency(std::vector<Module*>& otherModules)

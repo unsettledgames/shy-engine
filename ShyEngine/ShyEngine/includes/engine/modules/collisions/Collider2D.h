@@ -5,11 +5,14 @@
 #include <engine/Module.h>
 #include <engine/modules/Transform.h>
 #include <engine/Entity.h>
+#include <util/Classes.h>
 
 namespace ShyEngine
 {
 	class Collider2D : public Module
 	{
+		CLASS_DECLARATION(Collider2D);
+
 		class CollisionManager;
 		friend class CollisionManager;
 

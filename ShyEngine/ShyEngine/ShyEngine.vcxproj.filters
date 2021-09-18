@@ -237,6 +237,9 @@
     <ClInclude Include="includes\engine\systems\CollisionManager.h">
       <Filter>Header Files\Engine\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="includes\collisions\CollisionGrid.h">
+      <Filter>Header Files\Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -352,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="sources\engine\systems\CollisionManager.cpp">
       <Filter>Source Files\Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\collisions\CollisionGrid.cpp">
+      <Filter>Source Files\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

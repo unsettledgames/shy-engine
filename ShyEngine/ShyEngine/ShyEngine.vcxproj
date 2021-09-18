@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="includes\audio\AudioEngine.h" />
     <ClInclude Include="includes\collisions\Collidable.h" />
+    <ClInclude Include="includes\collisions\CollisionGrid.h" />
     <ClInclude Include="includes\data\ColorRGBA8.h" />
     <ClInclude Include="includes\data\Glyph.h" />
     <ClInclude Include="includes\data\ImageLoader.h" />
@@ -69,6 +70,7 @@
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp" />
     <ClCompile Include="sources\collisions\Collidable.cpp" />
+    <ClCompile Include="sources\collisions\CollisionGrid.cpp" />
     <ClCompile Include="sources\data\Glyph.cpp" />
     <ClCompile Include="sources\data\ImageLoader.cpp" />
     <ClCompile Include="sources\data\Particle.cpp" />

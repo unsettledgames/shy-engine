@@ -16,9 +16,9 @@ int main(int argc, char** argv)
 
     engine.registerShader(shader);
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 100; j++)
+        for (int j = 0; j < 10; j++)
         {
             ball = engine.createEntity("Ballin");
 
@@ -33,10 +33,9 @@ int main(int argc, char** argv)
             ball->attachModule<ShyEngine::Sprite>(ballSprite);
 
             // Adding a circle collider
-            
             ShyEngine::CircleCollider2D* circleCollider = new ShyEngine::CircleCollider2D(ball, 100);
-            engine.registerModule(circleCollider);
-            ball->attachModule(circleCollider);
+            engine.registerModule<ShyEngine::CircleCollider2D>(circleCollider);
+            ball->attachModule<ShyEngine::CircleCollider2D>(circleCollider);
 
             // Adding a physics module
             ShyEngine::Physics* physics = new ShyEngine::Physics(ball);

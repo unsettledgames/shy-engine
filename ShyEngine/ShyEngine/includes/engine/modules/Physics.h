@@ -1,7 +1,7 @@
 #pragma once
 
 #include <util/Classes.h>
-#include <engine/Module.h>
+#include <collisions/Collidable.h>
 #include <engine/Entity.h>
 #include <data/SystemData.h>
 
@@ -9,7 +9,7 @@
 
 namespace ShyEngine
 {
-	class Physics : public Module
+	class Physics : public Collidable
 	{
 		CLASS_DECLARATION(Physics)
 
@@ -18,7 +18,7 @@ namespace ShyEngine
 			float m_mass = 1.0f;
 
 		public:
-			Physics() : Module(nullptr) {}
+			Physics() : Collidable(nullptr) {}
 			Physics(Entity* entity);
 			~Physics();
 

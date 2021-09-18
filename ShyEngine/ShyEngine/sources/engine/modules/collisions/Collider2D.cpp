@@ -2,7 +2,9 @@
 
 namespace ShyEngine
 {
-	Collider2D::Collider2D() {}
+	CLASS_DEFINITION(Module, Collider2D);
+
+	Collider2D::Collider2D() : Module(nullptr){}
 
 	Collider2D::Collider2D(Entity* entity) : Module(entity) 
 	{

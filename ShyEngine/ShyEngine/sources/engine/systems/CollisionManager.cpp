@@ -9,58 +9,60 @@ namespace ShyEngine
 
 	void CollisionManager::updateModules(PhysicsData data)
 	{
+		glm::vec2 nCells = m_collisionGrid->getNCells();
 		SpatialPartitioningCell currCell;
+		Collidable* currCollidable;
 		std::vector<Entity*> currEntities;
 		std::vector<Collider2D*> currColliders;
 		std::vector<Module*> currModules;
 		std::vector<Collidable*> currCollidables;
 
-		int x, y;
+		int x, y, i;
 
-		for (int i = 0; i < m_cells.size(); i++)
+		for (auto entity : m_entities)
 		{
-			currCell = m_cells[i];
-			currEntities = currCell.m_objects;
+			currCollidable = entity->getModule<Collidable>();
+			// For each entity, update its cell coords
+			updateCellCoords(currCollidable);
 
-			x = i % (int)m_nCells.x;
-			y = i / (int)m_nCells.x;
+			// Get other entities from the cell
+			i = currCollidable->m_cellCoords.y * m_collisionGrid->getNCells().x + currCollidable->m_cellCoords.x;
+			x = currCollidable->m_cellCoords.x;
+			y = currCollidable->m_cellCoords.y;
 
-			// Take all the colliders of the current object
-			for (auto currEntity : currEntities)
+			currColliders = entity->getModules<Collider2D>();
+			/*
+			for (auto currCollider : currColliders)
 			{
-				currColliders = currEntity->getModules<Collider2D>();
-
-				for (auto currCollider : currColliders)
-				{
-					// OPTIMIZABLE: only check collisions if the boundaries of the object overlap more than 1 cell,
-					// this doesn't apply for objects in the same cell
-					
-					// Top left
-					cellCollision(currCollider, x - 1, y - 1);
-					// Top
-					cellCollision(currCollider, x, y - 1);
-					// Left
-					cellCollision(currCollider, x - 1, y);
-					// Middle
-					cellCollision(currCollider, x, y);
-					// Bottom left
-					cellCollision(currCollider, x - 1, y + 1);
-				}
-			}
+				// OPTIMIZABLE: only check collisions if the boundaries of the object overlap more than 1 cell,
+				// this doesn't apply for objects in the same cell
+				// Top left
+				cellCollision(currCollider, x - 1, y - 1);
+				// Top
+				cellCollision(currCollider, x, y - 1);
+				// Left
+				cellCollision(currCollider, x - 1, y);
+				// Middle
+				cellCollision(currCollider, x, y);
+				// Bottom left
+				cellCollision(currCollider, x - 1, y + 1);
+			}*/
 		}
 	}
 
 	void CollisionManager::cellCollision(Collider2D* collider, int x, int y)
 	{
-		if (x < 0 || y < 0 || x >= m_nCells.x || y >= m_nCells.y)
+		glm::vec2 nCells = m_collisionGrid->getNCells();
+
+		if (x < 0 || y < 0 || x >= nCells.x || y >= nCells.y)
 			return;
-		SpatialPartitioningCell cell = m_cells[y * m_nCells.y + x];
+		SpatialPartitioningCell cell = m_collisionGrid->getCell(y * nCells.y + x);
 		std::vector<Collider2D*> currColliders;
 		std::vector<Module*> currModules;
 		std::vector<Collidable*> currCollidables;
 
 		// Find list of colliders with which it collides
-		for (auto currObject : cell.m_objects)
+		for (auto currObject : cell.getObjects())
 		{
 			// Ignore collisions with colliders of the same object
 			if (currObject->getId() != collider->getEntity()->getId())
@@ -84,42 +86,45 @@ namespace ShyEngine
 		}
 	}
 
-	void CollisionManager::addModule(Module* toAdd)
+	void CollisionManager::updateCellCoords(Collidable* coll)
+	{
+		glm::vec2 otherPos = coll->getEntity()->getModule<Transform>()->getPos();
+
+		moveEntity(coll, otherPos);
+	}
+
+	// OPTIMIZABLE: this takes a lot of resources for some reason
+	void CollisionManager::moveEntity(Collidable* entity, glm::vec2 destCoords)
+	{
+		glm::vec2 currCoords = entity->m_cellCoords;
+		
+		m_collisionGrid->removeFromGrid(entity->getEntity(), currCoords.x, currCoords.y);
+		m_collisionGrid->addToGrid(entity->getEntity(), std::round(destCoords.x), std::round(destCoords.y));
+	}
+
+	void CollisionManager::addModule(Collidable* toAdd)
 	{
 		// Coordinates of the objects in the grid
 		int xIndex;
 		int yIndex;
 
 		// Transform
-		Transform* otherTransform = (Transform*)toAdd->getEntity()->getModule<Transform>();
+		Transform* otherTransform = (Transform*)toAdd->getEntity()->getTransform();
 		
 		// Putting the object in the grid
 		glm::vec2 otherPos = otherTransform->getPos();
-		addToGrid(toAdd->getEntity(), std::round(otherPos.x), std::round(otherPos.y));
+		glm::vec2 cellCoords = m_collisionGrid->addToGrid(toAdd->getEntity(), std::round(otherPos.x), std::round(otherPos.y));
 
+		toAdd->m_collisionGrid = m_collisionGrid;
+		toAdd->m_cellCoords = cellCoords;
+
+		// it's useless to use modulesPointers, only fill m_entities
+		m_entities.insert(toAdd->getEntity());
 		m_modulesPointers.push_back(toAdd);
-	}
-
-	int CollisionManager::addToGrid(Entity* toAdd, int x, int y)
-	{
-		int index;
-
-		x += m_gridSize.x / 2;
-		y += m_gridSize.y / 2;
-		index = y * m_gridSize.x + x;
-
-		m_cells[index].m_objects.push_back(toAdd);
-
-		return index;
 	}
 
 	CollisionManager::CollisionManager(float cellSize, glm::vec2 gridPos, glm::vec2 gridSize) : System("CollisionManager")
 	{
-		m_gridCellSize = cellSize;
-		m_gridPosition = gridPos;
-		m_gridSize = gridSize;
-	
-		m_nCells = glm::vec2(std::ceil(m_gridSize.x / m_gridCellSize), std::ceil(m_gridSize.y / m_gridCellSize));
-		m_cells.resize(m_nCells.x * m_nCells.y);
+		m_collisionGrid = new CollisionGrid(cellSize, gridPos, gridSize);
 	}
 }

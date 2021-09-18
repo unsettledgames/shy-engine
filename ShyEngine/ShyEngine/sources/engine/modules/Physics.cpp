@@ -2,9 +2,9 @@
 
 namespace ShyEngine
 {
-	CLASS_DEFINITION(Module, Physics)
+	CLASS_DEFINITION(Collidable, Physics)
 
-	Physics::Physics(Entity* entity) : Module(entity) {}
+	Physics::Physics(Entity* entity) : Collidable(entity) {}
 	Physics::~Physics() {}
 
 	void Physics::update(PhysicsData data)

@@ -2,6 +2,8 @@
 
 namespace ShyEngine
 {
+	CLASS_DEFINITION(Module, Collidable);
+
 	Collidable::Collidable() {}
 	Collidable::~Collidable() {}
 

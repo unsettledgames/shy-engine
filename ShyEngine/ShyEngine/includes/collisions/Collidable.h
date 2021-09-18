@@ -1,7 +1,13 @@
 #pragma once
 
+#include <glm/glm.hpp>
+#include <vector>
+
 #include <engine/Entity.h>
 #include <engine/Module.h>
+#include <util/Classes.h>
+
+#include <collisions/CollisionGrid.h>
 
 /*
 * COLLISION SYSTEM:
@@ -15,10 +21,19 @@
 
 namespace ShyEngine
 {
+	class CollisionManager;
+
 	class Collidable : public Module
 	{
+		CLASS_DECLARATION(Collidable);
+
+		friend class CollisionManager;
+
 		private:
 			bool m_prevContact = false;
+			glm::vec2 m_cellCoords = glm::vec2(0, 0);
+			CollisionGrid* m_collisionGrid;
+
 		public:
 			Collidable();
 			Collidable(Entity* entity) : Module(entity) {}

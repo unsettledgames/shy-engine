@@ -96,12 +96,6 @@ namespace ShyEngine
 			Camera2D m_hudCamera;
 
 			FpsLimiter m_fpsLimiter;
-
-			/*
-			ParticleEngine2D m_particleEngine;
-			ParticleBatch2D* m_testParticleBatch = nullptr;
-			*/
-
 			std::unique_ptr<b2World> m_world;
 
 		public:
@@ -122,27 +116,23 @@ namespace ShyEngine
 			{
 				toRegister->m_reference = toRegister;
 				// REFACTOR: turn name into a type so it's less flexible
-				if (toRegister->Type == Sprite::Type)
+				if (toRegister->IsClassType(Sprite::Type))
 				{
 					m_spriteRenderer->addModule(dynamic_cast<Sprite*>(toRegister));
 				}
-				else if (toRegister->Type == Text::Type)
+				else if (toRegister->IsClassType(Text::Type))
 				{
 					m_textRenderer->addModule(dynamic_cast<Text*>(toRegister));
 				}
-				else if (toRegister->Type == ParticleSystem::Type)
+				else if (toRegister->IsClassType(ParticleSystem::Type))
 				{
 					m_particleRenderer->addModule(dynamic_cast<ParticleSystem*>(toRegister));
 				}
-				else if (toRegister->Type == Physics::Type)
+				else if (toRegister->IsClassType(Physics::Type))
 				{
 					m_physicsManager->addModule(dynamic_cast<Physics*>(toRegister));
+					m_collisionManager->addModule((Collidable*)dynamic_cast<Physics*>(toRegister));
 				}
-				/*
-				else if (toRegister->Type == Collider::Type)
-				{
-					m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
-				}*/
 			}
 
 			void registerShader(ShaderProgram* toRegister);
