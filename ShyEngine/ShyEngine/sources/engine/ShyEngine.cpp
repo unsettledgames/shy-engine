@@ -29,7 +29,7 @@ namespace ShyEngine {
 		m_particleRenderer = new ParticleRenderer();
 
 		m_physicsManager = new PhysicsManager();
-		m_collisionManager = new CollisionManager(50, glm::vec2(0, 0), glm::vec2(200, 200));
+		m_collisionManager = new CollisionManager(50, glm::vec2(0, 0), glm::vec2(50, 50));
 	}
 
 	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -186,7 +186,7 @@ namespace ShyEngine {
 				currSimStep++;
 			}
 
-			if (debugTime % 100 == 0)
+			if (debugTime % 10 == 0)
 				std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;
 			m_fpsLimiter.end();
 

@@ -11,35 +11,40 @@ namespace ShyEngine
 		m_transform = entity->getTransform();
 	}
 
-	bool Collider2D::checkCollision(std::vector<Collider2D*> colliders)
-	{
-		bool ret = false;
-
-		for (auto collider : colliders)
-			ret = ret || checkCollision(collider);
-		
-		return ret;
-	}
-
-	bool Collider2D::checkCollisionOptimized(std::vector<Collider2D*> colliders)
+	Collider2D* Collider2D::checkCollision(std::vector<Collider2D*> colliders)
 	{
 		for (auto collider : colliders)
 		{
 			if (checkCollision(collider))
-				return true;
+				return collider;
 		}
 
-		return false;
+		return nullptr;
 	}
 
 	bool Collider2D::checkCollision(Transform* other)
 	{
-		return checkCollision(glm::vec4(other->getPos(), other->getScale()));
+		return AABB(glm::vec4(other->getPos(), other->getScale()),
+			glm::vec4(m_transform->getPos(), m_transform->getScale()));
 	}
 
+	// OPTIMIZABLE: make AABB a macro instead of a function
+	// OPTIMIZABLE: make as many members as possible public to remove calls
 	bool Collider2D::checkCollision(Collider2D* other)
 	{
-		return checkCollision(glm::vec4(other->m_transform->getPos(), other->m_transform->getScale()));
+		glm::vec4 first = glm::vec4(other->m_transform->getPos(), other->m_transform->getScale());
+		glm::vec4 second = glm::vec4(m_transform->getPos(), m_transform->getScale());
+
+		// Scale of the first one + scale of the second one / 2
+		glm::vec2 minDistance = (glm::vec2(first.z, first.w) + glm::vec2(second.z, second.w)) / 2.0f;
+		// First position - second position
+		glm::vec2 distance = glm::vec2(first.x, first.y) - glm::vec2(second.x, second.y);
+		glm::vec2 depth = minDistance - glm::abs(distance);
+
+		return depth.x > 0 && depth.y > 0;
+
+		/*return AABB(glm::vec4(other->m_transform->getPos(), other->m_transform->getScale()),
+			glm::vec4(m_transform->getPos(), m_transform->getScale()));*/
 	}
 
 	bool Collider2D::checkCollision(glm::vec4 rect)
@@ -49,11 +54,10 @@ namespace ShyEngine
 
 	bool Collider2D::AABB(glm::vec4 first, glm::vec4 second)
 	{
-		glm::vec2 thisPos = glm::vec2(first.x, first.y);
-		glm::vec2 thisScale = glm::vec2(first.z, first.w);
-		glm::vec2 minDistance = (thisScale + glm::vec2(second.z, second.w)) / 2.0f;
-
-		glm::vec2 distance = thisPos - glm::vec2(second.x, second.y);
+		// Scale of the first one + scale of the second one / 2
+		glm::vec2 minDistance = (glm::vec2(first.z, first.w) + glm::vec2(second.z, second.w)) / 2.0f;
+		// First position - second position
+		glm::vec2 distance = glm::vec2(first.x, first.y) - glm::vec2(second.x, second.y);
 		glm::vec2 depth = minDistance - glm::abs(distance);
 
 		return depth.x > 0 && depth.y > 0;

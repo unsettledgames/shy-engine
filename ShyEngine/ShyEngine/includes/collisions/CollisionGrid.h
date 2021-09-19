@@ -35,8 +35,8 @@ namespace ShyEngine
 			CollisionGrid(float cellSize, glm::vec2 gridPos, glm::vec2 gridSize);
 			CollisionGrid();
 
-			SpatialPartitioningCell getCell(int index);
-			SpatialPartitioningCell getCell(glm::vec2 pos);
+			SpatialPartitioningCell* getCell(int index);
+			SpatialPartitioningCell* getCell(glm::vec2 pos);
 			
 			glm::vec2 getEntityCoords(Entity* e, int x, int y);
 			// x and y are the integer approximation of toAdd's position

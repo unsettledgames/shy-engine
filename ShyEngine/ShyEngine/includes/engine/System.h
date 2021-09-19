@@ -15,6 +15,7 @@ namespace ShyEngine
 	{
 		protected:
 			std::vector<Module*> m_modulesPointers;
+			std::vector<Module> m_modules;
 			std::string m_name;
 
 		public:

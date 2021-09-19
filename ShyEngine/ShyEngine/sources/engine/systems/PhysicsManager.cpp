@@ -5,7 +5,7 @@ namespace ShyEngine
 {
 	PhysicsManager::PhysicsManager() : System("PhysicsManager") 
 	{
-		m_gravity = glm::vec2(0.0f, -9.81f);
+		m_gravity = glm::vec2(0.0f, 0.0f);
 	}
 
 	void PhysicsManager::init() {}

@@ -4,17 +4,47 @@ namespace ShyEngine
 {
 	SpatialPartitioningCell::SpatialPartitioningCell()
 	{
-		m_objects.reserve(50);
+		m_objects.reserve(25);
 	}
 
 	void CollisionManager::updateModules(PhysicsData data)
 	{
+		for (auto collider : m_modules)
+		{
+			for (auto collider2 : m_modules)
+			{
+				bool found = false;
+				Collider2D collidedCollider;
+				if (collider.checkCollision(&collider2))
+				{
+					collidedCollider = collider2;
+					found = true;
+				}
+				// ISSUE: caching issues with ifs
+				// If it collides
+				if (found)
+				{
+					// Trigger the enter / stay functions for all the Collidable modules
+					for (auto collidable : collider.getEntity()->getModules<Collidable>())
+						((Collidable*)collidable)->handleCollision(true, &collidedCollider);
+				}
+				else
+				{
+					// Trigger the enter / stay functions for all the Collidable modules
+					for (auto collidable : collider.getEntity()->getModules<Collidable>())
+					{
+						Collidable* curr = (Collidable*)collidable;
+						if (curr->m_currentCollider != nullptr)
+							curr->handleCollision(false, nullptr);
+					}
+				}
+			}
+		}
+		/*
 		glm::vec2 nCells = m_collisionGrid->getNCells();
 		SpatialPartitioningCell currCell;
 		Collidable* currCollidable;
-		std::vector<Entity*> currEntities;
 		std::vector<Collider2D*> currColliders;
-		std::vector<Module*> currModules;
 		std::vector<Collidable*> currCollidables;
 
 		int x, y, i;
@@ -31,13 +61,14 @@ namespace ShyEngine
 			y = currCollidable->m_cellCoords.y;
 
 			currColliders = entity->getModules<Collider2D>();
-			/*
+			
 			for (auto currCollider : currColliders)
 			{
 				// OPTIMIZABLE: only check collisions if the boundaries of the object overlap more than 1 cell,
 				// this doesn't apply for objects in the same cell
 				// Top left
 				cellCollision(currCollider, x - 1, y - 1);
+				/*
 				// Top
 				cellCollision(currCollider, x, y - 1);
 				// Left
@@ -46,44 +77,49 @@ namespace ShyEngine
 				cellCollision(currCollider, x, y);
 				// Bottom left
 				cellCollision(currCollider, x - 1, y + 1);
-			}*/
-		}
+				
+			}
+		}*/
 	}
 
+	// ISSUE: this is ExTREMELY slow
 	void CollisionManager::cellCollision(Collider2D* collider, int x, int y)
 	{
-		glm::vec2 nCells = m_collisionGrid->getNCells();
+		/*glm::vec2 nCells = m_collisionGrid->getNCells();
 
 		if (x < 0 || y < 0 || x >= nCells.x || y >= nCells.y)
 			return;
-		SpatialPartitioningCell cell = m_collisionGrid->getCell(y * nCells.y + x);
+		SpatialPartitioningCell* cell = m_collisionGrid->getCell(y * nCells.y + x);
 		std::vector<Collider2D*> currColliders;
-		std::vector<Module*> currModules;
-		std::vector<Collidable*> currCollidables;
-
+		
 		// Find list of colliders with which it collides
-		for (auto currObject : cell.getObjects())
+		for (auto currObject : cell->getObjects())
 		{
 			// Ignore collisions with colliders of the same object
-			if (currObject->getId() != collider->getEntity()->getId())
+			// ISSUE: getModules is EXTREMELY slow
+			currColliders = currObject->getModules<Collider2D>();
+			// ISSUE: Collision checking is slow
+			Collider2D* collidedCollider = collider->checkCollision(currColliders);
+			// ISSUE: caching issues with ifs
+			
+			// If it collides
+			if (collidedCollider != nullptr)
 			{
-				currColliders = currObject->getModules<Collider2D>();
-
-				// If it collides
-				if (collider->checkCollisionOptimized(currColliders))
+				// Trigger the enter / stay functions for all the Collidable modules
+				for (auto collidable : currObject->getModules<Collidable>())
+					((Collidable*)collidable)->handleCollision(true, collidedCollider);
+			}
+			else
+			{
+				// Trigger the enter / stay functions for all the Collidable modules
+				for (auto collidable : currObject->getModules<Collidable>())
 				{
-					// Trigger the enter / stay functions for all the Collidable modules
-					for (auto collidable : currObject->getModules<Collidable>())
-						((Collidable*)collidable)->handleCollision(true);
-				}
-				else
-				{
-					// Trigger the enter / stay functions for all the Collidable modules
-					for (auto collidable : currObject->getModules<Collidable>())
-						((Collidable*)collidable)->handleCollision(false);
+					Collidable* curr = (Collidable*)collidable;
+					if (curr->m_currentCollider != nullptr)
+						curr->handleCollision(false, nullptr);
 				}
 			}
-		}
+		}*/
 	}
 
 	void CollisionManager::updateCellCoords(Collidable* coll)
@@ -102,8 +138,12 @@ namespace ShyEngine
 		m_collisionGrid->addToGrid(entity->getEntity(), std::round(destCoords.x), std::round(destCoords.y));
 	}
 
-	void CollisionManager::addModule(Collidable* toAdd)
+	void CollisionManager::addModule(Collider2D* toAdd)
 	{
+		m_entities.insert(toAdd->getEntity());
+		m_modulesPointers.push_back(toAdd);
+		m_modules.push_back(*toAdd);
+		/*
 		// Coordinates of the objects in the grid
 		int xIndex;
 		int yIndex;
@@ -121,6 +161,7 @@ namespace ShyEngine
 		// it's useless to use modulesPointers, only fill m_entities
 		m_entities.insert(toAdd->getEntity());
 		m_modulesPointers.push_back(toAdd);
+		*/
 	}
 
 	CollisionManager::CollisionManager(float cellSize, glm::vec2 gridPos, glm::vec2 gridSize) : System("CollisionManager")

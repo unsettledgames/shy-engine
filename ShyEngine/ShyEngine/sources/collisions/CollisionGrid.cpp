@@ -13,27 +13,32 @@ namespace ShyEngine
 		m_cells.resize(m_nCells.x * m_nCells.y);
 	}
 
-	SpatialPartitioningCell CollisionGrid::getCell(int index)
+	SpatialPartitioningCell* CollisionGrid::getCell(int index)
 	{
-		return m_cells[index];
+		return &m_cells[index];
 	}
 
-	SpatialPartitioningCell CollisionGrid::getCell(glm::vec2 pos)
+	SpatialPartitioningCell* CollisionGrid::getCell(glm::vec2 pos)
 	{
 		int i = pos.y * m_nCells.x + pos.x;
 
 		if (i < m_cells.size())
-			return m_cells[i];
+			return &m_cells[i];
 
-		return SpatialPartitioningCell::SpatialPartitioningCell();
+		return nullptr;
 	}
 
 	glm::vec2 CollisionGrid::addToGrid(Entity* toAdd, int x, int y)
 	{
 		glm::vec2 gridCoords = getEntityCoords(toAdd, x, y);
-		getCell(gridCoords).m_objects.push_back(toAdd);
+		SpatialPartitioningCell* cell = getCell(gridCoords);
 
-		return gridCoords;
+		if (cell != nullptr)
+		{
+			getCell(gridCoords)->m_objects.push_back(toAdd);
+			return gridCoords;
+		}
+		return glm::vec2(0, 0);
 	}
 
 	glm::vec2 CollisionGrid::getEntityCoords(Entity* e, int x, int y)

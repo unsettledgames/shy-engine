@@ -2,18 +2,9 @@
 - Circle collisions
 - Spatial partitioning
 
-- getModules and getModule should check if the name contains the string, not if it's equal to it
-
 
 - Add a debug window and a debug manager where I can put textures and easily print stuff onto it
-- Since vectors are contiguous only with reserve (they're not with resize), it could be useful to let the user register 
-	components and only after they're done, actually create the vectors
-- Custom spatial partitioning. I'm not sure I like Ben's implementation, I'd like to have something way more generic,
-	but I think I'd need a proper collision class and structure in order to do so. In spatial partitioning, instead of checking
-	all the objects against themselves, you just check the cells with *:
-	*	*	X
-	*	*	X
-	*	X	X
+
 - Collision system: start with circle / AABB colliders just to flesh out the basic structure.
 - IMainGame and IGameScreen suck big time, their only purpose is to take part of the window features and put them in a new
 	class. Kinda ok but it should be done in a different class (something like Engine probably, in which we take care of SDL
@@ -22,8 +13,8 @@
 - Add proper destructors
 - Use the correct shader when rendering a Glyph
 
-Games:
-- Stress test with ball game
-
 Polish:
 - Let the programmer choose how to group the data
+
+Bugs:
+- Framerate calculator not stable with low framerates

@@ -22,6 +22,7 @@ namespace ShyEngine
 	{
 		private:
 			CollisionGrid* m_collisionGrid;
+			std::vector<Collider2D> m_modules;
 			std::set<Entity*> m_entities;
 
 			void cellCollision(Collider2D* collider, int x, int y);
@@ -33,7 +34,7 @@ namespace ShyEngine
 			~CollisionManager() {}
 
 			void updateModules(PhysicsData data);
-			void addModule(Collidable* toAdd);
+			void addModule(Collider2D* toAdd);
 
 	};
 }

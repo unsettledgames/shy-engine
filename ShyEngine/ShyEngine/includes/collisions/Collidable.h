@@ -8,6 +8,7 @@
 #include <util/Classes.h>
 
 #include <collisions/CollisionGrid.h>
+#include <engine/modules/collisions/Collider2D.h>
 
 /*
 * COLLISION SYSTEM:
@@ -32,17 +33,19 @@ namespace ShyEngine
 		private:
 			bool m_prevContact = false;
 			glm::vec2 m_cellCoords = glm::vec2(0, 0);
+			
 			CollisionGrid* m_collisionGrid;
+			Collider2D* m_currentCollider;
 
 		public:
 			Collidable();
 			Collidable(Entity* entity) : Module(entity) {}
 			~Collidable();
 
-			void handleCollision(bool contact);
+			void handleCollision(bool contact, Collider2D* collidedCollider);
 
-			void onCollisionStarted() {};
-			void onCollisionFinished() {};
-			void onCollisionStay() {};
+			virtual void onCollisionStarted(Collider2D* collider) {};
+			virtual void onCollisionFinished(Collider2D* collider) {};
+			virtual void onCollisionStay(Collider2D* collider) {};
 	};
 }

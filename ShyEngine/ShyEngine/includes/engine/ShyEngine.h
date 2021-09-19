@@ -131,7 +131,10 @@ namespace ShyEngine
 				else if (toRegister->IsClassType(Physics::Type))
 				{
 					m_physicsManager->addModule(dynamic_cast<Physics*>(toRegister));
-					m_collisionManager->addModule((Collidable*)dynamic_cast<Physics*>(toRegister));
+				}
+				else if (toRegister->IsClassType(Collider2D::Type))
+				{
+					m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
 				}
 			}
 

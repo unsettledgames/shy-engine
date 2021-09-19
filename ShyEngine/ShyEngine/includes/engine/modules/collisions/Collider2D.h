@@ -27,8 +27,7 @@ namespace ShyEngine
 			Collider2D(Entity* entity);
 			~Collider2D() {}
 
-			bool checkCollision(std::vector<Collider2D*> colliders);
-			bool checkCollisionOptimized(std::vector<Collider2D*> colliders);
+			Collider2D* checkCollision(std::vector<Collider2D*> colliders);
 
 			bool checkCollision(Collider2D* otherCollider);
 			bool checkCollision(Transform* otherTransform);

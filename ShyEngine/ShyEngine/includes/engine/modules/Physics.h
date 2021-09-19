@@ -29,5 +29,9 @@ namespace ShyEngine
 
 			void setMass(float mass) { m_mass = mass; }
 			float getMass() { return m_mass; }
+
+			void onCollisionStarted(Collider2D* collider);
+			void onCollisionFinished(Collider2D* collider);
+			void onCollisionStay(Collider2D* collider);
 	};
 }

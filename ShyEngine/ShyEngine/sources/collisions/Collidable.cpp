@@ -7,7 +7,7 @@ namespace ShyEngine
 	Collidable::Collidable() {}
 	Collidable::~Collidable() {}
 
-	void Collidable::handleCollision(bool contact)
+	void Collidable::handleCollision(bool contact, Collider2D* collidedCollider)
 	{
 		// If it's not colliding, do nothing
 		if (!contact && !m_prevContact)
@@ -15,12 +15,14 @@ namespace ShyEngine
 
 		// If it started colliding, call onCollisionStarted
 		if (contact && !m_prevContact)
-			onCollisionStarted();
+			onCollisionStarted(collidedCollider);
 		// Otherwise, if it created contact the previous frame, call onCollisionStay
 		else if (contact && m_prevContact)
-			onCollisionStay();
+			onCollisionStay(collidedCollider);
 		// If a contact ended, call onCollisionFinished
 		else if (!contact && m_prevContact)
-			onCollisionFinished();
+			onCollisionFinished(m_currentCollider);
+
+		m_currentCollider = collidedCollider;
 	}
 }

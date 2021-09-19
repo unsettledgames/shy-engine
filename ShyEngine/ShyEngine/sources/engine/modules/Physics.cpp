@@ -14,4 +14,24 @@ namespace ShyEngine
 		transform->setPos(transform->getPos() + m_velocity * data.deltaTime );
 		m_velocity += data.gravity * data.deltaTime * m_mass;
 	}
+
+	void Physics::onCollisionStarted(Collider2D* collider)
+	{
+		Physics* otherPhysics = collider->getEntity()->getModule<Physics>();
+		float otherMass = otherPhysics->getMass();
+		glm::vec2 otherVel = otherPhysics->getVelocity();
+
+		setVelocity(((m_mass - otherMass) * m_velocity + 2 * otherMass * otherVel) / (otherMass + m_mass));
+		otherPhysics->setVelocity(((otherMass - m_mass) * otherVel + 2 * m_mass * m_velocity) / (otherMass + m_mass));
+	}
+
+	void Physics::onCollisionFinished(Collider2D* collider)
+	{
+
+	}
+
+	void Physics::onCollisionStay(Collider2D* collider)
+	{
+
+	}
 }
