@@ -17,6 +17,8 @@ namespace ShyEngine
 			CircleCollider2D(Entity* entity, float radius);
 			~CircleCollider2D() {};
 
+			bool checkCollision (Collider2D* other) override;
+
 			bool checkCompatibility(std::vector<Module*>& otherModules);
 			bool checkDependency(std::vector<Module*>& otherModules);
 

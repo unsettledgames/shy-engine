@@ -30,7 +30,7 @@ namespace ShyEngine
 
 	// OPTIMIZABLE: make AABB a macro instead of a function
 	// OPTIMIZABLE: make as many members as possible public to remove calls
-	bool Collider2D::checkCollision(Collider2D* other)
+	/*bool Collider2D::checkCollision(Collider2D* other)
 	{
 		glm::vec4 first = glm::vec4(other->m_transform->getPos(), other->m_transform->getScale());
 		glm::vec4 second = glm::vec4(m_transform->getPos(), m_transform->getScale());
@@ -44,8 +44,8 @@ namespace ShyEngine
 		return depth.x > 0 && depth.y > 0;
 
 		/*return AABB(glm::vec4(other->m_transform->getPos(), other->m_transform->getScale()),
-			glm::vec4(m_transform->getPos(), m_transform->getScale()));*/
-	}
+			glm::vec4(m_transform->getPos(), m_transform->getScale()));
+	}*/
 
 	bool Collider2D::checkCollision(glm::vec4 rect)
 	{

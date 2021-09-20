@@ -1,14 +1,16 @@
 ﻿  CollisionManager.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(137,80): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(13,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(15,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(142,80): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(137,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(142,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(138,87): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(138,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(143,87): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(143,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\ShyEngine.lib

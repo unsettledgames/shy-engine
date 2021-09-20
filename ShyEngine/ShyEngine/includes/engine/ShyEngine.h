@@ -132,9 +132,9 @@ namespace ShyEngine
 				{
 					m_physicsManager->addModule(dynamic_cast<Physics*>(toRegister));
 				}
-				else if (toRegister->IsClassType(Collider2D::Type))
+				else if (toRegister->IsClassType(CircleCollider2D::Type))
 				{
-					m_collisionManager->addModule(dynamic_cast<Collider2D*>(toRegister));
+					m_collisionManager->addModule(dynamic_cast<CircleCollider2D*>(toRegister));
 				}
 			}
 

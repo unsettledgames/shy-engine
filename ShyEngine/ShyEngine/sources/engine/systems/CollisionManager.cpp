@@ -1,4 +1,5 @@
 #include <engine/systems/CollisionManager.h>
+#include <engine/modules/collisions/CircleCollider2D.h>
 
 namespace ShyEngine
 {
@@ -9,36 +10,43 @@ namespace ShyEngine
 
 	void CollisionManager::updateModules(PhysicsData data)
 	{
-		for (auto collider : m_modules)
+		std::vector<Collidable*> collidables;
+		Collider2D* collider, * collider2;
+		int i = 0;
+
+		// Ganzo, questo è esponenziale probabilmente (o almeno il calo di framerate è logaritmico)
+		for (int i=0; i<m_modulesPointers.size(); i++)
 		{
-			for (auto collider2 : m_modules)
+			for (int j=i+1; j< m_modulesPointers.size(); j++)
 			{
-				bool found = false;
-				Collider2D collidedCollider;
-				if (collider.checkCollision(&collider2))
-				{
-					collidedCollider = collider2;
-					found = true;
-				}
-				// ISSUE: caching issues with ifs
+				collider = (Collider2D*)m_modulesPointers[i];
+				collider2 = (Collider2D*)m_modulesPointers[j];
+
 				// If it collides
-				if (found)
+				if (collider->checkCollision(collider2))
 				{
+					collidables = collider->getEntity()->getModules<Collidable>();
 					// Trigger the enter / stay functions for all the Collidable modules
-					for (auto collidable : collider.getEntity()->getModules<Collidable>())
-						((Collidable*)collidable)->handleCollision(true, &collidedCollider);
+					for (int i = 0; i < collidables.size(); i++)
+					{
+						collidables[i]->handleCollision(true, collider2);
+						i++;
+					}
 				}
 				else
 				{
+					collidables = collider->getEntity()->getModules<Collidable>();
 					// Trigger the enter / stay functions for all the Collidable modules
-					for (auto collidable : collider.getEntity()->getModules<Collidable>())
+					for (int i = 0; i < collidables.size(); i++)
 					{
-						Collidable* curr = (Collidable*)collidable;
-						if (curr->m_currentCollider != nullptr)
-							curr->handleCollision(false, nullptr);
+						if (collidables[i]->m_currentCollider != nullptr)
+							collidables[i]->handleCollision(false, nullptr);
+						i++;
 					}
 				}
 			}
+
+			std::printf("Iterations: %d\n", i);
 		}
 		/*
 		glm::vec2 nCells = m_collisionGrid->getNCells();

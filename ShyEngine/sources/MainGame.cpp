@@ -4,6 +4,15 @@
 #include <engine/ShyEngine.h>
 #include <string>
 
+/*
+    CUSTOM SCRIPTS SYSTEM
+
+    - User can create a class derived from UserProgram
+    - User can derive from CollidableUserProgram if they want to have collisions
+    - User can register a UserProgram and attach it to an entity
+    - The engine updates all UserPrograms
+*/
+
 int main(int argc, char** argv)
 {
     srand((unsigned)time(NULL));

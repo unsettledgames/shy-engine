@@ -29,7 +29,8 @@ namespace ShyEngine
 
 			Collider2D* checkCollision(std::vector<Collider2D*> colliders);
 
-			bool checkCollision(Collider2D* otherCollider);
+			// ISSUE: make the engine use the checkCollision of the subclass ffs
+			virtual bool checkCollision(Collider2D* otherCollider) { return false; };
 			bool checkCollision(Transform* otherTransform);
 			bool checkCollision(glm::vec4 otherRect);
 
