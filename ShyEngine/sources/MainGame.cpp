@@ -2,6 +2,7 @@
 #include <time.h>
 
 #include <engine/ShyEngine.h>
+#include <sstream>
 #include <string>
 
 /*
@@ -15,6 +16,8 @@
 
 int main(int argc, char** argv)
 {
+    std::stringstream ballname;
+
     srand((unsigned)time(NULL));
 
     ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);
@@ -29,7 +32,9 @@ int main(int argc, char** argv)
     {
         for (int j = 0; j < 10; j++)
         {
-            ball = engine.createEntity("Ballin");
+            ballname << "Ballin " << i << ", " << j;
+            ball = engine.createEntity(ballname.str());
+            ballname.clear();
 
             // Adjusting the transform
             ball->getTransform()->setScale(glm::vec2(20, 20));
@@ -42,7 +47,7 @@ int main(int argc, char** argv)
             ball->attachModule<ShyEngine::Sprite>(ballSprite);
 
             // Adding a circle collider
-            ShyEngine::CircleCollider2D* circleCollider = new ShyEngine::CircleCollider2D(ball, 100);
+            ShyEngine::CircleCollider2D* circleCollider = new ShyEngine::CircleCollider2D(ball, 20);
             engine.registerModule<ShyEngine::CircleCollider2D>(circleCollider);
             ball->attachModule<ShyEngine::CircleCollider2D>(circleCollider);
 

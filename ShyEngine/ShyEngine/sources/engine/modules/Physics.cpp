@@ -17,7 +17,7 @@ namespace ShyEngine
 
 	void Physics::onCollisionStarted(Collider2D* collider)
 	{
-		Physics* otherPhysics = collider->getEntity()->getModule<Physics>();
+		Physics* otherPhysics = collider->m_entity->getModule<Physics>();
 		float otherMass = otherPhysics->getMass();
 		glm::vec2 otherVel = otherPhysics->getVelocity();
 

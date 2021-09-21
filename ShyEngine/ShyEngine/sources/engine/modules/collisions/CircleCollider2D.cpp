@@ -15,8 +15,11 @@ namespace ShyEngine
 	bool CircleCollider2D::checkCollision(Collider2D* coll)
 	{
 		CircleCollider2D* other = (CircleCollider2D*)coll;
+		glm::vec2 otherPos = other->m_transform->getPos();
+		glm::vec2 pos = m_transform->getPos();
 
-		return glm::distance(other->m_transform->getPos(), m_transform->getPos()) <=
+		return std::sqrtf((otherPos.x + pos.x) * (otherPos.x + pos.x) +
+			(otherPos.y + pos.y) * (otherPos.y + pos.y)) >
 			(other->m_radius + m_radius);
 	}
 

@@ -25,12 +25,13 @@ namespace ShyEngine
 
 		protected:
 			Module* m_reference;
-			Entity* m_entity;
 			int m_id;
 
 		public:
 			static const std::size_t Type;
 			static const std::string m_name;
+
+			Entity* m_entity;
 
 			Module() {}
 			Module(Entity* entity);

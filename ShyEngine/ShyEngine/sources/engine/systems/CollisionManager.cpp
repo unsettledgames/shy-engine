@@ -12,7 +12,6 @@ namespace ShyEngine
 	{
 		std::vector<Collidable*> collidables;
 		Collider2D* collider, * collider2;
-		int i = 0;
 
 		// Ganzo, questo è esponenziale probabilmente (o almeno il calo di framerate è logaritmico)
 		for (int i=0; i<m_modulesPointers.size(); i++)
@@ -25,28 +24,26 @@ namespace ShyEngine
 				// If it collides
 				if (collider->checkCollision(collider2))
 				{
-					collidables = collider->getEntity()->getModules<Collidable>();
+					collidables = collider->m_entity->m_collidables;
+
 					// Trigger the enter / stay functions for all the Collidable modules
 					for (int i = 0; i < collidables.size(); i++)
 					{
 						collidables[i]->handleCollision(true, collider2);
-						i++;
 					}
 				}
 				else
 				{
-					collidables = collider->getEntity()->getModules<Collidable>();
+					collidables = collider->m_entity->m_collidables;
+
 					// Trigger the enter / stay functions for all the Collidable modules
 					for (int i = 0; i < collidables.size(); i++)
 					{
 						if (collidables[i]->m_currentCollider != nullptr)
 							collidables[i]->handleCollision(false, nullptr);
-						i++;
 					}
 				}
 			}
-
-			std::printf("Iterations: %d\n", i);
 		}
 		/*
 		glm::vec2 nCells = m_collisionGrid->getNCells();
@@ -132,7 +129,7 @@ namespace ShyEngine
 
 	void CollisionManager::updateCellCoords(Collidable* coll)
 	{
-		glm::vec2 otherPos = coll->getEntity()->getModule<Transform>()->getPos();
+		glm::vec2 otherPos = coll->m_entity->getModule<Transform>()->getPos();
 
 		moveEntity(coll, otherPos);
 	}
@@ -142,13 +139,13 @@ namespace ShyEngine
 	{
 		glm::vec2 currCoords = entity->m_cellCoords;
 		
-		m_collisionGrid->removeFromGrid(entity->getEntity(), currCoords.x, currCoords.y);
-		m_collisionGrid->addToGrid(entity->getEntity(), std::round(destCoords.x), std::round(destCoords.y));
+		m_collisionGrid->removeFromGrid(entity->m_entity, currCoords.x, currCoords.y);
+		m_collisionGrid->addToGrid(entity->m_entity, std::round(destCoords.x), std::round(destCoords.y));
 	}
 
 	void CollisionManager::addModule(Collider2D* toAdd)
 	{
-		m_entities.insert(toAdd->getEntity());
+		m_entities.insert(toAdd->m_entity);
 		m_modulesPointers.push_back(toAdd);
 		m_modules.push_back(*toAdd);
 		/*

@@ -16,10 +16,13 @@
 namespace ShyEngine
 {
 	class Module;
+	class Collidable;
+	class CollisionManager;
 
 	class Entity
 	{
 		friend class ShyEngine;
+		friend class CollisionManager;
 
 		protected:
 			int m_id;
@@ -29,6 +32,7 @@ namespace ShyEngine
 			Entity* m_reference;
 
 			std::vector<Module*> m_modules;
+			std::vector<Collidable*> m_collidables;
 			Transform* m_transform;
 
 		public:
@@ -63,7 +67,12 @@ namespace ShyEngine
 			void attachModule(ModuleType* toAttach)
 			{
 				if (toAttach->checkCompatibility(m_modules))
+				{
 					m_modules.push_back(toAttach);
+					
+					if (toAttach->IsClassType(Collidable::Type))
+						m_collidables.push_back((Collidable*)toAttach);
+				}
 			}
 
 			template <class ModuleType, typename... Args>
@@ -109,5 +118,6 @@ namespace ShyEngine
 			void setName(const std::string& name) { m_name = name; }
 
 			Transform* getTransform() { return m_transform; }
+			std::vector<Collidable*> getCollidables() { return m_collidables; }
 	};	
 }
