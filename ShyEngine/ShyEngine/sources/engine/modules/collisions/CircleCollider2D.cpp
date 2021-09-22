@@ -18,9 +18,11 @@ namespace ShyEngine
 		glm::vec2 otherPos = other->m_transform->getPos();
 		glm::vec2 pos = m_transform->getPos();
 
-		return std::sqrtf((otherPos.x + pos.x) * (otherPos.x + pos.x) +
-			(otherPos.y + pos.y) * (otherPos.y + pos.y)) >
-			(other->m_radius + m_radius);
+		float distance = std::sqrtf((otherPos.x - pos.x) * (otherPos.x - pos.x) +
+			(otherPos.y - pos.y) * (otherPos.y - pos.y));
+		float radiusSum = other->m_radius + m_radius;
+
+		return distance <= radiusSum;
 	}
 
 	bool CircleCollider2D::checkCompatibility(std::vector<Module*>& otherModules)

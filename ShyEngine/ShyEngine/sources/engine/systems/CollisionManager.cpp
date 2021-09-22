@@ -13,7 +13,6 @@ namespace ShyEngine
 		std::vector<Collidable*> collidables;
 		Collider2D* collider, * collider2;
 
-		// Ganzo, questo è esponenziale probabilmente (o almeno il calo di framerate è logaritmico)
 		for (int i=0; i<m_modulesPointers.size(); i++)
 		{
 			for (int j=i+1; j< m_modulesPointers.size(); j++)

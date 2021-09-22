@@ -27,18 +27,19 @@ int main(int argc, char** argv)
     ShyEngine::ShaderProgram* shader = new ShyEngine::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
 
     engine.registerShader(shader);
-
-    for (int i = 0; i < 10; i++)
+    
+    for (int i = 0; i < 20; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 20; j++)
         {
             ballname << "Ballin " << i << ", " << j;
             ball = engine.createEntity(ballname.str());
+            ballname.str("");
             ballname.clear();
 
             // Adjusting the transform
-            ball->getTransform()->setScale(glm::vec2(20, 20));
-            ball->getTransform()->setPos(glm::vec2(25 * i, 25 * j));
+            ball->getTransform()->setScale(glm::vec2(40, 40));
+            ball->getTransform()->setPos(glm::vec2(70 * i, 70 * j));
 
             // Adding the sprite
             ShyEngine::Sprite* ballSprite = new ShyEngine::Sprite(ball, "textures/AH.png",

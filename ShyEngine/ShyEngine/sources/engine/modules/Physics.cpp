@@ -21,8 +21,8 @@ namespace ShyEngine
 		float otherMass = otherPhysics->getMass();
 		glm::vec2 otherVel = otherPhysics->getVelocity();
 
-		setVelocity(((m_mass - otherMass) * m_velocity + 2 * otherMass * otherVel) / (otherMass + m_mass));
 		otherPhysics->setVelocity(((otherMass - m_mass) * otherVel + 2 * m_mass * m_velocity) / (otherMass + m_mass));
+		setVelocity(((m_mass - otherMass) * m_velocity + 2 * otherMass * otherVel) / (otherMass + m_mass));
 	}
 
 	void Physics::onCollisionFinished(Collider2D* collider)
