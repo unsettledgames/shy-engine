@@ -10,6 +10,7 @@ namespace ShyEngine
 	{
 		private:
 			glm::vec2 m_gravity;
+			float m_simulationSpeed = 1.0f;
 		public:
 			PhysicsManager();
 			~PhysicsManager() {}
@@ -20,5 +21,8 @@ namespace ShyEngine
 
 			void setGravity(glm::vec2 gravity) { m_gravity = gravity; }
 			glm::vec2 getGravity() { return m_gravity; }
+
+			void setSimulationSpeed(float value) { m_simulationSpeed = value; }
+			float getSimulationSpeed() { return m_simulationSpeed; }
 	};
 }

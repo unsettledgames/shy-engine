@@ -17,6 +17,7 @@ namespace ShyEngine
 	{
 		glm::vec2 gravity;
 		float deltaTime;
+		float simulationSpeed;
 	};
 
 	struct ShaderData

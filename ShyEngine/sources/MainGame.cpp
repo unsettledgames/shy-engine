@@ -58,8 +58,8 @@ int main(int argc, char** argv)
             ball->attachModule<ShyEngine::Physics>(physics);
 
             // Adjusting physics
-            physics->setMass(2.0f);
-            physics->setVelocity(0.5f * glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 10.0f, (((float)rand() / RAND_MAX)) * 10.0f));
+            physics->setMass(0.01f);
+            physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 10.0f, (((float)rand() / RAND_MAX)) * 10.0f));
         }
     }
 
