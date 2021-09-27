@@ -9,6 +9,7 @@
 
 #include <collisions/CollisionGrid.h>
 #include <engine/modules/collisions/Collider2D.h>
+#include <data/SystemData.h>
 
 /*
 * COLLISION SYSTEM:
@@ -42,10 +43,10 @@ namespace ShyEngine
 			Collidable(Entity* entity) : Module(entity) {}
 			~Collidable();
 
-			void handleCollision(bool contact, Collider2D* collidedCollider);
+			void handleCollision(CollisionData data);
 
-			virtual void onCollisionStarted(Collider2D* collider) {};
-			virtual void onCollisionFinished(Collider2D* collider) {};
-			virtual void onCollisionStay(Collider2D* collider) {};
+			virtual void onCollisionStarted(CollisionData data) {};
+			virtual void onCollisionFinished(CollisionData data) {};
+			virtual void onCollisionStay(CollisionData data) {};
 	};
 }

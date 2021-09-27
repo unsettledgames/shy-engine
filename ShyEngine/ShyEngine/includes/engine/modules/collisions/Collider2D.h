@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <engine/Module.h>
+#include <data/SystemData.h>
 #include <engine/modules/Transform.h>
 #include <engine/Entity.h>
 #include <util/Classes.h>
@@ -27,10 +28,10 @@ namespace ShyEngine
 			Collider2D(Entity* entity);
 			~Collider2D() {}
 
-			Collider2D* checkCollision(std::vector<Collider2D*> colliders);
+			CollisionData checkCollision(std::vector<Collider2D*> colliders);
 
 			// ISSUE: make the engine use the checkCollision of the subclass ffs
-			virtual bool checkCollision(Collider2D* otherCollider) { return false; };
+			virtual CollisionData checkCollision(Collider2D* otherCollider) { return CollisionData::CollisionData(); };
 			bool checkCollision(Transform* otherTransform);
 			bool checkCollision(glm::vec4 otherRect);
 

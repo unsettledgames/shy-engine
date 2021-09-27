@@ -12,6 +12,7 @@ namespace ShyEngine
 	{
 		std::vector<Collidable*> collidables;
 		Collider2D* collider, * collider2;
+		CollisionData collisionData;
 
 		for (int i=0; i<m_modulesPointers.size(); i++)
 		{
@@ -20,28 +21,12 @@ namespace ShyEngine
 				collider = (Collider2D*)m_modulesPointers[i];
 				collider2 = (Collider2D*)m_modulesPointers[j];
 
-				// If it collides
-				if (collider->checkCollision(collider2))
-				{
-					collidables = collider->m_entity->m_collidables;
+				collisionData = collider->checkCollision(collider2);
+				collidables = collider->m_entity->m_collidables;
 
-					// Trigger the enter / stay functions for all the Collidable modules
-					for (int i = 0; i < collidables.size(); i++)
-					{
-						collidables[i]->handleCollision(true, collider2);
-					}
-				}
-				else
-				{
-					collidables = collider->m_entity->m_collidables;
-
-					// Trigger the enter / stay functions for all the Collidable modules
-					for (int i = 0; i < collidables.size(); i++)
-					{
-						if (collidables[i]->m_currentCollider != nullptr)
-							collidables[i]->handleCollision(false, nullptr);
-					}
-				}
+				// Trigger the enter / stay functions for all the Collidable modules
+				for (int i = 0; i < collidables.size(); i++)
+					collidables[i]->handleCollision(collisionData);
 			}
 		}
 		/*

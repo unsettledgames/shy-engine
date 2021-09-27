@@ -11,15 +11,17 @@ namespace ShyEngine
 		m_transform = entity->getTransform();
 	}
 
-	Collider2D* Collider2D::checkCollision(std::vector<Collider2D*> colliders)
+	CollisionData Collider2D::checkCollision(std::vector<Collider2D*> colliders)
 	{
+		CollisionData ret;
+
 		for (auto collider : colliders)
 		{
-			if (checkCollision(collider))
-				return collider;
+			ret = checkCollision(collider);
+			return ret;
 		}
 
-		return nullptr;
+		return ret;
 	}
 
 	bool Collider2D::checkCollision(Transform* other)

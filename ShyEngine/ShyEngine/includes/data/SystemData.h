@@ -5,12 +5,21 @@
 
 namespace ShyEngine
 {
+	class Collider2D;
+
 	enum class SpriteSortType
 	{
 		NONE,
 		FRONT_TO_BACK,
 		BACK_TO_FRONT,
 		TEXTURE
+	};
+
+	struct CollisionData
+	{
+		Collider2D* collider = nullptr;
+		float minDistance = 0.0f;
+		bool colliding = false;
 	};
 
 	struct PhysicsData

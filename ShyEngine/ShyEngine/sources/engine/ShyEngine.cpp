@@ -29,7 +29,6 @@ namespace ShyEngine {
 		m_particleRenderer = new ParticleRenderer();
 
 		m_physicsManager = new PhysicsManager();
-		m_physicsManager->setSimulationSpeed(0.1f);
 		m_collisionManager = new CollisionManager(50, glm::vec2(0, 0), glm::vec2(50, 50));
 	}
 
