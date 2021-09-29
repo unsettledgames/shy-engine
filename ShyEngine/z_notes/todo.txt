@@ -1,20 +1,15 @@
-- AABB collisions and CollisionManager
-- Circle collisions
-- Spatial partitioning
-
-
-- Add a debug window and a debug manager where I can put textures and easily print stuff onto it
-
-- Collision system: start with circle / AABB colliders just to flesh out the basic structure.
-- IMainGame and IGameScreen suck big time, their only purpose is to take part of the window features and put them in a new
-	class. Kinda ok but it should be done in a different class (something like Engine probably, in which we take care of SDL
-	initialization and the Engine components initialization). The screen management part should be some kind of Scene system
-	instead.
-- Add proper destructors
+EASY:
+- Index drawing 
 - Use the correct shader when rendering a Glyph
+- Compile shaders with their code / optimize shader compiling by saving shader object files and checking if they exist
+	before compiling the shaders
 
-Polish:
-- Let the programmer choose how to group the data
+MEDIUM:
+- Custom renderers (most importantly, debug renderer)
+- Custom scripts
+- Proper destructors and module detachment
+- Game screen management
 
-Bugs:
-- Framerate calculator not stable with low framerates
+HARD:
+- Spatial partitioning
+- Memory leaks
