@@ -184,7 +184,7 @@ namespace ShyEngine
 
 				int offset = 0;
 				std::vector<Vertex> vertices;
-				Glyph currGlyph = m_renderables[0];
+				Glyph currGlyph = *m_renderablesPointers[0];
 
 				vertices.resize(m_renderables.size() * 6);
 

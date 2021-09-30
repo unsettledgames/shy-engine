@@ -24,7 +24,6 @@ namespace ShyEngine
 			(otherPos.y - pos.y) * (otherPos.y - pos.y));
 		float radiusSum = other->m_radius + m_radius;
 
-
 		ret.collider = coll;
 		ret.minDistance = radiusSum - distance;
 		ret.colliding = distance <= radiusSum;

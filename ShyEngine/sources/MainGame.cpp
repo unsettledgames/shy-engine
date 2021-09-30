@@ -41,9 +41,19 @@ int main(int argc, char** argv)
             ball->getTransform()->setScale(glm::vec2(40, 40));
             ball->getTransform()->setPos(glm::vec2(70 * i, 70 * j));
 
+            ShyEngine::Sprite* ballSprite;
             // Adding the sprite
-            ShyEngine::Sprite* ballSprite = new ShyEngine::Sprite(ball, "textures/AH.png",
-                shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
+            if ((i + j) % 2 == 0)
+            {
+                ballSprite = new ShyEngine::Sprite(ball, "textures/AH.png",
+                    shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
+            }
+            else
+            {
+                ballSprite = new ShyEngine::Sprite(ball, "textures/win.png",
+                    shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
+            }
+             
             engine.registerModule<ShyEngine::Sprite>(ballSprite);
             ball->attachModule<ShyEngine::Sprite>(ballSprite);
 
@@ -62,6 +72,32 @@ int main(int argc, char** argv)
             physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX)) * 5.0f));
         }
     }
+
+    ballname << "Ground";
+    ball = engine.createEntity(ballname.str());
+
+    // Adjusting the transform
+    ball->getTransform()->setScale(glm::vec2(900, 100));
+    ball->getTransform()->setPos(glm::vec2(350, -70));
+
+    ShyEngine::Sprite* ballSprite;
+        ballSprite = new ShyEngine::Sprite(ball, "textures/win.png",
+            shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
+    engine.registerModule<ShyEngine::Sprite>(ballSprite);
+    ball->attachModule<ShyEngine::Sprite>(ballSprite);
+
+    // Adding a circle collider
+    ShyEngine::RectCollider2D* circleCollider = new ShyEngine::RectCollider2D(ball, glm::vec2(900, 100));
+    engine.registerModule<ShyEngine::RectCollider2D>(circleCollider);
+    ball->attachModule<ShyEngine::RectCollider2D>(circleCollider);
+
+    // Adding a physics module
+    ShyEngine::Physics* physics = new ShyEngine::Physics(ball);
+    engine.registerModule<ShyEngine::Physics>(physics);
+    ball->attachModule<ShyEngine::Physics>(physics);
+
+    // Adjusting physics
+    physics->setMass(0);
 
     /*
     ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);

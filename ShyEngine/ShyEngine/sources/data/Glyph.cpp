@@ -15,7 +15,7 @@ namespace ShyEngine
 
 	bool Glyph::compareTexture(Glyph* a, Glyph* b)
 	{
-		return a->m_texture.id < b->m_texture.id;
+		return (a->m_texture.id < b->m_texture.id);
 	}
 
 	bool operator==(const Glyph& e1, const Glyph& e2)
