@@ -19,7 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\ElasticBump.cpp" />
     <ClCompile Include="sources\MainGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\ElasticBump.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

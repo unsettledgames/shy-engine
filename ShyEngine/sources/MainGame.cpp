@@ -9,7 +9,8 @@
     CUSTOM SCRIPTS SYSTEM
 
     - User can create a class derived from UserProgram
-    - User can derive from CollidableUserProgram if they want to have collisions
+    - User can derive from CollidableUserProgram (which derives from UserProgram and Collidable)
+        if they want to have collisions
     - User can register a UserProgram and attach it to an entity
     - The engine updates all UserPrograms
 */

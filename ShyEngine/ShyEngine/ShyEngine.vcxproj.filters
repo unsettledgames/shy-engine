@@ -183,9 +183,6 @@
     <ClInclude Include="includes\engine\modules\Transform.h">
       <Filter>Header Files\Engine\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="includes\engine\modules\Camera.h">
-      <Filter>Header Files\Engine\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="includes\engine\systems\SpriteRenderer.h">
       <Filter>Header Files\Engine\Systems</Filter>
     </ClInclude>
@@ -239,6 +236,12 @@
     </ClInclude>
     <ClInclude Include="includes\collisions\CollisionGrid.h">
       <Filter>Header Files\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\systems\UserScriptsManager.h">
+      <Filter>Header Files\Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\engine\modules\UserScript.h">
+      <Filter>Header Files\Engine\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -305,9 +308,6 @@
     <ClCompile Include="sources\engine\modules\Sprite.cpp">
       <Filter>Source Files\Engine\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="sources\engine\modules\Camera.cpp">
-      <Filter>Source Files\Engine\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="sources\engine\modules\Physics.cpp">
       <Filter>Source Files\Engine\Modules</Filter>
     </ClCompile>
@@ -358,6 +358,12 @@
     </ClCompile>
     <ClCompile Include="sources\collisions\CollisionGrid.cpp">
       <Filter>Source Files\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\systems\UserScriptsManager.cpp">
+      <Filter>Source Files\Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\modules\UserScript.cpp">
+      <Filter>Source Files\Engine\Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -33,6 +33,8 @@
 #include <engine/modules/Text.h>
 #include <engine/modules/ParticleSystem.h>
 
+#include <engine/modules/UserScript.h>
+
 #include <engine/modules/Physics.h>
 #include <engine/modules/collisions/Collider2D.h>
 #include <engine/modules/collisions/CircleCollider2D.h>
@@ -43,6 +45,7 @@
 #include <engine/systems/TextRenderer.h>
 #include <engine/systems/PhysicsManager.h>
 #include <engine/systems/CollisionManager.h>
+#include <engine/systems/UserScriptsManager.h>
 
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 

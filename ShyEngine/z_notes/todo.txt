@@ -1,5 +1,4 @@
 EASY:
-- Index drawing 
 - Use the correct shader when rendering a Glyph
 - Compile shaders with their code / optimize shader compiling by saving shader object files and checking if they exist
 	before compiling the shaders
@@ -9,6 +8,7 @@ MEDIUM:
 - Custom scripts
 - Proper destructors and module detachment
 - Game screen management
+- Module enable / disable
 
 HARD:
 - Spatial partitioning
