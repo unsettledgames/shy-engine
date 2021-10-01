@@ -137,6 +137,10 @@ namespace ShyEngine
 				{
 					m_collisionManager->addModule(dynamic_cast<CircleCollider2D*>(toRegister));
 				}
+				else if (toRegister->IsClassType(RectCollider2D::Type))
+				{
+					m_collisionManager->addModule(dynamic_cast<RectCollider2D*>(toRegister));
+				}
 			}
 
 			void registerShader(ShaderProgram* toRegister);

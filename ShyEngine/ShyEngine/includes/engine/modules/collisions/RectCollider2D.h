@@ -17,6 +17,9 @@ namespace ShyEngine
 			RectCollider2D(Entity* entity, glm::vec2 size);
 
 			void setSize(glm::vec2 size) { m_rectSize = size; }
+			glm::vec2 getRectSize() { return m_rectSize; }
+
+			glm::vec4 getRectBounds() { return glm::vec4(m_transform->getPos(), m_rectSize); }
 
 			bool checkCompatibility(std::vector<Module*>& otherModules);
 			bool checkDependency(std::vector<Module*>& otherModules);
@@ -28,9 +31,9 @@ namespace ShyEngine
 				checkCollision(Collider)
 					switch (colliderType)
 						case Rect:
-							do stuff
+							checkCollision(this, (Rect)Collider)
 						case Circle:
-							do other stuff
+							checkCollision(this, (Circle)Collider)
 
 				Maybe the methods could stay in Collider2D? And the subclasses can call them: in this case the 
 				colliders are merely containers of data and don't do much on their own

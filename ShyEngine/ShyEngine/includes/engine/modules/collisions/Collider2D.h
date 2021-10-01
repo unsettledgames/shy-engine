@@ -15,6 +15,7 @@ namespace ShyEngine
 		CLASS_DECLARATION(Collider2D);
 
 		class CollisionManager;
+
 		friend class CollisionManager;
 
 		protected:
@@ -28,10 +29,8 @@ namespace ShyEngine
 			Collider2D(Entity* entity);
 			~Collider2D() {}
 
-			CollisionData checkCollision(std::vector<Collider2D*> colliders);
+			virtual CollisionData checkCollision(Collider2D* second) { return CollisionData::CollisionData(); };
 
-			// ISSUE: make the engine use the checkCollision of the subclass ffs
-			virtual CollisionData checkCollision(Collider2D* otherCollider) { return CollisionData::CollisionData(); };
 			bool checkCollision(Transform* otherTransform);
 			bool checkCollision(glm::vec4 otherRect);
 

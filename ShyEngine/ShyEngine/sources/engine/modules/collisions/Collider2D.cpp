@@ -1,3 +1,5 @@
+#include <engine/modules/collisions/CircleCollider2D.h>
+#include <engine/modules/collisions/RectCollider2D.h>
 #include <engine/modules/collisions/Collider2D.h>
 
 namespace ShyEngine
@@ -9,19 +11,6 @@ namespace ShyEngine
 	Collider2D::Collider2D(Entity* entity) : Module(entity) 
 	{
 		m_transform = entity->getTransform();
-	}
-
-	CollisionData Collider2D::checkCollision(std::vector<Collider2D*> colliders)
-	{
-		CollisionData ret;
-
-		for (auto collider : colliders)
-		{
-			ret = checkCollision(collider);
-			return ret;
-		}
-
-		return ret;
 	}
 
 	bool Collider2D::checkCollision(Transform* other)

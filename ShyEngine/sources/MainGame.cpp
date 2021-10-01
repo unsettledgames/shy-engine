@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 
     // Adjusting the transform
     ball->getTransform()->setScale(glm::vec2(900, 100));
-    ball->getTransform()->setPos(glm::vec2(350, -70));
+    ball->getTransform()->setPos(glm::vec2(350, -140));
 
     ShyEngine::Sprite* ballSprite;
         ballSprite = new ShyEngine::Sprite(ball, "textures/win.png",
