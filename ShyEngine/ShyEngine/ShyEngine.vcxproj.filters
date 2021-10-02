@@ -132,9 +132,6 @@
     <ClInclude Include="includes\util\Utility.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="includes\physics\Box.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="includes\rendering\Camera2D.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
@@ -268,9 +265,6 @@
     </ClCompile>
     <ClCompile Include="sources\util\Utility.cpp">
       <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\physics\Box.cpp">
-      <Filter>Source Files\Physics</Filter>
     </ClCompile>
     <ClCompile Include="sources\rendering\Camera2D.cpp">
       <Filter>Source Files\Rendering</Filter>

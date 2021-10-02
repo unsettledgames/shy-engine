@@ -15,16 +15,11 @@ namespace ShyEngine
 		m_velocity += data.gravity * data.deltaTime * m_mass * data.simulationSpeed;
 	}
 
+	// TODO: define static bodies so that they don't move
 	void Physics::onCollisionStarted(CollisionData data)
 	{
-		Collider2D* collider = data.collider;
-		Physics* otherPhysics = collider->m_entity->getModule<Physics>();
-		glm::vec2 otherPos = collider->m_entity->getTransform()->getPos();
-
 		glm::vec2 thisPos = m_entity->getTransform()->getPos();
-		glm::vec2 collisionDir = glm::normalize(otherPos - thisPos) * data.minDistance;
-
-		m_entity->getTransform()->setPos(thisPos - collisionDir);
+		m_entity->getTransform()->setPos(thisPos - data.minDistance);
 	}
 
 	void Physics::onCollisionFinished(CollisionData data)

@@ -6,13 +6,10 @@
 #include <string>
 
 /*
-    CUSTOM SCRIPTS SYSTEM
+    TODO:
 
-    - User can create a class derived from UserProgram
-    - User can derive from CollidableUserProgram (which derives from UserProgram and Collidable)
-        if they want to have collisions
-    - User can register a UserProgram and attach it to an entity
-    - The engine updates all UserPrograms
+    - Update and register user programs
+    - Fix distance issue in the rectcollider
 */
 
 int main(int argc, char** argv)
@@ -73,7 +70,7 @@ int main(int argc, char** argv)
             physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX)) * 5.0f));
         }
     }
-
+    /*
     ballname << "Ground";
     ball = engine.createEntity(ballname.str());
 
@@ -87,18 +84,10 @@ int main(int argc, char** argv)
     engine.registerModule<ShyEngine::Sprite>(ballSprite);
     ball->attachModule<ShyEngine::Sprite>(ballSprite);
 
-    // Adding a circle collider
+    // Adding a rect collider
     ShyEngine::RectCollider2D* circleCollider = new ShyEngine::RectCollider2D(ball, glm::vec2(900, 100));
     engine.registerModule<ShyEngine::RectCollider2D>(circleCollider);
-    ball->attachModule<ShyEngine::RectCollider2D>(circleCollider);
-
-    // Adding a physics module
-    ShyEngine::Physics* physics = new ShyEngine::Physics(ball);
-    engine.registerModule<ShyEngine::Physics>(physics);
-    ball->attachModule<ShyEngine::Physics>(physics);
-
-    // Adjusting physics
-    physics->setMass(0);
+    ball->attachModule<ShyEngine::RectCollider2D>(circleCollider);*/
 
     /*
     ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);

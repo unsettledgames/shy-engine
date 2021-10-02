@@ -9,6 +9,7 @@ MEDIUM:
 - Proper destructors and module detachment
 - Game screen management
 - Module enable / disable
+- Documentation
 
 HARD:
 - Spatial partitioning

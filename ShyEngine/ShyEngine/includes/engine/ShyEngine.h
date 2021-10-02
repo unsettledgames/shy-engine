@@ -6,7 +6,6 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
-#include <box2d/box2d.h>
 #include <memory>
 
 #include <input/Input.h>
@@ -24,7 +23,6 @@
 #include <rendering/Camera2D.h>
 
 #include <audio/AudioEngine.h>
-#include <physics/Box.h>
 
 #include <engine/System.h>
 #include <engine/Entity.h>
@@ -100,7 +98,6 @@ namespace ShyEngine
 			Camera2D m_hudCamera;
 
 			FpsLimiter m_fpsLimiter;
-			std::unique_ptr<b2World> m_world;
 
 		public:
 			ShyEngine(unsigned int flags);

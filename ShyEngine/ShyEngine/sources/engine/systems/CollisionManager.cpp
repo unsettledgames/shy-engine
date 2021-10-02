@@ -29,46 +29,6 @@ namespace ShyEngine
 					collidables[i]->handleCollision(collisionData);
 			}
 		}
-		/*
-		glm::vec2 nCells = m_collisionGrid->getNCells();
-		SpatialPartitioningCell currCell;
-		Collidable* currCollidable;
-		std::vector<Collider2D*> currColliders;
-		std::vector<Collidable*> currCollidables;
-
-		int x, y, i;
-
-		for (auto entity : m_entities)
-		{
-			currCollidable = entity->getModule<Collidable>();
-			// For each entity, update its cell coords
-			updateCellCoords(currCollidable);
-
-			// Get other entities from the cell
-			i = currCollidable->m_cellCoords.y * m_collisionGrid->getNCells().x + currCollidable->m_cellCoords.x;
-			x = currCollidable->m_cellCoords.x;
-			y = currCollidable->m_cellCoords.y;
-
-			currColliders = entity->getModules<Collider2D>();
-			
-			for (auto currCollider : currColliders)
-			{
-				// OPTIMIZABLE: only check collisions if the boundaries of the object overlap more than 1 cell,
-				// this doesn't apply for objects in the same cell
-				// Top left
-				cellCollision(currCollider, x - 1, y - 1);
-				/*
-				// Top
-				cellCollision(currCollider, x, y - 1);
-				// Left
-				cellCollision(currCollider, x - 1, y);
-				// Middle
-				cellCollision(currCollider, x, y);
-				// Bottom left
-				cellCollision(currCollider, x - 1, y + 1);
-				
-			}
-		}*/
 	}
 
 	// ISSUE: this is ExTREMELY slow
@@ -132,25 +92,6 @@ namespace ShyEngine
 		m_entities.insert(toAdd->m_entity);
 		m_modulesPointers.push_back(toAdd);
 		m_modules.push_back(*toAdd);
-		/*
-		// Coordinates of the objects in the grid
-		int xIndex;
-		int yIndex;
-
-		// Transform
-		Transform* otherTransform = (Transform*)toAdd->getEntity()->getTransform();
-		
-		// Putting the object in the grid
-		glm::vec2 otherPos = otherTransform->getPos();
-		glm::vec2 cellCoords = m_collisionGrid->addToGrid(toAdd->getEntity(), std::round(otherPos.x), std::round(otherPos.y));
-
-		toAdd->m_collisionGrid = m_collisionGrid;
-		toAdd->m_cellCoords = cellCoords;
-
-		// it's useless to use modulesPointers, only fill m_entities
-		m_entities.insert(toAdd->getEntity());
-		m_modulesPointers.push_back(toAdd);
-		*/
 	}
 
 	CollisionManager::CollisionManager(float cellSize, glm::vec2 gridPos, glm::vec2 gridSize) : System("CollisionManager")

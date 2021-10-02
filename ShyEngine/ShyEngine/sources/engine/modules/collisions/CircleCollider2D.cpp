@@ -28,7 +28,7 @@ namespace ShyEngine
 				(otherPos.y - pos.y) * (otherPos.y - pos.y));
 			float radiusSum = other->m_radius + m_radius;
 
-			ret.minDistance = radiusSum - distance;
+			ret.minDistance = glm::normalize(otherPos - pos) * (radiusSum - distance);
 			ret.colliding = distance <= radiusSum;
 		}
 		else if (coll->IsClassType(RectCollider2D::Type))

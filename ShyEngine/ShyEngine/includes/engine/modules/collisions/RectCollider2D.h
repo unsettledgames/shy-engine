@@ -23,20 +23,5 @@ namespace ShyEngine
 
 			bool checkCompatibility(std::vector<Module*>& otherModules);
 			bool checkDependency(std::vector<Module*>& otherModules);
-
-			/*
-				So
-				Apparently each collider should have a copy of each other's colliding function:
-
-				checkCollision(Collider)
-					switch (colliderType)
-						case Rect:
-							checkCollision(this, (Rect)Collider)
-						case Circle:
-							checkCollision(this, (Circle)Collider)
-
-				Maybe the methods could stay in Collider2D? And the subclasses can call them: in this case the 
-				colliders are merely containers of data and don't do much on their own
-			*/
 	};
 }

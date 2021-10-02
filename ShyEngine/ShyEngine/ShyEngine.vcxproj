@@ -56,7 +56,6 @@
     <ClInclude Include="includes\input\EngineIO.h" />
     <ClInclude Include="includes\input\EventBus.h" />
     <ClInclude Include="includes\input\Input.h" />
-    <ClInclude Include="includes\physics\Box.h" />
     <ClInclude Include="includes\rendering\Camera2D.h" />
     <ClInclude Include="includes\rendering\ShaderProgram.h" />
     <ClInclude Include="includes\screen\IGameScreen.h" />
@@ -98,7 +97,6 @@
     <ClCompile Include="sources\engine\systems\UserScriptsManager.cpp" />
     <ClCompile Include="sources\input\EventBus.cpp" />
     <ClCompile Include="sources\input\Input.cpp" />
-    <ClCompile Include="sources\physics\Box.cpp" />
     <ClCompile Include="sources\rendering\Camera2D.cpp" />
     <ClCompile Include="sources\rendering\EngineIO.cpp" />
     <ClCompile Include="sources\rendering\ShaderProgram.cpp" />

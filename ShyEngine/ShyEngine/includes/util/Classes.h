@@ -33,7 +33,7 @@ public:                                                                         
 //****************
 #define CLASS_DEFINITION( parentclass, childclass )                                         \
 const std::size_t childclass::Type = std::hash< std::string >()( TO_STRING( childclass ) ); \
-const std::string childclass::m_name = "childclass";                                        \
+const std::string childclass::m_name = TO_STRING(childclass);                                    \
 bool childclass::IsClassType( const std::size_t classType ) const {                         \
         if ( classType == childclass::Type )                                                \
             return true;                                                                    \
