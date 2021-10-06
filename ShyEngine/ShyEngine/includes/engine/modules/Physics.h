@@ -16,6 +16,13 @@ namespace ShyEngine
 		private:
 			glm::vec2 m_velocity = glm::vec2(0.0f, 0.0f);
 			float m_mass = 1.0f;
+			float m_bounciness = 1.0f;
+
+			bool m_static = false;
+
+			void bump(CollisionData data);
+
+			void contact(CollisionData data);
 
 		public:
 			Physics() : Collidable(nullptr) {}
@@ -30,8 +37,17 @@ namespace ShyEngine
 			void setMass(float mass) { m_mass = mass; }
 			float getMass() { return m_mass; }
 
+			void setBounciness(float b) { m_bounciness = b; }
+			float getBounciness() { return m_bounciness; }
+
+			void setStatic(bool val) { m_static = val; }
+			float isStatic() { return m_static; }
+
 			void onCollisionStarted(CollisionData data);
 			void onCollisionFinished(CollisionData data);
 			void onCollisionStay(CollisionData data);
+
+			bool checkDependency(std::vector<Module*>& otherModules);
+			bool checkCompatibility(std::vector<Module*>& otherModules);
 	};
 }

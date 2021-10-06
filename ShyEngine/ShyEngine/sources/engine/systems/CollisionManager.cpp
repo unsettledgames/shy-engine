@@ -89,6 +89,7 @@ namespace ShyEngine
 
 	void CollisionManager::addModule(Collider2D* toAdd)
 	{
+		// TODO: add compatibility and dependency checks
 		m_entities.insert(toAdd->m_entity);
 		m_modulesPointers.push_back(toAdd);
 		m_modules.push_back(*toAdd);

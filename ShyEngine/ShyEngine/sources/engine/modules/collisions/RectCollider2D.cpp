@@ -13,16 +13,4 @@ namespace ShyEngine
 	{
 		m_rectSize = size;
 	}
-
-	bool RectCollider2D::checkCompatibility(std::vector<Module*>& otherModules)
-	{
-		// There must exist a Transform component
-		return std::find_if(otherModules.begin(), otherModules.end(),
-			[](Module* other) { return other->Type == Transform::Type; }) != otherModules.end();
-	}
-
-	bool RectCollider2D::checkDependency(std::vector<Module*>& otherModules)
-	{
-		return false;
-	}
 }

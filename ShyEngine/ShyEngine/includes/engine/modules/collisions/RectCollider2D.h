@@ -7,6 +7,7 @@ namespace ShyEngine
 {
 	class RectCollider2D : public Collider2D
 	{
+		friend class CircleCollider2D;
 		CLASS_DECLARATION(RectCollider2D);
 
 		private:
@@ -20,8 +21,5 @@ namespace ShyEngine
 			glm::vec2 getRectSize() { return m_rectSize; }
 
 			glm::vec4 getRectBounds() { return glm::vec4(m_transform->getPos(), m_rectSize); }
-
-			bool checkCompatibility(std::vector<Module*>& otherModules);
-			bool checkDependency(std::vector<Module*>& otherModules);
 	};
 }

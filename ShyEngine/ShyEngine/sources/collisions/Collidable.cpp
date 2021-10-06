@@ -1,4 +1,5 @@
 #include <collisions/Collidable.h>
+#include <engine/modules/collisions/RectCollider2D.h>
 
 namespace ShyEngine
 {
@@ -23,6 +24,7 @@ namespace ShyEngine
 		else if (!data.colliding && m_prevContact)
 			onCollisionFinished(data);
 
+		m_prevContact = data.colliding;
 		m_currentCollider = data.collider;
 	}
 }

@@ -1,6 +1,7 @@
 #include <engine/modules/collisions/CircleCollider2D.h>
 #include <engine/modules/collisions/RectCollider2D.h>
 #include <engine/modules/collisions/Collider2D.h>
+#include <engine/modules/Physics.h>
 
 namespace ShyEngine
 {
@@ -27,22 +28,25 @@ namespace ShyEngine
 		return AABB(glm::vec4(m_transform->getPos(), m_transform->getScale()), rect);
 	}
 
-	bool Collider2D::AABB(glm::vec4 first, glm::vec4 second)
+	bool Collider2D::AABB(glm::vec4 first, glm::vec4 second, glm::vec2* depth)
 	{
 		// Scale of the first one + scale of the second one / 2
 		glm::vec2 minDistance = (glm::vec2(first.z, first.w) + glm::vec2(second.z, second.w)) / 2.0f;
 		// First position - second position
-		glm::vec2 distance = glm::vec2(first.x, first.y) - glm::vec2(second.x, second.y);
-		glm::vec2 depth = minDistance - glm::abs(distance);
+		glm::vec2 distance = glm::abs(glm::vec2(first.x, first.y) - glm::vec2(second.x, second.y));
+		glm::vec2 tempDepth = minDistance - distance;
 
-		return depth.x > 0 && depth.y > 0;
+		if (depth != nullptr)
+			*depth = tempDepth;
+
+		return tempDepth.x > 0 && tempDepth.y > 0;
 	}
 
 	bool Collider2D::checkCompatibility(std::vector<Module*>& otherModules) 
 	{
-		// There must exist a Transform component
+		// There must exist a Physics component
 		return std::find_if(otherModules.begin(), otherModules.end(),
-			[](Module* other) { return other->Type == Transform::Type; }) != otherModules.end();
+			[](Module* other) { return other->IsClassType(Physics::Type); }) != otherModules.end();
 	}
 
 	bool Collider2D::checkDependency(std::vector<Module*>& otherModules) 

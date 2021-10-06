@@ -17,6 +17,7 @@ namespace ShyEngine
 		class CollisionManager;
 
 		friend class CollisionManager;
+		friend class Collider2D;
 
 		protected:
 			bool m_auto = false;
@@ -34,9 +35,9 @@ namespace ShyEngine
 			bool checkCollision(Transform* otherTransform);
 			bool checkCollision(glm::vec4 otherRect);
 
-			bool checkCompatibility(std::vector<Module*>& otherModules);
-			bool checkDependency(std::vector<Module*>& otherModules);
+			virtual bool checkCompatibility(std::vector<Module*>& otherModules);
+			virtual bool checkDependency(std::vector<Module*>& otherModules);
 
-			static bool AABB(glm::vec4 first, glm::vec4 second);
+			static bool AABB(glm::vec4 first, glm::vec4 second, glm::vec2* depth = nullptr);
 	};
 }

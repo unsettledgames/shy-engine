@@ -5,6 +5,8 @@
 #include <sstream>
 #include <string>
 
+namespace SE = ShyEngine;
+
 /*
     TODO:
 
@@ -18,17 +20,17 @@ int main(int argc, char** argv)
 
     srand((unsigned)time(NULL));
 
-    ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);
+    SE::ShyEngine engine(SDL_INIT_EVERYTHING);
     engine.createWindow(1000, 600, "Ballin", SDL_WINDOW_OPENGL);
     
-    ShyEngine::Entity* ball;
-    ShyEngine::ShaderProgram* shader = new ShyEngine::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
+    SE::Entity* ball;
+    SE::ShaderProgram* shader = new SE::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
 
     engine.registerShader(shader);
     
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 20; j++)
+        for (int j = 0; j < 10; j++)
         {
             ballname << "Ballin " << i << ", " << j;
             ball = engine.createEntity(ballname.str());
@@ -39,38 +41,38 @@ int main(int argc, char** argv)
             ball->getTransform()->setScale(glm::vec2(40, 40));
             ball->getTransform()->setPos(glm::vec2(70 * i, 70 * j));
 
-            ShyEngine::Sprite* ballSprite;
+            SE::Sprite* ballSprite;
             // Adding the sprite
             if ((i + j) % 2 == 0)
             {
-                ballSprite = new ShyEngine::Sprite(ball, "textures/AH.png",
-                    shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
+                ballSprite = new SE::Sprite(ball, "textures/AH.png",
+                    shader, SE::ColorRGBA8(255, 255, 255, 255));
             }
             else
             {
-                ballSprite = new ShyEngine::Sprite(ball, "textures/win.png",
-                    shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
+                ballSprite = new SE::Sprite(ball, "textures/win.png",
+                    shader, SE::ColorRGBA8(255, 255, 255, 255));
             }
              
-            engine.registerModule<ShyEngine::Sprite>(ballSprite);
-            ball->attachModule<ShyEngine::Sprite>(ballSprite);
-
-            // Adding a circle collider
-            ShyEngine::CircleCollider2D* circleCollider = new ShyEngine::CircleCollider2D(ball, 20);
-            engine.registerModule<ShyEngine::CircleCollider2D>(circleCollider);
-            ball->attachModule<ShyEngine::CircleCollider2D>(circleCollider);
+            engine.registerModule<SE::Sprite>(ballSprite);
+            ball->attachModule<SE::Sprite>(ballSprite);
 
             // Adding a physics module
-            ShyEngine::Physics* physics = new ShyEngine::Physics(ball);
-            engine.registerModule<ShyEngine::Physics>(physics);
-            ball->attachModule<ShyEngine::Physics>(physics);
+            SE::Physics* physics = new SE::Physics(ball);
+            engine.registerModule<SE::Physics>(physics);
+            ball->attachModule<SE::Physics>(physics);
 
+            // Adding a circle collider
+            SE::CircleCollider2D* circleCollider = new SE::CircleCollider2D(ball, 20);
+            engine.registerModule<SE::CircleCollider2D>(circleCollider);
+            ball->attachModule<SE::CircleCollider2D>(circleCollider);
+            
             // Adjusting physics
             physics->setMass(0.01f);
             physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX)) * 5.0f));
         }
     }
-    /*
+
     ballname << "Ground";
     ball = engine.createEntity(ballname.str());
 
@@ -78,16 +80,21 @@ int main(int argc, char** argv)
     ball->getTransform()->setScale(glm::vec2(900, 100));
     ball->getTransform()->setPos(glm::vec2(350, -140));
 
-    ShyEngine::Sprite* ballSprite;
-        ballSprite = new ShyEngine::Sprite(ball, "textures/win.png",
-            shader, ShyEngine::ColorRGBA8(255, 255, 255, 255));
-    engine.registerModule<ShyEngine::Sprite>(ballSprite);
-    ball->attachModule<ShyEngine::Sprite>(ballSprite);
+    SE::Sprite* ballSprite;
+        ballSprite = new SE::Sprite(ball, "textures/win.png",
+            shader, SE::ColorRGBA8(255, 255, 255, 255));
+    engine.registerModule<SE::Sprite>(ballSprite);
+    ball->attachModule<SE::Sprite>(ballSprite);
+
+    SE::Physics* physics = new SE::Physics(ball);
+    physics->setStatic(true);
+    engine.registerModule<SE::Physics>(physics);
+    ball->attachModule<SE::Physics>(physics);
 
     // Adding a rect collider
-    ShyEngine::RectCollider2D* circleCollider = new ShyEngine::RectCollider2D(ball, glm::vec2(900, 100));
-    engine.registerModule<ShyEngine::RectCollider2D>(circleCollider);
-    ball->attachModule<ShyEngine::RectCollider2D>(circleCollider);*/
+    SE::RectCollider2D* circleCollider = new SE::RectCollider2D(ball, glm::vec2(900, 100));
+    engine.registerModule<SE::RectCollider2D>(circleCollider);
+    ball->attachModule<SE::RectCollider2D>(circleCollider);
 
     /*
     ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);

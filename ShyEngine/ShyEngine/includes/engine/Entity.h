@@ -69,10 +69,13 @@ namespace ShyEngine
 				if (toAttach->checkCompatibility(m_modules))
 				{
 					m_modules.push_back(toAttach);
-					
+
 					if (toAttach->IsClassType(Collidable::Type))
 						m_collidables.push_back((Collidable*)toAttach);
 				}
+				else
+					Error::runtime("The module " + (toAttach->m_name) + " on the entity " + 
+						toAttach->m_entity->getName() + " couldn't be added because it needs another component");
 			}
 
 			template <class ModuleType, typename... Args>

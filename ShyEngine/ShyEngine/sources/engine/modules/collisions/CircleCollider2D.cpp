@@ -28,29 +28,26 @@ namespace ShyEngine
 				(otherPos.y - pos.y) * (otherPos.y - pos.y));
 			float radiusSum = other->m_radius + m_radius;
 
-			ret.minDistance = glm::normalize(otherPos - pos) * (radiusSum - distance);
 			ret.colliding = distance <= radiusSum;
+			if (ret.colliding)
+				ret.minDistance = glm::normalize(otherPos - pos) * (radiusSum - distance);
+			
 		}
 		else if (coll->IsClassType(RectCollider2D::Type))
 		{
 			RectCollider2D* other = (RectCollider2D*)coll;
 
-			ret.colliding = AABB(other->getRectBounds(), glm::vec4(m_transform->getPos(), glm::vec2(m_radius, m_radius)));
-			// TODO: add distance management
+			ret.colliding = AABB(other->getRectBounds(), glm::vec4(m_transform->getPos(), glm::vec2(m_radius, m_radius) * 2.0f), &ret.minDistance);
+			
+			if (ret.colliding)
+			{
+				ret.minDistance = (abs(ret.minDistance.x) > abs(ret.minDistance.y) ? 
+					glm::vec2(0, -ret.minDistance.y) : glm::vec2(-ret.minDistance.x, 0));
+			}
 		}
 		
 		ret.collider = coll;
 
 		return ret;
-	}
-
-	bool CircleCollider2D::checkCompatibility(std::vector<Module*>& otherModules)
-	{
-		return true;
-	}
-
-	bool CircleCollider2D::checkDependency(std::vector<Module*>& otherModules)
-	{
-		return false;
 	}
 }

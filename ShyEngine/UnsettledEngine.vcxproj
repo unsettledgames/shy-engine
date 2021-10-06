@@ -106,7 +106,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ShyEngine.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;opengl32.lib;glew32.lib;SDL2_mixer.lib;box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ShyEngine.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;opengl32.lib;glew32.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
