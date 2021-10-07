@@ -69,7 +69,8 @@ int main(int argc, char** argv)
             
             // Adjusting physics
             physics->setMass(0.01f);
-            physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX)) * 5.0f));
+            physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX) * 5.0f)));
+            physics->setBounciness(0.8f);
         }
     }
 

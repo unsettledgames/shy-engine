@@ -1,5 +1,7 @@
 #include <engine/modules/Physics.h>
 
+#define CHECK_EPSILON if (m_velocity.length() < 0.1f) return;
+
 namespace ShyEngine
 {
 	CLASS_DEFINITION(Collidable, Physics)
@@ -11,7 +13,10 @@ namespace ShyEngine
 	{
 		if (m_static)
 			return;
+		CHECK_EPSILON
+
 		Transform* transform = m_entity->getTransform();
+		glm::vec2 prevPos = transform->getPos();
 
 		transform->setPos(transform->getPos() + m_velocity * data.deltaTime * data.simulationSpeed);
 		m_velocity += data.gravity * data.deltaTime * m_mass * data.simulationSpeed;
@@ -20,14 +25,15 @@ namespace ShyEngine
 	// TODO: define static bodies so that they don't move
 	void Physics::onCollisionStarted(CollisionData data)
 	{
-		contact(data);
+		CHECK_EPSILON
 		bump(data);
+		contact(data);
 	}
 
 	void Physics::onCollisionStay(CollisionData data)
 	{
+		CHECK_EPSILON
 		contact(data);
-		bump(data);
 	}
 
 	void Physics::onCollisionFinished(CollisionData data)
@@ -37,7 +43,32 @@ namespace ShyEngine
 
 	void Physics::bump(CollisionData data)
 	{
-		Collider2D* collider = data.collider;
+		Physics* otherPhysics = data.collider->m_entity->getModule<Physics>();
+		// Calculate relative velocity
+		glm::vec2 relativeVel = otherPhysics->getVelocity() - m_velocity;
+
+		// Calculate relative velocity in terms of the normal direction
+		float velAlongNormal = glm::dot(relativeVel, data.normal);
+
+		// Do not resolve if velocities are separating
+		if (velAlongNormal > 0)
+			return;
+
+		// Calculate restitution
+		float e = std::min(otherPhysics->getBounciness(), m_bounciness);
+
+		// Calculate impulse scalar
+		float j = -(1 + e) * velAlongNormal;
+		j /= 1 / m_mass + 1 / otherPhysics->getMass();
+
+		// Apply impulse
+		glm::vec2 impulse = j * data.normal;
+		setVelocity(m_velocity - 1/m_mass * impulse);
+		otherPhysics->setVelocity(otherPhysics->getVelocity() + 1/otherPhysics->getMass() * impulse);
+		
+		// Should be 1 / mass probably
+
+		/*Collider2D* collider = data.collider;
 		Physics* otherPhysics = collider->m_entity->getModule<Physics>();
 
 		if (otherPhysics == nullptr)
@@ -52,7 +83,7 @@ namespace ShyEngine
 
 		otherPhysics->setVelocity((((otherMass - m_mass) * otherVel +
 			2 * m_mass * m_velocity) / (otherMass + m_mass)) * otherPhysics->getBounciness());
-		setVelocity(((m_mass - otherMass) * m_velocity + 2 * otherMass * otherVel) / (otherMass + m_mass));
+		setVelocity(((m_mass - otherMass) * m_velocity + 2 * otherMass * otherVel) / (otherMass + m_mass) * m_bounciness);*/
 	}
 
 	void Physics::contact(CollisionData data)
