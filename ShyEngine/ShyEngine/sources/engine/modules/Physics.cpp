@@ -12,7 +12,11 @@ namespace ShyEngine
 	void Physics::update(PhysicsData data)
 	{
 		if (m_static)
+		{
+			m_velocity = glm::vec2(0, 0);
 			return;
+		}
+
 		CHECK_EPSILON
 
 		Transform* transform = m_entity->getTransform();
@@ -65,25 +69,6 @@ namespace ShyEngine
 		glm::vec2 impulse = j * data.normal;
 		setVelocity(m_velocity - 1/m_mass * impulse);
 		otherPhysics->setVelocity(otherPhysics->getVelocity() + 1/otherPhysics->getMass() * impulse);
-		
-		// Should be 1 / mass probably
-
-		/*Collider2D* collider = data.collider;
-		Physics* otherPhysics = collider->m_entity->getModule<Physics>();
-
-		if (otherPhysics == nullptr)
-			return;
-		
-		float otherMass = otherPhysics->getMass();
-		glm::vec2 otherVel = otherPhysics->getVelocity();
-		glm::vec2 otherPos = collider->m_entity->getTransform()->getPos();
-
-		glm::vec2 thisPos = m_entity->getTransform()->getPos();
-		glm::vec2 collisionDir = glm::normalize(otherPos - thisPos) * data.minDistance;
-
-		otherPhysics->setVelocity((((otherMass - m_mass) * otherVel +
-			2 * m_mass * m_velocity) / (otherMass + m_mass)) * otherPhysics->getBounciness());
-		setVelocity(((m_mass - otherMass) * m_velocity + 2 * otherMass * otherVel) / (otherMass + m_mass) * m_bounciness);*/
 	}
 
 	void Physics::contact(CollisionData data)

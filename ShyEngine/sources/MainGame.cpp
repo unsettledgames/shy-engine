@@ -28,9 +28,9 @@ int main(int argc, char** argv)
 
     engine.registerShader(shader);
     
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 20; j++)
         {
             ballname << "Ballin " << i << ", " << j;
             ball = engine.createEntity(ballname.str());
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
             // Adjusting physics
             physics->setMass(0.01f);
             physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX) * 5.0f)));
-            physics->setBounciness(0.8f);
+            physics->setBounciness(0.7f);
         }
     }
 
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
     ball = engine.createEntity(ballname.str());
 
     // Adjusting the transform
-    ball->getTransform()->setScale(glm::vec2(900, 100));
+    ball->getTransform()->setScale(glm::vec2(2700, 100));
     ball->getTransform()->setPos(glm::vec2(350, -140));
 
     SE::Sprite* ballSprite;
@@ -93,7 +93,7 @@ int main(int argc, char** argv)
     ball->attachModule<SE::Physics>(physics);
 
     // Adding a rect collider
-    SE::RectCollider2D* circleCollider = new SE::RectCollider2D(ball, glm::vec2(900, 100));
+    SE::RectCollider2D* circleCollider = new SE::RectCollider2D(ball, glm::vec2(2700, 100));
     engine.registerModule<SE::RectCollider2D>(circleCollider);
     ball->attachModule<SE::RectCollider2D>(circleCollider);
 
