@@ -1,5 +1,5 @@
 #include <engine/systems/CollisionManager.h>
-#include <engine/modules/collisions/CircleCollider2D.h>
+#include <collisions/CollisionHandlers.h>
 
 namespace ShyEngine
 {
@@ -21,10 +21,10 @@ namespace ShyEngine
 				collider = (Collider2D*)m_modulesPointers[i];
 				collider2 = (Collider2D*)m_modulesPointers[j];
 
-				collisionData = collider->checkCollision(collider2);
+				collisionData = checkCollision(collider, collider2);
 				collidables = collider->m_entity->m_collidables;
 
-				// Trigger the enter / stay functions for all the Collidable modules
+				// Trigger the enter / stay / exit functions for all the Collidable modules
 				for (int i = 0; i < collidables.size(); i++)
 					collidables[i]->handleCollision(collisionData);
 			}

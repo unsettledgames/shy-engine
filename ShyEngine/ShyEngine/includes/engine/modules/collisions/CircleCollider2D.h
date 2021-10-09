@@ -7,6 +7,7 @@ namespace ShyEngine
 {
 	class CircleCollider2D : public Collider2D 
 	{
+		friend class Collider2D;
 		CLASS_DECLARATION(CircleCollider2D);
 
 		private:
@@ -17,6 +18,7 @@ namespace ShyEngine
 			CircleCollider2D(Entity* entity, float radius);
 			~CircleCollider2D() {};
 
-			CollisionData checkCollision(Collider2D* second) override;
+			float getRadius() { return m_radius; }
+			void setRadius(float r) { m_radius = r; }
 	};
 }

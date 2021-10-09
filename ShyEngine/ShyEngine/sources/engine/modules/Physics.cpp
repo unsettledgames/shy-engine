@@ -31,13 +31,12 @@ namespace ShyEngine
 	{
 		CHECK_EPSILON
 		bump(data);
-		contact(data);
 	}
 
 	void Physics::onCollisionStay(CollisionData data)
 	{
 		CHECK_EPSILON
-		contact(data);
+		bump(data);
 	}
 
 	void Physics::onCollisionFinished(CollisionData data)

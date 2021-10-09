@@ -38,6 +38,8 @@ namespace ShyEngine
 			virtual bool checkCompatibility(std::vector<Module*>& otherModules);
 			virtual bool checkDependency(std::vector<Module*>& otherModules);
 
+			Transform* getTransform() { return m_transform; }
+
 			static bool AABB(glm::vec4 first, glm::vec4 second, glm::vec2* depth = nullptr);
 	};
 }

@@ -7,7 +7,8 @@ namespace ShyEngine
 {
 	class RectCollider2D : public Collider2D
 	{
-		friend class CircleCollider2D;
+		friend class Collider2D;
+
 		CLASS_DECLARATION(RectCollider2D);
 
 		private:

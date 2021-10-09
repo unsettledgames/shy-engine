@@ -11,7 +11,6 @@ namespace SE = ShyEngine;
     TODO:
 
     - Update and register user programs
-    - Fix distance issue in the rectcollider
 */
 
 int main(int argc, char** argv)
@@ -39,7 +38,7 @@ int main(int argc, char** argv)
 
             // Adjusting the transform
             ball->getTransform()->setScale(glm::vec2(40, 40));
-            ball->getTransform()->setPos(glm::vec2(70 * i, 70 * j));
+            ball->getTransform()->setPos(glm::vec2(80 * i, 80 * j));
 
             SE::Sprite* ballSprite;
             // Adding the sprite
@@ -70,7 +69,7 @@ int main(int argc, char** argv)
             // Adjusting physics
             physics->setMass(0.01f);
             physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX) * 5.0f)));
-            physics->setBounciness(0.7f);
+            physics->setBounciness(1.0f);
         }
     }
 

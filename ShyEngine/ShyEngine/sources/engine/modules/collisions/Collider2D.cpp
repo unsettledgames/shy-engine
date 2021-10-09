@@ -1,10 +1,10 @@
-#include <engine/modules/collisions/CircleCollider2D.h>
-#include <engine/modules/collisions/RectCollider2D.h>
 #include <engine/modules/collisions/Collider2D.h>
 #include <engine/modules/Physics.h>
+#include <engine/modules/collisions/CircleCollider2D.h>
+#include <engine/modules/collisions/RectCollider2D.h>
 
 namespace ShyEngine
-{
+{	
 	CLASS_DEFINITION(Module, Collider2D);
 
 	Collider2D::Collider2D() : Module(nullptr){}
