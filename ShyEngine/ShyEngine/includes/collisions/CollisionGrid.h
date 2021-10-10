@@ -8,6 +8,7 @@ namespace ShyEngine
 {
 	class CollisionGrid;
 
+	// UNUSED
 	class SpatialPartitioningCell
 	{
 		friend class CollisionGrid;

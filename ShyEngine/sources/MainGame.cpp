@@ -15,6 +15,18 @@ namespace SE = ShyEngine;
 
 int main(int argc, char** argv)
 {
+    /*
+    std::stringstream bunnyName;
+    srand((unsigned)time(NULL));
+
+    SE::ShyEngine engine(SDL_INIT_EVERYTHING);
+    engine.createWindow(1000, 600, "Bunnymark", SDL_WINDOW_OPENGL);
+
+    SE::Entity* bunny;
+    SE::ShaderProgram* shader = new SE::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
+
+    engine.registerShader(shader);*/
+
     std::stringstream ballname;
 
     srand((unsigned)time(NULL));
@@ -67,7 +79,7 @@ int main(int argc, char** argv)
             ball->attachModule<SE::CircleCollider2D>(circleCollider);
             
             // Adjusting physics
-            physics->setMass(0.1f);
+            physics->setMass(0.01f);
             physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX) * 5.0f)));
             physics->setBounciness(1.0f);
         }
@@ -95,58 +107,6 @@ int main(int argc, char** argv)
     SE::RectCollider2D* circleCollider = new SE::RectCollider2D(ball, glm::vec2(2700, 100));
     engine.registerModule<SE::RectCollider2D>(circleCollider);
     ball->attachModule<SE::RectCollider2D>(circleCollider);
-
-    /*
-    ShyEngine::ShyEngine engine(SDL_INIT_EVERYTHING);
-    ShyEngine::Entity* test;
-
-    ShyEngine::ParticleSystem* testParticleSystem;
-    ShyEngine::Sprite* testSprite;
-    ShyEngine::Text* testText;
-
-    ShyEngine::ShaderProgram shader;
-
-    engine.createWindow(1000, 600, "Fancy test", SDL_WINDOW_OPENGL);
-    
-    shader = ShyEngine::ShaderProgram("shaders/defaultUnlit2D.vert", "shaders/defaultUnlit2D.frag");
-    engine.registerShader(&shader);
-
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            test = engine.createEntity("Test entity");
-            test->getTransform()->setPos(glm::vec2(100 * i, 100 * j));
-            test->getTransform()->setScale(glm::vec2(200, 200));
-
-            testSprite = new ShyEngine::Sprite(test, "textures/Alice.png", &shader);
-            engine.registerModule(testSprite);
-            test->attachModule(testSprite);
-        }
-    }
-
-    // Testing text
-    test = engine.createEntity("TextEntity");
-    test->getTransform()->setPos(glm::vec2(-500, -250));
-    test->getTransform()->setScale(glm::vec2(1, 1));
-
-    testText = new ShyEngine::Text(test, "fonts/04.ttf", &shader, ShyEngine::ColorRGBA8(255,255,255,255), 
-        40, 1.0f, "abcdefghijklmnopqrstuvwxyz\n0123456789");
-    engine.registerModule(testText);
-    test->attachModule(testText);
-
-    // Testing particle systems
-    test = engine.createEntity("ParticleSystemEntity");
-    test->getTransform()->setPos(glm::vec2(200, 200));
-    test->getTransform()->setScale(glm::vec2(100, 100));
-
-    testParticleSystem = new ShyEngine::ParticleSystem(test, 100, "textures/particle.png", &shader);
-    engine.registerModule(testParticleSystem);
-    test->attachModule(testParticleSystem);
-
-    testParticleSystem->setEmissionRate(2);
-    testParticleSystem->setLifetime(1000);
-    */
 
     engine.run();
 

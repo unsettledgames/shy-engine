@@ -335,9 +335,6 @@
     <ClCompile Include="sources\engine\systems\PhysicsManager.cpp">
       <Filter>Source Files\Engine\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="sources\util\Classes.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
     <ClCompile Include="sources\collisions\Collidable.cpp">
       <Filter>Source Files\Collisions</Filter>
     </ClCompile>

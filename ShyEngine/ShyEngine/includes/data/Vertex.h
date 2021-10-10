@@ -7,18 +7,30 @@
 
 namespace ShyEngine
 {
+	/*
+		\brief	Represents a bidimensional position in the space
+
+		No, we can't use a glm::vec2 because the Vertex struct is passed to OpenGL and it needs to be as small
+		as possible in order for it to be efficient.
+	*/
 	typedef struct _position
 	{
 		float x;
 		float y;
 	} Position;
 
+	/*
+		\brief	Represents the UVs of a texture. See the struct Position on why this isn't a glm::vec2.
+	*/
 	typedef struct _uv
 	{
 		float u;
 		float v;
 	} UV;
 
+	/*
+		\brief	Represents a Vertex
+	*/
 	struct Vertex
 	{
 		Position position;

@@ -5,10 +5,10 @@
 
 namespace ShyEngine
 {
-	// REFACTOR: put this in its own class
 	class ColorRGBA8
 	{
 		private:
+			// Color components
 			GLubyte r;
 			GLubyte g;
 			GLubyte b;
@@ -19,7 +19,9 @@ namespace ShyEngine
 			ColorRGBA8(GLubyte R, GLubyte G, GLubyte B, GLubyte A) :
 				r(R), g(G), b(B), a(A) {}
 
-
+			/*
+				\brief	Converts this ColorRGBA8 into an SDL_Color
+			*/
 			SDL_Color getSDLColor()
 			{
 				SDL_Color ret;

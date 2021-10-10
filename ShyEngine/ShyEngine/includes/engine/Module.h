@@ -5,15 +5,6 @@
 
 namespace ShyEngine
 {
-	enum class ModuleTypes
-	{
-		Transform,
-		Physics,
-		Collider,
-		Camera,
-		Sprite
-	};
-
 	class Entity;
 
 	class Module

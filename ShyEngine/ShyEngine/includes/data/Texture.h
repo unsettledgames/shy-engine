@@ -2,6 +2,9 @@
 
 #include <GL/glew.h>
 
+/*
+	\brief	Represents a Texture
+*/
 typedef struct texture
 {
 	GLuint id;

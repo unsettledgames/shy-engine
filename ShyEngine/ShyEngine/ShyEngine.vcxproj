@@ -105,7 +105,6 @@
     <ClCompile Include="sources\screen\IMainGame.cpp" />
     <ClCompile Include="sources\SpatialGrid.cpp" />
     <ClCompile Include="sources\timing\Timing.cpp" />
-    <ClCompile Include="sources\util\Classes.cpp" />
     <ClCompile Include="sources\util\Error.cpp" />
     <ClCompile Include="sources\util\IdGenerator.cpp" />
     <ClCompile Include="sources\util\Utility.cpp" />

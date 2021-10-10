@@ -8,6 +8,7 @@ namespace ShyEngine
 	Collidable::Collidable() {}
 	Collidable::~Collidable() {}
 
+	// IMPROVEMENT: handle more than 1 collider at once
 	void Collidable::handleCollision(CollisionData data)
 	{
 		// If it's not colliding, do nothing

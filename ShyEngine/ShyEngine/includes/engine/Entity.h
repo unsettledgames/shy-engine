@@ -9,7 +9,6 @@
 #include <engine/modules/Transform.h>
 #include <util/IdGenerator.h>
 
-// BUG: Id system is wrong, should be a member of the engine instead
 // REFACTOR: if registering a module to the entity's only purpose is to set the entity, why shouldn't this happen
 //		in the module constructor?
 
@@ -26,20 +25,26 @@ namespace ShyEngine
 
 		protected:
 			int m_id;
-			IdGenerator m_ids;
 
 			std::string m_name;
 			Entity* m_reference;
 
+			// Vector containing all the modules that have been attached to this entity
 			std::vector<Module*> m_modules;
+			// Vector containing the modules that are collidable. This is to improve the perfomances of the CollisionManager
 			std::vector<Collidable*> m_collidables;
+			// Transform component: each Entity must have one
 			Transform* m_transform;
 
 		public:
 			friend bool operator==(const Entity& e1, const Entity& e2);
 			Entity(const std::string& name);
-			~Entity() { m_ids.add(m_id); }
+			~Entity() {}
 
+			/*
+				\brief	Returns the first module of type ModuleType that is found in the modules vector
+				\return The first module of type ModuleType that is found
+			*/
 			template <class ModuleType>
 			ModuleType* getModule()
 			{
@@ -51,6 +56,10 @@ namespace ShyEngine
 				return nullptr;
 			}
 
+			/*
+				\brief	Returns all the modules of type ModuleType attached to this entity
+				\return A vector containing hte modules of type ModuleType attached to this entity
+			*/
 			template <class ModuleType>
 			std::vector<ModuleType*> getModules()
 			{
@@ -63,6 +72,10 @@ namespace ShyEngine
 				return ret;
 			}
 
+			/*
+				\brief Attaches the module passed as an argument
+				\param toAttach	Pointer to the module that should be attached to this entity
+			*/
 			template <class ModuleType>
 			void attachModule(ModuleType* toAttach)
 			{
@@ -78,6 +91,12 @@ namespace ShyEngine
 						toAttach->m_entity->getName() + " couldn't be added because it needs another component");
 			}
 
+			/*
+				\brief Creates and attaches a module to this entity given the parameters of the constructor of
+					that module
+				\param parameters	The parameters of the constructor of the object with type ModuleType
+				\return	The module that has been created
+			*/
 			template <class ModuleType, typename... Args>
 			ModuleType* attachModule(Args... parameters)
 			{
@@ -89,6 +108,12 @@ namespace ShyEngine
 				return ret;
 			}
 
+			/*
+				\brief	Detaches the module passed as an argument from this entity
+				\param toRemove	The module that should be detached from this entity
+				\return 0 if everything went right, -1 if the entity didn't have the module to remove,
+					-2 if there was a dependency between a module and the one to detach
+			*/
 			template <class ModuleType>
 			int detachModule(ModuleType* toRemove)
 			{

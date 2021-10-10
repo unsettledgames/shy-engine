@@ -38,6 +38,9 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sour
   CollisionHandlers.cpp
   Glyph.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\data\Glyph.cpp(100,29): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
+  ImageLoader.cpp
+  Particle.cpp
+  ResourcesManager.cpp
   Entity.cpp
   Module.cpp
   ShyEngine.cpp
@@ -61,31 +64,31 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sour
   CircleCollider2D.cpp
   Collider2D.cpp
   RectCollider2D.cpp
+  Compiling...
   CollisionManager.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(17,18): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(19,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(28,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(86,77): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(21,18): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(23,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(35,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(94,77): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(86,63): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(94,63): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(87,84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(87,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(95,84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(95,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   ParticleRenderer.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(79,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(19,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(37,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(40,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\ParticleRenderer.h(14): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>' being compiled
   PhysicsManager.cpp
-  Compiling...
   SpriteRenderer.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>::createRenderBatches(void)'
@@ -95,4 +98,5 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sour
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>' being compiled
+  ShaderProgram.cpp
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\ShyEngine.lib

@@ -9,6 +9,11 @@
 
 namespace ShyEngine {
 
+	/*
+		\brief	Loader function (see ResourceCache.h) used to load Textures
+		\param path	The path of the texture
+		\return The texture identified by the path passed as an argument
+	*/
 	static Texture loadTexture(const std::string& path)
 	{
 		Texture ret;
@@ -17,6 +22,11 @@ namespace ShyEngine {
 		return ret;
 	}
 
+	/*
+		\brief	Loader function (see ResourceCache.h) used to load Music
+		\param path	The path of the audio track
+		\return The Music identified by the path passed as an argument
+	*/
 	static Music loadMusic(const std::string& path)
 	{
 		Music ret;
@@ -29,6 +39,11 @@ namespace ShyEngine {
 		return ret;
 	}
 
+	/*
+		\brief	Loader function (see ResourceCache.h) used to load SoundEffects
+		\param path	The path of the sound effect
+		\return The SoundEffect identified by the path passed as an argument
+	*/
 	static SoundEffect loadSoundEffect(const std::string& path)
 	{
 		Mix_Chunk* chunk = Mix_LoadWAV(path.c_str());
@@ -42,6 +57,14 @@ namespace ShyEngine {
 		return ret;
 	}
 
+	/*
+		\brief	The ResourcesManager is a Singleton of type _ResourcesManager used to handle resources such as
+			Textures, Musics and SoundEffects
+
+		The ResourcesManager contains a ResourceCache for each resource type in order to optimize memory and loading
+		speed. It also exposes methods to load resources without the user noticing any of the underlying
+		architecture.
+	*/
 	class _ResourcesManager
 	{
 		private:
@@ -52,10 +75,25 @@ namespace ShyEngine {
 		public:
 			_ResourcesManager() {}
 
+			/*
+				\brief Returns the texture identified by the path passed as an argument
+				\param path The path that identifies the texture to load
+				\return The texture identified by the path
+			*/
 			Texture getTexture(const std::string& path);
 
+			/*
+				\brief Returns the Music identified by the path passed as an argument
+				\param path The path that identifies the Music to load
+				\return The Music identified by the path
+			*/
 			Music getMusic(const std::string& path);
 
+			/*
+				\brief Returns the SoundEffect identified by the path passed as an argument
+				\param path The path that identifies the SoundEffect to load
+				\return The SoundEffect identified by the path
+			*/
 			SoundEffect getSoundEffect(const std::string& path);
 		
 	};

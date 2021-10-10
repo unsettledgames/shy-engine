@@ -10,6 +10,12 @@ namespace ShyEngine {
 	class ImageLoader
 	{
 	public:
+		/*
+			\brief	Loads a PNG file and creates a Texture with it
+			\param path	The path of the file that should be used to create the texture
+
+			\return	The texture based upon the specified file
+		*/
 		static Texture loadPNG(std::string path);
 	};
 }
