@@ -42,7 +42,7 @@ namespace ShyEngine
 			Entity* getEntity() { return m_entity; }
 
 			virtual bool checkCompatibility(std::vector<Module*>& otherModules) { return true; }
-			virtual bool checkDependency(std::vector<Module*>& otherModules) { return true; }
+			virtual bool checkDependency(std::vector<Module*>& otherModules) { return false; }
 			virtual bool IsClassType(const std::size_t classType) const { return classType == Type; }
 
 			int getId() { return m_id; }

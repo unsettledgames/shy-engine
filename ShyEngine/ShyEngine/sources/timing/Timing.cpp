@@ -10,8 +10,7 @@ namespace ShyEngine
 		setTargetFps(fps);
 	}
 
-	// IMPROVEMENT: fixed, deterministic timestep (https://gafferongames.com/post/fix_your_timestep/), 
-	// but you'll need to have a render module and a physics module (one undependent on the other)
+	// IMPROVEMENT: fixed, deterministic timestep (https://gafferongames.com/post/fix_your_timestep/)
 	void FpsLimiter::begin()
 	{
 		// Start and end times of the frame

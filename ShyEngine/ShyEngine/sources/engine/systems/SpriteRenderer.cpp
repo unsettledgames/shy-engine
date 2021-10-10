@@ -11,12 +11,13 @@ namespace ShyEngine
 	{
 		Sprite* currSprite;
 
-		// OPTIMIZABLE: sort sprites by shaders? Organize batches by texture + shader
-		// Rendering process
+		// IMPROVEMENT: implement depth sorting
 		begin();
 
 		for (auto _module : m_modulesPointers)
 		{
+			// Update the vertices of the sprite before drawing it: this is so that changes made by the collision
+			// or physics system are taken in account
 			currSprite = dynamic_cast<Sprite*>(_module);
 			currSprite->updateVertices();
 			// Only draw if the object is visible
@@ -26,7 +27,7 @@ namespace ShyEngine
 
 		end();
 
-		// OPTIMIZABLE: use the correct shader lol
+		// IMPROVEMENT: use the correct shader
 		m_modulesPointers[0]->useShader();
 		m_modulesPointers[0]->getShader()->setOrthoProjection("orthoProj", shaderData.cameraMatrix);
 

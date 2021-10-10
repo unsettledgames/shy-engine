@@ -12,9 +12,11 @@ namespace ShyEngine
 
 	void PhysicsManager::updateModules(PhysicsData data)
 	{
+		// Add data to the data objects
 		data.simulationSpeed = m_simulationSpeed;
 		data.gravity = m_gravity;
 
+		// Update all the bodies
 		for (Module* m : m_modulesPointers)
 			((Physics*)m)->update(data);
 	}

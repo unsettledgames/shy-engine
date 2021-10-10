@@ -18,8 +18,10 @@ namespace ShyEngine
 
 			for (int i = 0; i < m_modulesPointers.size(); i++)
 			{
+				// Update the system before rendering it
 				m_modulesPointers[i]->updateSystem(shaderData.deltaTime);
 
+				// Draw all the particles of the current system
 				for (int j = 0; j < m_modulesPointers[i]->getMaxParticles(); j++)
 				{
 					currParticle = m_modulesPointers[i]->updateParticle(j, shaderData.deltaTime);
@@ -31,6 +33,7 @@ namespace ShyEngine
 
 			end();
 
+			// DEBUG: find a shader to use
 			std::vector<Particle> firstParticles = m_modulesPointers[0]->getParticles();
 			Particle particleShader;
 

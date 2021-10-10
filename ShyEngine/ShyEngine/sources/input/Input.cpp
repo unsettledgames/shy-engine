@@ -1,6 +1,8 @@
 #include <input/Input.h>
 #include <iostream>
 
+// DEBUG
+
 namespace ShyEngine {
 	Input::Input()
 	{

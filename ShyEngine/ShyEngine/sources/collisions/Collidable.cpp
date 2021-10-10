@@ -24,6 +24,7 @@ namespace ShyEngine
 		else if (!data.colliding && m_prevContact)
 			onCollisionFinished(data);
 
+		// Save the last contact state and the collider the object is colliding with
 		m_prevContact = data.colliding;
 		m_currentCollider = data.collider;
 	}

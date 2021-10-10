@@ -34,9 +34,8 @@ namespace ShyEngine
 
 	bool Transform::checkDependency(std::vector<Module*>& otherModules)
 	{
-		// Sprite depends on Transform, so there shouldn't be a Sprite
-		return std::find_if(otherModules.begin(), otherModules.end(),
-			[](Module* other) { return other->Type == Sprite::Type; }) == otherModules.end();
+		// Everything depends on the Transform module, since every Entity must have one
+		return true;
 	}
 
 	bool Transform::checkCompatibility(std::vector<Module*>& otherModules)

@@ -1,12 +1,62 @@
-﻿  AudioEngine.cpp
-  Collidable.cpp
+﻿  Collidable.cpp
+  CollisionGrid.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(12,30): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(13,29): warning C4244: 'argument': conversion from 'T' to 'const unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(23,9): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(25,9): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(46,24): warning C4244: '+=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(47,24): warning C4244: '+=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(49,22): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(50,22): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(57,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(59,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(60,9): warning C4834: discarding return value of function with 'nodiscard' attribute
   CollisionHandlers.cpp
+  Glyph.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\data\Glyph.cpp(100,29): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
+  Entity.cpp
+  Module.cpp
   ShyEngine.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(79,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>' being compiled
+  System.cpp
+  ParticleSystem.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(79,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(86,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(100,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(113,57): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\ParticleSystem.cpp(124,21): warning C4018: '<': signed/unsigned mismatch
   Physics.cpp
+  Sprite.cpp
+  Text.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Text.cpp(147,42): warning C4244: '*=': conversion from 'float' to 'unsigned char', possible loss of data
+  Transform.cpp
   UserScript.cpp
   CircleCollider2D.cpp
   Collider2D.cpp
@@ -35,6 +85,7 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\incl
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\ParticleRenderer.h(14): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::ParticleSystem,ShyEngine::Particle>' being compiled
   PhysicsManager.cpp
+  Compiling...
   SpriteRenderer.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>::createRenderBatches(void)'

@@ -31,8 +31,6 @@ namespace ShyEngine
 			~Collider2D() {}
 
 			virtual CollisionData checkCollision(Collider2D* second) { return CollisionData::CollisionData(); };
-
-			bool checkCollision(Transform* otherTransform);
 			bool checkCollision(glm::vec4 otherRect);
 
 			virtual bool checkCompatibility(std::vector<Module*>& otherModules);

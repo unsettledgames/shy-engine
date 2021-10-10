@@ -12,6 +12,7 @@ namespace ShyEngine {
 	{
 		compileShaders(vertPath, fragPath);
 
+		// Currently supported attributes. IMPROVEMENT: add more
 		addAttribute("vertPos");
 		addAttribute("vertColor");
 		addAttribute("vertUV");

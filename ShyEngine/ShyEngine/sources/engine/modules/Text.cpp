@@ -12,16 +12,6 @@ namespace ShyEngine
         return s1.m_id == s2.m_id;
     }
 
-    int closestPow2(int i) {
-        i--;
-        int pi = 1;
-        while (i > 0) {
-            i >>= 1;
-            pi <<= 1;
-        }
-        return pi;
-    }
-
     Text::Text(Entity* entity, const std::string& font, int size, unsigned char startChar, unsigned char endChar) : 
         Module(entity)
     {
@@ -89,8 +79,8 @@ namespace ShyEngine
             std::vector<int>* glyphRow = createRows(glyphRects, m_nCharacters, rows, padding, currWidth);
 
             // Desire a power of 2 texture
-            currWidth = closestPow2(currWidth);
-            currHeight = closestPow2(currHeight);
+            currWidth = Math::closestPow2(currWidth);
+            currHeight = Math::closestPow2(currHeight);
 
             // A texture must be feasible
             if (currWidth > MAX_TEXTURE_RES || currHeight > MAX_TEXTURE_RES)
@@ -209,10 +199,12 @@ namespace ShyEngine
 
     void Text::dispose()
     {
+        // Delete the font texture
         if (m_texID != 0) {
             glDeleteTextures(1, &m_texID);
             m_texID = 0;
         }
+        // Delete all the glyphs
         if (m_glyphs) {
             delete[] m_glyphs;
             m_glyphs = nullptr;
@@ -260,7 +252,8 @@ namespace ShyEngine
     }
 
     // returns the size of a string
-    glm::vec2 Text::measure(const std::string& s) {
+    glm::vec2 Text::measure(const std::string& s) 
+    {
         glm::vec2 size(0, m_fontHeight);
         float cw = 0;
         for (int si = 0; s[si] != 0; si++) {
@@ -332,15 +325,5 @@ namespace ShyEngine
         }
 
         return ret;
-    }
-
-    bool Text::checkCompatibility(std::vector<Module*>& otherModules)
-    {
-        return true;
-    }
-
-    bool Text::checkDependency(std::vector<Module*>& otherModules)
-    {
-        return false;
     }
 }

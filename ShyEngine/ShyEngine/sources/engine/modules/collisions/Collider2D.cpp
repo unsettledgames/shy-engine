@@ -14,15 +14,8 @@ namespace ShyEngine
 		m_transform = entity->getTransform();
 	}
 
-	bool Collider2D::checkCollision(Transform* other)
-	{
-		return AABB(glm::vec4(other->getPos(), other->getScale()),
-			glm::vec4(m_transform->getPos(), m_transform->getScale()));
-	}
-
 	// OPTIMIZABLE: make AABB a macro instead of a function
 	// OPTIMIZABLE: make as many members as possible public to remove calls
-
 	bool Collider2D::checkCollision(glm::vec4 rect)
 	{
 		return AABB(glm::vec4(m_transform->getPos(), m_transform->getScale()), rect);
@@ -47,7 +40,8 @@ namespace ShyEngine
 	}
 
 	bool Collider2D::checkDependency(std::vector<Module*>& otherModules) 
-	{ 
+	{
+		// Nothing depends on the collider
 		return false; 
 	}
 }

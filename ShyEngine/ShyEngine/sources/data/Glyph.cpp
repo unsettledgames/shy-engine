@@ -20,8 +20,6 @@ namespace ShyEngine
 
 	bool operator==(const Glyph& e1, const Glyph& e2)
 	{
-		// If a glyph represents the same character, has the same texture id and the same position
-		// of another glyph, then the two glyphs are necessarily the same glyphs
 		return e1.m_id == e2.m_id;
 	}
 
@@ -31,6 +29,8 @@ namespace ShyEngine
 		m_shader = shader;
 		m_color = color;
 		m_depth = depth;
+
+		updateVertices();
 	}
 
 	Glyph::Glyph(Texture& texture, ShaderProgram* shader, ColorRGBA8 color, float depth)
@@ -59,12 +59,13 @@ namespace ShyEngine
 	// IMPROVABLE: make text rotatable
 	void Glyph::updateVertices()
 	{
-		// Get the corners
+		// Set the corners
 		glm::vec2 topLeft(-m_scale.x / 2, m_scale.y / 2);
 		glm::vec2 topRight(m_scale.x / 2, m_scale.y / 2);
 		glm::vec2 bottomRight(m_scale.x / 2, -m_scale.y / 2);
 		glm::vec2 bottomLeft(-m_scale.x / 2, -m_scale.y / 2);
 
+		// Set the color of each corner
 		this->m_topLeft.color = m_color;
 		this->m_topRight.color = m_color;
 		this->m_bottomRight.color = m_color;

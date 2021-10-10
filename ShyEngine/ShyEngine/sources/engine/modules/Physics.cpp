@@ -11,38 +11,35 @@ namespace ShyEngine
 
 	void Physics::update(PhysicsData data)
 	{
+		// If the body is static, don't update it and apply a velocity of vec2.zero. This is to avoid 
+		// miscalculations in the other objects that would otherwise collide with a static body with a velocity
 		if (m_static)
 		{
 			m_velocity = glm::vec2(0, 0);
 			return;
 		}
 
-		CHECK_EPSILON
-
 		Transform* transform = m_entity->getTransform();
 		glm::vec2 prevPos = transform->getPos();
 
+		// Set the position depending on the velocity
 		transform->setPos(transform->getPos() + m_velocity * data.deltaTime * data.simulationSpeed);
+		// Set the velocity depending on the gravity
+		// IMPROVEMENT: external forces
 		m_velocity += data.gravity * data.deltaTime * m_mass * data.simulationSpeed;
 	}
 
-	// TODO: define static bodies so that they don't move
 	void Physics::onCollisionStarted(CollisionData data)
 	{
-		CHECK_EPSILON
 		bump(data);
 	}
 
 	void Physics::onCollisionStay(CollisionData data)
 	{
-		CHECK_EPSILON
 		bump(data);
 	}
 
-	void Physics::onCollisionFinished(CollisionData data)
-	{
-
-	}
+	void Physics::onCollisionFinished(CollisionData data) {}
 
 	void Physics::bump(CollisionData data)
 	{
@@ -79,7 +76,8 @@ namespace ShyEngine
 
 	bool Physics::checkDependency(std::vector<Module*>& otherModules)
 	{
-		// TODO: can't remove a Physics module if there's at least a collider
-		return false;
+		// Can't remove a Physics module if there's at least a collider that is using it
+		return (std::find_if(otherModules.begin(), otherModules.end(),
+			[](Module* other) { return other->IsClassType(Collider2D::Type); }) != otherModules.end());
 	}
 }

@@ -10,10 +10,14 @@ namespace ShyEngine
 
 	void CollisionManager::updateModules(PhysicsData data)
 	{
+		// Used to store the collidables of an object that is colliding
 		std::vector<Collidable*> collidables;
+		// The two colliders involved in a collision
 		Collider2D* collider, * collider2;
+		// The data resulting from a collision
 		CollisionData collisionData;
 
+		// Check every collider against the ones after them
 		for (int i=0; i<m_modulesPointers.size(); i++)
 		{
 			for (int j=i+1; j< m_modulesPointers.size(); j++)
@@ -24,14 +28,17 @@ namespace ShyEngine
 				collisionData = checkCollision(collider, collider2);
 				collidables = collider->m_entity->m_collidables;
 
-				// Trigger the enter / stay / exit functions for all the Collidable modules
+				// Trigger the enter / stay / exit functions for all the Collidable modules.
+				// No, I can't avoid doing that if it's not colliding because Collidables need to know when
+				// a collision ended. If they were not colliding the frame before the current one, they'll take
+				// care of that and won't do anything
 				for (int i = 0; i < collidables.size(); i++)
 					collidables[i]->handleCollision(collisionData);
 			}
 		}
 	}
 
-	// ISSUE: this is ExTREMELY slow
+	// UNUSED
 	void CollisionManager::cellCollision(Collider2D* collider, int x, int y)
 	{
 		/*glm::vec2 nCells = m_collisionGrid->getNCells();
@@ -71,6 +78,7 @@ namespace ShyEngine
 		}*/
 	}
 
+	// UNUSED
 	void CollisionManager::updateCellCoords(Collidable* coll)
 	{
 		glm::vec2 otherPos = coll->m_entity->getModule<Transform>()->getPos();
@@ -78,7 +86,7 @@ namespace ShyEngine
 		moveEntity(coll, otherPos);
 	}
 
-	// OPTIMIZABLE: this takes a lot of resources for some reason
+	// UNUSED
 	void CollisionManager::moveEntity(Collidable* entity, glm::vec2 destCoords)
 	{
 		glm::vec2 currCoords = entity->m_cellCoords;

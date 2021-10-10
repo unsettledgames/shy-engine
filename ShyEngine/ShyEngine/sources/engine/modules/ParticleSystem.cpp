@@ -29,12 +29,14 @@ namespace ShyEngine
 	ParticleSystem::ParticleSystem(Entity* entity, int maxParticles, std::string& texture, ShaderProgram* shader,
 		std::function<void(Particle& particle, float deltaTime)> particleUpdate /*= defaultParticleUpdate*/) :
 		ParticleSystem(entity, maxParticles, ResourcesManager.getTexture(texture), shader, particleUpdate) {}
+
 	ParticleSystem::ParticleSystem(Entity* entity, int maxParticles, std::string&& texture, ShaderProgram* shader,
 		std::function<void(Particle& particle, float deltaTime)> particleUpdate /*= defaultParticleUpdate*/) :
 		ParticleSystem(entity, maxParticles, ResourcesManager.getTexture(texture), shader, particleUpdate) {}
 
 	void ParticleSystem::init()
 	{
+		// Prepare the particles vector to contain m_maxParticles (OPTIMIZABLE?)
 		m_particles.resize(m_maxParticles);
 		m_initialized = true;
 		play();
@@ -49,14 +51,17 @@ namespace ShyEngine
 	{
 		m_isPlaying = false;
 
+		// Immediately destroy the particles if specified
 		if (destroyParticles)
 			m_particles.clear();
 	}
 
 	Particle ParticleSystem::updateParticle(int index, float deltaTime)
 	{
+		// Update only if the particle is active
 		if (m_particles[index].m_lifetime > 0)
 		{
+			// Use the update function to update the particle
 			m_particleUpdate(m_particles[index], deltaTime * m_simulationSpeed);
 			m_particles[index].m_lifetime -= deltaTime * m_simulationSpeed;
 
@@ -70,8 +75,10 @@ namespace ShyEngine
 
 	void ParticleSystem::updateSystem(float deltaTime)
 	{
+		// Update only if the system is playing
 		if (m_isPlaying)
 		{
+			// DEBUG
 			m_particleVelocity = glm::vec2((float)rand() * 5 / RAND_MAX, (float)rand() * 5 / RAND_MAX);
 			// Emit particle if needed
 			if (m_nextEmissionTime > (1 / m_emissionRate))
@@ -86,8 +93,10 @@ namespace ShyEngine
 
 	void ParticleSystem::updateAll(float deltaTime)
 	{
+		// Update the system
 		updateSystem(deltaTime);
 
+		// Update the particles
 		for (int i = 0; i < m_particles.size(); i++)
 			updateParticle(i, deltaTime);
 	}
@@ -100,6 +109,7 @@ namespace ShyEngine
 
 	int ParticleSystem::getFreeParticle()
 	{
+		// Try to find a free index after the last you gound
 		for (int i = m_lastFreeParticle; i<m_maxParticles && i<m_particles.size(); i++)
 		{
 			if (m_particles[i].getLifetime() <= 0.0f)
@@ -109,7 +119,8 @@ namespace ShyEngine
 			}
 		}
 
-		// Free particle was before the last index
+		// If you're here, the free particle was before the last index and you need to search in the other
+		// part of the array
 		for (int i = 0; i < m_lastFreeParticle; i++)
 		{
 			if (m_particles[i].getLifetime() <= 0.0f)

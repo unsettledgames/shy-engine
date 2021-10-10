@@ -20,12 +20,12 @@ namespace ShyEngine {
 
 		glGenTextures(1, &(ret.id));
 		glBindTexture(GL_TEXTURE_2D, ret.id);
-		// EXPANDABLE: second parameter is mipmapping, third is colour mode, border?
+		// IMPROVEMENT: second parameter is mipmapping, third is colour mode, border?
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void*)&(outBuffer[0]));
-		// EXPANDABLE: texture wrapping (clamp / repeat etc)
+		// IMPROVEMENT: texture wrapping (clamp / repeat etc)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		// EXPANDABLE: point / bilinear filtering
+		// IMPROVEMENT: point / bilinear filtering
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 

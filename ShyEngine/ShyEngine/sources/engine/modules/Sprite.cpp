@@ -5,9 +5,7 @@ namespace ShyEngine
 {
 	CLASS_DEFINITION(Module, Sprite)
 
-	Sprite::Sprite() : Module(nullptr) 
-	{
-	}
+	Sprite::Sprite() : Module(nullptr) {}
 
 	Sprite::Sprite(Entity* entity, Texture& texture, ShaderProgram* shader, ColorRGBA8 color) : Module(entity)
 	{
@@ -46,12 +44,13 @@ namespace ShyEngine
 		glm::vec2 bottomRight(halfSize.x, -halfSize.y);
 		glm::vec2 bottomLeft(-halfSize.x, -halfSize.y);
 
-		// Rotate the points
+		// Rotate the corners
 		topLeft = Math::rotatePoint(topLeft, angle);
 		topRight = Math::rotatePoint(topRight, angle);
 		bottomRight = Math::rotatePoint(bottomRight, angle);
 		bottomLeft = Math::rotatePoint(bottomLeft, angle) ;
 
+		// Set the color
 		this->m_topLeft.color = m_color;
 		this->m_topRight.color = m_color;
 		this->m_bottomRight.color = m_color;
@@ -91,7 +90,6 @@ namespace ShyEngine
 
 	bool Sprite::checkCompatibility(std::vector<Module*>& otherModules)
 	{
-		// There must exist a Transform component
 		return true;
 	}
 

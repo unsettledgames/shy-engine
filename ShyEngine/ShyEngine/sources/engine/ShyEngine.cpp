@@ -203,7 +203,9 @@ namespace ShyEngine {
 	{
 		Entity* ret = new Entity(name);
 
+		// Set the self reference
 		ret->m_reference = ret;
+		// Set a new id for the entity
 		ret->m_id = m_entityIdGenerator.get();
 
 		return ret;

@@ -3,11 +3,15 @@
 
 namespace ShyEngine
 {
+	// Each module has a Type, which is the hash of its name: in that way it's possible to implement module-related
+	// functions (getModule, addModule etc)
 	const std::size_t Module::Type = std::hash<std::string>()(TO_STRING(Module));
+	// Each module also has a name. This is mainly used for debug purposes
 	const std::string Module::m_name = "Module";
 
 	Module::Module(Entity* entity) 
 	{ 
+		// Each module has a reference to its entity to speed up systems
 		m_entity = entity;
 	}
 

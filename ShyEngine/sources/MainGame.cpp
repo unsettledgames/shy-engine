@@ -67,7 +67,7 @@ int main(int argc, char** argv)
             ball->attachModule<SE::CircleCollider2D>(circleCollider);
             
             // Adjusting physics
-            physics->setMass(0.01f);
+            physics->setMass(0.1f);
             physics->setVelocity( glm::vec2((((float)rand() / (RAND_MAX/2)) - 1) * 5.0f, (((float)rand() / RAND_MAX) * 5.0f)));
             physics->setBounciness(1.0f);
         }
