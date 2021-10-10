@@ -70,12 +70,6 @@ namespace ShyEngine
 		otherPhysics->setVelocity(otherPhysics->getVelocity() + 1/otherPhysics->getMass() * impulse);
 	}
 
-	void Physics::contact(CollisionData data)
-	{
-		glm::vec2 thisPos = m_entity->getTransform()->getPos();
-		m_entity->getTransform()->setPos(thisPos - data.minDistance);
-	}
-
 	bool Physics::checkCompatibility(std::vector<Module*>& otherModules)
 	{
 		// There mustn't already exist a Physics component8

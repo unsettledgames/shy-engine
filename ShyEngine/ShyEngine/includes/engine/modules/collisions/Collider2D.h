@@ -40,6 +40,6 @@ namespace ShyEngine
 
 			Transform* getTransform() { return m_transform; }
 
-			static bool AABB(glm::vec4 first, glm::vec4 second, glm::vec2* depth = nullptr);
+			static bool AABB(glm::vec4 first, glm::vec4 second);
 	};
 }

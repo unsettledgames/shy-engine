@@ -17,17 +17,22 @@ namespace ShyEngine {
 
 	void ShyEngine::initSystems()
 	{
+		// Place the HUD camera in the middle of the screen and don't move it
 		m_hudCamera.init(m_screenWidth, m_screenHeight);
 		m_hudCamera.setPosition(glm::vec2(0, 0));
 
 		m_camera.init(m_screenWidth, m_screenHeight);
 		m_camera.setScale(0.5);
+		
 		m_audioEngine.init();
 
+		// Create the systems
+		// Renderers
 		m_spriteRenderer = new SpriteRenderer();
 		m_textRenderer = new TextRenderer();
 		m_particleRenderer = new ParticleRenderer();
 
+		// Physics
 		m_physicsManager = new PhysicsManager();
 		m_collisionManager = new CollisionManager(50, glm::vec2(0, 0), glm::vec2(50, 50));
 	}
@@ -36,8 +41,12 @@ namespace ShyEngine {
 	{
 		m_screenWidth = width;
 		m_screenHeight = height;
+
+		// Initialize the FPS limiter with a value of fps: that alone won't make the engine limit fps, the user will
+		// also have to call fpsLimiter.toggleFpsLimiting(true)
 		m_fpsLimiter.init(fps);
 
+		// Add SDL flags to the engine flags
 		if (flags & WindowFlags::INVISIBLE) {
 			flags |= SDL_WINDOW_HIDDEN;
 		}
@@ -65,13 +74,12 @@ namespace ShyEngine {
 		// Initializing glew
 		glewExperimental = GL_TRUE;
 		GLenum err = glewInit();
-
 		if (err == GLEW_OK)
 			std::cout << ("Initialized Glew") << std::endl;
 		else
 			Error::fatal("Couldn't initialize Glew");
 
-		// VSYNCIMPROVEMENT: let user decide v sync values, disabled atm
+		// IMPROVEMENT: let user decide v sync values, disabled atm
 		SDL_GL_SetSwapInterval(0);
 		// Enable alpha blending
 		glEnable(GL_BLEND);
@@ -82,24 +90,7 @@ namespace ShyEngine {
 		initSystems();
 
 		//m_audioEngine.play((Music&)ResourcesManager.getMusic("sfx/6th.mp3"), 1);
-/*
-		// TEST PHYSICS MANAGEMENT
-		// Create the physics world
-		m_world = std::make_unique<b2World>(b2Vec2(0.0f, -9.81f));
 
-		// Create the ground
-		b2BodyDef groundBodyDef;
-		groundBodyDef.position.Set(0.0f, -10.0f);
-		b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
-		// Ground fixture
-		b2PolygonShape groundBox;
-		groundBox.SetAsBox(50.0f, 10.0f);
-		groundBody->CreateFixture(&groundBox, 0.0f);
-
-		// Create a few boxes
-		Box newBox;
-		newBox.init(m_world.get(), glm::vec2(0.0f, 14.0f), glm::vec2(15.0f, 15.0f));
-		*/
 		// Printing debug data
 		std::cout << "CWD: " << Utility::getCwd() << std::endl;
 		Utility::printOpenGLVersion();
@@ -107,8 +98,8 @@ namespace ShyEngine {
 
 	void ShyEngine::run()
 	{
+		// Start the system update loop
 		this->m_state = GameState::GAME_STATE_RUNNING;		
-
 		this->loop();
 	}
 
@@ -125,6 +116,7 @@ namespace ShyEngine {
 		// Running the engine loop until the user doesn't quit
 		while (this->m_state == GameState::GAME_STATE_RUNNING)
 		{
+			// This is used to simulate more steps in case of a high deltatime
 			int currSimStep = 0;
 
 			m_fpsLimiter.begin();
@@ -133,14 +125,17 @@ namespace ShyEngine {
 
 			while (totalDeltaTime > 0.0f && currSimStep < MAX_SIM_STEPS)
 			{
-				// Camera update REFACTOR: the camera should update on its own, in some way. Maybe the
-				// engine has an active camera and it updates it?
+				// IMPROVEMENT: multiple cameras, the engine updates the active one
 				m_camera.update();
 				m_hudCamera.update();
 
 				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
+
+				// Prepare the data for the sprite and text renderer: the first uses the standard camera, the latter
+				// uses the HUD camera
 				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), m_camera.getViewportRect(), totalDeltaTime };
 				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), m_hudCamera.getViewportRect(), totalDeltaTime };
+				// Prepare the data for the physics engine
 				PhysicsData physicsData = { m_physicsManager->getGravity(), deltaTime };
 
 				/*******************INPUT******************/
@@ -150,6 +145,7 @@ namespace ShyEngine {
 				/********************PHYSICS******************/
 				// Update loop for the physics and collision manager
 				m_collisionManager->updateModules(physicsData);
+				// DEBUG
 				if (m_input.getKeyDown(SDLK_p))
 				{
 					m_physicsManager->updateModules(physicsData);
@@ -174,7 +170,7 @@ namespace ShyEngine {
 				if (m_input.isQuitting())
 					this->m_state = GameState::GAME_STATE_STOPPED;
 
-				// TEST
+				// TEST: W,A,S and D move the camera up, left, down, right
 				if (m_input.getKeyDown(SDLK_w))
 					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 6.0f) * totalDeltaTime);
 				if (m_input.getKeyDown(SDLK_s))
@@ -186,18 +182,20 @@ namespace ShyEngine {
 
 				totalDeltaTime -= deltaTime;
 				currSimStep++;
+
+				// Logging the fps every 10 iterations
+				if (debugTime % 10 == 0)
+					std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;
+				debugTime++;
 			}
 
-			if (debugTime % 10 == 0)
-				std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;
 			m_fpsLimiter.end();
-
-			debugTime++;
 		}
 	}
 
 	void ShyEngine::registerShader(ShaderProgram* toRegister)
 	{
+		// Simply add the shader to the list of shaders
 		m_shaders.push_back(toRegister);
 	}
 

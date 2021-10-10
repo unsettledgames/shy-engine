@@ -4,6 +4,11 @@ namespace ShyEngine
 {
 	CollisionData circleVsCircle(CircleCollider2D* first, CircleCollider2D* second)
 	{
+		/*
+			Circle vs circle collisions are quite simple:
+			- If the distance between the 2 objects is less than the sum of their radii, the objects are colliding
+			- The normal is just the distance between the 2 objects, normalized
+		*/
 		CollisionData ret;
 
 		glm::vec2 otherPos = second->getTransform()->getPos();
@@ -15,10 +20,7 @@ namespace ShyEngine
 
 		ret.colliding = distance <= radiusSum;
 		if (ret.colliding)
-		{
 			ret.normal = glm::normalize(otherPos - pos);
-			ret.minDistance = glm::normalize(otherPos - pos) * (radiusSum - distance);
-		}
 
 		return ret;
 	}
@@ -27,9 +29,19 @@ namespace ShyEngine
 	{
 		CollisionData ret;
 
+		/*
+			Circle vs rect collisions are more elaborate:
+			- Whether the objects are colliding or not is determined by a simple AABB
+				IMPROVEMENT: Is this precise enough?
+			- The normal is harder to compute: we have to get the nearest point of collision on the rect,
+				get the distance from the circle to that point and finally normalize the vector (-distance.y, distance.x)
+					
+
+		*/
+
 		ret.colliding = Collider2D::AABB(
 			rect->getRectBounds(), glm::vec4(circle->getTransform()->getPos(), 
-			glm::vec2(circle->getRadius(), circle->getRadius()) * 2.0f), &ret.minDistance
+			glm::vec2(circle->getRadius(), circle->getRadius()) * 2.0f)
 		);
 
 		if (ret.colliding)
@@ -45,15 +57,14 @@ namespace ShyEngine
 
 			// Compute the normal
 			ret.normal = glm::normalize(glm::vec2(-distance.y, distance.x));
-			// Compute penetration depth
-			ret.minDistance = (abs(ret.minDistance.x) > abs(ret.minDistance.y) ?
-				glm::vec2(0, -ret.minDistance.y) : glm::vec2(-ret.minDistance.x, 0));
 		}
 
 		return ret;
 	}
+
 	CollisionData rectVsRect(RectCollider2D* first, RectCollider2D* second)
 	{
+		// TODO
 		CollisionData ret;
 
 		return ret;
@@ -82,6 +93,7 @@ namespace ShyEngine
 				ret = circleVsRect((CircleCollider2D*)first, (RectCollider2D*)second);
 		}
 
+		// Setting the right collider
 		ret.collider = second;
 
 		return ret;

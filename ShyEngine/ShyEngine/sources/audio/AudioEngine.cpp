@@ -4,6 +4,8 @@
 namespace ShyEngine
 {
 	/*******************************************MUSIC***********************************************************/
+	// The functions in the AudioEngine that are not commented are just wrappers around the ones defined in
+	// SDL_Mixers
 	void Music::play(int loops /* = 1 */)
 	{
 		if (Mix_PlayMusic(m_music, loops) < 0)
@@ -82,9 +84,7 @@ namespace ShyEngine
 			m_initialized = true;
 		}
 		else
-		{
 			std::cout << "WARNING: tried to initialize the AudioEngine twice" << std::endl;
-		}
 	}
 
 	void AudioEngine::destroy()

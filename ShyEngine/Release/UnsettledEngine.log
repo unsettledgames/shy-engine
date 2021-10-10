@@ -4,7 +4,7 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\incl
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>' being compiled
   Generating code
-  1 of 2295 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 2291 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

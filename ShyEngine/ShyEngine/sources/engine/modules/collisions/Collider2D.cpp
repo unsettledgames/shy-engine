@@ -28,16 +28,13 @@ namespace ShyEngine
 		return AABB(glm::vec4(m_transform->getPos(), m_transform->getScale()), rect);
 	}
 
-	bool Collider2D::AABB(glm::vec4 first, glm::vec4 second, glm::vec2* depth)
+	bool Collider2D::AABB(glm::vec4 first, glm::vec4 second)
 	{
 		// Scale of the first one + scale of the second one / 2
 		glm::vec2 minDistance = (glm::vec2(first.z, first.w) + glm::vec2(second.z, second.w)) / 2.0f;
 		// First position - second position
 		glm::vec2 distance = glm::abs(glm::vec2(first.x, first.y) - glm::vec2(second.x, second.y));
 		glm::vec2 tempDepth = minDistance - distance;
-
-		if (depth != nullptr)
-			*depth = tempDepth;
 
 		return tempDepth.x > 0 && tempDepth.y > 0;
 	}

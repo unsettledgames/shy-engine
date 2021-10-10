@@ -1,14 +1,16 @@
 EASY:
+- Change texture compression method (or at least let the user specify it)
 - Use the correct shader when rendering a Glyph
 - Compile shaders with their code / optimize shader compiling by saving shader object files and checking if they exist
 	before compiling the shaders
 
 MEDIUM:
-- Custom renderers (most importantly, debug renderer)
 - Custom scripts
+- Transform tree
+- Custom renderers (most importantly, debug renderer)
+- Module enable / disable
 - Proper destructors and module detachment
 - Game screen management
-- Module enable / disable
 - Documentation
 
 HARD:

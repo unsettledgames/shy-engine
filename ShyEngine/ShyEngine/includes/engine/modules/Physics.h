@@ -22,8 +22,6 @@ namespace ShyEngine
 
 			void bump(CollisionData data);
 
-			void contact(CollisionData data);
-
 		public:
 			Physics() : Collidable(nullptr) {}
 			Physics(Entity* entity);

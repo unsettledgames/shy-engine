@@ -17,7 +17,7 @@ namespace ShyEngine
 		// If it started colliding, call onCollisionStarted
 		if (data.colliding && !m_prevContact)
 			onCollisionStarted(data);
-		// Otherwise, if it created contact the previous frame, call onCollisionStay
+		// Otherwise, if it created contact the previous frame, call onCollisionStay because it's keeping contact
 		else if (data.colliding && m_prevContact)
 			onCollisionStay(data);
 		// If a contact ended, call onCollisionFinished

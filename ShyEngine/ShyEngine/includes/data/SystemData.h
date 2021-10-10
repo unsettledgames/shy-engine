@@ -18,7 +18,6 @@ namespace ShyEngine
 	struct CollisionData
 	{
 		Collider2D* collider = nullptr;
-		glm::vec2 minDistance = glm::vec2(0.0f, 0.0f);
 		glm::vec2 normal = glm::vec2(0.0f, 0.0f);
 		bool colliding = false;
 	};
