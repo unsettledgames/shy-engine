@@ -4,7 +4,9 @@
 #include <engine/systems/SpriteRenderer.h>
 
 namespace ShyEngine {
-	ShyEngine::ShyEngine(unsigned int flags)
+	_ShyEngine Engine = _ShyEngine::_ShyEngine(SDL_INIT_EVERYTHING);
+
+	_ShyEngine::_ShyEngine(unsigned int flags)
 	{
 		// Initializing SDL
 		int sdlErr = SDL_Init(flags);
@@ -13,9 +15,9 @@ namespace ShyEngine {
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	}
 
-	ShyEngine::~ShyEngine() { }
+	_ShyEngine::~_ShyEngine() { }
 
-	void ShyEngine::initSystems()
+	void _ShyEngine::initSystems()
 	{
 		// Place the HUD camera in the middle of the screen and don't move it
 		m_hudCamera.init(m_screenWidth, m_screenHeight);
@@ -37,7 +39,7 @@ namespace ShyEngine {
 		m_collisionManager = new CollisionManager(50, glm::vec2(0, 0), glm::vec2(50, 50));
 	}
 
-	void ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
+	void _ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
 	{
 		m_screenWidth = width;
 		m_screenHeight = height;
@@ -96,14 +98,14 @@ namespace ShyEngine {
 		Utility::printOpenGLVersion();
 	}
 
-	void ShyEngine::run()
+	void _ShyEngine::run()
 	{
 		// Start the system update loop
 		this->m_state = GameState::GAME_STATE_RUNNING;		
 		this->loop();
 	}
 
-	void ShyEngine::loop()
+	void _ShyEngine::loop()
 	{
 		// Debugger time
 		static int debugTime = 0;
@@ -193,13 +195,13 @@ namespace ShyEngine {
 		}
 	}
 
-	void ShyEngine::registerShader(ShaderProgram* toRegister)
+	void _ShyEngine::registerShader(ShaderProgram* toRegister)
 	{
 		// Simply add the shader to the list of shaders
 		m_shaders.push_back(toRegister);
 	}
 
-	Entity* ShyEngine::createEntity(const std::string& name/* = "NewEntity"*/)
+	Entity* _ShyEngine::createEntity(const std::string& name/* = "NewEntity"*/)
 	{
 		Entity* ret = new Entity(name);
 

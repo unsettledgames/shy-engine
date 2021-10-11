@@ -36,13 +36,10 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sour
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(59,13): warning C4018: '>': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionGrid.cpp(60,9): warning C4834: discarding return value of function with 'nodiscard' attribute
   CollisionHandlers.cpp
-  Glyph.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\data\Glyph.cpp(100,29): warning C4244: 'argument': conversion from 'Uint32' to 'float', possible loss of data
-  ImageLoader.cpp
-  Particle.cpp
-  ResourcesManager.cpp
   Entity.cpp
   Module.cpp
+  Settings.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\Settings.cpp(22,21): warning C4018: '<': signed/unsigned mismatch
   ShyEngine.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(79,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
@@ -59,28 +56,26 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sour
   Sprite.cpp
   Text.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\modules\Text.cpp(147,42): warning C4244: '*=': conversion from 'float' to 'unsigned char', possible loss of data
-  Transform.cpp
   UserScript.cpp
   CircleCollider2D.cpp
   Collider2D.cpp
   RectCollider2D.cpp
-  Compiling...
   CollisionManager.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(21,18): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(23,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(35,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(94,77): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(38,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(99,77): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(94,63): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(99,63): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(95,84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(95,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(100,84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\CollisionManager.cpp(100,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   ParticleRenderer.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\modules\ParticleSystem.h(79,37): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\ParticleRenderer.cpp(19,22): warning C4018: '<': signed/unsigned mismatch
@@ -93,10 +88,10 @@ C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\incl
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\SpriteRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Sprite,ShyEngine::Sprite>' being compiled
+  Compiling...
   TextRenderer.cpp
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\engine\systems\TextRenderer.cpp(18,10): warning C4101: 'currText': unreferenced local variable
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(202,2): warning C4018: '<': signed/unsigned mismatch
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\Renderer.h(178): message : while compiling class template member function 'void ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>::createRenderBatches(void)'
 C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\includes\engine\systems\TextRenderer.h(13): message : see reference to class template instantiation 'ShyEngine::Renderer<ShyEngine::Text,ShyEngine::Glyph>' being compiled
-  ShaderProgram.cpp
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Release\ShyEngine.lib

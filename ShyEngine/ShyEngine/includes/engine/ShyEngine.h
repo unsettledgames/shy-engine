@@ -10,6 +10,7 @@
 
 #include <input/Input.h>
 #include <input/EventBus.h>
+#include <engine/Settings.h>
 
 #include <util/Error.h>
 #include <util/Utility.h>
@@ -54,7 +55,7 @@ namespace ShyEngine
 {
 	class SpriteRenderer;
 
-	class ShyEngine
+	class _ShyEngine
 	{
 		private:
 			SDL_Window* m_gameWindow = nullptr;
@@ -100,9 +101,9 @@ namespace ShyEngine
 			FpsLimiter m_fpsLimiter;
 
 		public:
-			ShyEngine(unsigned int flags);
+			_ShyEngine(unsigned int flags);
 
-			~ShyEngine();
+			~_ShyEngine();
 
 			void createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps = 60);
 
@@ -147,4 +148,6 @@ namespace ShyEngine
 
 			Entity* createEntity(const std::string& name = "NewEntity");
 	};
+
+	extern _ShyEngine Engine;
 }

@@ -11,6 +11,7 @@ MEDIUM:
 - Module enable / disable
 - Proper destructors and module detachment
 - Game screen management
+- Settings class
 - Documentation
 
 HARD:

@@ -9,7 +9,7 @@ namespace ShyEngine
 
 	class Module
 	{
-		friend class ShyEngine;
+		friend class _ShyEngine;
 		friend class System;
 		friend class Entity;
 		friend bool operator==(const Module& e1, const Module& e2);

@@ -22,18 +22,23 @@ namespace ShyEngine
 		{
 			for (int j=i+1; j< m_modulesPointers.size(); j++)
 			{
-				collider = (Collider2D*)m_modulesPointers[i];
-				collider2 = (Collider2D*)m_modulesPointers[j];
+				if (settings->collisions.collides(
+					m_modulesPointers[i]->m_entity->getLayer(), m_modulesPointers[j]->m_entity->getLayer()))
+				{
+					collider = (Collider2D*)m_modulesPointers[i];
+					collider2 = (Collider2D*)m_modulesPointers[j];
 
-				collisionData = checkCollision(collider, collider2);
-				collidables = collider->m_entity->m_collidables;
+					collisionData = checkCollision(collider, collider2);
+					collidables = collider->m_entity->m_collidables;
 
-				// Trigger the enter / stay / exit functions for all the Collidable modules.
-				// No, I can't avoid doing that if it's not colliding because Collidables need to know when
-				// a collision ended. If they were not colliding the frame before the current one, they'll take
-				// care of that and won't do anything
-				for (int i = 0; i < collidables.size(); i++)
-					collidables[i]->handleCollision(collisionData);
+					// Trigger the enter / stay / exit functions for all the Collidable modules.
+					// No, I can't avoid doing that if it's not colliding because Collidables need to know when
+					// a collision ended. If they were not colliding the frame before the current one, they'll take
+					// care of that and won't do anything
+					for (int i = 0; i < collidables.size(); i++)
+						collidables[i]->handleCollision(collisionData);
+				}
+				
 			}
 		}
 	}

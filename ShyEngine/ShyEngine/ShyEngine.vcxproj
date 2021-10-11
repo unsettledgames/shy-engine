@@ -44,6 +44,7 @@
     <ClInclude Include="includes\engine\modules\Text.h" />
     <ClInclude Include="includes\engine\modules\Transform.h" />
     <ClInclude Include="includes\engine\modules\UserScript.h" />
+    <ClInclude Include="includes\engine\Settings.h" />
     <ClInclude Include="includes\engine\ShyEngine.h" />
     <ClInclude Include="includes\engine\System.h" />
     <ClInclude Include="includes\engine\systems\CollisionManager.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="sources\engine\modules\Text.cpp" />
     <ClCompile Include="sources\engine\modules\Transform.cpp" />
     <ClCompile Include="sources\engine\modules\UserScript.cpp" />
+    <ClCompile Include="sources\engine\Settings.cpp" />
     <ClCompile Include="sources\engine\ShyEngine.cpp" />
     <ClCompile Include="sources\engine\System.cpp" />
     <ClCompile Include="sources\engine\systems\CollisionManager.cpp" />

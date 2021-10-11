@@ -35,6 +35,5 @@ namespace ShyEngine
 
 			void updateModules(PhysicsData data);
 			void addModule(Collider2D* toAdd);
-
 	};
 }

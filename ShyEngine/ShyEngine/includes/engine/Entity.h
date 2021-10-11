@@ -8,6 +8,7 @@
 #include <util/Classes.h>
 #include <engine/modules/Transform.h>
 #include <util/IdGenerator.h>
+#include <engine/Settings.h>
 
 // REFACTOR: if registering a module to the entity's only purpose is to set the entity, why shouldn't this happen
 //		in the module constructor?
@@ -20,14 +21,15 @@ namespace ShyEngine
 
 	class Entity
 	{
-		friend class ShyEngine;
+		friend class _ShyEngine;
 		friend class CollisionManager;
 
 		protected:
 			int m_id;
-
 			std::string m_name;
 			Entity* m_reference;
+
+			short m_layer = 0;
 
 			// Vector containing all the modules that have been attached to this entity
 			std::vector<Module*> m_modules;
@@ -147,5 +149,10 @@ namespace ShyEngine
 
 			Transform* getTransform() { return m_transform; }
 			std::vector<Collidable*> getCollidables() { return m_collidables; }
+
+			void setCollisionLayer(std::string layer) { m_layer = settings->collisions.nameToId(layer); }
+			void setCollisionLayer(short layer) { m_layer = layer; }
+
+			short getLayer() { return m_layer; }
 	};	
 }

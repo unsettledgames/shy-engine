@@ -3,7 +3,6 @@
 #include <SDL2_mixer-2.0.4/SDL_mixer.h>
 #include <iostream>
 #include <string>
-#include <map>
 #include <util/IdGenerator.h>
 
 namespace ShyEngine

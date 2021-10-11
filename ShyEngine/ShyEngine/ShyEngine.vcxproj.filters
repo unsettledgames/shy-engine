@@ -243,6 +243,9 @@
     <ClInclude Include="includes\collisions\CollisionHandlers.h">
       <Filter>Header Files\Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="includes\engine\Settings.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\audio\AudioEngine.cpp">
@@ -361,6 +364,9 @@
     </ClCompile>
     <ClCompile Include="sources\collisions\CollisionHandlers.cpp">
       <Filter>Source Files\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\engine\Settings.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
