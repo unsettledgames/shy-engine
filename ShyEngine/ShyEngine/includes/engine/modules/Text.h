@@ -97,6 +97,7 @@ namespace ShyEngine
                 const std::string& text, Justification = Justification::LEFT);
 
             void setText(std::string& text) { m_text = text; }
+            void setText(std::string text) { m_text = text; }
             std::string getText() { return m_text; }
 
             /// Destroys the font resources

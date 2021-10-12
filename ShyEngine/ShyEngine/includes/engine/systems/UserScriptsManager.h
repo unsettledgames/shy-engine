@@ -4,10 +4,12 @@
 
 namespace ShyEngine
 {
-	class UserScriptManager : public System
+	class UserScriptsManager : public System
 	{
 		private:
 		public:
+			UserScriptsManager() : System("UserScriptsManager") {}
+
 			void init();
 			void updateModules();
 	};

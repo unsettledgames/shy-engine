@@ -16,6 +16,7 @@ namespace ShyEngine {
 
 			\return	The texture based upon the specified file
 		*/
-		static Texture loadPNG(std::string path);
+		static Texture loadPNG(std::string path, GLint textureFiltering = GL_NEAREST,
+			GLint mipmapFiltering = GL_NEAREST_MIPMAP_NEAREST);
 	};
 }

@@ -17,6 +17,11 @@ namespace ShyEngine {
 
 	_ShyEngine::~_ShyEngine() { }
 
+	float _ShyEngine::getFPS()
+	{
+		return m_fpsLimiter.getCurrentFps();
+	}
+
 	void _ShyEngine::initSystems()
 	{
 		// Place the HUD camera in the middle of the screen and don't move it
@@ -37,6 +42,7 @@ namespace ShyEngine {
 		// Physics
 		m_physicsManager = new PhysicsManager();
 		m_collisionManager = new CollisionManager(50, glm::vec2(0, 0), glm::vec2(50, 50));
+		m_scriptsManager = new UserScriptsManager();
 	}
 
 	void _ShyEngine::createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps /*= 60*/)
@@ -71,7 +77,7 @@ namespace ShyEngine {
 			Error::fatal("Couldn't create GL context");
 		
 		// Start with a clean input handler
-		this->m_input.clearInput();
+		Input.clearInput();
 
 		// Initializing glew
 		glewExperimental = GL_TRUE;
@@ -101,7 +107,11 @@ namespace ShyEngine {
 	void _ShyEngine::run()
 	{
 		// Start the system update loop
-		this->m_state = GameState::GAME_STATE_RUNNING;		
+		this->m_state = GameState::GAME_STATE_RUNNING;
+
+		// Call the init function of the user scripts
+		m_scriptsManager->init();
+
 		this->loop();
 	}
 
@@ -142,16 +152,16 @@ namespace ShyEngine {
 
 				/*******************INPUT******************/
 				// Processing input for this frame
-				m_input.processInput();
+				Input.processInput();
 
 				/********************PHYSICS******************/
 				// Update loop for the physics and collision manager
 				m_collisionManager->updateModules(physicsData);
-				// DEBUG
-				if (m_input.getKeyDown(SDLK_p))
-				{
-					m_physicsManager->updateModules(physicsData);
-				}
+				m_physicsManager->updateModules(physicsData);
+
+				/*****************USER SCRIPTS****************/
+				// TODO: pass deltatime
+				m_scriptsManager->updateModules();
 
 				/********************RENDERING****************/
 				glClearDepth(1.0f);
@@ -169,26 +179,21 @@ namespace ShyEngine {
 				SDL_GL_SwapWindow(this->m_gameWindow);
 
 				// If the user decided to quit, I stop the loop
-				if (m_input.isQuitting())
+				if (Input.isQuitting())
 					this->m_state = GameState::GAME_STATE_STOPPED;
 
 				// TEST: W,A,S and D move the camera up, left, down, right
-				if (m_input.getKeyDown(SDLK_w))
+				if (Input.getKeyDown(SDLK_w))
 					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 6.0f) * totalDeltaTime);
-				if (m_input.getKeyDown(SDLK_s))
+				if (Input.getKeyDown(SDLK_s))
 					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -6.0f) * totalDeltaTime);
-				if (m_input.getKeyDown(SDLK_a))
+				if (Input.getKeyDown(SDLK_a))
 					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-6.0f, 0.0f) * totalDeltaTime);
-				if (m_input.getKeyDown(SDLK_d))
+				if (Input.getKeyDown(SDLK_d))
 					m_camera.setPosition(m_camera.getPosition() + glm::vec2(6.0f, 0.0f) * totalDeltaTime);
 
 				totalDeltaTime -= deltaTime;
 				currSimStep++;
-
-				// Logging the fps every 10 iterations
-				if (debugTime % 10 == 0)
-					std::cout << "Fps: " << m_fpsLimiter.getCurrentFps() << std::endl;
-				debugTime++;
 			}
 
 			m_fpsLimiter.end();

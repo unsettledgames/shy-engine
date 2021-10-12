@@ -17,7 +17,7 @@ namespace ShyEngine {
 		unsigned int upTime;
 	} InputData;
 
-	class Input
+	class _Input
 	{
 		private:
 			bool m_quitting;
@@ -41,9 +41,9 @@ namespace ShyEngine {
 			void setMousePosition(float x, float y);
 
 		public:
-			Input();
+			_Input();
 
-			~Input();
+			~_Input();
 
 			void clearInput();
 
@@ -66,4 +66,6 @@ namespace ShyEngine {
 			glm::vec2 getMousePosition();
 
 	};
+
+	extern _Input Input;
 }

@@ -20,6 +20,7 @@ namespace ShyEngine
 		m_collisionMatrix.resize(m_collisionMatrix.size() + 1);
 		// Add a column to the collision matrix, enable collisions by default
 		for (int i = 0; i < m_collisionMatrix.size(); i++)
+			while (m_collisionMatrix[i].size() < m_collisionMatrix.size())
 			m_collisionMatrix[i].push_back(true);
 
 		m_currId++;

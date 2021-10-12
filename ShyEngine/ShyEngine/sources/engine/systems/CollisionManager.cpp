@@ -20,7 +20,7 @@ namespace ShyEngine
 		// Check every collider against the ones after them
 		for (int i=0; i<m_modulesPointers.size(); i++)
 		{
-			for (int j=i+1; j< m_modulesPointers.size(); j++)
+			for (int j=0; j< m_modulesPointers.size(); j++)
 			{
 				if (settings->collisions.collides(
 					m_modulesPointers[i]->m_entity->getLayer(), m_modulesPointers[j]->m_entity->getLayer()))

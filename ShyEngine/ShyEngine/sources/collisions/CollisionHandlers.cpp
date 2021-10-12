@@ -82,6 +82,8 @@ namespace ShyEngine
 			// Rect - Rect
 			else if (second->IsClassType(RectCollider2D::Type))
 				ret = rectVsRect((RectCollider2D*)second, (RectCollider2D*)first);
+
+			ret.collider = first;
 		}
 		else if (first->IsClassType(CircleCollider2D::Type))
 		{
@@ -91,10 +93,9 @@ namespace ShyEngine
 			// Circle - Rect
 			else if (second->IsClassType(RectCollider2D::Type))
 				ret = circleVsRect((CircleCollider2D*)first, (RectCollider2D*)second);
-		}
 
-		// Setting the right collider
-		ret.collider = second;
+			ret.collider = second;
+		}
 
 		return ret;
 	}

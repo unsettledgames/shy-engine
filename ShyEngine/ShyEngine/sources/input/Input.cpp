@@ -4,17 +4,19 @@
 // DEBUG
 
 namespace ShyEngine {
-	Input::Input()
+	_Input Input = _Input::_Input();
+
+	_Input::_Input()
 	{
 		clearInput();
 	}
 
-	Input::~Input()
+	_Input::~_Input()
 	{
 
 	}
 
-	void Input::processInput()
+	void _Input::processInput()
 	{
 		SDL_Event inputEvent;
 
@@ -129,7 +131,7 @@ namespace ShyEngine {
 		}
 	}
 
-	void Input::clearInput()
+	void _Input::clearInput()
 	{
 		this->m_quitting = false;
 
@@ -137,23 +139,23 @@ namespace ShyEngine {
 		this->m_lastButtonUp = -1;
 	}
 
-	bool Input::isQuitting()
+	bool _Input::isQuitting()
 	{
 		return this->m_quitting;
 	}
 
-	bool Input::getKeyDown(SDL_Keycode key)
+	bool _Input::getKeyDown(SDL_Keycode key)
 	{
 		return m_keysMap.find(key) != m_keysMap.end() &&
 			m_keysMap.find(key)->second.isDown;
 	}
 
-	bool Input::getKeyUp(SDL_Keycode key)
+	bool _Input::getKeyUp(SDL_Keycode key)
 	{
 		return m_lastKeyUp != -1 && m_lastKeyUp == key;
 	}
 
-	bool Input::keyPressed(SDL_Keycode key)
+	bool _Input::keyPressed(SDL_Keycode key)
 	{
 		auto keyIt = m_keysMap.find(key);
 
@@ -168,18 +170,18 @@ namespace ShyEngine {
 		return false;
 	}
 
-	bool Input::getButtonDown(Uint8 button)
+	bool _Input::getButtonDown(Uint8 button)
 	{
 		return m_mouseMap.find(button) != m_mouseMap.end() &&
 			m_mouseMap.find(button)->second.isDown;
 	}
 
-	bool Input::getButtonUp(Uint8 button)
+	bool _Input::getButtonUp(Uint8 button)
 	{
 		return m_lastButtonUp != -1 && m_lastButtonUp == button;
 	}
 
-	bool Input::buttonPressed(Uint8 button)
+	bool _Input::buttonPressed(Uint8 button)
 	{
 		auto buttonIt = m_mouseMap.find(button);
 
@@ -194,12 +196,12 @@ namespace ShyEngine {
 		return false;
 	}
 
-	glm::vec2 Input::getMousePosition()
+	glm::vec2 _Input::getMousePosition()
 	{
 		return this->m_mousePosition;
 	}
 
-	void Input::setMousePosition(float x, float y)
+	void _Input::setMousePosition(float x, float y)
 	{
 		this->m_mousePosition.x = x;
 		this->m_mousePosition.y = y;

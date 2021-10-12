@@ -61,8 +61,6 @@ namespace ShyEngine
 			SDL_Window* m_gameWindow = nullptr;
 			SDL_GLContext m_glContext;
 
-			Input m_input;
-
 			GameState m_state = GameState::GAME_STATE_PAUSED;
 
 			AudioEngine m_audioEngine;
@@ -77,6 +75,7 @@ namespace ShyEngine
 			// Managers
 			PhysicsManager* m_physicsManager;
 			CollisionManager* m_collisionManager;
+			UserScriptsManager* m_scriptsManager;
 
 			// Renderers
 			SpriteRenderer* m_spriteRenderer;
@@ -142,11 +141,17 @@ namespace ShyEngine
 				{
 					m_collisionManager->addModule(dynamic_cast<RectCollider2D*>(toRegister));
 				}
+				else if (toRegister->IsClassType(UserScript::Type))
+				{
+					m_scriptsManager->addModule(dynamic_cast<UserScript*>(toRegister));
+				}
 			}
 
 			void registerShader(ShaderProgram* toRegister);
 
 			Entity* createEntity(const std::string& name = "NewEntity");
+
+			float getFPS();
 	};
 
 	extern _ShyEngine Engine;

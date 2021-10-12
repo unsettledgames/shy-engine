@@ -1,7 +1,8 @@
 #include <data/ImageLoader.h>
 
 namespace ShyEngine {
-	Texture ImageLoader::loadPNG(std::string path)
+	Texture ImageLoader::loadPNG(std::string path, GLint textureFiltering/*=GL_NEAREST*/, 
+		GLint mipmapFiltering/*=GL_NEAREST_MIPMAP_NEAREST*/)
 	{
 		// OPTIMIZABLE: return a pointer, not the texture, should be deallocated though
 		Texture ret = {};
@@ -34,6 +35,8 @@ namespace ShyEngine {
 
 		ret.width = width;
 		ret.height = height;
+		ret.mipmapFiltering = mipmapFiltering;
+		ret.textureFiltering = textureFiltering;
 
 		return ret;
 	}
