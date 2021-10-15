@@ -12,5 +12,7 @@ namespace ShyEngine
 	{
 		m_entity = entity;
 		m_radius = radius;
+
+		m_size = glm::vec2(m_radius * 2, m_radius * 2);
 	}
 }

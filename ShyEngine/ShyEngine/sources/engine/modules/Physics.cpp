@@ -26,7 +26,7 @@ namespace ShyEngine
 		transform->setPos(transform->getPos() + m_velocity * data.deltaTime * data.simulationSpeed);
 		// Set the velocity depending on the gravity
 		// IMPROVEMENT: external forces
-		m_velocity += data.gravity * data.deltaTime * m_mass * data.simulationSpeed;
+		m_velocity += data.gravity * m_mass * data.simulationSpeed;
 	}
 
 	void Physics::onCollisionStarted(CollisionData data)
@@ -64,7 +64,7 @@ namespace ShyEngine
 		// Apply impulse
 		glm::vec2 impulse = j * data.normal;
 		setVelocity(m_velocity - 1/m_mass * impulse);
-		otherPhysics->setVelocity(otherPhysics->getVelocity() + 1/otherPhysics->getMass() * impulse);
+		//otherPhysics->setVelocity(otherPhysics->getVelocity() + 1/otherPhysics->getMass() * impulse);
 	}
 
 	bool Physics::checkCompatibility(std::vector<Module*>& otherModules)

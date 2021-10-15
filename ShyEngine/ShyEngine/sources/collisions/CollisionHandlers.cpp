@@ -40,23 +40,29 @@ namespace ShyEngine
 		*/
 
 		ret.colliding = Collider2D::AABB(
-			rect->getRectBounds(), glm::vec4(circle->getTransform()->getPos(), 
-			glm::vec2(circle->getRadius(), circle->getRadius()) * 2.0f)
+			rect->getRectBounds(), glm::vec4(circle->getTransform()->getPos(), circle->getSize())
 		);
 
 		if (ret.colliding)
 		{
+			if (rect->m_entity->getName() == "Left")
+				;//std::cout << "sus";
+
 			glm::vec2 thisPos = circle->getTransform()->getPos();
 			glm::vec4 otherBox = rect->getRectBounds();
 
 			glm::vec2 nearestPoint = glm::vec2(
-				std::max(thisPos.x, otherBox.x + otherBox.z),
-				std::max(thisPos.y, otherBox.y + otherBox.w)
+				std::max(otherBox.x - otherBox.z / 2, std::min(thisPos.x, otherBox.x + otherBox.z/2)),
+				std::max(otherBox.y - otherBox.w / 2, std::min(thisPos.y, otherBox.y + otherBox.w/2))
 			);
-			glm::vec2 distance = thisPos - nearestPoint;
+
+			if (nearestPoint == glm::vec2(otherBox.x + otherBox.z / 2, otherBox.y))
+				std::cout <<"";
+			// Move the nearest point until the dot with the radius is 0?
+			glm::vec2 distance = nearestPoint - thisPos;
 
 			// Compute the normal
-			ret.normal = glm::normalize(glm::vec2(-distance.y, distance.x));
+			ret.normal = glm::normalize(distance);
 		}
 
 		return ret;

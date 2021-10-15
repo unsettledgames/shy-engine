@@ -29,7 +29,7 @@ namespace ShyEngine
 		glm::vec2 distance = glm::abs(glm::vec2(first.x, first.y) - glm::vec2(second.x, second.y));
 		glm::vec2 tempDepth = minDistance - distance;
 
-		return (tempDepth.x > 0 && tempDepth.y > 0) || (tempDepth.x < 0 && tempDepth.y < 0);
+		return (tempDepth.x > 0 && tempDepth.y > 0);
 	}
 
 	bool Collider2D::checkCompatibility(std::vector<Module*>& otherModules) 

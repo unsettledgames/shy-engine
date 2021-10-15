@@ -12,6 +12,7 @@ namespace ShyEngine
 
 		private:
 			float m_radius;
+			glm::vec2 m_size;
 
 		public:
 			CircleCollider2D();
@@ -20,5 +21,7 @@ namespace ShyEngine
 
 			float getRadius() { return m_radius; }
 			void setRadius(float r) { m_radius = r; }
+
+			glm::vec2 getSize() { return m_size; }
 	};
 }

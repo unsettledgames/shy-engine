@@ -148,7 +148,7 @@ namespace ShyEngine {
 				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), m_camera.getViewportRect(), totalDeltaTime };
 				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), m_hudCamera.getViewportRect(), totalDeltaTime };
 				// Prepare the data for the physics engine
-				PhysicsData physicsData = { m_physicsManager->getGravity(), deltaTime };
+				PhysicsData physicsData = { m_physicsManager->getGravity(), totalDeltaTime };
 
 				/*******************INPUT******************/
 				// Processing input for this frame

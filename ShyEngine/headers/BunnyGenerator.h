@@ -11,6 +11,8 @@ class BunnyGenerator : public ShyEngine::UserScript
 		SE::Text* m_fpsCounter;
 
 		SE::ShaderProgram* m_shader = nullptr;
+		bool m_canGenerate = true;
+		float nextBunnyTime = 0;
 
 		void generateBunny();
 	public:
