@@ -8,7 +8,7 @@ namespace ShyEngine
 		m_name = name;
 
 		// The entity must have at least a transform component
-		m_transform = new Transform(this, glm::vec2(0, 0), glm::vec2(0, 0));
+		m_transform = new Transform(this, glm::vec2(0, 0), glm::vec2(1, 1));
 		m_modules.push_back(m_transform);
 	}
 

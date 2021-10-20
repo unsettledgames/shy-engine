@@ -98,6 +98,7 @@ namespace ShyEngine
 			Camera2D m_hudCamera;
 
 			FpsLimiter m_fpsLimiter;
+			float m_deltaTime = 0;
 
 		public:
 			_ShyEngine(unsigned int flags);
@@ -152,6 +153,10 @@ namespace ShyEngine
 			Entity* createEntity(const std::string& name = "NewEntity");
 
 			float getFPS();
+
+			float getDeltaTime() { return m_deltaTime; }
+
+			Camera2D* getCamera() { return &m_camera; }
 	};
 
 	extern _ShyEngine Engine;

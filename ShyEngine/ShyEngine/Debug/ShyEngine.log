@@ -1,3 +1,8 @@
-﻿  CollisionHandlers.cpp
-C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\collisions\CollisionHandlers.cpp(49,5): warning C4390: ';': empty controlled statement found; is this the intent?
+﻿  Timing.cpp
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\timing\Timing.cpp(10,29): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\timing\Timing.cpp(17,29): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\timing\Timing.cpp(18,29): warning C4244: '=': conversion from 'float' to 'Uint32', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\timing\Timing.cpp(32,21): warning C4244: 'initializing': conversion from 'float' to 'Uint32', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\timing\Timing.cpp(37,23): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
+C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\ShyEngine\sources\timing\Timing.cpp(45,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   ShyEngine.vcxproj -> C:\Users\nicol\OneDrive\Desktop\Git projects\shy-engine\ShyEngine\Debug\ShyEngine.lib

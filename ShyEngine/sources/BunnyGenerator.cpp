@@ -6,13 +6,13 @@ namespace SE = ShyEngine;
 void BunnyGenerator::init()
 {
 	SE::Entity* textEntity = SE::Engine.createEntity("FPS");
-	textEntity->getTransform()->setPos(glm::vec2(-200, 400));
+	textEntity->getTransform()->setPos(glm::vec2(-300, 250));
 
 	// Generate shaders
 	m_shader = new SE::ShaderProgram("shaders/defaultUnlit2d.vert", "shaders/defaultUnlit2d.frag");
 
 	// Add fps text
-	m_fpsCounter = new SE::Text(textEntity, "fonts/04.TTF", m_shader, SE::ColorRGBA8(255, 255, 255, 255), 20, 0, "sas");
+	m_fpsCounter = new SE::Text(textEntity, "fonts/04.TTF", m_shader, SE::ColorRGBA8(255, 255, 255, 255), 40, 0, "sas");
 	textEntity->attachModule<SE::Text>(m_fpsCounter);
 	SE::Engine.registerModule<SE::Text>(m_fpsCounter);
 }
@@ -22,9 +22,10 @@ void BunnyGenerator::update()
 	std::stringstream fpsText;
 
 	if (SE::Input.getKeyDown(SDLK_b))
-		generateBunny();
+		for(int i=0; i<3; i++)
+			generateBunny();
 
-	fpsText << "Bunnies: " << m_currBunnies << ", FPS: " << SE::Engine.getFPS();
+	fpsText << "Bunnies: " << m_currBunnies << ", FPS: " << (int)SE::Engine.getFPS();
 
 	m_fpsCounter->setText(fpsText.str());
 }
@@ -64,4 +65,5 @@ void BunnyGenerator::generateBunny()
 	bunny->attachModule<SE::CircleCollider2D>(coll);
 
 	nextBunnyTime += 500;
+	m_currBunnies++;
 }

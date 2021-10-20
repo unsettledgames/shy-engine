@@ -132,71 +132,63 @@ namespace ShyEngine {
 			int currSimStep = 0;
 
 			m_fpsLimiter.begin();
+
 			// Delta time management ISSUE: it's always 0
 			float totalDeltaTime = m_fpsLimiter.getDeltaTime();
 
+			/*******************INPUT******************/
+			// Processing input for this frame
+			Input.processInput();
+
 			while (totalDeltaTime > 0.0f && currSimStep < MAX_SIM_STEPS)
 			{
-				// IMPROVEMENT: multiple cameras, the engine updates the active one
-				m_camera.update();
-				m_hudCamera.update();
-
-				float deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
-
-				// Prepare the data for the sprite and text renderer: the first uses the standard camera, the latter
-				// uses the HUD camera
-				ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), m_camera.getViewportRect(), totalDeltaTime };
-				ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), m_hudCamera.getViewportRect(), totalDeltaTime };
-				// Prepare the data for the physics engine
-				PhysicsData physicsData = { m_physicsManager->getGravity(), totalDeltaTime };
-
-				/*******************INPUT******************/
-				// Processing input for this frame
-				Input.processInput();
-
-				/********************PHYSICS******************/
-				// Update loop for the physics and collision manager
-				m_collisionManager->updateModules(physicsData);
-				m_physicsManager->updateModules(physicsData);
+				m_deltaTime = std::min(MAX_DELTA_TIME, totalDeltaTime);
 
 				/*****************USER SCRIPTS****************/
 				// TODO: pass deltatime
 				m_scriptsManager->updateModules();
 
-				/********************RENDERING****************/
-				glClearDepth(1.0f);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				glClearColor(0, 0, 1, 1);
+				// Prepare the data for the physics engine
+				PhysicsData physicsData = { m_physicsManager->getGravity(), m_deltaTime };
 
-				// Update loop for the sprite renderer
-				m_spriteRenderer->updateModules(spriteRendererShaderData);
-				// Update loop for the particle renderer
-				m_particleRenderer->updateModules(spriteRendererShaderData);
-				// Update loop for the text renderer
-				m_textRenderer->updateModules(textRendererShaderData);
-
-				// Cleanup
-				SDL_GL_SwapWindow(this->m_gameWindow);
-
+				/********************PHYSICS******************/
+				// Update loop for the physics and collision manager
+				m_collisionManager->updateModules(physicsData);
+				m_physicsManager->updateModules(physicsData);
+				
 				// If the user decided to quit, I stop the loop
 				if (Input.isQuitting())
 					this->m_state = GameState::GAME_STATE_STOPPED;
 
-				// TEST: W,A,S and D move the camera up, left, down, right
-				if (Input.getKeyDown(SDLK_w))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, 6.0f) * totalDeltaTime);
-				if (Input.getKeyDown(SDLK_s))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -6.0f) * totalDeltaTime);
-				if (Input.getKeyDown(SDLK_a))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(-6.0f, 0.0f) * totalDeltaTime);
-				if (Input.getKeyDown(SDLK_d))
-					m_camera.setPosition(m_camera.getPosition() + glm::vec2(6.0f, 0.0f) * totalDeltaTime);
-
-				totalDeltaTime -= deltaTime;
+				totalDeltaTime -= m_deltaTime;
 				currSimStep++;
+				debugTime++;
 			}
 
-			m_fpsLimiter.end();
+			// IMPROVEMENT: multiple cameras, the engine updates the active one
+			m_camera.update();
+			m_hudCamera.update();
+
+			// Prepare the data for the sprite and text renderer: the first uses the standard camera, the latter
+			// uses the HUD camera
+			ShaderData spriteRendererShaderData = { m_camera.getCameraMatrix(), m_camera.getViewportRect(), totalDeltaTime };
+			ShaderData textRendererShaderData = { m_hudCamera.getCameraMatrix(), m_hudCamera.getViewportRect(), totalDeltaTime };
+
+			/********************RENDERING****************/
+			glClearDepth(1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClearColor(0, 0, 1, 1);
+
+			// Update loop for the sprite renderer
+			m_spriteRenderer->updateModules(spriteRendererShaderData);
+			// Update loop for the particle renderer
+			// TODO: split the particleRenderer update into updatePhysics and render
+			m_particleRenderer->updateModules(spriteRendererShaderData);
+			// Update loop for the text renderer
+			m_textRenderer->updateModules(textRendererShaderData);
+
+			// Cleanup
+			SDL_GL_SwapWindow(this->m_gameWindow);
 		}
 	}
 

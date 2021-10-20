@@ -21,9 +21,15 @@
     <ClCompile Include="sources\BunnyGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\CameraMover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BunnyGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\CameraMover.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

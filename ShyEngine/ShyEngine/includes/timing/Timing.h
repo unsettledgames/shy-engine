@@ -27,6 +27,7 @@ namespace ShyEngine
 
 	public:
 		FpsLimiter();
+		FpsLimiter(float fps) { m_targetFps = fps; }
 
 		/*
 			Call init to set the target FPS
@@ -37,11 +38,6 @@ namespace ShyEngine
 			Call begin to mark the beginning of a frame
 		*/
 		void begin();
-
-		/*
-			Call end to mark the end of a frame and get the FPS
-		*/
-		float end();
 
 		/*
 			Toggle FPS limiting
