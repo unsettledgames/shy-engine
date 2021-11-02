@@ -45,5 +45,7 @@ namespace ShyEngine {
 		void use(float time);
 
 		void unuse();
+
+		int getId() { return m_programID; }
 	};
 }

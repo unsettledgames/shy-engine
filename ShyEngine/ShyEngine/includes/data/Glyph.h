@@ -84,5 +84,7 @@ namespace ShyEngine
 			static bool compareFrontToBack(Glyph* a, Glyph* b);
 			static bool compareBackToFront(Glyph* a, Glyph* b);
 			static bool compareTexture(Glyph* a, Glyph* b);
+			static bool compareShaderTexture(Glyph* a, Glyph* b);
+			
 	};
 }

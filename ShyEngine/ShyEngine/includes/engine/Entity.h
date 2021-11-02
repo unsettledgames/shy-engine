@@ -19,16 +19,24 @@ namespace ShyEngine
 	class Collidable;
 	class CollisionManager;
 
+	/*
+		\brief	Represents an entity in the engine. Each entities is made of an id and a list of modules attached
+				to it. A name is also added to better identify and debug entity-related issues
+	*/
 	class Entity
 	{
 		friend class _ShyEngine;
 		friend class CollisionManager;
 
 		protected:
+			// Unique id assigned to the entity 
 			int m_id;
+			// Name of the entity
 			std::string m_name;
+			// Self-reference, used when it's necessary to edit the entity's properties 
 			Entity* m_reference;
 
+			// Collision layer (see Settings.h:CollisionSettings)
 			short m_layer = 0;
 
 			// Vector containing all the modules that have been attached to this entity

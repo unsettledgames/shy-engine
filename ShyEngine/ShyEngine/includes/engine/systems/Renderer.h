@@ -30,6 +30,7 @@ namespace ShyEngine
 		GLuint offset;
 		GLuint nVertices;
 		GLuint texture;
+		ShaderProgram* shader;
 	};
 
 	template <class ModuleType, class RenderableType>
@@ -53,7 +54,7 @@ namespace ShyEngine
 			// Vertex attribute object
 			GLuint m_vao = 0;
 			// Tells how to sort the sprites
-			SpriteSortType m_sortType = SpriteSortType::TEXTURE;
+			SpriteSortType m_sortType = SpriteSortType::TEXTURE_SHADER;
 
 		public:
 			Renderer() : System() {};
@@ -92,7 +93,7 @@ namespace ShyEngine
 			/**
 			*	Marks the beginning of a rendering phase. Sets the sort type, initializes the process.
 			*/
-			void begin(SpriteSortType sortType = SpriteSortType::TEXTURE)
+			void begin(SpriteSortType sortType = SpriteSortType::TEXTURE_SHADER)
 			{
 				m_sortType = sortType;
 				m_renderBatches.clear();
@@ -168,6 +169,10 @@ namespace ShyEngine
 				{
 					std::sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareTexture);
 					break;
+				}
+				case SpriteSortType::TEXTURE_SHADER:
+				{
+					std::sort(m_renderablesPointers.begin(), m_renderablesPointers.end(), Glyph::compareShaderTexture);
 				}
 				default:
 					break;

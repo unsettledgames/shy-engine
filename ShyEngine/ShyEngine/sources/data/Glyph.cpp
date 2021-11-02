@@ -18,6 +18,11 @@ namespace ShyEngine
 		return (a->m_texture.id < b->m_texture.id);
 	}
 
+	bool Glyph::compareShaderTexture(Glyph* a, Glyph* b)
+	{
+		return (a->getShader()->getId() == b->getShader()->getId() ? Glyph::compareTexture(a, b) : a->getShader()->getId() < b->getShader()->getId());
+	}
+
 	bool operator==(const Glyph& e1, const Glyph& e2)
 	{
 		return e1.m_id == e2.m_id;

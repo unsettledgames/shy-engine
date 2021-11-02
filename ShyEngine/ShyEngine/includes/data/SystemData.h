@@ -21,6 +21,7 @@ namespace ShyEngine
 		NONE,			// No sorting
 		FRONT_TO_BACK,	// Sort by depth (ascending)
 		BACK_TO_FRONT,	// Sort by depth (descending)
+		TEXTURE_SHADER,	// Group by shader, then by texture
 		TEXTURE			// Sort by texture id (ascending)
 	};
 

@@ -46,27 +46,45 @@
 #include <engine/systems/CollisionManager.h>
 #include <engine/systems/UserScriptsManager.h>
 
+/*
+	\brief	Used to store the current state of the game
+*/
 enum class GameState { GAME_STATE_RUNNING, GAME_STATE_PAUSED, GAME_STATE_STOPPED };
 
 // 0x2 is used by SDL_WINDOW_OPENGL
+// REFACTOR: just use opengl flags or use aliases?
 enum WindowFlags { INVISIBLE = 0x1, FULLSCREEN = 0x4, BORDERLESS = 0x8 };
 
 namespace ShyEngine 
 {
 	class SpriteRenderer;
 
+	/*
+		\brief	The whole freaking engine core. Initializes all the third party libraries (such as Glew or SDL) and
+				takes care of the engine loop.
+
+				The engine loop updates all the systems, computes deltaTime and the current FPS. It also gives methods
+				to register modules and shaders created by the user so that it's possible to use them.
+	*/
 	class _ShyEngine
 	{
 		private:
+			// The game window
 			SDL_Window* m_gameWindow = nullptr;
+			// We need to create a context to draw
 			SDL_GLContext m_glContext;
 
+			// Curent game state
 			GameState m_state = GameState::GAME_STATE_PAUSED;
 
+			// Audio engine: takes care of all the audio-related functions. REFACTOR: make it globally accessible?
 			AudioEngine m_audioEngine;
 
+			// All the systems of the engine. UNUSED
 			std::vector<System*> m_systems;
+			// All the entities in the game. UNUSED
 			std::vector<Entity> m_entities;
+			// All the shaders registered by th user
 			std::vector<ShaderProgram*> m_shaders;
 
 			// ID generators
@@ -82,37 +100,64 @@ namespace ShyEngine
 			TextRenderer* m_textRenderer;
 			ParticleRenderer* m_particleRenderer;
 
+			// Window resolution
 			int m_screenWidth;
 			int m_screenHeight;
 
-			void initShaders();
-
+			/*
+				\brief	Initializes all the ShyEngine systems and engines.
+			*/
 			void initSystems();
 
+			/*
+				\brief	Engine loop.
+						- Computes delta time and current FPS
+						- Simulates physics, takes care of collisions
+						- Renders renderable objects depending on their data
+						- Updates cameras
+			*/
 			void loop();
 
-			void drawUI();
-
-			// TEST
+			// Main camera. IMPROVEMENT: add custom cameras
 			Camera2D m_camera;
+			// Camera used to render the UI (text)
 			Camera2D m_hudCamera;
 
+			// Calculates and limits the FPS of the game if necessary
 			FpsLimiter m_fpsLimiter;
+			// Current delta time
 			float m_deltaTime = 0;
 
 		public:
+			/*
+				\brief	Creates the engine and initializes SDL depending on the flags
+
+				\param	flags	The flags used to initialize SDL
+			*/
 			_ShyEngine(unsigned int flags);
 
 			~_ShyEngine();
 
+			/*
+				\brief	Creates a game window using the flags passed as an argument.
+					- Initializes the FPSLimiter
+					- Initializes OpenGL and Glew
+					- Sets some OpenGL options
+					- Initializes the systems using initSystems
+			*/
 			void createWindow(int width, int height, std::string name, unsigned int flags, unsigned int fps = 60);
 
+			/*
+				\brief	Starts the game loop and calls the init functions of the custom scripts.
+			*/
 			void run();
 
-			int getScreenWidth() { return m_screenWidth; }
+			/*
+				\brief	Registers a Module so that the engine can update it. Depending on the ModuleType, the module
+						is assigned to a system that will take care of it during the engine loop.
 
-			int getScreenHeight() { return m_screenHeight; }
-
+				\param	toRegister	The Module to register to the engine.
+			*/
 			template <class ModuleType>
 			void registerModule(ModuleType* toRegister)
 			{
@@ -148,14 +193,23 @@ namespace ShyEngine
 				}
 			}
 
+			/*
+				UNUSED
+			*/
 			void registerShader(ShaderProgram* toRegister);
 
+			/*
+				\brief	Creates an entity. This is necessary because the engine sets both the entity reference
+						(REFACTOR: this could be done in the Entity constructor) and its id (REFACTOR: this could
+						be done with a static id generator in the entity class, which would make this method
+						completely useless).
+			*/
 			Entity* createEntity(const std::string& name = "NewEntity");
 
 			float getFPS();
-
 			float getDeltaTime() { return m_deltaTime; }
-
+			int getScreenWidth() { return m_screenWidth; }
+			int getScreenHeight() { return m_screenHeight; }
 			Camera2D* getCamera() { return &m_camera; }
 	};
 
